@@ -734,7 +734,8 @@ a.navbar-brand {
 }
 
 .img-responsive {
-	max-width: 100%;
+	max-width: 60%;
+
 }
 
 .slide_text h3 {
