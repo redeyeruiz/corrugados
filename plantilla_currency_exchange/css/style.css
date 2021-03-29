@@ -2611,108 +2611,160 @@ label {
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
-/* Estilos Mike uwu */
-/* Estilos capturarOrdenes */
+/*---------------------------------------------------
+				Estilos iFrames 
+-----------------------------------------------------*/
 
-.main-header{
-    background-color:  rgb(255, 198, 11);
+/*-----------------capturarOrdenes-------------------*/
+
+.bodyCO{
+    background:navajowhite;
+    margin:0
 }
 
-.moderna-title-image{
-    display: block;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-
+.buttonCO{
+    float:right;
+    padding:8px 12px;
+    margin:8px 0 0;
+    font-family:'Montserrat',sans-serif;
+    font-weight: bold;
+    border:2px solid chocolate;
+    background:rgba(210, 105, 30, 0.3);
+    color: chocolate;
+    cursor:pointer;
+    transition:all .3s;
 }
-.capturar-box{
-    width: 30em;
-    border: 1px salmon solid;
-    margin: 2cm auto 5cm auto;
-    text-align: center;
-    font-size: 1.5em;
+
+.buttonCO:hover{
+    background:chocolate;
+    color:#fff;
+}
+
+.buttonBigCO{
+    float:none;
+    padding:16px 22px;
+    margin:0 50%;
+	font-family:'Montserrat',sans-serif;
+    font-weight: bold;
+    border:2px solid sienna;
+	background:rgba(160, 81, 45, 0.3);
+    color: sienna;
+	cursor:pointer;
+    transition:all .3s;
+}
+
+.buttonBigCO:hover{
+    background:sienna;
+    color:#fff;
+}
+
+.center{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
     
 }
 
-.capturar-ordenes-box{
-    width: 20em;
-    border: 1px salmon solid;
-    margin: 0cm auto 1cm auto;
+.divCO{
+    position:absolute;
+    bottom:-15px;
+    background:#50505a;
+    color:#fff;width:320px;
+    padding:16px 4px 16px 0;
+    border-radius:6px;
+    font-size:13px;
+    box-shadow:10px 10px 40px -14px #000;
+}
+
+.formCO{
+    width:45em;
+    background:#e6e6e6;
+    border-radius:8px;
+    box-shadow:0 0 40px -10px #000;
+    margin:calc(50vh - 220px) auto;
+    padding:20px 30px;
+    max-width:calc(100vw - 40px);
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+    position:relative;
+}
+
+.h2CO{
     text-align: center;
-    font-size: 1.5em;
+    margin:10px 0;
+    padding-bottom:10px;
+    color:sienna;
+    border-bottom:3px solid sienna;
 }
 
-.capturar-title-box{
-    background-color:  salmon;
-}
-
-.capturar-textarea {
-    resize: none;
-  }
-
-.capturar-button{
-    border: none;
-    color: white;
-    background-color:  rgb(231, 93, 78);
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.capturar-button:hover{
-    border-color:salmon;
-    border-style: groove;
-    background-color: white;
-    color:  rgb(231, 93, 78);
-    padding: 10px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.login-space{
-    margin: 2em;
-}
-
-/* Estilos buscarOrdenes */
-.buscar-box{
-    width: 50em;
-    border: 1px salmon solid;
-    margin: 2cm auto 5cm auto;
-    text-align: center;
-    font-size: 1.5em;
-    
-}
-
-.buscar-tabla{
-    height: 15em;
-    width: 45em;
-    border: none;
-    text-align: center;
-}
-
-.buscar-articulos-tabla{
-    height: 15em;
-    width: 15em;
-    border: none;
-    text-align: center;
-    
+.inputCO, 
+.textareaCO{
+    width:100%;
+    padding:10px;
+    box-sizing:border-box;
+    background: rgba(117, 117, 117, 0.2);
+    outline:none;
+    resize:none;
+    border:0;
+    font-family:'Montserrat', sans-serif;
+    color:#5a5a5a;;
+    transition:all .3s;
+    border-bottom:2px solid #bebed2;
 }
 
 
-.articulosEP{
-	margin: auto;
-	width: 30%;
-	height: 900px;
-	border: 3px solid rgb(255, 255, 255);
-	padding: 11px;
-	margin-left: 35%;
-	margin-right: 35%;
+.inputCO:focus,
+.textareaCO:focus{
+    border-bottom:2px solid #78788c;
 }
+
+.pCO:before{
+    content:attr(type);
+    display:block;
+    margin:28px 0 0;
+    font-size:14px;
+    color:#5a5a5a;
+}
+
+/*-----------Búsquedas en General-------------*/
+
+
+
+/*buscarOrdenes*/
+.bodyBO{
+    background:navajowhite;
+    margin:0
+}
+
+.formBO{
+    width:40em;
+    background:#e6e6e6;
+    border-radius:8px;
+    box-shadow:0 0 40px -10px #000;
+    margin:calc(50vh - 220px) auto;
+    padding:20px 30px;
+    max-width:calc(100vw - 40px);
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+    position:relative;
+	display: flex;
+	flex-wrap: wrap;
+		
+}
+
+.inputBO{
+	flex: 1 1 10ch;
+	margin: .5rem;
+	border: none;
+	background: hsl(0 0% 93%);
+	border-radius: .25rem;
+	padding: .75rem 1rem;
+}
+
+  
+.inputSubmitBO{
+	background: hotpink;
+	color: white;
+	box-shadow: 0 .75rem .5rem -.5rem hsl(0 50% 80%);
+}
+  

@@ -104,70 +104,59 @@
         
     </header>
     <!-- End header -->
-        <section class="capturar-box">
-            <div class= "login-space">
-                <p>Folio de Orden: <span><input class="user" type="text"></span></p>
-            </div>
-            <div class="button-op" style="margin: auto;">
-                <a href="#"> Buscar ></a>
-            </div>    
-            <div class="capturar-title-box">
-                <h2 class="capturar-ordenes-box">Modificar Órdenes de Venta</h2>
-            </div>
-    
-            <div class="info-box">
-                <form name="f_forma">
-                    <div class= "login-space">
-                        <p>Cliente: <span><input class="user" type="text"></span></p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Dir. Entrega: <span><input class="user" type="text"></span></p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Ord. Compra: <span><input class="user" type="text"></span></p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Fec. Ord. Compra: <span><input class="user" type="date"></span></p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Articulo: <span><input class="user" type="text"></span> - El Articulo No Existe</p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Cantidad: <span><input class="user" type="text"></span> Unidad 1x1000 <button class="capturar-button">Recalcular Precio</button></span></p>
-                        
-                    </div>
-                    <div class= "login-space">
-                        <p>Precio: <span><input class="user" type="text"> Unidad</span></p>
-                    </div>
-                    <div class= "login-space">
-                        <p>Fec. Solicitada: <span><input class="user" type="date"></span></p>
-                    </div>
-                    <div>
-                        <p>Observaciones del Artículo: </p>
-                    </div>
-                    <div>
-                        <textarea class="capturar-textarea" rows="6" cols="50"></textarea>
-                    </div>
-                    <div>
-                        <button class="capturar-button">Agrega Artículo</button>
-                    </div>
-                    <div>
-                        <p>Observaciones de la Orden: </p>
-                    </div>
-                    <div>
-                        <textarea class="capturar-textarea" rows="6" cols="50"></textarea>
-                    </div>
-                    <div>
-                        <span><button class="capturar-button">Guardar</button></span>
-                        <span><input type="reset" class="capturar-button" value="Cancelar"></span>
-                    </div>
-                    <div class= "login-space"></div>
-                    
-                </form>
-                <div class="button-op" style="margin: auto;">
-                    <a href="#"> Actualizar ></a>
-                </div>    
-            </div>
+    <section class="bodyCO">
+
+        <form class="formCO">
+
+            <h2 class="h2CO">Modificar ordenes</h2>
+
+
+            <p class="pCO" type="Foio:">
+            <input class="inputCO" type="text" placeholder="Ingrese el Número de Folio" required>
+            </p>
+            <button class="buttonBigCO">Buscar</button>
+            <p class="pCO" type="Cliente:">
+            <input class="inputCO" type="text" placeholder="Ingrese el nombre del cliente" required>
+            </p>
+            <p class="pCO" type="Dirección de Entrega:">
+            <input class="inputCO" type="text" placeholder="Ingrese la dirección de entrega" required></input>
+            </p>
+            <p class="pCO" type="Órden de Compra:">
+            <input class="inputCO" type="text" placeholder="Ingrese el número de órden de compra" required></input>
+            </p>
+            <p class="pCO" type="Fecha de Órden de Compra:">
+            <input class="inputCO" type="date" required></input>
+            </p>
+            <p class="pCO" type="Artículo:">
+            <input class="inputCO" type="text" placeholder="Ingrese el nombre de un artículo" required></input>
+            </p>
+            <p class="pCO" type="Cantidad:">
+            <input class="inputCO" type="number" placeholder="Indique la cantidad en unidad 1x1000" required></input>
+            </p>
+            <p class="pCO" type="Precio:" >
+            <input class="inputCO" type="number" placeholder="Indique el precio en pesos" required></input>
+            <button class="buttonCO">Recalcular Precio</button><br><br>
+            </p>
+            <p class="pCO" type="Fecha Solicitada:">
+            <input class="inputCO" type="date" required></input>
+            </p>
+            <p class="pCO" type="Observaciones del Artículo:">
+            <textarea class="textareaCO" rows="3" placeholder="¿Tiene alguna observación sobre el artículo?" required></textarea>
+            <button class="buttonCO">Agregar artículo</button><br><br>
+            </p>
+            <p class="pCO" type="Observaciones del Artículo:">
+            <textarea class="textareaCO" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
+            </p>
+            <br>
+            <p class="pCO center">
+                <button class="buttonBigCO">Guardar</button>
+                <button class="buttonBigCO">Cancelar</button>
+            </p>
+            <br><br>
+
+        </form>
+
+    </section>
             
     
         </section>
