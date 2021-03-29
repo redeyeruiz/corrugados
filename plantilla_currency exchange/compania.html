@@ -30,6 +30,11 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -40,7 +45,10 @@
             <img src="images/loader.gif" alt="#" />
         </div>
     </div>
+    <!-- end loader -->
+    <!-- END LOADER -->
 
+    <!-- Start header -->
     <header class="top-header">
         <div class="header_top">
 
@@ -51,6 +59,7 @@
                     </div>
                     <div class="site_information">
                         <ul>
+                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
                                 <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
@@ -68,7 +77,7 @@
                     <div class="menu_orange_section" style="background: #ff880e;">
                         <nav class="navbar header-nav navbar-expand-lg">
                             <div class="menu_section">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">--> 
                     <span></span>
                     <span></span>
                     <span></span>
@@ -79,23 +88,21 @@
                                         <li><a class="nav-link" href="about.html">Administración</a></li>
                                         <li><a class="nav-link" href="exchange.html">Catálogos</a></li>
                                         <li><a class="nav-link" href="services.html">Operaciones</a></li>
-                                        <li><a class="nav-link" href="contact.html">Reportes</a></li>
+                                        <li><a class="nav-link" href="new.html">Reportes</a></li>
+                                        <!--<li><a class="nav-link" href="contact.html">Reportes</a></li>-->
                                         <li><a class="nav-link" href="#">Contacto</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </nav>
-                    </div>
+                       </div>
                 </div>
             </div>
         </div>
         </div>
 
     </header>
-    <!-- End header
-    <br/>
-    <br/>
-     -->
+    <!-- End header -->
 
     <!-- Start Banner -->
     <div class="section inner_page_banner" style="background-color: #003DCE">
@@ -124,43 +131,46 @@
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="agentes">
-                    <tr>
-                        <td>
-                            <p align="center"><b>Nombre de la Compañia</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_nama" type="text" size="50" maxlength="10" class="campo">
-                        </td>
-                    </tr>
+                <form name="f_companias">
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp_age" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Nombre de la Compañía</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
+                    
                 </form>
             </table>
             <div class="row margin-top_30">
                 <div class="col-sm-12">
                     <div class="full">
                         <div class="center">
-                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger">Bajas</button>
                         </div>
                         <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- end section -->
+    <hr>
+    <hr>
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
@@ -171,7 +181,7 @@
         </div>
     </div>
 
-    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+    <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>

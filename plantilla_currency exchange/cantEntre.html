@@ -93,12 +93,6 @@
                 </div>
                      </div>
                  </nav>
-                 <!--<div class="search-box">
-                    <input type="text" class="search-txt" placeholder="Search">
-                    <a class="search-btn">
-                        <img src="images/search_icon.png" alt="#" />
-                    </a>
-                --></div> 
                 </div>
             </div>
           </div>
@@ -108,7 +102,7 @@
     <!-- End header -->
 
     <!-- Start Banner -->
-    <div class="section inner_page_banner" style="background-color: #4CC543">
+    <div class="section inner_page_banner" style="background-color: #003DCE">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -134,17 +128,17 @@
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-            <form name="altas_companias">
-                <tr>
-                    <td><p align="center"><b>ID Compañia</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
+            <form name="f_cantEntre">
                 <tr>
                     <td><p align="center"><b>ID Orden</b></p></td>
                     <td align="center">
                         <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>ID Compañia</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
                     </td>
                 </tr>
                 <tr>
@@ -192,69 +186,27 @@
                 <tr>
                     <td><p align="center"><b>Tipo Reg</b></p></td>
                     <td align="center">
-                        <input style="border:3px solid #ff880e" name="t_reg" type="text" size="50" maxlength="50" class="campo">
+                        <!--<input style="border:3px solid #ff880e" name="t_reg" type="text" size="50" maxlength="50" class="campo">-->
+                        <select style="border:3px solid #ff880e" name="t_reg" class="campo">
+                            <option selected></option>
+                            <option>Capturado</option>
+                            <option>Cancelado</option>
+                            <option>Facturado</option>
+                        </select>
                     </td>
                 </tr>
             </form></table>
-            <!-- <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" />
-                       <h4>Safe & Secure</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Mobile Apps</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Wallet</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s4.png" alt="#" />
-                        <h4>Experts Support</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Mobile Apps</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Wallet</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" />
-                       <h4>Safe & Secure</h4>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Mobile Apps</h4>
-                    </div>
-                </div>
-            </div> -->
             <div class="row margin-top_30">
                 <div class="col-sm-12">
                     <div class="full">
                         <div class="center">
-                            <a class="main_bt" href="#">Altas</a>
-                            <a class="main_bt" href="#">Bajas</a>
-                            <a class="main_bt" href="#">Consultas</a>
-                            <a class="main_bt" href="#">Actualización</a>
-                            <a class="main_bt" href="#">Reportes</a>
+                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                        </div>
+                        <div class="center">
+                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                         </div>
                     </div>
                 </div>
@@ -264,62 +216,6 @@
     <!-- end section -->
    
     <!-- Start Footer
-    <footer class="footer-box">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12 white_fonts">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <img class="img-responsive" src="images/footer_logo.png" alt="#" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <h3>Quick Links</h3>
-                            </div>
-                            <div class="full">
-                                <ul class="menu_footer">
-                                    <li><a href="home.html">> Home</a></li>
-                                    <li><a href="about.html">> About</a></li>
-                                    <li><a href="exchange.html">> Exchange</a></li>
-                                    <li><a href="services.html">> Services</a></li>
-                                    <li><a href="new.html">> New</a></li>
-                                    <li><a href="contact.html">> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Newsletter</h3>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-                             <div class="newsletter_form">
-                                <form action="index.html">
-                                   <input type="email" placeholder="Your Email" name="#" required="">
-                                   <button>Submit</button>
-                                </form>
-                             </div>
-                         </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Contact us</h3>
-                             <ul class="full">
-                               <li><img src="images/i5.png"><span>London 145<br>United Kingdom</span></li>
-                               <li><img src="images/i6.png"><span>demo@gmail.com</span></li>
-                               <li><img src="images/i7.png"><span>+12586954775</span></li>
-                             </ul>
-                         </div>
-                            </div>
-                        </div>
-					</div>
-                </div>
-			 </div>
-        </div>
-    </footer>
      End Footer -->
 
     <div class="footer_bottom">
