@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Exchange Currency - Responsive HTML5 Template</title>
+    <title>Portal Papeles Corrugados</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -86,7 +86,7 @@
                         <li><a class="nav-link" href="exchange.html">Exchange</a></li>
                         <li><a class="nav-link" href="operaciones.html">operaciones</a></li>
                         <li><a class="nav-link" href="reportes.html">Reportes</a></li>
-                        <li><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li><a class="nav-link" href="contact.html">Con</a></li>
                     </ul>
                 </div>
                      </div>
@@ -106,12 +106,12 @@
     <!-- End header -->
 
     <!-- Start Banner -->
-    <div class="section inner_page_banner">
+    <div class="section inner_page_banner" style="background-color: #003DCE">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Oeraciones</h3>
+                        <h3>Catálogos</h3>
                     </div>
                 </div>
             </div>
@@ -119,97 +119,114 @@
     </div>
     <!-- End Banner -->
     
-   <!-- section -->
+    <!-- section -->
     <div class="section layout_padding">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Operaciones</h2>    
+                           <h2><span class="theme_color"></span>Cantidades Entregadas</h2>    
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/busqueda.png"alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="buscarOrdenes_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Busqueda de Ordenes</h3>
-                       </div>
+            <table border="0" width="50%" align="center">
+            <form name="f_cantEntre">
+                <tr>
+                    <td><p align="center"><b>ID Orden</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>ID Compañia</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>ID Artículo</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="id_art" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Folio</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="folio" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Fecha del Movimiento</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="f_mov" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Hora del Movimiento</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Cantidad</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="cant" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Posición</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="pos" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Secuencia</b></p></td>
+                    <td align="center">
+                        <input style="border:3px solid #ff880e" name="sec" type="text" size="50" maxlength="50" class="campo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><p align="center"><b>Tipo Reg</b></p></td>
+                    <td align="center">
+                        <!--<input style="border:3px solid #ff880e" name="t_reg" type="text" size="50" maxlength="50" class="campo">-->
+                        <select style="border:3px solid #ff880e" name="t_reg" class="campo">
+                            <option selected></option>
+                            <option>Capturado</option>
+                            <option>Cancelado</option>
+                            <option>Facturado</option>
+                        </select>
+                    </td>
+                </tr>
+            </form></table>
+            <div class="row margin-top_30">
+                <div class="col-sm-12">
+                    <div class="full">
+                        <div class="center">
+                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                        </div>
+                        <div class="center">
+                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/carrito.png" alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="capturarOrden_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Capturar Orden</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="images/consulta.png" alt="#" />
-                        <div class="overlay"><a class="main_bt transparent" href="autorizar_fecha.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Autorizar fechas de entrega</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="images/modificar.png" alt="#" />
-                        <div class="overlay"><a class="main_bt transparent" href="capturarOrden_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Consultar Ordenes</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/estatus.png"alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="modif_ord.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Modificar Ordenes</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/search_store.png"  alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="estatus_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Consultar Estatus</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/factura.jpg" alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="buscarOrdenes_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Buscar Articulos</h3>
-                       </div>
-                    </div>
-                </div>
-                
-
-
-
-             </div>
+            </div>
         </div>
     </div>
     <!-- end section -->
-
+   
+    <!-- Start Footer
+     End Footer -->
 
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
+                    <p class="crp">© Copyrights 2020 design by html.design</p>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Autorizar Fecha</title>
+    <title>Portal Papeles Corrugados</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,11 +30,6 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -45,10 +40,7 @@
             <img src="images/loader.gif" alt="#" />
         </div>
     </div>
-    <!-- end loader -->
-    <!-- END LOADER -->
 
-    <!-- Start header -->
     <header class="top-header">
         <div class="header_top">
             
@@ -59,8 +51,8 @@
                     </div>
                     <div class="site_information">
                         <ul>
-                            <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />Equipo 5</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/phone_icon.png" alt="#" />2222222222</a></li>
+                            <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />La Moderna</a></li>
+                            <li><a href="tel:exchang@gmail.com"><img src="images/phone_icon.png" alt="#" />7772337987</a></li>
                             <li><a class="join_bt" href="#">Join us</a></li>
                         </ul>
                     </div>
@@ -85,8 +77,8 @@
                         <li><a class="nav-link" href="about.html">About</a></li>
                         <li><a class="nav-link" href="exchange.html">Exchange</a></li>
                         <li><a class="nav-link" href="operaciones.html">operaciones</a></li>
-                        <li><a class="nav-link" href="reportes.html">News</a></li>
-                        <li><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
+                        <li><a class="nav-link" href="contact.html">Con</a></li>
                     </ul>
                 </div>
                      </div>
@@ -103,63 +95,96 @@
         </div>
         
     </header>
-    <!-- End header -->
+    <!-- End header
+    <br/>
+    <br/>
+     -->
 
     <!-- Start Banner -->
-    <div class="section inner_page_banner">
+    <div class="section inner_page_banner" style="background-color: #003DCE">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Autorizar Fecha</h3>
+                        <h3>Catálogos</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Banner -->
-    
-   <!-- section -->
+
+    <!-- section -->
     <div class="section layout_padding">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Ordenes en Proceso</h2>   
-                        <div class="button-op">
-                            <a href="#"> Autoriazar Orden ></a>
-                        </div>                    
-                        <div class="button-op">
-                            <a href="#"> Actualizar/Modificar ></a>
-                        </div>                   
-                        <div class="button-op">
-                            <a href="#"> Cancelar ></a>
-                        </div> 
+                            <h2><span class="theme_color"></span>Artículo Existente</h2>
                         </div>
-                        <label for="start">Fecha:</label>
-                        <input type="date" id="start" name="trip-start"
-                            value="2020-09-03"
-                            min="2018-01-01" max="2040-01-01">
+                    </div>
+                </div>
+            </div>
+            <table border="0" width="50%" align="center">
+                <form name="f_artExi">
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Compañía</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="t_ncmp" type="text" size="50" maxlength="10" class="campo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Artículo</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="t_item" type="text" size="50" maxlength="10" class="campo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Descripción</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="t_dsca" type="text" size="50" maxlength="4" class="campo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Costo Estándar</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="t_corp" type="text" size="50" maxlength="10" class="campo">
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <div class="row margin-top_30">
+                <div class="col-sm-12">
+                    <div class="full">
+                        <div class="center">
+                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                        </div>
+                        <div class="center">
+                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end section -->
-
-    <!-- contact_form -->
-    <div class="section contact_form">
-        <iframe class="ordenesEP" src="ordenesEP.html" title="ordenesEP"></iframe>
-    </div>
-    <!-- end contact_form -->
-   
 
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
+                    <p class="crp">© Copyrights 2020 design by html.design</p>
                 </div>
             </div>
         </div>
@@ -169,7 +194,7 @@
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
@@ -181,7 +206,7 @@
     <script src="js/isotope.min.js"></script>
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
-	
+
 </body>
 
 </html>
