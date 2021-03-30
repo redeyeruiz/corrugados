@@ -14,3 +14,8 @@
     min-height: 650px;
     padding-top: 35px;
 }
+
+.h2_custom {
+    color: #f2f3;
+    font-size: 32px;
+  }
