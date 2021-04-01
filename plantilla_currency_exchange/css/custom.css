@@ -13,3 +13,8 @@
     min-height: 650px;
     padding-top: 35px;
 }
+
+.btn-ops {
+    padding: 2px;
+    margin: auto;
+}

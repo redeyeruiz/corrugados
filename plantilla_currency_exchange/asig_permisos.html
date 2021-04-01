@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Exchange Currency - Responsive HTML5 Template</title>
+    <title>Portal Papeles Corrugados</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -80,18 +80,19 @@
                     <span></span>
                     <span></span>
                 </button>
-                <ul class="navbar-nav">
-                    <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                    <li><a class="nav-link" href="admin.html">Administración</a></li>
-                    <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                    <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
-                    <li><a class="nav-link" href="reportes.html">Reportes</a></li>
-                    
-                </ul>
+                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
+                        <li><a class="nav-link" href="admin.html">Administración</a></li>
+                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                        <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
+                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
+                        
+                    </ul>
                 </div>
                      </div>
                  </nav>
-                 
+                
                 </div>
             </div>
           </div>
@@ -101,27 +102,62 @@
     <!-- End header -->
 
     <!-- Start Banner -->
-    <div class="section inner_page_banner">
+    <div class="section inner_page_banner" style="background-color: #003DCE">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Contact</h3>
+                        <h3>Administración</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Banner -->
-    
-   <!-- section -->
+
+    <!-- section -->
     <div class="section layout_padding">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Búsqueda de Artículos por Cliente</h2>    
+                            <h2><span class="theme_color"></span>Asignación de permisos</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table border="0" width="50%" align="center">
+                <form name="f_asig_usuario_rol">
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Usuario</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Permiso</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="permiso" type="text" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
+                    
+                </form>
+            </table>
+            <div class="row margin-top_30">
+                <div class="col-sm-12">
+                    <div class="full">
+                        <div class="center">
+                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success btn-ops">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger ">Bajas</button>
+
+                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                         </div>
                     </div>
                 </div>
@@ -129,97 +165,23 @@
         </div>
     </div>
     <!-- end section -->
-
-    <!-- contact_form -->
-    <section> 
-
-        <div class= "login-space">
-            <p>
-            Cliente: <span><input class="user" type="text"></span>
-            <span><button class="capturar-button">Buscar</button></span>
-            </p>
-        </div>
-
-        <div class="section contact_form">
-            <iframe class="articulosEP" src="articulosEP.html" title="ordenesEP"></iframe>
-        </div>
-    </section>
-    <!-- end contact_form -->
-   
-    <!-- Start Footer -->
-    <footer class="footer-box">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12 white_fonts">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <img class="img-responsive" src="images/footer_logo.png" alt="#" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <h3>Quick Links</h3>
-                            </div>
-                            <div class="full">
-                                <ul class="menu_footer">
-                                    <li><a href="catalogos.html">> Catálogos</a></li>
-                                    <li><a href="about.html">> About</a></li>
-                                    <li><a href="exchange.html">> Exchange</a></li>
-                                    <li><a href="operaciones.html">> operaciones</a></li>
-                                    <li><a href="reportes.html">> New</a></li>
-                                    <li><a href="contact.html">> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Newsletter</h3>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-                             <div class="newsletter_form">
-                                <form action="catalogos.html">
-                                   <input type="email" placeholder="Your Email" name="#" required="">
-                                   <button>Submit</button>
-                                </form>
-                             </div>
-                         </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Contact us</h3>
-                             <ul class="full">
-                               <li><img src="images/i5.png"><span>London 145<br>United Kingdom</span></li>
-                               <li><img src="images/i6.png"><span>demo@gmail.com</span></li>
-                               <li><img src="images/i7.png"><span>+12586954775</span></li>
-                             </ul>
-                         </div>
-                            </div>
-                        </div>
-					</div>
-                </div>
-			 </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
-
+    <hr>
+    <hr>
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
+                    <p class="crp">© Copyrights 2020 design by html.design</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+    <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
@@ -231,7 +193,7 @@
     <script src="js/isotope.min.js"></script>
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
-	
+
 </body>
 
 </html>
