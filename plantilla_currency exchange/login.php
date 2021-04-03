@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['mens_error'])){
+	echo "<script type='text/javascript'>";
+	echo "alert('".$_SESSION['mens_error']."')";
+	echo "</script>";
+	unset($_SESSION['mens_error']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +45,7 @@
 				<span class="login100-form-title p-b-50">
 					<img src="images/papeles_corrugados.png" alt="Papeles Corrugados" width="300" height="125">
 					</span>
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="php/autenticacion.php" method="POST">
 					<span class="login100-form-title p-b-40">
 						Bienvenido
 					</span>
@@ -54,9 +64,10 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<!--<button class="login100-form-btn">
 							Entrar
-						</button>
+						</button>-->
+						<input class="login100-form-btn" type="submit" value="Entrar">
 					</div>
 
 					<ul class="login-more p-t-60">
