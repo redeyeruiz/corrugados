@@ -26,9 +26,8 @@ if($statement = $conexion->prepare('SELECT nombre, contrasena FROM usuario WHERE
             $_SESSION['conectado'] = TRUE;
             $_SESSION['nombre'] = $nom;
             $_SESSION['usuario'] = $_POST['username'];
-            echo "Estado: ".$_SESSION['conectado'];
-            echo "Nombre: ".$_SESSION['nombre'];
-            echo "Usuario: ".$_SESSION['usuario'];
+            header("Location: http://localhost/corrugados/plantilla_currency%20exchange/inicio.php");
+            die();
         }else{
             $_SESSION['mens_error'] = "Usuario o contraseña incorrectos, inténtelo de nuevo.";
             header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");

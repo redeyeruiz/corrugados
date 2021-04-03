@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -55,16 +65,16 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,16 +87,16 @@
                     <div class="menu_orange_section" style="background: #ff880e;">
                         <nav class="navbar header-nav navbar-expand-lg">
                             <div class="menu_section">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">--> 
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>
@@ -124,24 +134,16 @@
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Almacenes</h2>
+                            <h2><span class="theme_color"></span>Compañías</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_almacenes">
+                <form name="f_companias">
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
@@ -149,25 +151,26 @@
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Descripción</b></p>
+                            <p align="center"><b>Nombre de la Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
+                    
                 </form>
             </table>
             <div class="row margin-top_30">
                 <div class="col-sm-12">
                     <div class="full">
                         <div class="center">
-                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger">Bajas</button>
                         </div>
                         <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                         </div>
                     </div>
                 </div>
@@ -175,18 +178,19 @@
         </div>
     </div>
     <!-- end section -->
-
+    <hr>
+    <hr>
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+    <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>

@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -55,15 +65,15 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="inicio.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -83,9 +93,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                            <li><a class="nav-link" href="admin.html">Administración</a></li>
-                            <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                            <li><a class="nav-link" href="admin.php">Administración</a></li>
+                            <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                             <li><a class="nav-link" href="#">Operaciones</a></li>
                             <li><a class="nav-link" href="#">Reportes</a></li>
                             <li><a class="nav-link" href="#">Contacto</a></li>
@@ -129,67 +139,67 @@
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="companias.html"><div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" href="compania.html"/>
+                    <a href="companias.php"><div class="full services_blog">
+                       <img class="img-responsive" src="images/s1.png" alt="#"/>
                        <h4>Compañías</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="agentes.html"><div class="full services_blog">
+                    <a href="agentes.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Agentes</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="clientes.html"><div class="full services_blog">
+                    <a href="clientes.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s3.png" alt="#" />
                         <h4>Clientes</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="artExistentes.html"><div class="full services_blog">
+                    <a href="artExistentes.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s4.png" alt="#" />
                         <h4>Artículos Existentes</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="artVendidos.html"><div class="full services_blog">
+                    <a href="artVendidos.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Artículos Vendidos</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="listasPrecio.html"><div class="full services_blog">
+                    <a href="listasPrecio.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s3.png" alt="#" />
                         <h4>Listas de Precios</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="dir_ent.html"><div class="full services_blog">
+                    <a href="dir_ent.php"><div class="full services_blog">
                        <img class="img-responsive" src="images/s1.png" alt="#" />
                        <h4>Direcciones de Entrega</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="cantEntre.html"><div class="full services_blog">
+                    <a href="cantEntre.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Cantidades Entregadas</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="facturas.html"><div class="full services_blog">
+                    <a href="facturas.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Facturas</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="inventarios.html"><div class="full services_blog">
+                    <a href="inventarios.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Inventarios</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="almacenes.html"><div class="full services_blog">
+                    <a href="almacenes.php"><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Almacenes</h4>
                     </div></a>
@@ -215,7 +225,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>

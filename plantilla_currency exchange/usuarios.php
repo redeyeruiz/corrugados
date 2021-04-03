@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -55,16 +65,16 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -84,9 +94,9 @@
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>
@@ -109,7 +119,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Catálogos</h3>
+                        <h3>Administración</h3>
                     </div>
                 </div>
             </div>
@@ -124,13 +134,21 @@
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Compañías</h2>
+                            <h2><span class="theme_color"></span>Usuario</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_companias">
+                <form name="f_asig_usuario_rol">
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Usuario</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
@@ -141,13 +159,28 @@
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Nombre de la Compañía</b></p>
+                            <p align="center"><b>Nombre</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="nom" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <td>
+                            <p align="center"><b>Contraseña</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="contrasena" type="password" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Rol</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="rol" type="text" size="50" maxlength="50" class="campo">
+                        </td>
+                    </tr>
                 </form>
             </table>
             <div class="row margin-top_30">
@@ -174,7 +207,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>

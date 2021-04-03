@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -55,16 +65,16 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -84,9 +94,9 @@
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>
@@ -174,7 +184,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>

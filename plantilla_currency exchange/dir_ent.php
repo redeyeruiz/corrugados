@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -47,15 +57,15 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,9 +85,9 @@
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>
@@ -92,11 +102,7 @@
         </div>
 
     </header>
-    <!-- End header
-    <br/>
-    <br/>
-     -->
-
+    <!-- End header -->
     <!-- Start Banner -->
     <div class="section inner_page_banner" style="background-color: #003DCE">
         <div class="container">
@@ -118,19 +124,19 @@
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Clientes</h2>
+                            <h2><span class="theme_color"></span>Direcciones de Entrega</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_clientes">
+                <form name="dir_ent">
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_ncmp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="id_comp_de" type="text" size="50" maxlength="4" class="campo">
                         </td>
                     </tr>
                     <tr>
@@ -138,87 +144,88 @@
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cuno" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="id_cli_de" type="text" size="50" maxlength="10" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Representante</b></p>
+                            <p align="center"><b>Nombre</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_crep" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="nom_ent" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Lista de Precios</b></p>
+                            <p align="center"><b>RFC</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_crep" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="rfc_de" type="text" size="50" maxlength="20" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Almacén</b></p>
+                            <p align="center"><b>Dirección</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_crep" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="direccion" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Nombre del Cliente</b></p>
+                            <p align="center"><b>Código Postal</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_nama" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="cod_post" type="text" size="50" maxlength="5" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Estatus del Cliente</b></p>
+                            <p align="center"><b>Municipio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cnpa" type="int" size="50" maxlength="1" class="campo">
+                            <input style="border:3px solid #ff880e" name="municipio" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Analista</b></p>
+                            <p align="center"><b>Estado</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_crra" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="estado" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Divisa</b></p>
+                            <p align="center"><b>País</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_ccur" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="pais" type="text" size="50" maxlength="3" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Límite de Crédito</b></p>
+                            <p align="center"><b>Teléfono</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_crlr" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="telefono" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Saldo de Orden</b></p>
+                            <p align="center"><b>Código de Ruta</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cpls" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="cod_ruta" type="text" size="50" maxlength="5" class="campo">
                         </td>
                     </tr>
+                    
                     <tr>
                         <td>
-                            <p align="center"><b>Saldo de Factura</b></p>
+                            <p align="center"><b>Observaciones</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cwar" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="observaciones" type="text" size="50" maxlength="50" class="campo">
                         </td>
                     </tr>
                 </form>
@@ -227,13 +234,13 @@
                 <div class="col-sm-12">
                     <div class="full">
                         <div class="center">
-                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                            <button name="b_altas" type="button" value="Altas_de" style="width:200px" class="btn btn-outline-success">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_de" style="width:200px" class="btn btn-outline-danger">Bajas</button>
                         </div>
                         <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                            <button name="b_consultas" type="button" value="Consultas_de" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_de" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_de" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                         </div>
                     </div>
                 </div>
@@ -245,7 +252,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>

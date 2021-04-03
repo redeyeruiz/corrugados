@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -55,14 +65,14 @@
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Usuario</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a href="#"><img src="images/user_logo.png" width="30" height="30"alt="#" /><?php echo $_SESSION['nombre'] ?></a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -82,18 +92,16 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                         <li><a class="nav-link" href="#">Operaciones</a></li>
                         <li><a class="nav-link" href="#">Reportes</a></li>
-                        <!--<li><a class="nav-link" href="contact.html">Reportes</a></li>-->
                         <li><a class="nav-link" href="#">Contacto</a></li>
                     </ul>
                 </div>
                      </div>
                  </nav>
-                 </div> 
                 </div>
             </div>
           </div>
@@ -103,77 +111,91 @@
     <!-- End header -->
 
     <!-- Start Banner -->
-    <div class="ulockd-home-slider">
-        <div class="container-fluid">
+    <div class="section inner_page_banner">
+        <div class="container">
             <div class="row">
-                <div class="pogoSlider" id="js-main-slider">
-                    <div class="pogoSlider-slide" style="background-image:url(images/carton_edit.jpg);">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-20">
-                                    <!--<div class="slide_text white_fonts">-->
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>    
-                                        <p style="color: white; font-size: 48px;">¡Bienvenido Usuario!<br><br></p>
-                                        <p style="color: white; font-weight: bold; font-size: 60px;"><strong>Portal Papeles Corrugados</strong></p>
-                                        <br>
-                                        <a class="start_exchange_bt" href="exchange.html">Ver Órdenes ></a>
-                                    <!--</div>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pogoSlider-slide" style="background-image:url(images/carton_edit.jpg);">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>    
-                                        <p style="color: white; font-size: 48px;">¡Bienvenido Usuario!<br><br></p>
-                                        <p style="color: white; font-weight: bold; font-size: 60px;"><strong>Portal Papeles Corrugados</strong></p>
-                                        <br>
-                                        <a class="start_exchange_bt" href="exchange.html">Ver Órdenes ></a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-md-12">
+                    <div class="banner_title">
+                        <h3>Administración</h3>
                     </div>
                 </div>
-                <!-- .pogoSlider -->
             </div>
         </div>
     </div>
     <!-- End Banner -->
     
     <!-- section -->
-    
+    <div class="section layout_padding">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                           <h2><span class="theme_color"></span>Elija la opción deseada</h2>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="usuarios.php"><div class="full services_blog">
+                       <img class="img-responsive" src="images/s1.png" alt="#" />
+                       <h4>Usuarios</h4>
+                    </div></a>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="roles.php"><div class="full services_blog">
+                       <img class="img-responsive" src="images/s1.png" alt="#" />
+                       <h4>Roles</h4>
+                    </div></a>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="asig_roles.php"><div class="full services_blog">
+                        <img class="img-responsive" src="images/s3.png" alt="#" />
+                        <h4>Asignación de Roles</h4>
+                    </div></a>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="asig_permisos.php"><div class="full services_blog">
+                        <img class="img-responsive" src="images/s4.png" alt="#" />
+                        <h4>Asignación de Permisos</h4>
+                    </div></a>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="parametrosAD.php"><div class="full services_blog">
+                        <img class="img-responsive" src="images/s2.png" alt="#" />
+                        <h4>Parámetros Active Directory</h4>
+                    </div></a>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-8">
+                    <a href="parametrosFTP.php"><div class="full services_blog">
+                        <img class="img-responsive" src="images/s3.png" alt="#" />
+                        <h4>Parámetros FTP</h4>
+                    </div></a>
+                </div>
+            </div>
+            <!-- <div class="row margin-top_30">
+                <div class="col-sm-12">
+                    <div class="full">
+                        <div class="center">
+                            <a class="main_bt" href="#">See More ></a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
     <!-- end section -->
+
    
-    <!-- Start Footer
-     End Footer -->
+    <!-- Start Footer -->
+    <!-- End Footer -->
 
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>
