@@ -1,15 +1,17 @@
+
 <?php 
+/*
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-include("agentesfunc.php"); 
+*/
+include("funciones/agentesfuncP.php"); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<!-- Basic -->
 
 <head>
     <meta charset="utf-8">
@@ -43,13 +45,13 @@ include("agentesfunc.php");
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 
-    <!--
+    
     <div id="preloader">
         <div class="loader">
             <img src="images/loader.gif" alt="#" />
         </div>
     </div>
-    -->
+    
 
     <header class="top-header">
         <div class="header_top">
@@ -169,12 +171,12 @@ include("agentesfunc.php");
                                     <div class="full">
                                         <div class="center">
                                             <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
-                                            <button name="b_bajas" type="submit" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
                                         </div>
                                         <div class="center">
-                                            <button name="b_consultas" type="submit" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                                            <button name="b_actualizar" type="submit" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                                            <button name="b_reporte" type="submit" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -193,6 +195,30 @@ include("agentesfunc.php");
                     </tr>
                 </form>
             </table>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='80%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='3'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='25%' align='center'>ID Representante</td>
+                                    <td style='border:3px solid #ff880e' width='55%' align='center'>Nombre Representante</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Compañía</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='25%'>". $row["idRepresentante"] ."</td><td style='border:3px solid #ff880e' width='55%'>". $row["nomRepresentante"] ."</td><td style='border:3px solid #ff880e' width='20%'>". $row["idCompania"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='3'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
 

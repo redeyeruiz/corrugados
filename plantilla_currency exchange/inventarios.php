@@ -5,7 +5,7 @@ if(!isset($_SESSION['conectado'])){
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-
+include("funciones/agentesfuncP.php"); 
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,8 @@
 <?php
 
+include_once "util_pcP.php";
 $idrep_error = $idcomp_error = $nomrep_error = ""; 
-$idrep = $idcomp = $nomrep = $success = "";
+$idrep = $idcomp = $nomrep = $success = $option = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idrep"])){
@@ -24,7 +25,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     }
     
     if ($idrep_error == "" and $idcomp_error == "" and $nomrep_error == ""){
-        $query="INSERT INTO Agente VALUES ('$idcomp','$idrep','$nomrep')";
+        //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
+        $query="INSERT INTO Agente VALUES ('$idrep','$nomrep','$idcomp');";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en el alta del agente.";
@@ -92,6 +94,32 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         else{
             $success = "Actualización realizada con éxito.";
         }
+        $idrep = $idcomp = $nomrep = "";
+    }
+}
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
+    if (empty($_POST["idrep"])){
+        $idrep_error = "Se requiere el ID del representante.";
+    }
+    else{
+        $idrep = test_input($_POST["idrep"]);
+    }
+
+    if ($idrep_error == ""){
+        $option = "Consultas por ID del Representante";
+        $query="SELECT * FROM Agente WHERE idRepresentante='$idrep'";
+        $result = mysqli_query($conection, $query);
+        $idrep = $idcomp = $nomrep = "";
+    }
+}
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
+
+    if ($idrep_error == ""){
+        $option = "Reporte";
+        $query="SELECT * FROM Agente";
+        $result = mysqli_query($conection, $query);
         $idrep = $idcomp = $nomrep = "";
     }
 }

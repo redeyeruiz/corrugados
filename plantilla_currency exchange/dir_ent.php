@@ -1,11 +1,13 @@
 <?php
+/*
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-
+*/
+include("funciones/dir_entfuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -130,13 +132,13 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="dir_ent">
-                    <tr>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp_de" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -144,107 +146,190 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_cli_de" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="50" maxlength="10" class="campo" value="<?= $idcli ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcli_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
+                    <tr>
                         <td>
-                            <p align="center"><b>Nombre</b></p>
+                            <p align="center"><b>Direccion de Entrega</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="nom_ent" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="dirent" type="text" size="50" maxlength="10" class="campo" value="<?= $dirent ?>">
+                            <p><span style="color:#C84810" class="error"><?= $dirent_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
+                    <tr>
                         <td>
-                            <p align="center"><b>RFC</b></p>
+                            <p align="center"><b>Nombre de Entrega</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rfc_de" type="text" size="50" maxlength="20" class="campo">
+                            <input style="border:3px solid #ff880e" name="noment" type="text" size="50" maxlength="50" class="campo" value="<?= $noment ?>">
+                            <p><span style="color:#C84810" class="error"><?= $noment_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
+                    <tr>
                         <td>
-                            <p align="center"><b>Dirección</b></p>
+                            <p align="center"><b>Direccion</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="direccion" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="dir" type="text" size="50" maxlength="100" class="campo" value="<?= $dir ?>">
+                            <p><span style="color:#C84810" class="error"><?= $dir_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <p align="center"><b>Código Postal</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="cod_post" type="text" size="50" maxlength="5" class="campo">
-                        </td>
-                    </tr>
                     <tr>
                         <td>
                             <p align="center"><b>Municipio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="municipio" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="mun" type="text" size="50" maxlength="30" class="campo" value="<?= $mun ?>">
+                            <p><span style="color:#C84810" class="error"><?= $mun_error ?></span></p>
                         </td>
                     </tr>
+                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Estado</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="estado" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="est" type="text" size="50" maxlength="30" class="campo" value="<?= $est ?>">
+                            <p><span style="color:#C84810" class="error"><?= $est_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
+                    <tr>
                         <td>
-                            <p align="center"><b>País</b></p>
+                            <p align="center"><b>Telefono</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="pais" type="text" size="50" maxlength="3" class="campo">
+                            <input style="border:3px solid #ff880e" name="tel" type="text" size="50" maxlength="20" class="campo" value="<?= $tel ?>">
+                            <p><span style="color:#C84810" class="error"><?= $tel_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <p align="center"><b>Teléfono</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="telefono" type="text" size="50" maxlength="50" class="campo">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align="center"><b>Código de Ruta</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="cod_ruta" type="text" size="50" maxlength="5" class="campo">
-                        </td>
-                    </tr>
-                    
                     <tr>
                         <td>
                             <p align="center"><b>Observaciones</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="observaciones" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="obs" type="text" size="50" maxlength="100" class="campo" value="<?= $obs ?>">
+                            <p><span style="color:#C84810" class="error"><?= $obs_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Codigo Postal</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="codp" type="text" size="50" maxlength="5" class="campo" value="<?= $codp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $codp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Codigo de Ruta</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="codr" type="text" size="50" maxlength="5" class="campo" value="<?= $codr ?>">
+                            <p><span style="color:#C84810" class="error"><?= $codr_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Pais</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="pais" type="text" size="50" maxlength="3" class="campo" value="<?= $pais ?>">
+                            <p><span style="color:#C84810" class="error"><?= $pais_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>RFC</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="rfc" type="text" size="50" maxlength="20" class="campo" value="<?= $rfc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $rfc_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_de" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_de" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_de" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_de" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_de" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='90%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='13'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='4%' align='center'>ID Compañia</td>
+                                    <td style='border:3px solid #ff880e' width='8%' align='center'>ID Cliente</td>
+                                    <td style='border:3px solid #ff880e' width='8%' align='center'>Direccion de Entrega</td>
+                                    <td style='border:3px solid #ff880e' width='8%' align='center'>Nombre Entrega</td>
+                                    <td style='border:3px solid #ff880e' width='14%' align='center'>Direccion</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Municipio</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>Estado</td>
+                                    <td style='border:3px solid #ff880e' width='6%' align='center'>Telefono</td>
+                                    <td style='border:3px solid #ff880e' width='12%' align='center'>Observaciones</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>C.P.</td>
+                                    <td style='border:3px solid #ff880e' width='4%' align='center'>C.R.</td>
+                                    <td style='border:3px solid #ff880e' width='4%' align='center'>Pais</td>
+                                    <td style='border:3px solid #ff880e' width='8%' align='center'>RFC</td>
+
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='4%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='8%'>". $row["idCliente"] ."</td><td style='border:3px solid #ff880e' width='8%'>". $row["dirEnt"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='8%'>". $row["nombreEntrega"] ."</td><td style='border:3px solid #ff880e' width='14%'>". $row["direccion"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["municipio"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='7%'>". $row["estado"] ."</td><td style='border:3px solid #ff880e' width='6%'>". $row["telefono"] ."</td><td style='border:3px solid #ff880e' width='12%'>". $row["observaciones"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='7%'>". $row["codPost"] ."</td><td style='border:3px solid #ff880e' width='4%'>". $row["codRuta"] ."</td><td style='border:3px solid #ff880e' width='4%'>". $row["pais"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='8%'>". $row["rfc"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='13'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
 
