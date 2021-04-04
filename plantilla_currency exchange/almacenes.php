@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
@@ -6,6 +7,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
+include("funciones/almacenesfuncP.php");
 ?>
 
 <!DOCTYPE html>
@@ -140,21 +142,23 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_almacenes">
-                    <tr>
-                        <td>
-                            <p align="center"><b>ID Compañía</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
-                        </td>
-                    </tr>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
                             <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="idalm" type="text" size="50" maxlength="10" class="campo" value="<?= $idalm ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idalm_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Compañía</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -162,26 +166,65 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Descripción</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="desc" type="text" size="50" maxlength="30" class="campo" value="<?= $desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='80%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='3'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='25%' align='center'>ID Almacen</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Compañía</td>
+                                    <td style='border:3px solid #ff880e' width='55%' align='center'>Descripción</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='25%'>". $row["idAlmacen"] ."</td><td style='border:3px solid #ff880e' width='55%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='20%'>". $row["descripcion"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='3'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
     <!-- end section -->
