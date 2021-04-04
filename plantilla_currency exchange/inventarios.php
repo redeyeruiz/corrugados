@@ -1,11 +1,13 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-include("funciones/agentesfuncP.php"); 
+
+include("funciones/inventariosfuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -129,21 +131,23 @@ include("funciones/agentesfuncP.php");
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="inventarios">
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp_inv" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Almacén</b></p>
+                            <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_alm_age" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="idalm" type="text" size="50" maxlength="4" class="campo" value="<?= $idalm ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idalm_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -151,7 +155,8 @@ include("funciones/agentesfuncP.php");
                             <p align="center"><b>ID Artículo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_art_age" type="text" size="50" maxlength="20" class="campo">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="20" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -159,26 +164,66 @@ include("funciones/agentesfuncP.php");
                             <p align="center"><b>Stock</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="stock_age" type="text" size="50" maxlength="20" class="campo">
+                            <input style="border:3px solid #ff880e" name="stock" type="number" min="0" step="0.01" class="campo" value="<?= $stock ?>">
+                            <p><span style="color:#C84810" class="error"><?= $stock_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='80%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='4'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Compañía</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Almacen</td>
+                                    <td style='border:3px solid #ff880e' width='35%' align='center'>ID Artículo</td>
+                                    <td style='border:3px solid #ff880e' width='35%' align='center'>Stock</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='15%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["idAlmacen"] ."</td><td style='border:3px solid #ff880e' width='35%'>". $row["idArticulo"] ."</td><td style='border:3px solid #ff880e' width='35%'>". $row["stock"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='4'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
 

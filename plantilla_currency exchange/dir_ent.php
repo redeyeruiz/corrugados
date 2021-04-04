@@ -1,12 +1,12 @@
 <?php
-/*
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-*/
+
 include("funciones/dir_entfuncP.php"); 
 ?>
 
@@ -153,7 +153,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Direccion de Entrega</b></p>
+                            <p align="center"><b>Dirección de Entrega</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="dirent" type="text" size="50" maxlength="10" class="campo" value="<?= $dirent ?>">
@@ -173,7 +173,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Direccion</b></p>
+                            <p align="center"><b>Dirección</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="dir" type="text" size="50" maxlength="100" class="campo" value="<?= $dir ?>">
@@ -203,7 +203,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Telefono</b></p>
+                            <p align="center"><b>Télefono</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="tel" type="text" size="50" maxlength="20" class="campo" value="<?= $tel ?>">
@@ -223,7 +223,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Codigo Postal</b></p>
+                            <p align="center"><b>Código Postal</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="codp" type="text" size="50" maxlength="5" class="campo" value="<?= $codp ?>">
@@ -233,7 +233,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Codigo de Ruta</b></p>
+                            <p align="center"><b>Código de Ruta</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="codr" type="text" size="50" maxlength="5" class="campo" value="<?= $codr ?>">
@@ -243,7 +243,7 @@ include("funciones/dir_entfuncP.php");
                     <tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Pais</b></p>
+                            <p align="center"><b>País</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="pais" type="text" size="50" maxlength="3" class="campo" value="<?= $pais ?>">

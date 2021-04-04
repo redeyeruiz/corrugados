@@ -116,12 +116,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
-    if ($idrep_error == ""){
-        $option = "Reporte";
-        $query="SELECT * FROM Agente";
-        $result = mysqli_query($conection, $query);
-        $idrep = $idcomp = $nomrep = "";
-    }
+    $option = "Reporte";
+    $query="SELECT * FROM Agente";
+    $result = mysqli_query($conection, $query);
+    $idrep = $idcomp = $nomrep = "";
 }
 
 function test_input($data){
