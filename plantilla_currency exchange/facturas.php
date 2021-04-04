@@ -1,12 +1,12 @@
 <?php
-/*
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-*/
+
 include("funciones/facturasfuncP.php");
 ?>
 
@@ -263,7 +263,7 @@ include("funciones/facturasfuncP.php");
                 if ($option != ""){
                     echo "<table style='border:3px solid #ff880e' width='90%' align='center'>
                                 <tr>
-                                    <td style='border:3px solid #ff880e' colspan='13'>
+                                    <td style='border:3px solid #ff880e' colspan='9'>
                                         <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
                                     </td>
                                 </tr>
@@ -286,7 +286,7 @@ include("funciones/facturasfuncP.php");
                         }
                     }
                     else{
-                        echo "<tr><td style='border:3px solid #ff880e' colspan='13'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='9'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
                 }
@@ -294,7 +294,7 @@ include("funciones/facturasfuncP.php");
         </div>
     </div>
     <!-- end section -->
-   
+    
     <!-- Start Footer
      End Footer -->
 
