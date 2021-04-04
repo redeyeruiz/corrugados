@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -29,6 +32,8 @@
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -135,50 +140,55 @@
     <!-- Iframe -->
     <section class="bodyCO">
 
-        <form class="formCO">
+        <form class="formCO" method="POST" action="capturarOrden_frame.php">
 
-            <h2 class="h2CO">Captura de Órdenes de gVenta</h2>
+            <h2 class="h2CO">Captura de Órdenes de Venta</h2>
 
             <p class="pCO" type="Cliente:">
-            <input class="inputCO" type="text" placeholder="Ingrese el nombre del cliente" required>
+            <input class="inputCO" type="text" name='nombreCliente' placeholder="Ingrese el nombre del cliente" required>
             </p>
             <p class="pCO" type="Dirección de Entrega:">
-            <input class="inputCO" type="text" placeholder="Ingrese la dirección de entrega" required></input>
+            <input class="inputCO" type="text" name='dirEnt' placeholder="Ingrese la dirección de entrega" required></input>
             </p>
             <p class="pCO" type="Órden de Compra:">
-            <input class="inputCO" type="text" placeholder="Ingrese el número de órden de compra" required></input>
+            <input class="inputCO" type="number" name='ordenCompra' placeholder="Ingrese el número de órden de compra" required></input>
             </p>
             <p class="pCO" type="Fecha de Órden de Compra:">
-            <input class="inputCO" type="date" required></input>
+            <input class="inputCO" type="date" name ='fechaOrden' required></input>
             </p>
             <p class="pCO" type="Artículo:">
-            <input class="inputCO" type="text" placeholder="Ingrese el nombre de un artículo" required></input>
+            <input class="inputCO" type="text" name ='descripcion' placeholder="Ingrese el nombre de un artículo" required></input>
             </p>
             <p class="pCO" type="Cantidad:">
-            <input class="inputCO" type="number" placeholder="Indique la cantidad en unidad 1x1000" required></input>
+            <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required></input>
             </p>
             <p class="pCO" type="Precio:" >
-            <input class="inputCO" type="number" placeholder="Indique el precio en pesos" required></input>
+            <input class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required></input>
             <button class="buttonCO">Recalcular Precio</button><br><br>
             </p>
+                
             <p class="pCO" type="Fecha Solicitada:">
-            <input class="inputCO" type="date" required></input>
+            <input class="inputCO" type="date" name ='fechaSolicitud' required></input>
             </p>
-            <p class="pCO" type="Observaciones del Artículo:">
-            <textarea class="textareaCO" rows="3" placeholder="¿Tiene alguna observación sobre el artículo?" required></textarea>
-            <button class="buttonCO">Agregar artículo</button><br><br>
-            </p>
-            <p class="pCO" type="Observaciones del Artículo:">
-            <textarea class="textareaCO" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
+            <p class="pCO" type="Observaciones de la Orden:">
+            <textarea class="textareaCO" name="Observaciones" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
             </p>
             <br>
             <p class="pCO center">
-                <button class="buttonBigCO">Guardar</button>
-                <button class="buttonBigCO">Cancelar</button>
+
             </p>
             <br><br>
 
+            <form class="formCO" method="POST" action="capturarOrden_frame.php">
+                        <button type="submit" name="agregarArt" class="buttonBigCO" >Agregar Articulo</button>
+                        <button type="submit" name="guardar" class="buttonBigCO" >Guardar</button>
+                        <button class="buttonBigCO">Cancelar</button>
+            </form>
+
         </form>
+
+       
+        
 
     </section>
     <!-- end cIframe -->
@@ -268,7 +278,75 @@
     <script src="js/isotope.min.js"></script>
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
-	
+
+
+	<?php
+
+    /* && isset($_POST['dirEnt']) && isset($_POST['ordenCompra']) 
+        && isset($_POST['cantidad']) && isset($_POST['costo']) && isset($_POST['descripcion']) 
+        && isset($_POST['fechaOrden']) && isset($_POST['fechaSolicitud']) 
+        && isset($_POST['Observaciones'])*/
+    echo "primer echo <br>"; 
+    if( isset($_POST['agregarArt']) ){
+        echo "segundo echo <br>"; 
+
+        $idOrden="0001";
+        $idCompania="0003";
+        $folio=1;
+        $numFact=1234;
+        $ordenBaan=1234;
+        $idCliente=1234;
+        $nombreCliente=$_POST['nombreCliente'];
+        $dirEnt=$_POST['dirEnt'];
+        $idArticulo="idtest";
+        $ordenCompra= $_POST['ordenCompra'];
+        $cantidad=$_POST['cantidad'];
+        $precio=34;
+        $decripcion=$_POST['descripcion'];
+        $fechaOrden=$_POST['fechaOrden'];
+        $fechaSolicitud=$_POST['fechaSolicitud'];
+        $fechaEntrega="un dia";
+        $entregado=0;
+        $acumulado=0;
+        $total=0;
+        $costo=$_POST['costo'];
+        $moneda="MXP";
+        $Observaciones=$_POST['Observaciones'];
+
+        
+        if(!isset($_SESSION['queries'])){
+            $_SESSION['queries']="INSERT INTO ReporteOrden VALUES('$idOrden','$idCompania','
+            $folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt
+            ','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','
+            $fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','
+            $total','$costo','$moneda','$Observaciones)";
+        
+        }
+        
+            
+
+            
+        
+        else{
+            $_SESSION['queries'] .= "INSERT INTO ReporteOrden VALUES('$idOrden','$idCompania','
+            $folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt
+            ','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','
+            $fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','
+            $total','$costo','$moneda','$Observaciones)";
+        }
+        echo "antes del echo queries <br>"; 
+        echo $_SESSION['queries']; 
+
+        
+            
+        
+
+    }
+
+    if(isset($_POST["guardar"])){
+        echo "guardar";
+    }
+    ?>  
 </body>
 
 </html>
