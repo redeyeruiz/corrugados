@@ -1,11 +1,13 @@
 <?php
+/*
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-
+*/
+include("funciones/facturasfuncP.php");
 ?>
 
 <!DOCTYPE html>
@@ -138,78 +140,157 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-            <form name="altas_companias">
-                <tr>
-                    <td><p align="center"><b>Número de la Factura</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Fecha de la Factura</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="h_mov" type="date" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Folio</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="folio" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>ID Compañia</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>ID Orden</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>ID Artículo</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_art" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <td>
+                            <p align="center"><b>Número de Factura</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="numfact" type="number" min="0" max="9999999999"class="campo" value="<?= $numfact ?>">
+                            <p><span style="color:#C84810" class="error"><?= $numfact_error ?></span></p>
+                        </td>
+                    </tr>
                     <tr>
-                    <td><p align="center"><b>ID Cliente</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_art" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Entrega</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="f_mov" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Tipo de Transferencia</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="cant" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-            </form></table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <td>
+                            <p align="center"><b>ID Compañía</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Orden</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idord" type="number" min="0" max="9999999999" class="campo" value="<?= $idord ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idord_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Artículo</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="20" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Cliente</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="50" maxlength="10" class="campo" value="<?= $idcli ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcli_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Folio</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="fol" type="number" min="0" class="campo" value="<?= $fol ?>">
+                            <p><span style="color:#C84810" class="error"><?= $fol_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Entrega</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="ent" type="number" min="0" class="campo" value="<?= $ent ?>">
+                            <p><span style="color:#C84810" class="error"><?= $ent_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Tipo de Transporte</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="trans" type="text" size="50" maxlength="4" class="campo" value="<?= $trans ?>">
+                            <p><span style="color:#C84810" class="error"><?= $trans_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Fecha de Facturación</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="fechaf" type="text" size="50" maxlength="10" class="campo" value="<?= $fechaf ?>">
+                            <p><span style="color:#C84810" class="error"><?= $fechaf_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='90%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='13'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Numero Factura</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>ID Compañia</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>ID Orden</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Articulo</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>ID Cliente</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Folio</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Entrega</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Transporte</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Fecha Facturacion</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='10%'>". $row["numFact"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idOrden"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='20%'>". $row["idArticulo"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idCliente"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["folio"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='10%'>". $row["entrega"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["tipoTrans"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["fechaFac"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='13'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
     <!-- end section -->
