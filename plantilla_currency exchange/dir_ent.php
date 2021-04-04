@@ -133,6 +133,7 @@ include("funciones/dir_entfuncP.php");
             </div>
             <table border="0" width="50%" align="center">
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
@@ -151,7 +152,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Dirección de Entrega</b></p>
                         </td>
@@ -160,7 +160,6 @@ include("funciones/dir_entfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $dirent_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Nombre de Entrega</b></p>
@@ -171,7 +170,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Dirección</b></p>
                         </td>
@@ -180,7 +178,6 @@ include("funciones/dir_entfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $dir_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Municipio</b></p>
@@ -191,7 +188,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Estado</b></p>
                         </td>
@@ -200,7 +196,6 @@ include("funciones/dir_entfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $est_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Télefono</b></p>
@@ -211,7 +206,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Observaciones</b></p>
                         </td>
@@ -220,7 +214,6 @@ include("funciones/dir_entfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $obs_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Código Postal</b></p>
@@ -231,7 +224,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Código de Ruta</b></p>
                         </td>
@@ -241,7 +233,6 @@ include("funciones/dir_entfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>País</b></p>
                         </td>
@@ -250,7 +241,6 @@ include("funciones/dir_entfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $pais_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>RFC</b></p>
@@ -300,20 +290,20 @@ include("funciones/dir_entfuncP.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style='border:3px solid #ff880e' width='4%' align='center'>ID Compañia</td>
+                                    <td style='border:3px solid #ff880e' width='4%' align='center'>ID Compañía</td>
                                     <td style='border:3px solid #ff880e' width='8%' align='center'>ID Cliente</td>
-                                    <td style='border:3px solid #ff880e' width='8%' align='center'>Direccion de Entrega</td>
+                                    <td style='border:3px solid #ff880e' width='8%' align='center'>Dirección de Entrega</td>
                                     <td style='border:3px solid #ff880e' width='8%' align='center'>Nombre Entrega</td>
-                                    <td style='border:3px solid #ff880e' width='14%' align='center'>Direccion</td>
+                                    <td style='border:3px solid #ff880e' width='14%' align='center'>Dirección</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>Municipio</td>
                                     <td style='border:3px solid #ff880e' width='7%' align='center'>Estado</td>
-                                    <td style='border:3px solid #ff880e' width='6%' align='center'>Telefono</td>
+                                    <td style='border:3px solid #ff880e' width='6%' align='center'>Teléfono</td>
                                     <td style='border:3px solid #ff880e' width='12%' align='center'>Observaciones</td>
                                     <td style='border:3px solid #ff880e' width='7%' align='center'>C.P.</td>
                                     <td style='border:3px solid #ff880e' width='4%' align='center'>C.R.</td>
-                                    <td style='border:3px solid #ff880e' width='4%' align='center'>Pais</td>
+                                    <td style='border:3px solid #ff880e' width='4%' align='center'>País</td>
                                     <td style='border:3px solid #ff880e' width='8%' align='center'>RFC</td>
-
+                                    
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){

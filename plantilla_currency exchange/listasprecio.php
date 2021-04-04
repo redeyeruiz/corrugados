@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
@@ -6,6 +7,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
+include("funciones/listaspreciofuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -134,21 +136,23 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="arti">
-                    <tr>
-                        <td>
-                            <p align="center"><b>ID Lista de Precios</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_ncmp" type="text" size="50" maxlength="10" class="campo">
-                        </td>
-                    </tr>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cpls" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Lista</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idlis" type="text" size="50" maxlength="10" class="campo" value="<?= $idlis ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idlis_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -156,7 +160,8 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>ID Artículo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_item" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="20" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -164,23 +169,8 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Descuento</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_disc" type="text" size="50" maxlength="10" class="campo">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align="center"><b>Nivel de Descuento</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_dile" type="text" size="50" maxlength="50" class="campo">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align="center"><b>Importe de Descuento</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_disc" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="desc" type="number" min="0" step="0.01" class="campo" value="<?= $desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -188,23 +178,26 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Precio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_pric" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="prec" type="number" min="0" step="0.01" class="campo" value="<?= $prec ?>">
+                            <p><span style="color:#C84810" class="error"><?= $prec_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Cant Olmp</b></p>
+                            <p align="center"><b>Cantidad Olmp.</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_canp" type="int" size="50" maxlength="1" class="campo">
+                            <input style="border:3px solid #ff880e" name="olmp" type="number" min="0" max="9999999999" class="campo" value="<?= $olmp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $olmp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Fecha de Inicio</b></p>
+                            <p align="center"><b>Nivel de Descuento</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_stdt" type="date" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="lvldesc" type="number" min="0" class="campo" value="<?= $lvldesc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $lvldesc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -212,26 +205,95 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Fecha de Caducidad</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_tdat" type="date" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="fcad" type="text" size="50" maxlength="10" class="campo" value="<?= $fcad ?>">
+                            <p><span style="color:#C84810" class="error"><?= $fcad_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Fecha de Inicio</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="finicio" type="text" size="50" maxlength="10" class="campo" value="<?= $finicio ?>">
+                            <p><span style="color:#C84810" class="error"><?= $finicio_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Importe de Descuento</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="impdesc" type="number" min="0" step="0.01" class="campo" value="<?= $impdesc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $impdesc_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='90%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='10'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='5%' align='center'>ID Compañía</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>ID Lista</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Artículo</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Descuento</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Precio</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>Cantidad Olmp.</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>Nivel Descuento</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>Fecha Caducidad</td>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>Fecha Inicio</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Importe Descuento</td>
+
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='5%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='7%'>". $row["idLista"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["idArticulo"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='15%'>". $row["descuento"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["precio"] ."</td><td style='border:3px solid #ff880e' width='7%'>". $row["cantOlmp"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='7%'>". $row["nivelDscto"] ."</td><td style='border:3px solid #ff880e' width='7%'>". $row["fechaCaducidad"] ."</td><td style='border:3px solid #ff880e' width='7%'>". $row["fechaInicio"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='15%'>". $row["impDesc"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='10'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
+
         </div>
     </div>
 

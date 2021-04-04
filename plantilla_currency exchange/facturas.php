@@ -141,6 +141,7 @@ include("funciones/facturasfuncP.php");
             </div>
             <table border="0" width="50%" align="center">
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <tr>
                         <td>
                             <p align="center"><b>Número de Factura</b></p>
                         </td>
@@ -159,7 +160,6 @@ include("funciones/facturasfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>ID Orden</b></p>
                         </td>
@@ -168,7 +168,6 @@ include("funciones/facturasfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $idord_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>ID Artículo</b></p>
@@ -179,7 +178,6 @@ include("funciones/facturasfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
@@ -188,7 +186,6 @@ include("funciones/facturasfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $idcli_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Folio</b></p>
@@ -199,7 +196,6 @@ include("funciones/facturasfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Entrega</b></p>
                         </td>
@@ -209,7 +205,6 @@ include("funciones/facturasfuncP.php");
                         </td>
                     </tr>
                     <tr>
-                    <tr>
                         <td>
                             <p align="center"><b>Tipo de Transporte</b></p>
                         </td>
@@ -218,7 +213,6 @@ include("funciones/facturasfuncP.php");
                             <p><span style="color:#C84810" class="error"><?= $trans_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
                     <tr>
                         <td>
                             <p align="center"><b>Fecha de Facturación</b></p>
@@ -269,14 +263,14 @@ include("funciones/facturasfuncP.php");
                                 </tr>
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>Numero Factura</td>
-                                    <td style='border:3px solid #ff880e' width='10%' align='center'>ID Compañia</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>ID Compañía</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>ID Orden</td>
-                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Articulo</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Artículo</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>ID Cliente</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>Folio</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>Entrega</td>
                                     <td style='border:3px solid #ff880e' width='10%' align='center'>Transporte</td>
-                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Fecha Facturacion</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Fecha Facturación</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){

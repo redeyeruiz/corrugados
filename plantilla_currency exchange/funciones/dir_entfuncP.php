@@ -6,7 +6,7 @@ $idcomp = $idcli = $dirent = $success = $option = $noment = $dir = $mun = $est =
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idcomp"])){
-        $idcomp_error = "Se requiere el ID del la compañía.";
+        $idcomp_error = "Se requiere el ID de la compañía.";
     }
     else{
         $idcomp = test_input($_POST["idcomp"]);
@@ -100,7 +100,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     if (empty($_POST["idcomp"])){
-        $idcomp_error = "Se requiere el ID del la compañía.";
+        $idcomp_error = "Se requiere el ID de la compañía.";
     }
     else{
         $idcomp = test_input($_POST["idcomp"]);
@@ -127,7 +127,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
     if (empty($_POST["idcomp"])){
-        $idcomp_error = "Se requiere el ID del la compañía.";
+        $idcomp_error = "Se requiere el ID de la compañía.";
     }
     else{
         $idcomp = test_input($_POST["idcomp"]);
@@ -220,7 +220,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
     if (empty($_POST["idcomp"])){
-        $idcomp_error = "Se requiere el ID del la compañía.";
+        $idcomp_error = "Se requiere el ID de la compañía.";
     }
     else{
         $idcomp = test_input($_POST["idcomp"]);
