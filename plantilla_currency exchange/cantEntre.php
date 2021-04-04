@@ -1,11 +1,13 @@
 <?php
+/*
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-
+*/
+include("funciones/cantEntrefuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -137,93 +139,168 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-            <form name="f_cantEntre">
-                <tr>
-                    <td><p align="center"><b>ID Orden</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_ord" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>ID Compañia</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>ID Artículo</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="id_art" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Folio</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="folio" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Fecha del Movimiento</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="f_mov" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Hora del Movimiento</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="h_mov" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Cantidad</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="cant" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Posición</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="pos" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Secuencia</b></p></td>
-                    <td align="center">
-                        <input style="border:3px solid #ff880e" name="sec" type="text" size="50" maxlength="50" class="campo">
-                    </td>
-                </tr>
-                <tr>
-                    <td><p align="center"><b>Tipo Reg</b></p></td>
-                    <td align="center">
-                        <!--<input style="border:3px solid #ff880e" name="t_reg" type="text" size="50" maxlength="50" class="campo">-->
-                        <select style="border:3px solid #ff880e" name="t_reg" class="campo">
-                            <option selected></option>
-                            <option>Capturado</option>
-                            <option>Cancelado</option>
-                            <option>Facturado</option>
-                        </select>
-                    </td>
-                </tr>
-            </form></table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_alm" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_alm" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_alm" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_alm" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_alm" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Compañía</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Orden</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idord" type="number" min="0" max="9999999999" class="campo" value="<?= $idord ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idord_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Folio</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="folio" type="number" min="0" class="campo" value="<?= $folio ?>">
+                            <p><span style="color:#C84810" class="error"><?= $folio_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Fecha de Movimiento</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="fmov" type="text" size="50" maxlength="10" class="campo" value="<?= $fmov ?>">
+                            <p><span style="color:#C84810" class="error"><?= $fmov_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Hora</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="hora" type="number" min="0" step="9999999999" class="campo" value="<?= $hora ?>">
+                            <p><span style="color:#C84810" class="error"><?= $hora_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Secuencia</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="sec" type="number" min="0" class="campo" value="<?= $sec ?>">
+                            <p><span style="color:#C84810" class="error"><?= $sec_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Tipo Reg.</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="tiporeg" type="number" min="0" class="campo" value="<?= $tiporeg ?>">
+                            <p><span style="color:#C84810" class="error"><?= $tiporeg_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Cantidad</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="cant" type="number" min="0" step="0.01" class="campo" value="<?= $cant ?>">
+                            <p><span style="color:#C84810" class="error"><?= $cant_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Artículo</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="20" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Posición</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="pos" type="number" min="0" class="campo" value="<?= $pos ?>">
+                            <p><span style="color:#C84810" class="error"><?= $pos_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='90%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='10'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='7%' align='center'>ID Compañía</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>ID Orden</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Folio</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Fecha Movimiento</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Hora</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Secuencia</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Tipo Reg.</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Cantidad</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Artículo</td>
+                                    <td style='border:3px solid #ff880e' width='9%' align='center'>Posición</td>
+
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='7%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='9%'>". $row["idOrden"] ."</td><td style='border:3px solid #ff880e' width='9%'>". $row["folio"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='9%'>". $row["fechaMov"] ."</td><td style='border:3px solid #ff880e' width='9%'>". $row["hora"] ."</td><td style='border:3px solid #ff880e' width='9%'>". $row["secuencia"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='9%'>". $row["tipoReg"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["cantidad"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["idArticulo"] ."</td>";
+                            echo "<td style='border:3px solid #ff880e' width='9%'>". $row["posicion"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='10'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
+
         </div>
     </div>
     <!-- end section -->
-   
+    
     <!-- Start Footer
      End Footer -->
 
