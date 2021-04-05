@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
@@ -6,6 +7,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
+include("funciones/artexfuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +42,11 @@ if(!isset($_SESSION['conectado'])){
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -50,7 +57,10 @@ if(!isset($_SESSION['conectado'])){
             <img src="images/loader.gif" alt="#" />
         </div>
     </div>
+    <!-- end loader -->
+    <!-- END LOADER -->
 
+    <!-- Start header -->
     <header class="top-header">
         <div class="header_top">
 
@@ -61,6 +71,7 @@ if(!isset($_SESSION['conectado'])){
                     </div>
                     <div class="site_information">
                         <ul>
+                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
                                 <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
@@ -78,7 +89,7 @@ if(!isset($_SESSION['conectado'])){
                     <div class="menu_orange_section" style="background: #ff880e;">
                         <nav class="navbar header-nav navbar-expand-lg">
                             <div class="menu_section">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">--> 
                     <span></span>
                     <span></span>
                     <span></span>
@@ -95,17 +106,14 @@ if(!isset($_SESSION['conectado'])){
                                 </div>
                             </div>
                         </nav>
-                    </div>
+                       </div>
                 </div>
             </div>
         </div>
         </div>
 
     </header>
-    <!-- End header
-    <br/>
-    <br/>
-     -->
+    <!-- End header -->
 
     <!-- Start Banner -->
     <div class="section inner_page_banner" style="background-color: #003DCE">
@@ -128,62 +136,105 @@ if(!isset($_SESSION['conectado'])){
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Artículos Existentes</h2>
+                            <h2><span class="theme_color"></span>Articulos Existentes</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_artExi">
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
-                            <p align="center"><b>ID Compañía</b></p>
+                            <p align="center"><b>ID Articulo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_ncmp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="4" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Artículo</b></p>
+                            <p align="center"><b>ID Compañia</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_item" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="70" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Descripción</b></p>
+                            <p align="center"><b>Descripcion</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_dsca" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="desc" type="text" size="50" maxlength="70" class="campo" value="<?= $desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Costo Estándar</b></p>
+                            <p align="center"><b>Costo Estandar</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_corp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="coststa" type="text" size="50" maxlength="70" class="campo" value="<?= $coststa ?>">
+                            <p><span style="color:#C84810" class="error"><?= $coststa_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='80%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='4'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Id Articulo</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Id Compania</td>
+                                    <td style='border:3px solid #ff880e' width='40%' align='center'>Descripcion</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Costo Estandar</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='20%'>". $row["idArticulo"] ."</td><td style='border:3px solid #ff880e' width='20%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='40%'>". $row["descripcion"] ."</td><td style='border:3px solid #ff880e' width='20%'>". $row["costoEstandar"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='4'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
 
@@ -196,8 +247,7 @@ if(!isset($_SESSION['conectado'])){
             </div>
         </div>
     </div>
-
-    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+    <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>

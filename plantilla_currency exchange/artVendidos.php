@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
@@ -6,6 +7,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
+include("funciones/artvenfuncP.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +42,11 @@ if(!isset($_SESSION['conectado'])){
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -50,7 +57,10 @@ if(!isset($_SESSION['conectado'])){
             <img src="images/loader.gif" alt="#" />
         </div>
     </div>
+    <!-- end loader -->
+    <!-- END LOADER -->
 
+    <!-- Start header -->
     <header class="top-header">
         <div class="header_top">
 
@@ -61,6 +71,7 @@ if(!isset($_SESSION['conectado'])){
                     </div>
                     <div class="site_information">
                         <ul>
+                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
                                 <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
@@ -78,7 +89,7 @@ if(!isset($_SESSION['conectado'])){
                     <div class="menu_orange_section" style="background: #ff880e;">
                         <nav class="navbar header-nav navbar-expand-lg">
                             <div class="menu_section">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">--> 
                     <span></span>
                     <span></span>
                     <span></span>
@@ -95,17 +106,14 @@ if(!isset($_SESSION['conectado'])){
                                 </div>
                             </div>
                         </nav>
-                    </div>
+                       </div>
                 </div>
             </div>
         </div>
         </div>
 
     </header>
-    <!-- End header
-    <br/>
-    <br/>
-     -->
+    <!-- End header -->
 
     <!-- Start Banner -->
     <div class="section inner_page_banner" style="background-color: #003DCE">
@@ -128,35 +136,47 @@ if(!isset($_SESSION['conectado'])){
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Artículos Vendidos</h2>
+                            <h2><span class="theme_color"></span>Articulos Vendidos</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_artVen">
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
                             <p align="center"><b>Folio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_ncmp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="folio" type="text" size="50" maxlength="10" class="campo" value="<?= $folio ?>">
+                            <p><span style="color:#C84810" class="error"><?= $folio_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Compañía</b></p>
+                            <p align="center"><b>ID Articulo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_item" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="10" class="campo" value="<?= $idart ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Artículo</b></p>
+                            <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_dsca" type="text" size="50" maxlength="4" class="campo">
+                            <input style="border:3px solid #ff880e" name="idalma" type="text" size="50" maxlength="10" class="campo" value="<?= $idalma ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idalma_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Compañia</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="10" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -164,15 +184,17 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cuqs" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="idcliente" type="text" size="50" maxlength="50" class="campo" value="<?= $idcliente ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcliente_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Nuevo Agente</b></p>
+                            <p align="center"><b>Nuevo Representante</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_seak" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="newrep" type="text" size="50" maxlength="50" class="campo" value="<?= $newrep ?>">
+                            <p><span style="color:#C84810" class="error"><?= $newrep_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -180,7 +202,17 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Stock</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_corp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="stock" type="text" size="50" maxlength="50" class="campo" value="<?= $stock ?>">
+                            <p><span style="color:#C84810" class="error"><?= $stock_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Codigo de Aviso</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="codavi" type="text" size="50" maxlength="3" class="campo" value="<?= $codavi ?>">
+                            <p><span style="color:#C84810" class="error"><?= $codavi_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -188,34 +220,71 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Unidad de Venta</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_corp" type="text" size="50" maxlength="10" class="campo">
+                            <input style="border:3px solid #ff880e" name="udvta" type="text" size="50" maxlength="4" class="campo" value="<?= $udvta ?>">
+                            <p><span style="color:#C84810" class="error"><?= $udvta_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <p align="center"><b>Código de Aviso</b></p>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_corp" type="text" size="50" maxlength="10" class="campo">
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_age" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_age" style="width:200px" class="btn btn-outline-danger">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_age" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_age" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_age" style="width:200px" class="btn btn-outline-dark">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='80%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='9'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Folio</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Id Articulo</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Id Almacen</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Id Compañia</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Id Cliente</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>New Rep</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Stock</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Codigo Aviso</td>
+                                    <td style='border:3px solid #ff880e' width='10%' align='center'>Unidad Venta</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td style='border:3px solid #ff880e' width='20%'>". $row["folio"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idArticulo"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idAlmacen"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["idCliente"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["newRep"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["stock"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["codAviso"] ."</td><td style='border:3px solid #ff880e' width='10%'>". $row["udVta"] ."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='9'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                }
+            ?>
         </div>
     </div>
 
@@ -228,8 +297,7 @@ if(!isset($_SESSION['conectado'])){
             </div>
         </div>
     </div>
-
-    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+    <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>
