@@ -188,7 +188,12 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Estatus del Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="t_cnpa" type="int" size="50" maxlength="1" class="campo">
+                            <select style="border:3px solid #ff880e" name="t_cnpa" class="campo">
+                                <option selected>Cliente Normal</option>
+                                <option>Cliente Dudoso</option>
+                                <option>Cliente Bloqueado</option>
+                                <option>Cliente Potencial</option>
+				            </select>
                         </td>
                     </tr>
                     <tr>
