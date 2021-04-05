@@ -1,12 +1,12 @@
 <?php
-/*
+
 session_start();
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-*/
+
 include("funciones/cantEntrefuncP.php"); 
 ?>
 
