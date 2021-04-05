@@ -162,7 +162,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
     else{
         $impdesc = test_input($_POST["impdesc"]);
     }
-    
     if ($idcomp_error == "" and $idlis_error == "" and $idart_error == "" and $desc_error == "" and $prec_error == "" and $olmp_error == "" and $lvldesc_error == "" and $fcad_error == "" and $finicio_error == "" and $impdesc_error == ""){
         $query="UPDATE ListaPrecio SET idCompania='$idcomp', idArticulo='$idart', descuento='$desc', precio='$prec', cantOlmp='$olmp', nivelDscto='$lvldesc', fechaCaducidad='$fcad', fechaInicio='$finicio', impDesc='$impdesc' WHERE idLista='$idlis'";
         $sql=mysqli_query($conection,$query);

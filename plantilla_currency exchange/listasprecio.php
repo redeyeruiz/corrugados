@@ -175,20 +175,20 @@ include("funciones/listaspreciofuncP.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Precio</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="prec" type="number" min="0" step="0.01" class="campo" value="<?= $prec ?>">
-                            <p><span style="color:#C84810" class="error"><?= $prec_error ?></span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <p align="center"><b>Cantidad Olmp.</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="olmp" type="number" min="0" max="9999999999" class="campo" value="<?= $olmp ?>">
                             <p><span style="color:#C84810" class="error"><?= $olmp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>Precio</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="prec" type="number" min="0" step="0.01" class="campo" value="<?= $prec ?>">
+                            <p><span style="color:#C84810" class="error"><?= $prec_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -202,11 +202,11 @@ include("funciones/listaspreciofuncP.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Fecha de Caducidad</b></p>
+                            <p align="center"><b>Importe de Descuento</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="fcad" type="text" size="50" maxlength="10" class="campo" value="<?= $fcad ?>">
-                            <p><span style="color:#C84810" class="error"><?= $fcad_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="impdesc" type="number" min="0" step="0.01" class="campo" value="<?= $impdesc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $impdesc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -214,17 +214,17 @@ include("funciones/listaspreciofuncP.php");
                             <p align="center"><b>Fecha de Inicio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="finicio" type="text" size="50" maxlength="10" class="campo" value="<?= $finicio ?>">
+                            <input style="border:3px solid #ff880e" name="finicio" type="date" size="50" maxlength="10" class="campo" value="<?= $finicio ?>">
                             <p><span style="color:#C84810" class="error"><?= $finicio_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Importe de Descuento</b></p>
+                            <p align="center"><b>Fecha de Caducidad</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="impdesc" type="number" min="0" step="0.01" class="campo" value="<?= $impdesc ?>">
-                            <p><span style="color:#C84810" class="error"><?= $impdesc_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="fcad" type="date" size="50" maxlength="10" class="campo" value="<?= $fcad ?>">
+                            <p><span style="color:#C84810" class="error"><?= $fcad_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
