@@ -73,9 +73,9 @@ if(!isset($_SESSION['conectado'])){
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,9 +95,9 @@ if(!isset($_SESSION['conectado'])){
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>

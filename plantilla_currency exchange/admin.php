@@ -138,13 +138,13 @@ if(!isset($_SESSION['conectado'])){
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="usuarios.php"><div class="full services_blog">
+                    <a href="usuario_frame.php"><div class="full services_blog">
                        <img class="img-responsive" src="images/s1.png" alt="#" />
                        <h4>Usuarios</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="roles.php"><div class="full services_blog">
+                    <a href="rol_frame.php"><div class="full services_blog">
                        <img class="img-responsive" src="images/s1.png" alt="#" />
                        <h4>Roles</h4>
                     </div></a>
