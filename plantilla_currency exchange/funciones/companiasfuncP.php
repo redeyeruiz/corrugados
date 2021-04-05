@@ -71,7 +71,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="UPDATE Compania SET nombre='$nom' WHERE idCompania='$idcomp'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
-            $success = "Error en el actualización de datos de la compañía.";
+            $success = "Error en la actualización de datos de la compañía.";
         }
         else{
             $success = "Actualización realizada con éxito.";
