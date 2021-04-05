@@ -5,7 +5,6 @@ if(!isset($_SESSION['conectado'])){
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +39,9 @@ if(!isset($_SESSION['conectado'])){
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+    <script type="text/javascript" src="./js/utilerias.js"></script>
+    <script type="text/javascript" src="./js/permisos.js"></script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -65,16 +67,16 @@ if(!isset($_SESSION['conectado'])){
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
                             </li>
-                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -94,9 +96,9 @@ if(!isset($_SESSION['conectado'])){
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
+                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
+                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
+                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
                                         <li><a class="nav-link" href="#">Operaciones</a></li>
                                         <li><a class="nav-link" href="#">Reportes</a></li>
                                         <li><a class="nav-link" href="#">Contacto</a></li>
@@ -140,7 +142,7 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_asig_usuario_rol">
+                <form name="f_permisos">
                     <tr>
                         <td>
                             <p align="center"><b>ID Usuario</b></p>
@@ -164,13 +166,13 @@ if(!isset($_SESSION['conectado'])){
                 <div class="col-sm-12">
                     <div class="full">
                         <div class="center">
-                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success" onclick="alta_permisos()">Altas</button>
+                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger" onclick="baja_permisos()">Bajas</button>
                         </div>
                         <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark" onclick="consulta_permisos()">Consultas</button>
+                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info" onclick="actualiza_permisos()">Actualización</button>
+                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark" onclick="reporte_permisos()">Reportes</button>
                         </div>
                     </div>
                 </div>
@@ -184,7 +186,7 @@ if(!isset($_SESSION['conectado'])){
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
+                    <p class="crp">© Copyrights 2020 design by html.design</p>
                 </div>
             </div>
         </div>
