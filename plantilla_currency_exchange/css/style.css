@@ -2370,30 +2370,30 @@ ul.bottom_menu li {
     color: #fff;
     background: #050000;
 }
-
-td,
-th {
+/* tabla reportes */
+.td-reporte,
+.th-reporte {
     border: 1px solid rgb(190, 190, 190);
     padding: 10px;
 }
 
-td {
+.td-reporte {
     text-align: center;
 }
 
-tr:nth-child(even) {
+.tr-reporte:nth-child(even) {
     background-color: #eee;
 }
-tr:nth-child(odd) {
+.tr-reporte:nth-child(odd) {
     background-color: rgb(241, 233, 195);
 }
 
-th[scope="col"] {
+.th-reporte[scope="col"] {
     background-color: #696969;
     color: #fff;
 }
 
-th[scope="row"] {
+.th-reporte[scope="row"] {
     background-color: #d7d9f2;
 }
 
@@ -2402,7 +2402,7 @@ caption {
     caption-side: bottom;
 }
 
-table {
+.tabla-reporte {
     border-collapse: collapse;
     border: 2px solid rgb(200, 200, 200);
     letter-spacing: 1px;
@@ -2417,7 +2417,7 @@ table {
 	border: 3px solid rgb(255, 255, 255);
 	padding: 11px;
 }
-
+/*button OP*/
 .button-op{
 	display: block;
 	border-radius: 4px;
@@ -2633,7 +2633,7 @@ label {
 .buttonCO{
     float:right;
     padding:8px 12px;
-    margin:8px 0 0;
+    
     font-family:'Montserrat',sans-serif;
     font-weight: bold;
     border:2px solid chocolate;
@@ -2651,7 +2651,6 @@ label {
 .buttonBigCO{
     float:none;
     padding:16px 22px;
-    margin:0 50%;
 	font-family:'Montserrat',sans-serif;
     font-weight: bold;
     border:2px solid sienna;
@@ -2685,11 +2684,11 @@ label {
 }
 
 .formCO{
-    width:45em;
+    width:65em; /*TamaÃ±o de la form*/
     background:#e6e6e6;
     border-radius:8px;
     box-shadow:0 0 40px -10px #000;
-    margin:calc(50vh - 220px) auto;
+    margin:calc(60vh - 220px) auto;
     padding:20px 30px;
     max-width:calc(100vw - 40px);
     box-sizing:border-box;
@@ -2734,7 +2733,7 @@ label {
     color:#5a5a5a;
 }
 
-/*-----------Búsquedas en General-------------*/
+/*-----------BÃºsquedas en General-------------*/
 
 
 
@@ -2775,4 +2774,44 @@ label {
 	color: white;
 	box-shadow: 0 .75rem .5rem -.5rem hsl(0 50% 80%);
 }
-  
+
+/*--------------Tabla Orden-----------------*/
+
+	.h1-orden{
+	font-size: 30px;
+	color: sienna;
+	text-transform: uppercase;
+	font-weight: 300;
+	text-align: center;
+	margin-bottom: 15px;
+  }
+  .table-orden{
+	width:100%;
+	table-layout: fixed;
+  }
+  .tbl-header-orden{
+	background-color: rgba(160, 81, 45, 0.548);
+   }
+  .tbl-content-orden{
+	height:300px;
+	overflow-x:auto;
+	margin-top: 0px;
+	border: 1px solid rgba(255,255,255,0.3);
+  }
+  .th-orden{
+	padding: 20px 15px;
+	text-align: left;
+	font-weight: 500;
+	font-size: 12px;
+	color: sienna;
+	text-transform: uppercase;
+  }
+  .td-orden{
+	padding: 15px;
+	text-align: left;
+	vertical-align:middle;
+	font-weight: 300;
+	font-size: 12px;
+	color: sienna;
+	border-bottom: solid 1px rgba(255,255,255,0.1);
+  }

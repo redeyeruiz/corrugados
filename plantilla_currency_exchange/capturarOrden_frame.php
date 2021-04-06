@@ -33,7 +33,14 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(window).on("load resize ", function() {
+	    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+	    $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
+    </script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -120,21 +127,21 @@
     </div>
     <!-- End Banner -->
     
-   <!-- section -->
+   <!-- section 
     <div class="section layout_padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Capturar Orden</h2>    
+                           <h2><span class="theme_color"></span>Capturar Orden</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end section -->
+    end section -->
 
 
     <!-- Iframe -->
@@ -164,8 +171,12 @@
             </p>
             <p class="pCO" type="Precio:" >
             <input class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required></input>
-            <button class="buttonCO">Recalcular Precio</button><br><br>
             </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
+                <button class="buttonBigCO btn">Recalcular Precio</button>
+                </div>
+            
+            
                 
             <p class="pCO" type="Fecha Solicitada:">
             <input class="inputCO" type="date" name ='fechaSolicitud' required></input>
@@ -177,17 +188,32 @@
             <p class="pCO center">
 
             </p>
-            <br><br>
+            
+            <form class="formCO" method="POST" action="capturarOrden_frame.php">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
+                <button type="submit" name="agregarArt" class="buttonBigCO btn" >Agregar Articulo</button>
+                
+                </div>
+                <?php
+                if(isset($_POST['agregarArt']) ){
+                            update_table();
+                        }
+                ?>
+            </form>
+            
 
             <form class="formCO" method="POST" action="capturarOrden_frame.php">
-                        <button type="submit" name="agregarArt" class="buttonBigCO" >Agregar Articulo</button>
-                        <button type="submit" name="guardar" class="buttonBigCO" >Guardar</button>
-                        <button class="buttonBigCO">Cancelar</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
+                <button type="submit" name="guardar" class="buttonBigCO btn" >Guardar</button>
+                <button type ="submit" name= "cancelar" class="buttonBigCO btn">Cancelar</button>
+                </div>
             </form>
 
         </form>
 
-       
+        
+
+        
         
 
     </section>
@@ -199,7 +225,7 @@
             <div class="row">
                <div class="col-md-12 white_fonts">
                     <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
+                        <!-- <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="full">
                                 <img class="img-responsive" src="images/footer_logo.png" alt="#" />
                             </div>
@@ -244,7 +270,7 @@
                              </ul>
                          </div>
                             </div>
-                        </div>
+                        </div>-->
 					</div>
                 </div>
 			 </div>
@@ -281,45 +307,49 @@
 
 
 	<?php
-
+    require_once('php/utilerias.php');
     /* && isset($_POST['dirEnt']) && isset($_POST['ordenCompra']) 
         && isset($_POST['cantidad']) && isset($_POST['costo']) && isset($_POST['descripcion']) 
         && isset($_POST['fechaOrden']) && isset($_POST['fechaSolicitud']) 
         && isset($_POST['Observaciones'])*/
-    echo "primer echo <br>"; 
+    
     if( isset($_POST['agregarArt']) ){
-        echo "segundo echo <br>"; 
+        
 
-        $idOrden="0001";
-        $idCompania="0003";
-        $folio=1;
-        $numFact=1234;
-        $ordenBaan=1234;
-        $idCliente=1234;
-        $nombreCliente=$_POST['nombreCliente'];
-        $dirEnt=$_POST['dirEnt'];
-        $idArticulo="idtest";
-        $ordenCompra= $_POST['ordenCompra'];
-        $cantidad=$_POST['cantidad'];
-        $precio=34;
-        $decripcion=$_POST['descripcion'];
-        $fechaOrden=$_POST['fechaOrden'];
-        $fechaSolicitud=$_POST['fechaSolicitud'];
-        $fechaEntrega="un dia";
-        $entregado=0;
-        $acumulado=0;
-        $total=0;
-        $costo=$_POST['costo'];
-        $moneda="MXP";
-        $Observaciones=$_POST['Observaciones'];
+        $idOrden                                    ="0001";
+        $idCompania                                 ="0003";
+        $folio                                      =1;
+        $numFact                                    =1234;
+        $ordenBaan                                  =1234;
+        $idCliente                                  =1234;
+        $_SESSION['cliente'] = $nombreCliente       =$_POST['nombreCliente'];
+        $_SESSION['dirEnt']  =$dirEnt               =$_POST['dirEnt'];
+        $idArticulo                                 ="idtest";
+        $ordenCompra                                = $_POST['ordenCompra'];
+        $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
+        $_SESSION['precio']=$precio                 =34;
+        $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
+        $_SESSION['fechaOrden'] =$fechaOrden        =$_POST['fechaOrden'];
+        $_SESSION['fechaSolicitud'] =$fechaSolicitud=$_POST['fechaSolicitud'];
+        $fechaEntrega                               ="un dia";
+        $entregado                                  =0;
+        $acumulado                                  =0;
+        $total                                      =0;
+        $costo                                      =$_POST['costo'];
+        $moneda                                     ="MXP";
+        $Observaciones                              =$_POST['Observaciones'];
 
+        $conn = conecta_servidor();
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+        else{
+            echo "Connected successfully MySQL";
+        }
+        
         
         if(!isset($_SESSION['queries'])){
-            $_SESSION['queries']="INSERT INTO ReporteOrden VALUES('$idOrden','$idCompania','
-            $folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt
-            ','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','
-            $fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','
-            $total','$costo','$moneda','$Observaciones)";
+            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones')|";
         
         }
         
@@ -328,11 +358,7 @@
             
         
         else{
-            $_SESSION['queries'] .= "INSERT INTO ReporteOrden VALUES('$idOrden','$idCompania','
-            $folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt
-            ','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','
-            $fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','
-            $total','$costo','$moneda','$Observaciones)";
+            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones')|";
         }
         echo "antes del echo queries <br>"; 
         echo $_SESSION['queries']; 
@@ -343,10 +369,119 @@
 
     }
 
+    //guardar e insertar a la DB
     if(isset($_POST["guardar"])){
         echo "guardar";
+
+        $conn = conecta_servidor();
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+          } 
+          else{
+              echo "Connected successfully MySQL";
+          }
+        if(isset($_SESSION['queries'])){
+            $queries=explode("|",$_SESSION['queries'],-1);
+
+            
+            
+            for($i=0;$i<count($queries);$i++){
+                $query=$queries[$i];
+                echo $query;
+                echo "<br>";
+                mysqli_query($conn, $query);
+                
+    
+    
+            }
+        
+        }
+
+
+
     }
+
+    //cancelar una orden
+    if(isset($_POST["cancelar"]) && isset($_SESSION['queries'])){
+        
+            unset($_SESSION['queries']);
+    }
+    
     ?>  
+
+    <?php
+        function update_table(){
+            if(isset($_SESSION['queries'])){
+                echo
+                "<br><br><br>
+                <h1 class='h1-orden'>Artículos Agregados</h1>
+                <div class='tbl-header-orden'>
+                    <table class='table-orden' cellpadding='0' cellspacing='0'>
+                    <thead>
+                        <tr>
+                            <th class='th-orden' scope='col'>Cliente</th>
+                            <th class='th-orden' scope='col'>Direccion de Entrega</th>
+                            <th class='th-orden' scope='col'>Orden de compra</th>
+                            <th class='th-orden' scope='col'>Fecha-Orden</th>
+                            <th class='th-orden' scope='col'>Articulo</th>
+                            <th class='th-orden' scope='col'>Descripción</th>
+                            <th class='th-orden' scope='col'>Cantidad</th>
+                            <th class='th-orden' scope='col'>Precio</th>
+                            <th class='th-orden' scope='col'>Fecha-Solicitud</th>
+                        </tr>
+                    </thead>
+                    </table>
+                </div>
+                <div class='tbl-content-orden'>
+                        <table class='table-orden' cellpadding='0' cellspacing='0'>
+                        <tbody>";
+
+                
+                $queries=explode("|",$_SESSION['queries'],-1);
+
+                for($i=0;$i<count($queries);$i++){
+                    $query= explode("'",$queries[$i]);
+
+                    $cliente        = $query[13];
+                    $dirEnt         = $query [15];
+                    $ordenCompra    = $query [19];
+                    $fechaOrden     = $query [27];
+                    $idArticulo     = $query [17];
+                    $descripcion    = $query [25];
+                    $cantidad       = $query [21];
+                    $precio         = $query [23];
+                    $fechaSolicitud = $query [29];
+
+
+                    echo
+        
+                    "       <tr>
+                                <td class='td-orden'>$cliente</td>
+                                <td class='td-orden'>$dirEnt</td>
+                                <td class='td-orden'>$ordenCompra</td>
+                                <td class='td-orden'>$fechaOrden</td>
+                                <td class='td-orden'>$idArticulo</td>
+                                <td class='td-orden'>$descripcion</td>
+                                <td class='td-orden'>$cantidad</td>
+                                <td class='td-orden'>$precio</td>
+                                <td class='td-orden'>$fechaSolicitud</td>
+                            </tr>
+                        ";
+
+        
+                }
+                echo"
+                        </tbody>
+                        </table>
+                </div>";
+                
+            }
+            
+            
+        }
+    ?>
+
 </body>
 
 </html>
