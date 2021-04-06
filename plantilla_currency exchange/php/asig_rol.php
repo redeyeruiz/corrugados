@@ -30,7 +30,7 @@ if(!isset($_SESSION['conectado'])){
 			$rol = $_GET['rol'];
 
 			$conexion=conecta_servidor();
-			$query="INSERT INTO asig_rol VALUES ('$id_user','$rol')";
+			$query="UPDATE usuario SET rol='$rol' WHERE idUsuario='$id_user'";
 			$sql=mysqli_query($conexion,$query);
 			if (!$sql){
 				msg("Error, el ID Usuario se duplica en la base de datos","rojo");
@@ -44,7 +44,7 @@ if(!isset($_SESSION['conectado'])){
 			$id_user = $_GET['id_user'];
 
 			$conexion=conecta_servidor();
-			$query="DELETE FROM asig_rol WHERE idUsuario ='$id_user'";
+			$query="UPDATE usuario SET rol='' WHERE idUsuario='$id_user'";
 			$sql=mysqli_query($conexion,$query);
 			if (mysqli_affected_rows($conexion)==0){
 				msg("Error, ID Usuario inexistente en base de datos","rojo");
@@ -80,7 +80,7 @@ if(!isset($_SESSION['conectado'])){
 		function consulta_asig_rol(){
 			$id_user = $_GET['id_user'];
 			$conexion=conecta_servidor();
-			$query="SELECT * FROM asig_rol WHERE idUsuario ='$id_user'";
+			$query="SELECT * FROM usuario WHERE idUsuario ='$id_user'";
 			$sql=mysqli_query($conexion,$query);
 			$reg=mysqli_fetch_object($sql);
 			if ($reg==mysqli_fetch_array($sql)){
@@ -96,7 +96,7 @@ if(!isset($_SESSION['conectado'])){
 			$id_user = $_GET['id_user'];
 			$rol = $_GET['rol'];
 			$conexion=conecta_servidor();
-			$query="UPDATE asig_rol SET rol='$rol' WHERE idUsuario='$id_user'";
+			$query="UPDATE usuario SET rol='$rol' WHERE idUsuario='$id_user'";
 			$sql=mysqli_query($conexion,$query);
 			if (mysqli_affected_rows($conexion)==0){
 				msg("Error, ID Usuario inexistente en la base de datos","rojo");
@@ -106,9 +106,9 @@ if(!isset($_SESSION['conectado'])){
 			}
 		}
 
-		function reporte_asig_rol(){
+		function reporte_asig_rol() {
 			$conexion=conecta_servidor();
-			$query="SELECT * FROM asig_rol ORDER BY idUsuario";
+			$query="SELECT * FROM usuario ORDER BY idUsuario";
 			$sql=mysqli_query($conexion,$query);
 			echo "
 				<table border='3' width='80%'>
@@ -131,7 +131,7 @@ if(!isset($_SESSION['conectado'])){
 			echo "
 				<tr align='center' bgcolor='#A1C1F3'> 
 					<td colspan='2'>
-						<p class='texto20'>Total de Usuario = $cont</p>
+						<p class='texto20'>Total de usuarios = $cont</p>
 					</td>
 				</tr>
 			";
