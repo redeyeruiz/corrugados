@@ -14,18 +14,19 @@ if(mysqli_connect_errno()){
     die();
 }
 
-if($statement = $conexion->prepare('SELECT nombre, contrasena FROM usuario WHERE idUsuario = ?')){
+if($statement = $conexion->prepare('SELECT nombre, contrasena, rol FROM usuario WHERE idUsuario = ?')){
     $statement->bind_param('s', $_POST['username']);
     $statement->execute();
     $statement->store_result();
     if($statement->num_rows >0){
-        $statement->bind_result($nom, $contra);
+        $statement->bind_result($nom, $contra, $rol);
         $statement->fetch();
         if($_POST['pass']==$contra){
             session_regenerate_id();
             $_SESSION['conectado'] = TRUE;
             $_SESSION['nombre'] = $nom;
             $_SESSION['usuario'] = $_POST['username'];
+            $_SESSION['rol'] = $rol;
             header("Location: http://localhost/corrugados/plantilla_currency%20exchange/inicio.php");
             die();
         }else{

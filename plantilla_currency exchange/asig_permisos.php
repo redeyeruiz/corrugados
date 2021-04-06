@@ -5,6 +5,8 @@ if(!isset($_SESSION['conectado'])){
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
+
+include("php/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -96,12 +98,7 @@ if(!isset($_SESSION['conectado'])){
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                                        <li><a class="nav-link" href="#">Operaciones</a></li>
-                                        <li><a class="nav-link" href="#">Reportes</a></li>
-                                        <li><a class="nav-link" href="#">Contacto</a></li>
+                                        <?php menu()?>
                                     </ul>
                                 </div>
                             </div>

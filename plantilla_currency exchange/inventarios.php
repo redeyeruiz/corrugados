@@ -8,6 +8,7 @@ if(!isset($_SESSION['conectado'])){
 }
 
 include("funciones/inventariosfuncP.php"); 
+include("php/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -87,12 +88,7 @@ include("funciones/inventariosfuncP.php");
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <li><a class="nav-link" href="inicio.php">Inicio</a></li>
-                                        <li><a class="nav-link" href="admin.php">Administración</a></li>
-                                        <li><a class="nav-link" href="catalogos.php">Catálogos</a></li>
-                                        <li><a class="nav-link" href="#">Operaciones</a></li>
-                                        <li><a class="nav-link" href="#">Reportes</a></li>
-                                        <li><a class="nav-link" href="#">Contacto</a></li>
+                                        <?php menu()?>
                                     </ul>
                                 </div>
                             </div>
