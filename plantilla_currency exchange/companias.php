@@ -173,7 +173,18 @@ include("php/menu.php");
                                         </div>
                                     </div>
                                 </div>
+                                &nbsp;
                             </div>
+                            <div class="center">
+                                &nbsp;
+                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
+                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" onclick="document.getElementById('selectedFile').click();"/>
+                                &nbsp;
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                            </div>
+                            <div class="center">
+                            <p id="feedback"></p>
+                            </div>  
                         </td>
                     </tr>
                     <tr>
@@ -229,6 +240,7 @@ include("php/menu.php");
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/cargar.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script>
