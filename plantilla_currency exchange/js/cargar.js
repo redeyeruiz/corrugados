@@ -16,3 +16,6 @@ archivo.addEventListener('change', (event) => {
     console.log({ file, name, type, size, lastModified });
   }
 });
+
+var reader = new FileReader();
+var x = reader.readAsText(archivo, "UTF-8");
