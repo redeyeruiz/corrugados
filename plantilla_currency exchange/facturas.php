@@ -235,6 +235,14 @@ include("php/menu.php");
                                     </div>
                                 </div>
                             </div>
+                            <div class="center">
+                                &nbsp;
+                                &nbsp;
+                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
+                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
+                                &nbsp;
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                            </div>
                         </td>
                     </tr>
                     <tr>

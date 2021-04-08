@@ -173,9 +173,9 @@ include("php/menu.php");
                                         </div>
                                     </div>
                                 </div>
-                                &nbsp;
                             </div>
                             <div class="center">
+                                &nbsp;
                                 &nbsp;
                                 <!--
                                 <div class="form-group">
