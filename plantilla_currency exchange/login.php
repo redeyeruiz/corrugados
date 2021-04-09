@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('utilerias.php');
+include_once('php/utilerias.php');
 if(isset($_SESSION['mens_error'])){
 	echo "<script type='text/javascript'>";
 	echo "alert('".$_SESSION['mens_error']."')";
