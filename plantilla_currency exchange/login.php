@@ -1,10 +1,14 @@
 <?php
 session_start();
+include_once('utilerias.php');
 if(isset($_SESSION['mens_error'])){
 	echo "<script type='text/javascript'>";
 	echo "alert('".$_SESSION['mens_error']."')";
 	echo "</script>";
 	unset($_SESSION['mens_error']);
+}elseif ($_SESSION['conectado']==TRUE){
+	header('Location: '.redirect('inicio'));
+	die();
 }
 ?>
 

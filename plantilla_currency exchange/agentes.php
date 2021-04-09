@@ -1,14 +1,18 @@
 <?php 
-
 session_start();
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    header("Location: ".redirect('login'));
     die();
-}
+}/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+}*/
 
 include("funciones/agentesfuncP.php"); 
-include("php/menu.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

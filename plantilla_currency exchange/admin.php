@@ -1,12 +1,15 @@
 <?php
 session_start();
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    header("Location: ".redirect('login'));
     die();
-}
-
-include("php/menu.php");
+}/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -134,37 +137,37 @@ include("php/menu.php");
             </div>
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="usuario_frame.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('usuario_frame'); ?>><div class="full services_blog">
                        <img class="img-responsive" src="images/s1.png" alt="#" />
                        <h4>Usuarios</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="rol_frame.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('rol_frame'); ?>><div class="full services_blog">
                        <img class="img-responsive" src="images/s1.png" alt="#" />
                        <h4>Roles</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="asig_roles.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('asig_roles'); ?>><div class="full services_blog">
                         <img class="img-responsive" src="images/s3.png" alt="#" />
                         <h4>Asignación de Roles</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="asig_permisos.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('asig_permisos'); ?>><div class="full services_blog">
                         <img class="img-responsive" src="images/s4.png" alt="#" />
                         <h4>Asignación de Permisos</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="parametrosAD.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('parametrosAD'); ?>><div class="full services_blog">
                         <img class="img-responsive" src="images/s2.png" alt="#" />
                         <h4>Parámetros Active Directory</h4>
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href="parametrosFTP.php"><div class="full services_blog">
+                    <a href=<?php echo redirect('parametrosFTP'); ?>><div class="full services_blog">
                         <img class="img-responsive" src="images/s3.png" alt="#" />
                         <h4>Parámetros FTP</h4>
                     </div></a>

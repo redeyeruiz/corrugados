@@ -1,12 +1,12 @@
 <?php
 session_start();
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    header("Location: ".redirect('login'));
     die();
 }
 
-include("php/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -213,7 +213,7 @@ include("php/menu.php");
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>
