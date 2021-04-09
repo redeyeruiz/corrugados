@@ -21,7 +21,8 @@ if($statement = $conexion->prepare('SELECT nombre, contrasena, rol FROM usuario 
     if($statement->num_rows >0){
         $statement->bind_result($nom, $contra, $rol);
         $statement->fetch();
-        if($_POST['pass']==$contra){
+        if(password_verify($_POST['pass'], $contra)){
+        //if($contra==$_POST['pass']){
             session_regenerate_id();
             $_SESSION['conectado'] = TRUE;
             $_SESSION['nombre'] = $nom;

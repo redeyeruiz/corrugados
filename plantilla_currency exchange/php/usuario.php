@@ -20,11 +20,13 @@
 			$contrasena = $_GET['contrasena'];
 			$rol = $_GET['rol'];
 
+			$laContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+
 			$conexion=conecta_servidor();
-			$query="INSERT INTO usuario VALUES ('$id_user','$id_comp','$nom','$contrasena','$rol')";
+			$query="INSERT INTO usuario VALUES ('$id_user','$id_comp','$nom','$laContrasena','$rol',1)";
 			$sql=mysqli_query($conexion,$query);
 			if (!$sql){
-				msg("Error, el ID Usuario se duplica en la base de datos","rojo");
+				msg(mysqli_error($conexion),"rojo");
 			}
 			else{
 				msg("El registro se ha grabado correctamente","verde");
