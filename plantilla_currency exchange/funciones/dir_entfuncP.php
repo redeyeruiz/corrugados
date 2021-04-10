@@ -98,7 +98,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             else{
                 $row = $exist-> fetch_assoc();
                 if ($row["estatus"] == "0"){
-                    $success = "Datos con el ID de Compañía e ID de Cliente ingresados ya existen en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                    $success = "La direccion de entrega con el ID de Compañía e ID de Cliente ingresados ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
                     $btnsn = "Mostrar";
                 }
                 else{
