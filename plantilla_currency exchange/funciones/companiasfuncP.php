@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $idcomp_error = $nom_error = ""; 
-$idcomp = $nom = $success = $option = "";
+$idcomp = $nom = $success = $option = $exist = $btnsn = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idcomp"])){
@@ -162,7 +162,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             if ($row["estatus"] == "0"){
                 $query="UPDATE Compania SET nombre='$nom', estatus=true WHERE idCompania='$idcomp'";
                 $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+                $success = "Alta y actualización realizada con éxito.";
             }
             else{
                 $success = "Error en el actualización de datos de la compañía.";
