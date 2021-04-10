@@ -38,7 +38,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             else{
                 $row = $exist-> fetch_assoc();
                 if ($row["estatus"] == "0"){
-                    $success = "El ID del agente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlos con los que ya ingresó?";
+                    $success = "El ID del agente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
                     $btnsn = "Mostrar";
                 }
                 else{
