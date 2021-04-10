@@ -239,6 +239,7 @@ include("funciones/listaspreciofuncP.php");
                                     </div>
                                 </div>
                             </div>
+                            <br/>
                             <div class="center">
                                 &nbsp;
                                 &nbsp;
@@ -259,6 +260,18 @@ include("funciones/listaspreciofuncP.php");
                             <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
+                    <?php
+                        if ($btnsn != ""){
+                            echo '<tr>
+                                    <td colspan="2">
+                                        <div class="center">
+                                            <button name="confirmoc" type="submit" style="width:200px" class="btn btn-outline-success">Confirmar</button>
+                                            <button name="canceloc" type="submit" style="width:200px" class="btn btn-outline-danger">Cancelar</button>
+                                        </div>
+                                    </td>
+                                </tr>';
+                        }
+                    ?>
                 </form>
             </table>
             <?php
