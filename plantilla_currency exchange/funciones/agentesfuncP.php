@@ -63,7 +63,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         $idrep = test_input($_POST["idrep"]);
     }
     
-    if ($idrep_error == "" and $idcomp_error == ""){
+    if ($idrep_error == ""){
         $query="SELECT * FROM Agente WHERE idRepresentante='$idrep' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
