@@ -150,14 +150,175 @@ include("php/permisos.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Permiso</b></p>
+                            <p align="center"><b>Permisos</b></p>
                         </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="per" type="text" size="50" maxlength="20" class="campo" value="<?= $per ?>">
-                            <p><span style="color:#C84810" class="error"><?= $per_error ?></span></p>
+                        <td>
+                            <!--<input style="border:3px solid #ff880e" name="per" type="text" size="50" maxlength="20" class="campo" value="<?= $per ?>">
+                            <p><span style="color:#C84810" class="error"><?= $per_error ?></span></p>-->
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+                            <ul class="treeview">
+                                <li>
+                                    <input type="checkbox" name="tall" id="tall">
+                                    <label for="tall" class="custom-unchecked"><b><i>Administración</i></b></label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">Usuario</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">Contraseña</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">Asignación de roles</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">Asignación de permisos</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">Parámetros Active Directory</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">Parámetros FTP</label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="last">
+                                    <input type="checkbox" name="short" id="short">
+                                    <label for="short" class="custom-unchecked"><b><i>Catálogos</i></b></label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" name="short-1" id="short-1">
+                                            <label for="short-1" class="custom-unchecked">Compañías</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-2" id="short-2">
+                                            <label for="short-2" class="custom-unchecked">Agentes</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="short-3" id="short-3">
+                                            <label for="short-3" class="custom-unchecked">Clientes</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-1" id="short-1">
+                                            <label for="short-1" class="custom-unchecked">Artículos Existentes</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-2" id="short-2">
+                                            <label for="short-2" class="custom-unchecked">Artículos Vendidos</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="short-3" id="short-3">
+                                            <label for="short-3" class="custom-unchecked">Listas de Precios</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-1" id="short-1">
+                                            <label for="short-1" class="custom-unchecked">Direcciones de entrega</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-2" id="short-2">
+                                            <label for="short-2" class="custom-unchecked">Cantidades entregadas</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="short-3" id="short-3">
+                                            <label for="short-3" class="custom-unchecked">Facturas</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-1" id="short-1">
+                                            <label for="short-1" class="custom-unchecked">Inventarios</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="short-2" id="short-2">
+                                            <label for="short-2" class="custom-unchecked">Almacenes</label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="tall" id="tall">
+                                    <label for="tall" class="custom-unchecked"><b><i>Operaciones</i></b></label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">Autorizaciones</label>
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" name="tall-2-1" id="tall-2-1">
+                                                    <label for="tall-2-1" class="custom-unchecked">...</label>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                    <label for="tall-2-2" class="custom-unchecked">...</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="tall-2-1" id="tall-2-1">
+                                                    <label for="tall-2-1" class="custom-unchecked">...</label>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                    <label for="tall-2-2" class="custom-unchecked">...</label>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="tall" id="tall">
+                                    <label for="tall" class="custom-unchecked"><b><i>Reportes</i></b></label>
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-1" id="tall-1">
+                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="tall-2" id="tall-2">
+                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>
                             <p align="center"><b>Permiso a actualizar</b></p>
                         </td>
@@ -165,7 +326,7 @@ include("php/permisos.php");
                             <input style="border:3px solid #ff880e" name="per_af" type="text" size="50" maxlength="20" class="campo" value="<?= $per_af ?>">
                             <p><span style="color:#C84810" class="error"><?= $per_af_error ?></span></p>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td colspan="2">
                             <div class="row margin-top_30">
@@ -269,6 +430,7 @@ include("php/permisos.php");
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/cargar.js"></script>
+    <script src="js/treeview.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script>
