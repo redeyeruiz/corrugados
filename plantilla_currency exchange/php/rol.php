@@ -1,139 +1,129 @@
 <?php
 
-session_start();
-if(!isset($_SESSION['conectado'])){
-    $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
-    die();
+include_once "utilerias.php";
+$id_comp_error = $rol_error = $rol_af_error = ""; 
+$id_comp = $rol = $rol_af = $success = $option = "";
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la Compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
+
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
+    $estatus = 1;
+    
+    if ($id_comp_error == "" and $rol_error == ""){
+        $query="INSERT INTO rol VALUES ('$id_comp','$rol','$estatus')";
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en el alta de Rol.";
+        }
+        else{
+            $success = "Alta realizada con éxito.";
+        }
+        $id_comp = $rol = $rol_af = "";
+    }
 }
- 
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Rol</title>
-</head>
-<body><center>
-	<?php  
-		include_once("utilerias.php");
-		$op=$_GET['op'];
-		if ($op == "altas") alta_rol();
-		if ($op == "bajas") baja_rol();
-		if ($op == "consultas") consulta_rol();
-		if ($op == "actualiza") actualiza_rol();
-		if ($op === "reporte") reporte_rol();
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la Compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
 
-		function alta_rol(){
-			$rol = $_GET['rol'];
-			$id_comp = $_GET['id_comp'];
-			$conexion=conecta_servidor();
-			$query="INSERT INTO rol VALUES ('$id_comp','$rol')";
-			$sql=mysqli_query($conexion,$query);
-			if (!$sql){
-				msg("Error, el Rol se duplica en la base de datos","rojo");
-			}
-			else{
-				msg("El registro se ha grabado correctamente","verde");
-			}
-		}
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
+    
+    if ($id_comp_error == "" and $rol_error == ""){
+        $query="UPDATE Rol SET estatus='0' WHERE idCompania='$id_comp' and rol='$rol'";
 
-		function baja_rol(){
-			$rol = $_GET['rol'];
-			$conexion = conecta_servidor();
-			$query="DELETE FROM rol WHERE rol ='$rol'";
-			$sql=mysqli_query($conexion,$query);
-			if (!$sql){
-				msg("Error, el Rol inexistente en la base de datos","rojo");
-			}
-			else{
-				msg("El registro se ha eliminado correctamente","verde");
-			}
-		}
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en la baja del Rol.";
+        }
+        else{
+            $success = "Baja realizada con éxito.";
+        }
+        $id_comp = $rol = $rol_af = "";
+    }
+}
 
-		function formulario($id_comp, $rol){
-			echo "
-				<table border='0' width='50%' align='center'>
-					<tr>
-                        <td>
-                            <p align='center'><b>ID Compañía</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='id_comp' type='text' size='50' maxlength='50' class='campo' value='$id_comp' disabled>
-                        </td>
-                    </tr>
-					<tr>
-                        <td>
-                            <p align='center'><b>Rol</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='rol' type='text' size='50' maxlength='50' class='campo' value='$rol' disabled>
-                        </td>
-                    </tr>
-  		        </table>
-			";
-		}
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la Compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
 
-		function consulta_rol(){
-			$id_comp = $_GET['id_comp'];
-			$conexion=conecta_servidor();
-			$query="SELECT * FROM rol WHERE idCompania ='$id_comp'";
-			$sql=mysqli_query($conexion,$query);
-			$reg=mysqli_fetch_object($sql);
-			if ($reg==mysqli_fetch_array($sql)){
-				msg("Error, ID Usuario inexistente en base de datos","rojo");
-			}
-			else{
-				msg("Consulta realizada","verde");
-				formulario($id_comp,$reg->rol);
-			}
-		}
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol anterior.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
 
-		function actualiza_rol(){
-			$id_comp = $_GET['id_comp'];
-			$rol = $_GET['rol'];
-			$conexion=conecta_servidor();
-			$query="UPDATE rol SET rol='$rol' WHERE idCompania='$id_comp'";
-			$sql=mysqli_query($conexion,$query);
-			if (mysqli_affected_rows($conexion)==0){
-				msg("Error, ID Compañía inexistente en la base de datos","rojo");
-			}
-			else{
-				msg("El cambio ha sido realizado","verde");
-			}
-		}
+    if (empty($_POST["rol_af"])){
+        $rol_af_error = "Se requiere el Rol nuevo.";
+    }
+    else{
+        $rol_af = test_input($_POST["rol_af"]);
+    }
+    echo $rol_af;
+    if ($id_comp_error == "" and $rol_error == "" and $rol_af_error == ""){
+        $query="UPDATE rol SET rol='$rol_af' WHERE idCompania='$id_comp' and rol='$rol'";
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en la actualización de datos del Rol.";
+        }
+        else{
+            $success = "Actualización realizada con éxito.";
+        }
+        $id_comp = $rol = $rol_af = "";
+    }
+}
 
-		function reporte_rol(){
-			$conexion=conecta_servidor();
-			$query="SELECT * FROM rol ORDER BY idCompania";
-			$sql=mysqli_query($conexion,$query);
-			echo "
-				<table border='3' width='80%'>
-				<tr align='center' bgcolor='#A1C1F3'>
-					<td colspan='2'>
-						<p class='texto20'>Listado de Compañía ordenado por ID</p>
-					</td>
-				</tr>
-			";
-			$cont=0;
-			while ($reg=mysqli_fetch_object($sql)){
-				echo "<tr>";
-					echo "
-						<td align='center'><font color='blue'><b>$reg->idCompania</b></font></td>
-						<td align='center'><font color='blue'><b>$reg->rol</b></font></td>
-					";
-				echo "</tr>";
-				$cont++;
-			}
-			echo "
-				<tr align='center' bgcolor='#A1C1F3'> 
-					<td colspan='5'>
-						<p class='texto20'>Total de Compañías = $cont</p>
-					</td>
-				</tr>
-			";
-			echo "</table>";
-		}
-	?>
-</center></body>
-</html>
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la Compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
+
+    if ($id_comp_error == ""){
+        $option = "Consultas por ID de la Compañía";
+        $query="SELECT * FROM Rol WHERE idCompania='$id_comp'";
+        $result = mysqli_query($conection, $query);
+        $id_comp = $rol = $rol_af = "";
+    }
+}
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
+
+    $option = "Reporte";
+    $query="SELECT * FROM Rol";
+    $result = mysqli_query($conection, $query);
+    $id_comp = $rol = "";
+}
+
+function test_input($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
