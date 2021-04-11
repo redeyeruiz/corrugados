@@ -8,7 +8,7 @@ if(!isset($_SESSION['conectado'])){
 }
 
 include("php/usuario.php");
-include("php/menu.php");
+//include("php/menu.php");
 ?>
 
 <!DOCTYPE html>

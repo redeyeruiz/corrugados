@@ -8,7 +8,7 @@ if(!isset($_SESSION['conectado'])){
 }
 
 include("php/asig_rol.php");
-include("php/menu.php");
+
 ?>
 
 <!DOCTYPE html>
