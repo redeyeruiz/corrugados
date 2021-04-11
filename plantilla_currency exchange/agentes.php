@@ -138,20 +138,20 @@ include("funciones/agentesfuncP.php");
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
                     <tr>
                         <td>
-                            <p align="center"><b>ID Representante</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="50" maxlength="10" class="campo" value="<?= $idrep ?>">
-                            <p><span style="color:#C84810" class="error"><?= $idrep_error ?></span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Representante</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="50" maxlength="10" class="campo" value="<?= $idrep ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idrep_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
