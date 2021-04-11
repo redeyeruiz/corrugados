@@ -1,11 +1,14 @@
 <?php
+
 session_start();
-include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: ".redirect('login'));
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
+
+include("php/asig_rol.php");
+include("php/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +48,6 @@ if(!isset($_SESSION['conectado'])){
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript" src="./js/asig_usuario_rol.js"></script>
-    <script type="text/javascript" src="./js/utilerias.js"></script>
-
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -68,16 +68,16 @@ if(!isset($_SESSION['conectado'])){
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
+                        <a class="navbar-brand" href="inicio.php"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
                             <li>
-                                <a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30" alt="#" />Usuario</a>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
                             </li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ if(!isset($_SESSION['conectado'])){
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <?php menu()?>
+                                       <?php menu()?>
                                     </ul>
                                 </div>
                             </div>
@@ -138,13 +138,14 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_asig_rol">
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" name="datos">
                     <tr>
                         <td>
                             <p align="center"><b>ID Usuario</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="20" class="campo" value="<?= $id_user ?>">
+                            <p><span style="color:#C84810" class="error"><?= $id_user_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -152,47 +153,116 @@ if(!isset($_SESSION['conectado'])){
                             <p align="center"><b>Rol</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rol" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="rol" type="text" size="50" maxlength="4" class="campo" value="<?= $rol ?>">
+                            <p><span style="color:#C84810" class="error"><?= $rol_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_altas" type="submit" style="width:200px" class="btn btn-outline-success">Altas</button>
+                                            <button name="b_bajas" type="submit" style="width:200px" class="btn btn-outline-danger">Bajas</button>
+                                        </div>
+                                        <div class="center">
+                                            <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
+                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center">
+                                &nbsp;
+                                &nbsp;
+                                <!--
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="filebutton">Select File</label>
+                                    <div class="col-md-4">
+                                        <input type="file" name="file" id="file" class="input-large">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="singlebutton">Import data</label>
+                                    <div class="col-md-4">
+                                        <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
+                                    </div>
+                                </div> -->
+                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
+                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
+                                &nbsp;
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                            </div>
+                            <!--<div id="response"
+                                class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
+                                <?php if(!empty($message)) { echo $message; } ?>
+                            </div>
+                            <div class="center">
+                            <p id="feedback"></p>
+                            </div>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success" onclick="alta_asig_rol()">Altas</button>
-                            <button name="b_bajas" type="button" value="Bajas_com" style="width:200px" class="btn btn-outline-danger" onclick="baja_asig_rol()">Bajas</button>
-                        </div>
-                        <div class="center">
-                            <button name="b_consultas" type="button" value="Consultas_com" style="width:200px" class="btn btn-outline-dark" onclick="consulta_asig_rol()">Consultas</button>
-                            <button name="b_actualizar" type="button" value="Actualizacion_com" style="width:200px" class="btn btn-outline-info" onclick="actualiza_asig_rol()">Actualización</button>
-                            <button name="b_reporte" type="button" value="Reportes_com" style="width:200px" class="btn btn-outline-dark" onclick="reporte_asig_rol()">Reportes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                if ($option != ""){
+                    echo "<table style='border:3px solid #ff880e' width='60%' align='center'>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' colspan='6'>
+                                        <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Usuario</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Compañía</td>
+                                    <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Estado</td>
+                                </tr>";
+                    if ($result-> num_rows > 0){
+                        while ($row = $result-> fetch_assoc()){
+                            echo "<tr><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idUsuario"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='30%'>". $row["nombre"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["contrasena"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["estatus"]."</td></tr>";
+                        }
+                    }
+                    else{
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='6'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                    }
+                    echo "</table>";
+                    echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";
+                }
+            ?>
         </div>
     </div>
-    <!-- end section -->
-    <hr>
-    <hr>
+
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2020 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/cargar.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script>
