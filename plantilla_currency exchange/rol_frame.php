@@ -141,15 +141,6 @@ include("php/rol.php");
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" name="datos">
                     <tr>
                         <td>
-                            <p align="center"><b>ID Compañía</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="4" class="campo" value="<?= $id_comp ?>">
-                            <p><span style="color:#C84810" class="error"><?= $id_comp_error ?></span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <p align="center"><b>Rol</b></p>
                         </td>
                         <td align="center">
@@ -159,11 +150,11 @@ include("php/rol.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Rol a actualizar</b></p>
+                            <p align="center"><b>Descripción</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rol_af" type="text" size="50" maxlength="4" class="campo" value="<?= $rol_af ?>">
-                            <p><span style="color:#C84810" class="error"><?= $rol_af_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="rol_af" type="text" size="50" maxlength="4" class="campo" value="<?= $rol_desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $rol_desc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>

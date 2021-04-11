@@ -1,8 +1,8 @@
 <?php
 
 include_once "utilerias.php";
-$id_comp_error = $rol_error = $rol_af_error = ""; 
-$id_comp = $rol = $rol_af = $success = $option = "";
+$rol_error = $rol_desc_error = ""; 
+$rol = $rol_desc = $success = $option = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_comp"])){
