@@ -1,34 +1,35 @@
 <?php
 
 include_once "utilerias.php";
-$id_user_error = $rol_error = ""; 
-$id_user = $rol = $success = $option = "";
+$id_user_error = $per_error = $per_af_error = ""; 
+$id_user = $per = $per_af = $success = $option = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
-   	if (empty($_POST["id_user"])){
+    if (empty($_POST["id_user"])){
         $id_user_error = "Se requiere el ID del Usuario.";
     }
     else{
         $id_user = test_input($_POST["id_user"]);
     }
 
-    if (empty($_POST["rol"])){
-        $rol_error = "Se requiere el Rol.";
+    if (empty($_POST["per"])){
+        $per_error = "Se requiere el Permiso.";
     }
     else{
-        $rol = test_input($_POST["rol"]);
+        $per = test_input($_POST["per"]);
     }
+    $estatus = 1;
     
-    if ($id_user_error == "" and $rol_error == ""){
-        $query="UPDATE Usuario SET rol='$rol', estatus='1' WHERE idUsuario='$id_user'";
+    if ($id_user_error == "" and $per_error == ""){
+        $query="INSERT INTO permiso VALUES ('$id_user','$per','$estatus')";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
-            $success = "Error en el alta de rol al Usuario.";
+            $success = "Error en el alta de permiso.";
         }
         else{
             $success = "Alta realizada con éxito.";
         }
-        $id_user = $rol = "";
+        $id_comp = $rol = $per_af = "";
     }
 }
 
@@ -39,17 +40,24 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     else{
         $id_user = test_input($_POST["id_user"]);
     }
+
+    if (empty($_POST["per"])){
+        $per_error = "Se requiere el Permiso.";
+    }
+    else{
+        $per = test_input($_POST["per"]);
+    }
     
-    if ($id_user_error == ""){
-        $query="UPDATE Usuario SET estatus='0' WHERE idUsuario='$id_user'";
+    if ($id_user_error == "" and $per_error == ""){
+        $query="UPDATE permiso SET estatus='0' WHERE idUsuario='$id_user' and estatus='1' and permiso='$per'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
-            $success = "Error en la baja del Rol.";
+            $success = "Error en la baja del Permiso.";
         }
         else{
             $success = "Baja realizada con éxito.";
         }
-        $id_comp = $rol = $rol_af = "";
+        $id_comp = $per = $per_af = "";
     }
 }
 
@@ -60,15 +68,23 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
     else{
         $id_user = test_input($_POST["id_user"]);
     }
-    if (empty($_POST["rol"])){
-        $rol_error = "Se requiere el Rol a asignar.";
+
+    if (empty($_POST["per"])){
+        $per_error = "Se requiere el Permiso.";
     }
     else{
-        $rol = test_input($_POST["rol"]);
+        $per = test_input($_POST["per"]);
     }
 
-    if ($id_user_error == "" and $rol_error == ""){
-        $query="UPDATE Usuario SET rol='$rol' WHERE idUsuario='$id_user'";
+    if (empty($_POST["per_af"])){
+        $per_af_error = "Se requiere el Permiso a actualizar.";
+    }
+    else{
+        $per_af = test_input($_POST["per_af"]);
+    }
+
+    if ($id_user_error == "" and $per_error == ""){
+        $query="UPDATE permiso SET permiso='$per_af' WHERE idUsuario='$id_user' and permiso='$per'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en la actualización de datos del Rol.";
@@ -76,7 +92,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         else{
             $success = "Actualización realizada con éxito.";
         }
-        $id_comp = $rol = "";
+        $id_comp = $rol = $per_af = "";;
     }
 }
 
@@ -88,20 +104,20 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
         $id_user = test_input($_POST["id_user"]);
     }
 
-    if ($id_user_error == ""){
+    if ($id_user_error == "" and $per_error == ""){
         $option = "Consultas por ID del Usuario";
-        $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus='1'";
+        $query="SELECT * FROM permiso WHERE idUsuario='$id_user'";
         $result = mysqli_query($conection, $query);
-        $id_user = $rol = "";
+        $id_comp = $per = $per_af = "";
     }
 }
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
     $option = "Reporte";
-    $query="SELECT * FROM Usuario";
+    $query="SELECT * FROM permiso";
     $result = mysqli_query($conection, $query);
-    $id_user = $rol = "";
+    $id_comp = $rol = "";
 }
 
 function test_input($data){

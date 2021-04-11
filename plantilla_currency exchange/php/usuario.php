@@ -1,165 +1,156 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Usuario</title>
-</head>
-<body><center>
-	<?php 
-		include_once("utilerias.php");
-		$op=$_GET['op'];
-		if ($op == "altas") alta_usuario();
-		if ($op == "bajas") baja_usuario();
-		if ($op == "consulta") consulta_usuario();
-		if ($op == "actualiza") actualiza_usuario();
-		if ($op == "reporte") reporte_usuario();
+<?php
 
-		function alta_usuario(){
-			$id_user = $_GET['id_user'];
-			$id_comp = $_GET['id_comp'];
-			$nom = $_GET['nom'];
-			$contrasena = $_GET['contrasena'];
-			$rol = $_GET['rol'];
+include_once "utilerias.php";
+$id_user_error = $id_comp_error = $nom_error = $contrasena_error = $rol_error = ""; 
+$id_user = $id_comp = $nom = $contrasena = $rol = $success = $option = "";
 
-			$laContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
+    if (empty($_POST["id_user"])){
+        $id_user_error = "Se requiere el ID del Usuario.";
+    }
+    else{
+        $id_user = test_input($_POST["id_user"]);
+    }
 
-			$conexion=conecta_servidor();
-			$query="INSERT INTO usuario VALUES ('$id_user','$id_comp','$nom','$laContrasena','$rol',1)";
-			$sql=mysqli_query($conexion,$query);
-			if (!$sql){
-				msg(mysqli_error($conexion),"rojo");
-			}
-			else{
-				msg("El registro se ha grabado correctamente","verde");
-			}
-		}
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
 
-		function baja_usuario(){
-			$id_user = $_GET['id_user'];
-			$conexion=conecta_servidor();
-			$query="DELETE FROM usuario WHERE idUsuario ='$id_user'";
-			$sql=mysqli_query($conexion,$query);
-			if (mysqli_affected_rows($conexion)==0){
-				msg("Error, ID Usuario inexistente en base de datos","rojo");
-			}
-			else{
-				msg("El registro se ha eliminado correctamente","verde");
-			}
-		}
+    if (empty($_POST["nom"])){
+        $nom_error = "Se requiere el Nombre.";
+    }
+    else{
+        $nom = test_input($_POST["nom"]);
+    }
 
-		function formulario($id_user, $id_comp, $nom, $contrasena, $rol){
-			echo "
-				<table border='0' width='50%' align='center'>
-                    <tr>
-                        <td>
-                            <p align='center'><b>ID Usuario</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='id_user' type='text' size='50' maxlength='50' class='campo' value='$id_user' disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align='center'><b>ID Compañía</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='id_comp' type='text' size='50' maxlength='50' class='campo' value='$id_comp' disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align='center'><b>Nombre</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='nom' type='text' size='50' maxlength='50' class='campo' value='$nom' disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align='center'><b>Contraseña</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='contrasena' type='password' size='50' maxlength='50' class='campo' value='$contrasena' disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p align='center'><b>Rol</b></p>
-                        </td>
-                        <td align='center'>
-                            <input style='border:3px solid #ff880e' name='rol' type='text' size='50' maxlength='50' class='campo' value='$rol' disabled>
-                        </td>
-                    </tr>
-                </table>
-			";
-		}
+    if (empty($_POST["contrasena"])){
+        $contrasena_error = "Se requiere la Contraseña.";
+    }
+    else{
+        $contrasena = test_input($_POST["contrasena"]);
+    }
 
-		function consulta_usuario(){
-			$id_user = $_GET['id_user'];
-			$conexion=conecta_servidor();
-			$query="SELECT * FROM usuario WHERE idUsuario='$id_user'";
-			$sql=mysqli_query($conexion,$query);
-			$reg=mysqli_fetch_object($sql);
-			if ($reg==mysqli_fetch_array($sql)){
-				msg("Error, ID Usuario inexistente en base de datos","rojo");
-			}
-			else{
-				msg("Consulta realizada","verde");
-				formulario($id_user,$reg->idCompania,$reg->nombre,$reg->contrasena,$reg->rol);
-			}
-		}
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
+    $estatus = 1;
+    
+    if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
+        $query="INSERT INTO Usuario VALUES ('$id_user','$id_comp','$nom','$contrasena','$rol','$estatus')";
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en el alta de Usuario.";
+        }
+        else{
+            $success = "Alta realizada con éxito.";
+        }
+        $id_user = $id_comp = $nom = $contrasena = $rol = "";
+    }
+}
 
-		function actualiza_usuario(){
-			$id_user = $_GET['id_user'];
-			$id_comp = $_GET['id_comp'];
-			$nom = $_GET['nom'];
-			$contrasena = $_GET['contrasena'];
-			$rol = $_GET['rol'];
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
+    if (empty($_POST["id_user"])){
+        $id_user_error = "Se requiere el ID del Usuario.";
+    }
+    else{
+        $id_user = test_input($_POST["id_user"]);
+    }
+    
+    if ($id_user_error == ""){
+        $query="UPDATE Usuario SET estatus='0' WHERE idUsuario='$id_user'";
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en la baja de l Usuario.";
+        }
+        else{
+            $success = "Baja realizada con éxito.";
+        }
+        $id_comp = $nom = "";
+    }
+}
 
-			$conexion=conecta_servidor();
-			$query="UPDATE usuario SET idCompania='$id_comp', nombre='$nom', contrasena='$contrasena', rol='$rol' WHERE idUsuario='$id_user'";
-			$sql=mysqli_query($conexion,$query);
-			if (mysqli_affected_rows($conexion)==0){
-				msg("Error, ID Usuario inexistente en la base de datos","rojo");
-			}
-			else{
-				msg("El cambio ha sido realizado","verde");
-			}
-		}
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
+    if (empty($_POST["id_user"])){
+        $id_user_error = "Se requiere el ID del Usuario.";
+    }
+    else{
+        $id_user = test_input($_POST["id_user"]);
+    }
 
-		function reporte_usuario() {
-			$conexion=conecta_servidor();
-			$query="SELECT * FROM usuario ORDER BY idUsuario";
-			$sql=mysqli_query($conexion,$query);
-			echo "
-				<table border='3' width='80%'>
-				<tr align='center' bgcolor='#A1C1F3'>
-					<td colspan='5'>
-						<p class='texto20'>Listado de Usuario ordenado por ID</p>
-					</td>
-				</tr>
-			";
-			$cont=0;
-			while ($reg=mysqli_fetch_object($sql)){
-				echo "<tr>";
-					echo "
-						<td align='center'><font color='blue'><b>$reg->idUsuario</b></font></td>
-						<td align='center'><font color='blue'><b>$reg->idCompania</b></font></td>
-						<td><font color='blue'><b>$reg->nombre</b></font></td>
-						<td align='center'><font color='blue'><b>$reg->contrasena</b></font></td>
-						<td align='center'><font color='blue'><b>$reg->rol</b></font></td>
-					";
-				echo "</tr>";
-				$cont++;
-			}
-			echo "
-				<tr align='center' bgcolor='#A1C1F3'> 
-					<td colspan='5'>
-						<p class='texto20'>Total de usuarios = $cont</p>
-					</td>
-				</tr>
-			";
-			echo "</table>";
-		}
-	?>
-</center></body>
-</html>
+    if (empty($_POST["id_comp"])){
+        $id_comp_error = "Se requiere el ID de la compañía.";
+    }
+    else{
+        $id_comp = test_input($_POST["id_comp"]);
+    }
+
+    if (empty($_POST["nom"])){
+        $nom_error = "Se requiere el Nombre.";
+    }
+    else{
+        $nom = test_input($_POST["nom"]);
+    }
+
+    if (empty($_POST["contrasena"])){
+        $contrasena_error = "Se requiere la Contraseña.";
+    }
+    else{
+        $contrasena = test_input($_POST["contrasena"]);
+    }
+
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
+    
+    if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
+        $query="UPDATE Usuario SET nombre='$nom', idUsuario='$id_user', contrasena='$contrasena', rol='$rol' WHERE idCompania='$id_comp'";
+        $sql=mysqli_query($conection,$query);
+        if (!$sql){
+            $success = "Error en la actualización de datos de la compañía.";
+        }
+        else{
+            $success = "Actualización realizada con éxito.";
+        }
+       $id_user = $id_comp = $nom = $contrasena = $rol = "";
+    }
+}
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
+    if (empty($_POST["id_user"])){
+        $id_user_error = "Se requiere el ID del Usuario.";
+    }
+    else{
+        $id_user = test_input($_POST["id_user"]);
+    }
+
+    if ($id_user_error == ""){
+        $option = "Consultas por ID del Usuario";
+        $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus='1'";
+        $result = mysqli_query($conection, $query);
+        $id_user = $id_comp = $nom = $contrasena = $rol = "";
+    }
+}
+
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
+
+    $option = "Reporte";
+    $query="SELECT * FROM Usuario";
+    $result = mysqli_query($conection, $query);
+    $id_user = $id_comp = $nom = $contrasena = $rol = "";
+}
+
+function test_input($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
