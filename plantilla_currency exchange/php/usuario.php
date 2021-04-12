@@ -2,7 +2,7 @@
 
 include_once "utilerias.php";
 $id_user_error = $id_comp_error = $nom_error = $contrasena_error = $rol_error = ""; 
-$id_user = $id_comp = $nom = $contrasena = $rol = $success = $option = $btnsn = "";
+$id_user = $id_comp = $nom = $contrasena = $rol = $success = $option = $btnsn = $exist = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_user"])){
@@ -56,13 +56,15 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                 }
                 else{
                     $success = "Error en el alta del almacen.";
+                    $id_user = $id_comp = $nom = $contrasena = $rol = "";
                 }
             }
         }
         else{
             $success = "Alta realizada con éxito.";
+            $id_user = $id_comp = $nom = $contrasena = $rol = "";
         }
-        $id_user = $id_comp = $nom = $contrasena = $rol = "";
+        //$id_user = $id_comp = $nom = $contrasena = $rol = "";
     }
 }
 
