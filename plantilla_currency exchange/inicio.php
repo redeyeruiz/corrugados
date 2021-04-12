@@ -72,7 +72,7 @@ if(!isset($_SESSION['conectado'])){
                         <ul>
                             <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" /><?php echo $permisos['pAdmin']?></a></li>
+                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" /><?php echo $_SESSION['nombre']?></a></li>
                             <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
