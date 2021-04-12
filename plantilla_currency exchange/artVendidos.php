@@ -238,14 +238,6 @@ include("funciones/artvenfuncP.php");
                                 </div>
                             </div>
                             <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -303,6 +295,85 @@ include("funciones/artvenfuncP.php");
                 }
             ?>
         </div>
+        <br>
+        &nbsp;
+            <div class="center">
+                
+                <?php
+
+                $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+                if(isset($_POST["import"])){
+                    foreach($_FILES as $file){
+                        //echo $file["tmp_name"];
+                    }
+                    $fileName = $_FILES["file-1"]["tmp_name"];
+
+                    if($_FILES["file-1"]["size"] > 0 ){
+                        $file = fopen($fileName, "r");
+
+                        while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                            $folio = $column[0];
+                            $idcomp = $column[1];
+                            $idart = $column[2];
+                            $idalma = $column[3];
+                            $idlciente = $column [4];
+                            $newrep = $column [5];
+                            $udvta = $column [6];
+                            $stock = $column [7];
+                            $codavi = $column [8];
+                            $estatus = $column [9];
+                            
+                            $sqlInsert = "INSERT into articulovendido values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "')";
+                            //echo $sqlInsert;
+                            $result = mysqli_query($conn, $sqlInsert);
+
+                        }
+                        
+                    }
+                    if(!empty($result)){
+                        echo "CSV Data Importado";
+                    }else{
+                        echo "No importado";
+                    }
+                }
+                if(isset($_POST["descarga"])){
+
+                        $query="SELECT * FROM articuloexistente";
+                        $sql=mysqli_query($conn,$query);
+                        // 2) Abrir el archivo de tipo texto
+                        $arch=fopen("archivos/articulovendido.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                        while ($reg=mysqli_fetch_object($sql)){
+                            $linea=$reg->folio.",".$reg->idCompania.",".$reg->idArticulo.",".$reg->idAlmacen.",".$reg->idCliente.",".$reg->newRep.",".$reg->udVta.",".$reg->stock.",".$reg->codAviso.",".$reg->estatus;
+                            //echo $linea."<br>"; // Imprime pa prueba
+                            fwrite($arch,$linea.PHP_EOL);
+                        }
+                        fclose($arch);
+
+                        
+                }
+
+                ?>
+
+
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                <div>
+                <label>Importa CSV</label>
+                <input type="file" name="file-1" accept=".csv , .txt"/>
+                <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+                <div class="center">
+                    <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+                </div>
+                    <div class="center">
+                        <a href="descarga.php?path=archivos/articulovendido.txt">Descargar Archivo de Texto</a>
+                    </div>
+                </div>
+                </form>
+                
+                &nbsp;
+            </div>
     </div>
 
     <div class="footer_bottom">

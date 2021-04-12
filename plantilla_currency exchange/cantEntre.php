@@ -242,15 +242,7 @@ include("funciones/cantEntrefuncP.php");
                                     </div>
                                 </div>
                             </div>
-                            <br/>
                             <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -263,18 +255,6 @@ include("funciones/cantEntrefuncP.php");
                             <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
-                    <?php
-                        if ($btnsn != ""){
-                            echo '<tr>
-                                    <td colspan="2">
-                                        <div class="center">
-                                            <button name="confirmoc" type="submit" style="width:200px" class="btn btn-outline-success">Confirmar</button>
-                                            <button name="canceloc" type="submit" style="width:200px" class="btn btn-outline-danger">Cancelar</button>
-                                        </div>
-                                    </td>
-                                </tr>';
-                        }
-                    ?>
                 </form>
             </table>
             <?php
@@ -314,6 +294,86 @@ include("funciones/cantEntrefuncP.php");
             ?>
 
         </div>
+        &nbsp;
+            <div class="center">
+                
+                <?php
+
+                $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+                if(isset($_POST["import"])){
+                    foreach($_FILES as $file){
+                        //echo $file["tmp_name"];
+                    }
+                    $fileName = $_FILES["file-1"]["tmp_name"];
+
+                    if($_FILES["file-1"]["size"] > 0 ){
+                        $file = fopen($fileName, "r");
+
+                        while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                            $idcomp = $column[0];
+                            $idOrden = $column[1];
+                            $folio = $column[2];
+                            $idart = $column[3];
+                            $fechamov = $column[4];
+                            $hora = $column[5];
+                            $cantidad = $column[6];
+                            $secuencia = $column[7];
+                            $posicion = $column[8];
+                            $tiporeg = $column[9];
+                            $estatus = $column[10];
+
+
+                            $sqlInsert = "INSERT into cantentregada values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "');";
+                            echo $sqlInsert;
+                            $result = mysqli_query($conn, $sqlInsert);
+
+                        }
+                        
+                    }
+                    if(!empty($result)){
+                        echo "CSV Data Importado";
+                    }else{
+                        echo "No importado";
+                    }
+                }
+                if(isset($_POST["descarga"])){
+
+                        $query="SELECT * FROM cantentregada";
+                        $sql=mysqli_query($conn,$query);
+                        // 2) Abrir el archivo de tipo texto
+                        $arch=fopen("archivos/cantent.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                        while ($reg=mysqli_fetch_object($sql)){
+                            $linea=$reg->idCompania.",".$reg->idOrden.",".$reg->folio.",".$reg->idArticulo.",".$reg->fechaMov.",".$reg->hora.",".$reg->cantidad.",".$reg->secuencia.",".$reg->posicion.",".$reg->tipoReg.",".$reg->estatus;
+                            //echo $linea."<br>"; // Imprime pa prueba
+                            fwrite($arch,$linea.PHP_EOL);
+                        }
+                        fclose($arch);
+
+                        
+                }
+
+                ?>
+
+
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                <div>
+                <label>Importa CSV</label>
+                <input type="file" name="file-1" accept=".csv , .txt"/>
+                <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+                <div class="center">
+                    <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+                </div>
+                    <div class="center">
+                        <a href="descarga.php?path=archivos/cantent.txt">Descargar Archivo de Texto</a>
+                    </div>
+                </div>
+                </form>
+                
+                &nbsp;
+            </div>
     </div>
     <!-- end section -->
     

@@ -181,14 +181,6 @@ include("funciones/agentesfuncP.php");
                                 </div>
                             </div>
                             <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -239,6 +231,77 @@ include("funciones/agentesfuncP.php");
                     echo "</table>";
                 }
             ?>
+        </div>
+        <br/>
+        <div class="center">
+            &nbsp;
+            &nbsp;
+
+            <?php
+
+            $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+            if(isset($_POST["import"])){
+                $fileName = $_FILES["file-1"]["tmp_name"];
+                // echo $fileName;
+                if($_FILES["file-1"]["size"] > 0 ){
+                    $file = fopen($fileName, "r");
+
+                    while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                        $idcomp = $column[0];
+                        $idrep = $column[1];
+                        $nomrep = $column[2];
+                        $estatus = $column[3];
+                        
+                        $sqlInsert = "INSERT into agente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
+
+                        $result = mysqli_query($conn, $sqlInsert);
+
+                    }
+                    
+                }
+                if(!empty($result)){
+                    echo "CSV Data Importado";
+                }else{
+                    echo "No importado";
+                }
+            }
+            if(isset($_POST["descarga"])){
+
+                    $query="SELECT * FROM agente";
+                    $sql=mysqli_query($conn,$query);
+                    // 2) Abrir el archivo de tipo texto
+                    $arch=fopen("archivos/agente.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                    while ($reg=mysqli_fetch_object($sql)){
+                        $linea=$reg->idCompania.",".$reg->idRepresentante.",".$reg->nomRepresentante.",".$reg->estatus;
+                        //echo $linea."<br>"; // Imprime pa prueba
+                        fwrite($arch,$linea.PHP_EOL);
+                    }
+                    fclose($arch);
+
+                    
+            }
+
+            ?>
+
+
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <div>
+            <label>Importa CSV</label>
+            <input type="file" name="file-1" accept=".csv , .txt"/>
+            <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+            <div class="center">
+                <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+            </div>
+                <div class="center">
+                    <a href="descarga.php?path=archivos/agente.txt">Descargar Archivo de Texto</a>
+                </div>
+            </div>
+            </form>
+            
+            &nbsp;
         </div>
     </div>
 

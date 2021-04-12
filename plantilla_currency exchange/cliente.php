@@ -263,15 +263,6 @@ include("funciones/clientesfuncP.php");
                                     </div>
                                 </div>
                             </div>
-                            <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -284,18 +275,6 @@ include("funciones/clientesfuncP.php");
                             <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
-                    <?php
-                        if ($btnsn != ""){
-                            echo '<tr>
-                                    <td colspan="2">
-                                        <div class="center">
-                                            <button name="confirmoc" type="submit" style="width:200px" class="btn btn-outline-success">Confirmar</button>
-                                            <button name="canceloc" type="submit" style="width:200px" class="btn btn-outline-danger">Cancelar</button>
-                                        </div>
-                                    </td>
-                                </tr>';
-                        }
-                    ?>
                 </form>
             </table>
             <?php
@@ -332,6 +311,99 @@ include("funciones/clientesfuncP.php");
                     echo "</table>";
                 }
             ?>
+        </div>
+        <br/>
+        <div class="center">
+            &nbsp;
+            &nbsp;
+
+            <?php
+
+            $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+            if(isset($_POST["import"])){
+                $fileName = $_FILES["file-1"]["tmp_name"];
+                // echo $fileName;
+                if($_FILES["file-1"]["size"] > 0 ){
+                    $file = fopen($fileName, "r");
+
+                    while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                        $idcliente = $column[0];
+                        $idcomp = $column[1];
+                        $idrepre = $column[2];
+                        $idlist = $column[3];
+                        $idalma = $column[4];
+                        $nombre = $column[5];
+                        $estatuscliente = $column[6];
+                        $analista = $column[7];
+                        $divisa = $column[8];
+                        $limcredito = $column[9];
+                        $saldoorden = $column[10];
+                        $saldofactu = $column[11];
+                        $bloqueo = $column[12];
+                        $estatus = $column[13];
+                        
+                        $sqlInsert = "INSERT into cliente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "','" . $column[11] . "','" . $column[12] . "','" . $column[13] . "');";
+
+                        echo $sqlInsert;
+
+                        $result = mysqli_query($conn, $sqlInsert);
+
+                    }
+                    
+                }
+                if(!empty($result)){
+                    echo "CSV Data Importado";
+                }else{
+                    echo "No importado";
+                }
+            }
+            if(isset($_POST["descarga"])){
+
+                    $query="SELECT * FROM cliente";
+                    $sql=mysqli_query($conn,$query);
+                    // 2) Abrir el archivo de tipo texto
+                    $arch=fopen("archivos/cliente.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                    while ($reg=mysqli_fetch_object($sql)){
+                        $linea=$reg->idCompania.",".$reg->idCliente.",".$reg->idCompania.",".$reg->idRepresentante.",".$reg->idLista.",".$reg->idAlmacen.",".$reg->nombreCliente.",".$reg->estatusCliente.",".$reg->analista.",".$reg->divisa.",".$reg->limCredito.",".$reg->saldoOrden.",".$reg->saldoFactura.",".$reg->bloqueo.",".$reg->estatus;
+                        //echo $linea."<br>"; // Imprime pa prueba
+                        fwrite($arch,$linea.PHP_EOL);
+                    }
+                    fclose($arch);
+
+                    
+            }
+
+            ?>
+
+
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <div>
+            <label>Importa CSV</label>
+            <input type="file" name="file-1" accept=".csv , .txt"/>
+            <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+            <div class="center">
+                <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+            </div>
+                <div class="center">
+                    <a href="descarga.php?path=archivos/cliente.txt">Descargar Archivo de Texto</a>
+                </div>
+            </div>
+            </form>
+            
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Papeles Corrugados: Innovación en empaques.</p>
+                </div>
+            </div>
         </div>
     </div>
 

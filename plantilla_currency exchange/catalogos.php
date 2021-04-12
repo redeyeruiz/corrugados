@@ -146,7 +146,7 @@ if(!isset($_SESSION['conectado'])){
                     </div></a>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('clientes') ?>><div class="full services_blog">
+                    <a href=<?php echo redirect('cliente') ?>><div class="full services_blog">
                         <img class="img-responsive" src="images/s3.png" alt="#" />
                         <h4>Clientes</h4>
                     </div></a>
