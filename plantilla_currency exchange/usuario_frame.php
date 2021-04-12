@@ -141,20 +141,20 @@ include("php/usuario.php");
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" name="datos">
                     <tr>
                         <td>
-                            <p align="center"><b>ID Usuario</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="20" class="campo" value="<?= $id_user ?>">
-                            <p><span style="color:#C84810" class="error"><?= $id_user_error ?></span></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="4" class="campo" value="<?= $id_comp ?>">
                             <p><span style="color:#C84810" class="error"><?= $id_comp_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p align="center"><b>ID Usuario</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="20" class="campo" value="<?= $id_user ?>">
+                            <p><span style="color:#C84810" class="error"><?= $id_user_error ?></span></p>
                         </td>
                     </tr>
                     <tr>

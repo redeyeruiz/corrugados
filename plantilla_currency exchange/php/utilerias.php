@@ -7,7 +7,7 @@
 			case 'artExistentes': return 'http://localhost/corrugados/plantilla_currency%20exchange/artExistentes.php';
 			case 'artVendidos':   return 'http://localhost/corrugados/plantilla_currency%20exchange/artVendidos.php';
 			case 'asig_permisos': return 'http://localhost/corrugados/plantilla_currency%20exchange/asig_permisos.php';
-			case 'asig_roles':    return 'http://localhost/corrugados/plantilla_currency%20exchange/almacenes.php';
+			case 'asig_roles':    return 'http://localhost/corrugados/plantilla_currency%20exchange/asig_roles.php';
 			case 'cantEntre':     return 'http://localhost/corrugados/plantilla_currency%20exchange/cantEntre.php';
 			case 'catalogos':     return 'http://localhost/corrugados/plantilla_currency%20exchange/catalogos.php';
 			case 'cliente':       return 'http://localhost/corrugados/plantilla_currency%20exchange/cliente.php';
@@ -69,10 +69,19 @@
         } 
     }
 
+    function submenu(){
+        
+    }
+
 	$dbServername = "localhost";
 	$dbUsername = "root";
 	$dbPassword = "";
 	$dbName = "PapelesCorrugados";
 
 	$conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
+    $query="SELECT * FROM Permiso WHERE idUsuario='$_SESSION[usuario]' AND estatus=true";
+    $result = mysqli_query($conection, $query);
+    $permisos = $result-> fetch_assoc();
+    $permisos['pAdmin'];
 ?>
