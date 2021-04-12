@@ -190,10 +190,10 @@ include("php/asig_rol.php");
                                         <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
                                     </div>
                                 </div> -->
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
+                                <!--<input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
                                 <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
                                 &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>-->
                             </div>
                             <!--<div id="response"
                                 class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">

@@ -121,7 +121,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
     $rol = test_input($_POST["rol"]);
     
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
-        $query="UPDATE Usuario SET nombre='$nom', idUsuario='$id_user', contrasena='$contrasena', rol='$rol' WHERE idCompania='$id_comp'";
+        $query="UPDATE Usuario SET nombre='$nom', idUsuario='$id_user', contrasena='$contrasena', rol='$rol' WHERE idUsuario='$id_user'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en la actualización de datos de la compañía.";

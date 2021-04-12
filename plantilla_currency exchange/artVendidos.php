@@ -325,7 +325,7 @@ include("funciones/artvenfuncP.php");
                             $codavi = $column [8];
                             $estatus = $column [9];
                             
-                            $sqlInsert = "INSERT into articulovendido values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "')";
+                            $sqlInsert = "INSERT into articulovendido values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "');";
                             //echo $sqlInsert;
                             $result = mysqli_query($conn, $sqlInsert);
 

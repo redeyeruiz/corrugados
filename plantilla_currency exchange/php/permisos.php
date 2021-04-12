@@ -1,8 +1,8 @@
 <?php
 
 include_once "utilerias.php";
-$id_user_error = $per_error = $per_af_error = ""; 
-$id_user = $per = $per_af = $success = $option = "";
+$id_user_error = $per_error = $per_desc_error = ""; 
+$id_user = $per = $per_desc = $success = $option = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_user"])){
@@ -29,7 +29,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
         else{
             $success = "Alta realizada con éxito.";
         }
-        $id_comp = $rol = $per_af = "";
+        $id_comp = $rol = "";
     }
 }
 
@@ -57,7 +57,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         else{
             $success = "Baja realizada con éxito.";
         }
-        $id_comp = $per = $per_af = "";
+        $id_comp = $per = "";
     }
 }
 

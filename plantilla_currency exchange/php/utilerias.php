@@ -80,8 +80,8 @@
 
 	$conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
-    $query="SELECT * FROM Permiso WHERE idUsuario='$_SESSION[usuario]' AND estatus=true";
+    /*$query="SELECT * FROM Permiso WHERE idUsuario='$_SESSION[usuario]' AND estatus=true";
     $result = mysqli_query($conection, $query);
     $permisos = $result-> fetch_assoc();
-    $permisos['pAdmin'];
+    $permisos['pAdmin'];*/
 ?>
