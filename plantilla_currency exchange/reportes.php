@@ -1,3 +1,18 @@
+<?php 
+session_start();
+include('php/utilerias.php');
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: ".redirect('login'));
+    die();
+}/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+}*/
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -10,7 +25,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Modificar Ordenes</title>
+    <title>Exchange Currency - Responsive HTML5 Template</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -49,7 +64,7 @@
     <!-- END LOADER -->
 
     <!-- Start header -->
-    <header class="top-header">
+<header class="top-header">
         <div class="header_top">
             
             <div class="container">
@@ -59,10 +74,11 @@
                     </div>
                     <div class="site_information">
                         <ul>
-                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Usuario</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                            </li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -82,17 +98,12 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                        <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
-                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
-                        
+                    <?php menu() ?>
                     </ul>
                 </div>
                      </div>
                  </nav>
-                  
+
                 </div>
             </div>
           </div>
@@ -107,7 +118,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Modificar Ordenes</h3>
+                        <h3>Reportes</h3>
                     </div>
                 </div>
             </div>
@@ -115,92 +126,63 @@
     </div>
     <!-- End Banner -->
     
-    <!-- section -->
-    <div class="section layout_padding about_bg">
+   <!-- section -->
+    <div class="section layout_padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="full paddding_left_15">
-                        <div class="heading_main text_align_left">
-                           <h2>Modificar Ordenes</h2>    
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                           <h2><span class="theme_color"></span>Reportes</h2>    
                         </div>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <p>Permite buscar y poder realizar cambios</p>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <a class="main_bt" href="#"> Modificar ></a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="full text_align_right_img">
-                        <img src="images/modificar.png" alt="#" />
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="full news_blog">
+                       <img class="img-responsive" src="images/reporte-reTodasOrdenes.png" alt="#" />
+                       <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
+                       <div class="blog_details">
+                         <h3>Reporte Todas las Ordenes</h3>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="full news_blog">
+                        <img class="img-responsive" src="images/reporte-reTiempo.png" alt="#" />
+                        <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
+                       <div class="blog_details">
+                         <h3>Reporte de Promedio deTiempo</h3>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="full news_blog">
+                        <img class="img-responsive" src="images/reporte-reProcesados.jpg" alt="#" />
+                        <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
+                       <div class="blog_details">
+                         <h3>Reporte de ordenes Procesadas</h3>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="full news_blog">
+                       <img class="img-responsive" src="images/reporte-reProcesos.png" alt="#" />
+                       <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
+                       <div class="blog_details">
+                         <h3>Reporte de ordenes en proceso</h3>
+                       </div>
+                    </div>
+                </div>
+
+
+
+             </div>
         </div>
     </div>
     <!-- end section -->
 
-   
-    <!-- Start Footer -->
-    <footer class="footer-box">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12 white_fonts">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <img class="img-responsive" src="images/footer_logo.png" alt="#" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <h3>Quick Links</h3>
-                            </div>
-                            <div class="full">
-                                <ul class="menu_footer">
-                                    <li><a href="catalogos.html">> Catálogos</a></li>
-                                    <li><a href="about.html">> About</a></li>
-                                    <li><a href="exchange.html">> Exchange</a></li>
-                                    <li><a href="operaciones.html">> operaciones</a></li>
-                                    <li><a href="reportes.html">> New</a></li>
-                                    <li><a href="contact.html">> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Newsletter</h3>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-                             <div class="newsletter_form">
-                                <form action="index.html">
-                                   <input type="email" placeholder="Your Email" name="#" required="">
-                                   <button>Submit</button>
-                                </form>
-                             </div>
-                         </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Contact us</h3>
-                             <ul class="full">
-                               <li><img src="images/i5.png"><span>London 145<br>United Kingdom</span></li>
-                               <li><img src="images/i6.png"><span>demo@gmail.com</span></li>
-                               <li><img src="images/i7.png"><span>+12586954775</span></li>
-                             </ul>
-                         </div>
-                            </div>
-                        </div>
-					</div>
-                </div>
-			 </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
 
     <div class="footer_bottom">
         <div class="container">
@@ -232,5 +214,3 @@
 </body>
 
 </html>
-
-

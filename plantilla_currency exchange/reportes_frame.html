@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Modificar Ordenes</title>
+    <title>Exchange Currency - Responsive HTML5 Template</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
+    <!-- Javascript-->
+    <script type="text/javascript" src="js/busqueda.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -49,7 +51,7 @@
     <!-- END LOADER -->
 
     <!-- Start header -->
-    <header class="top-header">
+<header class="top-header">
         <div class="header_top">
             
             <div class="container">
@@ -92,7 +94,12 @@
                 </div>
                      </div>
                  </nav>
-                  
+                 <div class="search-box">
+                    <input type="text" class="search-txt" placeholder="Search">
+                    <a class="search-btn">
+                        <img src="images/search_icon.png" alt="#" />
+                    </a>
+                </div> 
                 </div>
             </div>
           </div>
@@ -107,7 +114,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Modificar Ordenes</h3>
+                        <h3>Contact</h3>
                     </div>
                 </div>
             </div>
@@ -115,33 +122,35 @@
     </div>
     <!-- End Banner -->
     
-    <!-- section -->
-    <div class="section layout_padding about_bg">
+   <!-- section -->
+    <div class="section layout_padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="full paddding_left_15">
-                        <div class="heading_main text_align_left">
-                           <h2>Modificar Ordenes</h2>    
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                           <h2><span class="theme_color"></span>Reporte de tiempo por departamento</h2>    
                         </div>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <p>Permite buscar y poder realizar cambios</p>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <a class="main_bt" href="#"> Modificar ></a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="full text_align_right_img">
-                        <img src="images/modificar.png" alt="#" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- end section -->
+    
+    <div class= "login-space">
+        <p>
+        Fecha de orden Desde: <span><input class="user" type="date" id="f_desde"></span> 
+        Hasta: <span><input class="user" type="date" id="f_hasta"></span>
+        <span><button class="capturar-button" onclick="tiempo_filtro();">Filtrar</button></span>
+        </p>
+    </div>
 
+    <!-- contact_form -->
+    <div class="section contact_form">
+        <iframe class="ordenesEP" src="ordenesEP.html" title="ordenesEP"></iframe>
+    </div>
+    <!-- end contact_form -->
    
     <!-- Start Footer -->
     <footer class="footer-box">
@@ -164,7 +173,7 @@
                                     <li><a href="about.html">> About</a></li>
                                     <li><a href="exchange.html">> Exchange</a></li>
                                     <li><a href="operaciones.html">> operaciones</a></li>
-                                    <li><a href="reportes.html">> New</a></li>
+                                    <li><a href="new.html">> New</a></li>
                                     <li><a href="contact.html">> Contact</a></li>
                                 </ul>
                             </div>
@@ -175,7 +184,7 @@
                              <h3>Newsletter</h3>
                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
                              <div class="newsletter_form">
-                                <form action="index.html">
+                                <form action="catalogos.html">
                                    <input type="email" placeholder="Your Email" name="#" required="">
                                    <button>Submit</button>
                                 </form>
@@ -232,5 +241,3 @@
 </body>
 
 </html>
-
-

@@ -1,3 +1,17 @@
+<?php
+    session_start();
+    include('php/utilerias2.php');
+    include('php/utilerias.php');
+    if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: ".redirect('login'));
+    die();
+    }/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+    }*/
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -10,7 +24,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Modificar Ordenes</title>
+    <title>Exchange Currency - Responsive HTML5 Template</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,6 +43,8 @@
     <link rel="stylesheet" href="css/responsive.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
+    <!-- Javascript-->
+    <script type="text/javascript" src="js/busqueda.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -59,10 +75,11 @@
                     </div>
                     <div class="site_information">
                         <ul>
-                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Usuario</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                            </li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -82,17 +99,13 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                        <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
-                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
+                    <?php menu() ?>
                         
                     </ul>
                 </div>
                      </div>
                  </nav>
-                  
+                
                 </div>
             </div>
           </div>
@@ -107,7 +120,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="banner_title">
-                        <h3>Modificar Ordenes</h3>
+                        <h3></h3>
                     </div>
                 </div>
             </div>
@@ -115,26 +128,15 @@
     </div>
     <!-- End Banner -->
     
-    <!-- section -->
-    <div class="section layout_padding about_bg">
+   <!-- section -->
+    <div class="section layout_padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="full paddding_left_15">
-                        <div class="heading_main text_align_left">
-                           <h2>Modificar Ordenes</h2>    
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                           <h2><span class="theme_color"></span>Buscar Ordenes</h2>    
                         </div>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <p>Permite buscar y poder realizar cambios</p>
-                    </div>
-                    <div class="full paddding_left_15">
-                        <a class="main_bt" href="#"> Modificar ></a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="full text_align_right_img">
-                        <img src="images/modificar.png" alt="#" />
                     </div>
                 </div>
             </div>
@@ -142,6 +144,31 @@
     </div>
     <!-- end section -->
 
+    <!-- Iframe -->
+    <section> 
+
+        <div class= "login-space">
+            <p>
+            
+            <!--Ord Baan: <span><input class="user" type="text" id="baan"></span>
+            Cliente: <span><input class="user" type="text" id="client"></span> !-->
+            <form class="form-button-only" method="POST" action="buscarOrdenes_frame.php">
+            Folio: <span><input name="folio" class="user" type="text" id="fol"></span> 
+            <span><button class="form-button-only" name="buscar" >Buscar</button></span>
+            </form>
+            </p>
+        </div>
+
+        <?php
+        tabla_orden();
+        ?>
+        <!--
+            <div class="section contact_form">
+            <iframe class="ordenesEP" src="ordenesEP.html" title="ordenesEP"></iframe>
+        </div>
+        -->
+    </section>
+    <!-- end cIframe -->
    
     <!-- Start Footer -->
     <footer class="footer-box">
@@ -175,7 +202,7 @@
                              <h3>Newsletter</h3>
                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
                              <div class="newsletter_form">
-                                <form action="index.html">
+                                <form action="catalogos.html">
                                    <input type="email" placeholder="Your Email" name="#" required="">
                                    <button>Submit</button>
                                 </form>
@@ -229,8 +256,82 @@
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
 	
+
+    <?php
+    function tabla_orden(){
+        if (isset($_POST['buscar']) && isset($_POST['folio'])){
+           busqueda_orden();
+            
+        }
+    }
+
+    function busqueda_orden(){
+        
+        $fol=$_POST['folio'];
+        $conn=conecta_servidor();
+        $query="SELECT * FROM reporteorden WHERE folio='$fol'";
+        $sql=mysqli_query($conn,$query);
+        
+        if (mysqli_affected_rows($conn)==0){
+            msg("Folio Inexistente", "rojo");
+        }
+        echo
+        "<br><br><br>
+        <h1 class='h1-orden'>Busqueda de orden</h1>
+        <div class='tbl-header-orden'>
+            <table class='table-orden' cellpadding='0' cellspacing='0'>
+            <thead>
+                <tr>
+                    <th class='th-orden' scope='col'>Folio de orden</th>
+                    <th class='th-orden' scope='col'>Orden Baan</th>
+                    <th class='th-orden' scope='col'>ID cliente</th>
+                    <th class='th-orden' scope='col'>Nombre</th>
+                    
+                </tr>
+            </thead>
+            </table>
+        </div>
+        <div class='tbl-content-orden'>
+                <table class='table-orden' cellpadding='0' cellspacing='0'>
+                <tbody>";
+
+
+        while ($reg=mysqli_fetch_object($sql)){
+            
+            /*if ($reg==mysqli_fetch_array($sql)){
+                msg("Folio Inexistente", "rojo");
+            }*/
+            $fol=$_POST['folio'];
+            $ordenBaan=$reg->ordenBaan;
+            $idCliente=$reg->idCliente;
+            $nombreCliente=$reg->nombreCliente;
+            
+            echo
+        
+            "<tr>
+                <td class='td-orden'>$fol</td>
+                <td class='td-orden'>$ordenBaan</td>
+                <td class='td-orden'>$idCliente</td>
+                <td class='td-orden'>$nombreCliente</td>
+
+            </tr>";
+
+        }
+        echo"
+        </tbody>
+        </table>
+        </div>";
+        /*if ($reg==mysqli_fetch_array($sql)){
+            msg("Folio Inexistente", "rojo");
+        }
+        else{
+
+            formulario($fol, $reg->ordenBaan, $reg->idCliente, $reg->nombreCliente);
+            msg("Consulta realizada", "verde");
+        }
+        */
+    }
+    ?>
 </body>
 
 </html>
-
-
