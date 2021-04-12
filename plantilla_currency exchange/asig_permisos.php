@@ -150,7 +150,7 @@ include("php/permisos.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Permisos</b></p>
+                            <p align="center"><b>Permiso</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="per" type="text" size="50" maxlength="20" class="campo" value="<?= $per ?>">
@@ -332,7 +332,7 @@ include("php/permisos.php");
                                         </div>
                                         <div class="center">
                                             <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
+                                            <!--<button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>-->
                                             <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                                         </div>
                                     </div>
@@ -353,11 +353,11 @@ include("php/permisos.php");
                                     <div class="col-md-4">
                                         <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
                                     </div>
-                                </div> -->
+                                </div> 
                                 <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
                                 <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
                                 &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>-->
                             </div>
                             <!--<div id="response"
                                 class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
@@ -401,7 +401,7 @@ include("php/permisos.php");
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='20%' align='center'>ID Usuario</td>
                                     <td style='border:3px solid #ff880e' width='80%' align='center'>Permiso</td>
-                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Estado</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Estatus</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
@@ -409,7 +409,7 @@ include("php/permisos.php");
                         }
                     }
                     else{
-                        echo "<tr><td style='border:3px solid #ff880e' colspan='2'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='6'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
                     echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";

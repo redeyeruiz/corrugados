@@ -217,10 +217,10 @@ include("php/usuario.php");
                                         <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
                                     </div>
                                 </div> -->
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
+                                <!--<input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
                                 <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
                                 &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
+                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>-->
                             </div>
                             <!--<div id="response"
                                 class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
@@ -269,7 +269,6 @@ include("php/usuario.php");
                                     <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Estado</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
