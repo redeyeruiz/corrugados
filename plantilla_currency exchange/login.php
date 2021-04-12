@@ -6,7 +6,7 @@ if(isset($_SESSION['mens_error'])){
 	echo "alert('".$_SESSION['mens_error']."')";
 	echo "</script>";
 	unset($_SESSION['mens_error']);
-}elseif ($_SESSION['conectado']==TRUE){
+}elseif (isset($_SESSION['conectado'])){
 	header('Location: '.redirect('inicio'));
 	die();
 }

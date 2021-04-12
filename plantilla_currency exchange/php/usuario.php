@@ -42,7 +42,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     $estatus = 1;
     
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
-        $query="INSERT INTO Usuario VALUES ('$id_user','$id_comp','$nom','$contrasena','$rol','$estatus')";
+        $laContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+        $query="INSERT INTO Usuario VALUES ('$id_user','$id_comp','$nom','$laContrasena','$rol','$estatus')";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en el alta de Usuario.";
