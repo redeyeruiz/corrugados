@@ -231,7 +231,7 @@ include("funciones/companiasfuncP.php");
 
                 if(isset($_POST["import"])){
                     foreach($_FILES as $file){
-                        echo $file["tmp_name"];
+                        //echo $file["tmp_name"];
                     }
                     $fileName = $_FILES["file-1"]["tmp_name"];
 

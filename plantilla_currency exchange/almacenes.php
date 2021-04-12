@@ -260,7 +260,7 @@ include("funciones/almacenesfuncP.php");
 
 
                             $sqlInsert = "INSERT into almacen values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "');";
-                            echo $sqlInsert;
+                            //echo $sqlInsert;
                             $result = mysqli_query($conn, $sqlInsert);
 
                         }

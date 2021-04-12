@@ -352,7 +352,7 @@ include("funciones/dir_entfuncP.php");
                             $estatus = $column[13];
 
                             $sqlInsert = "INSERT into dirent values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "','" . $column[11] . "','" . $column[12] . "','" . $column[13] . "','" . $column[14] . "');";
-                            echo $sqlInsert;
+                            //echo $sqlInsert;
                             $result = mysqli_query($conn, $sqlInsert);
 
                         }

@@ -346,7 +346,7 @@ include("funciones/clientesfuncP.php");
                         
                         $sqlInsert = "INSERT into cliente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "','" . $column[11] . "','" . $column[12] . "','" . $column[13] . "');";
 
-                        echo $sqlInsert;
+                        //echo $sqlInsert;
 
                         $result = mysqli_query($conn, $sqlInsert);
 
