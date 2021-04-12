@@ -243,11 +243,11 @@ include("php/permisos.php");
                                     <ul>
                                         <li>
                                             <input type="checkbox" name="tall-1" id="tall-1">
-                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                            <label for="tall-1" class="custom-unchecked">Búsqueda de Órdenes</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" name="tall-2" id="tall-2">
-                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                            <label for="tall-2" class="custom-unchecked">Capturar Orden</label>
                                         </li>
                                         <li class="last">
                                             <input type="checkbox" name="tall-3" id="tall-3">
@@ -255,33 +255,45 @@ include("php/permisos.php");
                                             <ul>
                                                 <li>
                                                     <input type="checkbox" name="tall-2-1" id="tall-2-1">
-                                                    <label for="tall-2-1" class="custom-unchecked">...</label>
+                                                    <label for="tall-2-1" class="custom-unchecked">Autorización Facturación</label>
                                                 </li>
                                                 <li class="last">
                                                     <input type="checkbox" name="tall-2-2" id="tall-2-2">
-                                                    <label for="tall-2-2" class="custom-unchecked">...</label>
+                                                    <label for="tall-2-2" class="custom-unchecked">Autorización Cuentas por Cobrar</label>
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" name="tall-2-1" id="tall-2-1">
-                                                    <label for="tall-2-1" class="custom-unchecked">...</label>
+                                                    <label for="tall-2-1" class="custom-unchecked">Autorización Costos</label>
                                                 </li>
                                                 <li class="last">
                                                     <input type="checkbox" name="tall-2-2" id="tall-2-2">
-                                                    <label for="tall-2-2" class="custom-unchecked">...</label>
+                                                    <label for="tall-2-2" class="custom-unchecked">Autorización Ingeniería</label>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                    <label for="tall-2-2" class="custom-unchecked">Autorización Planeación</label>
+                                                </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="tall-2-2" id="tall-2-2">
+                                                    <label for="tall-2-2" class="custom-unchecked">Autorización Fechas</label>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
                                             <input type="checkbox" name="tall-1" id="tall-1">
-                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                            <label for="tall-1" class="custom-unchecked">Consultar Órdenes</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" name="tall-2" id="tall-2">
-                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                            <label for="tall-2" class="custom-unchecked">Modificar Órdenes</label>
                                         </li>
                                         <li class="last">
                                             <input type="checkbox" name="tall-3" id="tall-3">
-                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                            <label for="tall-3" class="custom-unchecked">Consultar Estatus</label>
+                                        </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="tall-3" id="tall-3">
+                                            <label for="tall-3" class="custom-unchecked">Buscar Artículos</label>
                                         </li>
                                     </ul>
                                 </li>
@@ -291,42 +303,25 @@ include("php/permisos.php");
                                     <ul>
                                         <li>
                                             <input type="checkbox" name="tall-1" id="tall-1">
-                                            <label for="tall-1" class="custom-unchecked">...</label>
+                                            <label for="tall-1" class="custom-unchecked">Reporte de Todas las Órdenes</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" name="tall-2" id="tall-2">
-                                            <label for="tall-2" class="custom-unchecked">...</label>
+                                            <label for="tall-2" class="custom-unchecked">Reporte de Promedio de Tiempo</label>
                                         </li>
                                         <li class="last">
                                             <input type="checkbox" name="tall-3" id="tall-3">
-                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                            <label for="tall-3" class="custom-unchecked">Reporte de Órdenes Procesadas</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" name="tall-1" id="tall-1">
-                                            <label for="tall-1" class="custom-unchecked">...</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" name="tall-2" id="tall-2">
-                                            <label for="tall-2" class="custom-unchecked">...</label>
-                                        </li>
-                                        <li class="last">
-                                            <input type="checkbox" name="tall-3" id="tall-3">
-                                            <label for="tall-3" class="custom-unchecked">...</label>
+                                            <label for="tall-1" class="custom-unchecked">Reporte de Órdenes en Proceso</label>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </td>
                     </tr>
-                    <!--<tr>
-                        <td>
-                            <p align="center"><b>Permiso a actualizar</b></p>
-                        </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="per_af" type="text" size="50" maxlength="20" class="campo" value="<?= $per_af ?>">
-                            <p><span style="color:#C84810" class="error"><?= $per_af_error ?></span></p>
-                        </td>
-                    </tr>-->
                     <tr>
                         <td colspan="2">
                             <div class="row margin-top_30">

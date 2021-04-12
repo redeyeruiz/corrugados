@@ -5,23 +5,23 @@ $rol_error = $rol_desc_error = "";
 $rol = $rol_desc = $success = $option = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
-    if (empty($_POST["id_comp"])){
-        $id_comp_error = "Se requiere el ID de la Compañía.";
-    }
-    else{
-        $id_comp = test_input($_POST["id_comp"]);
-    }
-
     if (empty($_POST["rol"])){
         $rol_error = "Se requiere el Rol.";
     }
     else{
         $rol = test_input($_POST["rol"]);
     }
+
+    if (empty($_POST["rol_desc"])){
+        $rol_desc_error = "Se requiere la descripción.";
+    }
+    else{
+        $rol_desc = test_input($_POST["rol_desc"]);
+    }
     $estatus = 1;
     
-    if ($id_comp_error == "" and $rol_error == ""){
-        $query="INSERT INTO rol VALUES ('$id_comp','$rol','$estatus')";
+    if ($rol_error == "" and $rol_desc_error == ""){
+        $query="INSERT INTO rol(rol,descripcion,estatus) VALUES ('$rol','$rol_desc','$estatus')";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en el alta de Rol.";
@@ -34,22 +34,22 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
 }
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
-    if (empty($_POST["id_comp"])){
-        $id_comp_error = "Se requiere el ID de la Compañía.";
-    }
-    else{
-        $id_comp = test_input($_POST["id_comp"]);
-    }
-
     if (empty($_POST["rol"])){
         $rol_error = "Se requiere el Rol.";
     }
     else{
         $rol = test_input($_POST["rol"]);
     }
+
+    if (empty($_POST["rol_desc"])){
+        $rol_desc_error = "Se requiere la descripción.";
+    }
+    else{
+        $rol_desc = test_input($_POST["rol_desc"]);
+    }
     
-    if ($id_comp_error == "" and $rol_error == ""){
-        $query="UPDATE Rol SET estatus='0' WHERE idCompania='$id_comp' and rol='$rol'";
+    if ($rol_error == "" and $rol_desc_error == ""){
+        $query="UPDATE Rol SET estatus='0' WHERE rol='$rol'";
 
         $sql=mysqli_query($conection,$query);
         if (!$sql){
@@ -63,29 +63,21 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
 }
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
-    if (empty($_POST["id_comp"])){
-        $id_comp_error = "Se requiere el ID de la Compañía.";
-    }
-    else{
-        $id_comp = test_input($_POST["id_comp"]);
-    }
-
     if (empty($_POST["rol"])){
-        $rol_error = "Se requiere el Rol anterior.";
+        $rol_error = "Se requiere el Rol.";
     }
     else{
         $rol = test_input($_POST["rol"]);
     }
-
-    if (empty($_POST["rol_af"])){
-        $rol_af_error = "Se requiere el Rol nuevo.";
+    if (empty($_POST["rol_desc"])){
+        $rol_desc_error = "Se requiere la descripción a modificar.";
     }
     else{
-        $rol_af = test_input($_POST["rol_af"]);
+        $rol_desc = test_input($_POST["rol_desc"]);
     }
-    echo $rol_af;
-    if ($id_comp_error == "" and $rol_error == "" and $rol_af_error == ""){
-        $query="UPDATE rol SET rol='$rol_af' WHERE idCompania='$id_comp' and rol='$rol'";
+    //echo $rol_af;
+    if ($rol_error == "" and $rol_desc_error == ""){
+        $query="UPDATE rol SET descripcion='$rol_desc' WHERE rol='$rol'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en la actualización de datos del Rol.";
@@ -98,18 +90,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
 }
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
-    if (empty($_POST["id_comp"])){
-        $id_comp_error = "Se requiere el ID de la Compañía.";
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere el Rol.";
     }
     else{
-        $id_comp = test_input($_POST["id_comp"]);
+        $rol = test_input($_POST["rol"]);
     }
 
-    if ($id_comp_error == ""){
-        $option = "Consultas por ID de la Compañía";
-        $query="SELECT * FROM Rol WHERE idCompania='$id_comp'";
+    if ($rol_error == ""){
+        $option = "Consultas por Rol";
+        $query="SELECT * FROM Rol WHERE rol='$rol'";
         $result = mysqli_query($conection, $query);
-        $id_comp = $rol = $rol_af = "";
+        $rol = $rol_desc = "";
     }
 }
 
@@ -118,7 +110,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
     $option = "Reporte";
     $query="SELECT * FROM Rol";
     $result = mysqli_query($conection, $query);
-    $id_comp = $rol = "";
+    $rol = $rol_desc = "";
 }
 
 function test_input($data){

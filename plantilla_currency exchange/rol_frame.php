@@ -153,7 +153,7 @@ include("php/rol.php");
                             <p align="center"><b>Descripción</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rol_af" type="text" size="50" maxlength="4" class="campo" value="<?= $rol_desc ?>">
+                            <input style="border:3px solid #ff880e" name="rol_desc" type="text" size="50" maxlength="100" class="campo" value="<?= $rol_desc ?>">
                             <p><span style="color:#C84810" class="error"><?= $rol_desc_error ?></span></p>
                         </td>
                     </tr>
@@ -225,13 +225,13 @@ include("php/rol.php");
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style='border:3px solid #ff880e' width='20%' align='center'>ID Compañía</td>
                                     <td style='border:3px solid #ff880e' width='20%' align='center'>Rol</td>
+                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Descripción</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Estado</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["idCompania"]."</td><td align='center' style='border:3px solid #ff880e' width='20%'>".$row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["estatus"]."</td></tr>";
+                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='20%'>".$row["descripcion"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["estatus"]."</td></tr>";
                         }
                     }
                     else{

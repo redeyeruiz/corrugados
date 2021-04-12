@@ -226,15 +226,13 @@ include("php/asig_rol.php");
                                 </tr>
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>ID Usuario</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>ID Compañía</td>
                                     <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Estado</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "<tr><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idUsuario"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='30%'>". $row["nombre"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["contrasena"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["estatus"]."</td></tr>";
+                            echo "<tr><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idUsuario"] ."</td><td style='border:3px solid #ff880e' width='30%'>". $row["nombre"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["estatus"]."</td></tr>";
                         }
                     }
                     else{
