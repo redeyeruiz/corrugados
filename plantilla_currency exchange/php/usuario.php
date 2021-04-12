@@ -33,12 +33,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
         $contrasena = test_input($_POST["contrasena"]);
     }
 
-    if (empty($_POST["rol"])){
-        $rol_error = "Se requiere el Rol.";
-    }
-    else{
-        $rol = test_input($_POST["rol"]);
-    }
+    $rol = test_input($_POST["rol"]);
+    
     $estatus = 1;
     
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
@@ -105,12 +101,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $contrasena = test_input($_POST["contrasena"]);
     }
 
-    if (empty($_POST["rol"])){
-        $rol_error = "Se requiere el Rol.";
-    }
-    else{
-        $rol = test_input($_POST["rol"]);
-    }
+    $rol = test_input($_POST["rol"]);
     
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
         $query="UPDATE Usuario SET nombre='$nom', idUsuario='$id_user', contrasena='$contrasena', rol='$rol' WHERE idCompania='$id_comp'";
