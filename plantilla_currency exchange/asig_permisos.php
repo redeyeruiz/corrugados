@@ -43,6 +43,8 @@ include("php/permisos.php");
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -150,175 +152,175 @@ include("php/permisos.php");
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Permiso</b></p>
+                            <p align="center"><b>Permisos</b></p>
                         </td>
-                        <td align="center">
-                            <input style="border:3px solid #ff880e" name="per" type="text" size="50" maxlength="20" class="campo" value="<?= $per ?>">
-                            <p><span style="color:#C84810" class="error"><?= $per_error ?></span></p>
-                            <!--<ul class="treeview">
+                        <td style="width:20%">
+                            <!--<input style="border:3px solid #ff880e" name="per" type="text" size="50" maxlength="20" class="campo" value="<?= $per ?>">
+                            <p><span style="color:#C84810" class="error"><?= $per_error ?></span></p> -->
+                            <ul class="treeview">
                                 <li>
-                                    <input type="checkbox" name="check_list[]" id="check1">
+                                    <input type="checkbox" name="check_list[]" id="check1" value="Administración">
                                     <label for="tall" class="custom-unchecked"><b><i>Administración</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check2">
+                                            <input type="checkbox" name="check_list[]" id="check2" value="Usuarios">
                                             <label for="tall-1" class="custom-unchecked">Usuarios</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check3">
+                                            <input type="checkbox" name="check_list[]" id="check3" value="Roles">
                                             <label for="tall-2" class="custom-unchecked">Roles</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check4">
+                                            <input type="checkbox" name="check_list[]" id="check4" value="Asignación de roles">
                                             <label for="tall-3" class="custom-unchecked">Asignación de roles</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check5">
+                                            <input type="checkbox" name="check_list[]" id="check5" value="Asignación de permisos">
                                             <label for="tall-1" class="custom-unchecked">Asignación de permisos</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check6">
+                                            <input type="checkbox" name="check_list[]" id="check6" value="Parámetros Active Directory">
                                             <label for="tall-2" class="custom-unchecked">Parámetros Active Directory</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check7">
+                                            <input type="checkbox" name="check_list[]" id="check7" value="Parámetros FTP">
                                             <label for="tall-3" class="custom-unchecked">Parámetros FTP</label>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="last">
-                                    <input type="checkbox" name="check_list[]" id="check8">
+                                    <input type="checkbox" name="check_list[]" id="check8" value="Catálogos">
                                     <label for="short" class="custom-unchecked"><b><i>Catálogos</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check9">
+                                            <input type="checkbox" name="check_list[]" id="check9" value="Compañías">
                                             <label for="short-1" class="custom-unchecked">Compañías</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check10">
+                                            <input type="checkbox" name="check_list[]" id="check10" value="Agentes">
                                             <label for="short-2" class="custom-unchecked">Agentes</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check11">
+                                            <input type="checkbox" name="check_list[]" id="check11" value="Clientes">
                                             <label for="short-3" class="custom-unchecked">Clientes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check12">
+                                            <input type="checkbox" name="check_list[]" id="check12" value="Artículos Existentes">
                                             <label for="short-1" class="custom-unchecked">Artículos Existentes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check13">
+                                            <input type="checkbox" name="check_list[]" id="check13" value="Artículos Vendidos">
                                             <label for="short-2" class="custom-unchecked">Artículos Vendidos</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check14">
+                                            <input type="checkbox" name="check_list[]" id="check14" value="Listas de Precios">
                                             <label for="short-3" class="custom-unchecked">Listas de Precios</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check15">
+                                            <input type="checkbox" name="check_list[]" id="check15" value="Direcciones de entrega">
                                             <label for="short-1" class="custom-unchecked">Direcciones de entrega</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check16">
+                                            <input type="checkbox" name="check_list[]" id="check16" value="Cantidades entregadas">
                                             <label for="short-2" class="custom-unchecked">Cantidades entregadas</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check17">
+                                            <input type="checkbox" name="check_list[]" id="check17" value="Facturas">
                                             <label for="short-3" class="custom-unchecked">Facturas</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check18">
+                                            <input type="checkbox" name="check_list[]" id="check18" value="Inventarios">
                                             <label for="short-1" class="custom-unchecked">Inventarios</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check19">
+                                            <input type="checkbox" name="check_list[]" id="check19" value="Almacenes">
                                             <label for="short-2" class="custom-unchecked">Almacenes</label>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <input type="checkbox" name="check_list[]" id="check20">
+                                    <input type="checkbox" name="check_list[]" id="check20" value="Operaciones">
                                     <label for="tall" class="custom-unchecked"><b><i>Operaciones</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check21">
+                                            <input type="checkbox" name="check_list[]" id="check21" value="Búsqueda de Órdenes">
                                             <label for="tall-1" class="custom-unchecked">Búsqueda de Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check22">
+                                            <input type="checkbox" name="check_list[]" id="check22" value="Captuar Órden">
                                             <label for="tall-2" class="custom-unchecked">Capturar Órden</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check23">
+                                            <input type="checkbox" name="check_list[]" id="check23" value="Autorizaciones">
                                             <label for="tall-3" class="custom-unchecked">Autorizaciones</label>
                                             <ul>
                                                 <li>
-                                                    <input type="checkbox" name="check_list[]" id="check24">
+                                                    <input type="checkbox" name="check_list[]" id="check24" value="Autorización Facturación">
                                                     <label for="tall-2-1" class="custom-unchecked">Autorización Facturación</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check25">
+                                                    <input type="checkbox" name="check_list[]" id="check25" value="Autorización Cuentas por Cobrar">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Cuentas por Cobrar</label>
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" name="check_list[]" id="check26">
+                                                    <input type="checkbox" name="check_list[]" id="check26" value="Autorización Costos">
                                                     <label for="tall-2-1" class="custom-unchecked">Autorización Costos</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check27">
+                                                    <input type="checkbox" name="check_list[]" id="check27" value="Autorización Ingeniería">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Ingeniería</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check28">
+                                                    <input type="checkbox" name="check_list[]" id="check28" value="Autorización Planeación">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Planeación</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check29">
+                                                    <input type="checkbox" name="check_list[]" id="check29" value="Autorización Fechas">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Fechas</label>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check30">
+                                            <input type="checkbox" name="check_list[]" id="check30" value="Consultar Órdenes">
                                             <label for="tall-1" class="custom-unchecked">Consultar Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check31">
+                                            <input type="checkbox" name="check_list[]" id="check31" value="Modificar Órdenes">
                                             <label for="tall-2" class="custom-unchecked">Modificar Órdenes</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check32">
+                                            <input type="checkbox" name="check_list[]" id="check32" value="Consultar Estatus">
                                             <label for="tall-3" class="custom-unchecked">Consultar Estatus</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check33">
+                                            <input type="checkbox" name="check_list[]" id="check33" value="Buscar Artículos">
                                             <label for="tall-3" class="custom-unchecked">Buscar Artículos</label>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <input type="checkbox" name="check_list[]" id="check34">
+                                    <input type="checkbox" name="check_list[]" id="check34" value="Reportes">
                                     <label for="tall" class="custom-unchecked"><b><i>Reportes</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check35">
+                                            <input type="checkbox" name="check_list[]" id="check35" value="Reporte de Todas las Órdenes">
                                             <label for="tall-1" class="custom-unchecked">Reporte de Todas las Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check36">
+                                            <input type="checkbox" name="check_list[]" id="check36" value="Reporte de Promedio de Tiempo"> 
                                             <label for="tall-2" class="custom-unchecked">Reporte de Promedio de Tiempo</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check37">
+                                            <input type="checkbox" name="check_list[]" id="check37" value="Reporte de Órdenes Procesadas">
                                             <label for="tall-3" class="custom-unchecked">Reporte de Órdenes Procesadas</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check38">
+                                            <input type="checkbox" name="check_list[]" id="check38" value="Reporte de Órdenes en Proceso">
                                             <label for="tall-1" class="custom-unchecked">Reporte de Órdenes en Proceso</label>
                                         </li>
                                     </ul>
                                 </li>
-                            </ul>-->
+                            </ul>
                         </td>
                     </tr>
                     <tr>
@@ -379,19 +381,9 @@ include("php/permisos.php");
                         </td>
                     </tr>
                 </form>
-            </table>
-            <?php
+            </table>    
+        <?php
                 if ($option != ""){
-                    /*$checkbox = ""; ?>
-                            <script>
-                                $(document).ready(function(){
-                                    if ($("#check1").is(':checked')) {
-                                         $checkbox .= '1';
-                                    }else{
-                                         $checkbox .= '0';
-                                    }
-                                    echo $checkbox;
-                            </script>*/
                     echo "<table style='border:3px solid #ff880e' width='60%' align='center'>
                                 <tr>
                                     <td style='border:3px solid #ff880e' colspan='3'>

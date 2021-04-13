@@ -1,4 +1,4 @@
-const archivo = document.getElementById('selectedFile');
+/*const archivo = document.getElementById('selectedFile');
 
 archivo.addEventListener('change', (event) => {
   const files = event.target.files;
@@ -18,4 +18,4 @@ archivo.addEventListener('change', (event) => {
 });
 
 var reader = new FileReader();
-var x = reader.readAsText(archivo, "UTF-8");
+var x = reader.readAsText(archivo, "UTF-8");*/

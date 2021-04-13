@@ -2,7 +2,7 @@
 
 include_once "utilerias.php";
 $id_user_error = $per_error = $per_af_error = ""; 
-$id_user = $per = $per_af = $success = $option = "";
+$id_user = $per = $per_af = $success = $option = $checked = $check_list_ar = $i = $permiso_check ="";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_user"])){
@@ -12,26 +12,28 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
         $id_user = test_input($_POST["id_user"]);
     }
 
-    if (empty($_POST["per"])){
-        $per_error = "Se requiere el Permiso.";
-    }
-    else{
-        $per = test_input($_POST["per"]);
-    }
+    $check_list_ar = array();
+    $check_list_ar = $_POST['check_list'];
     $estatus = 1;
     
-    if ($id_user_error == "" and $per_error == ""){
-        $query="INSERT INTO permiso VALUES ('$id_user','$per','$estatus')";
-        $sql=mysqli_query($conection,$query);
+    if(array_key_exists('check_list', $_POST) and $id_user_error == ""){
+        foreach($check_list_ar as $permiso_check){
+            $query="INSERT INTO permiso VALUES('$id_user','$permiso_check','$estatus')";
+            $sql=mysqli_query($conection,$query);
+        }
         if (!$sql){
             $success = "Error en el alta de permiso.";
         }
         else{
             $success = "Alta realizada con éxito.";
-        }
-        $id_comp = $rol = $per_af = "";
+        }    
     }
+    else{
+        $success = "Error. No hay ningún permiso seleccionado.";
+    }
+    $id_comp = $rol = $per_af = $permiso_check = "";
 }
+
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     if (empty($_POST["id_user"])){
