@@ -262,7 +262,7 @@
             <input disabled class="inputCO" type="number" name='ordenCompra' placeholder=" Número de órden de compra" required value="<?php echo htmlspecialchars($_SESSION['folio'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Fecha de Órden de Compra:">
-            <input class="inputCO" type="date" name ='fechaOrden' required></input>
+            <input disabled class="inputCO" type="date" name ='fechaOrden' required value="<?php echo htmlspecialchars($_SESSION['fechaOrden'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Artículo:">
             <input class="datal "  name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['descripcion'] ?? '', ENT_QUOTES); ?>">
@@ -280,7 +280,7 @@
                 <button name ="calcularP"class="buttonBigCO btn" formnovalidate >Recalcular Precio </button>
                 </div>
             <p class="pCO" type="Fecha Solicitada:">
-            <input class="inputCO" type="date" name ='fechaSolicitud' required></input>
+            <input  disabled class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_SESSION['fechaSolicitud'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Observaciones de la Orden:">
             <textarea class="textareaCO" name="Observaciones" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
@@ -365,6 +365,11 @@ function folioValue(){
         }else{
             $_SESSION['idCliente'] = $reg->idCliente;
             $_SESSION['dirEnt']= $reg->dirEnt;
+            $_SESSION['idCompania']= $reg->idCompania;
+            $_SESSION['idOrden']= $reg->idOrden;
+            $_SESSION['fechaSolicitud']= $reg->fechaSolicitud;
+            $_SESSION['fechaOrden']= $reg->fechaOrden;
+            echo "fecha Orden : " . $_SESSION['fechaOrden'];
             
             
         }
@@ -376,8 +381,8 @@ function agregar_tablaM(){
    
     if( isset($_POST['agregarArt']) && isset($_SESSION['folio']) ){
 
-        $idOrden                                    ="0001";
-        $idCompania                                 ="0003";
+        $idOrden                                    =$_SESSION['idOrden'];
+        $idCompania                                 =$_SESSION['idCompania'];
         $folio                                      =$_SESSION['folio'];
         $numFact                                    =1234;
         $ordenBaan                                  =1234;
@@ -385,13 +390,13 @@ function agregar_tablaM(){
         $nombreCliente                              =$_SESSION['nombreCliente'];
         $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
         $idArticulo                                 =$_SESSION['idArticulo'];
-        $ordenCompra                                = $_SESSION['folio'];
+        $ordenCompra                                =$_SESSION['folio'];
         $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
-        $precio                                     = $_SESSION['precio'];
+        $precio                                     =$_SESSION['precio'];
         $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
-        $_SESSION['fechaOrden'] =$fechaOrden        =$_POST['fechaOrden'];
-        $_SESSION['fechaSolicitud'] =$fechaSolicitud=$_POST['fechaSolicitud'];
-        $fechaEntrega                               ="un dia";
+        $fechaOrden                                 =$_SESSION['fechaOrden'];
+        $fechaSolicitud                             =$_SESSION['fechaSolicitud'];
+        $fechaEntrega                               ="NULL";
         $entregado                                  =0;
         $acumulado                                  =0;
         $total                                      =0;
@@ -743,10 +748,8 @@ function unsetAll(){
     unset($_POST['descripcion']);
     unset($_POST['cantidad']);
     unset($_SESSION['dirEnt']);
-    
-    
-
-    
+    unset($_SESSION['idCompania']);
+    unset($_SESSION['idOrden']);    
 }
 
 ?>

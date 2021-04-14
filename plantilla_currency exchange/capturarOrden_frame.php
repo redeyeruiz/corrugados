@@ -436,8 +436,8 @@
             $entregado                                  =0;
             $acumulado                                  =0;
             $total                                      =0;
-            $costo                                      ='32';
-            $moneda                                     ="MXP";
+            $costo                                      =$_SESSION['precio'];
+            $moneda                                     =$_SESSION['moneda'];
             $Observaciones                              =$_POST['Observaciones'];
             $estatus=0;
             $producido=0;
@@ -679,7 +679,7 @@
             $datosCliente=explode(",",$_SESSION['nombreClienteDT']);
             $nombreCliente=$datosCliente[0];         
             $conn=conecta_servidor();
-            $query="SELECT nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE nombreCliente = '$nombreCliente'";
+            $query="SELECT divisa,nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE nombreCliente = '$nombreCliente'";
             $sql=mysqli_query($conn,$query);
             $reg=mysqli_fetch_object($sql);
             if ($reg==mysqli_fetch_array($sql)){
@@ -692,6 +692,7 @@
                 $_SESSION['bloqueo']=$reg->bloqueo;
                 $_SESSION['idCompania']=$reg->idCompania;
                 $_SESSION['nombreCliente']=$reg->nombreCliente;
+                $_SESSION['moneda']=$reg->divisa;
             }
         }
 
