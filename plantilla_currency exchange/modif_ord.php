@@ -150,13 +150,23 @@
                 <button type="submit" name="buscar" class="buttonBigCO btn">Buscar</button>
                 </div>
                 <?php
-                clientValues();
                 cancelar();
+                guardar();
+                folioValue();
+                
+                
+                clientValues();
+                
+                
+                
                 eliminar();
+                calcularPrecio();
                 agregar_tablaM();
+                
                 update_dir();
+                
                 update_tableM();
-                calcularPrecio()
+                
                 ?>
         </form>  
 
@@ -249,13 +259,13 @@
 
 
             <p class="pCO" type="Órden de Compra:">
-            <input class="inputCO" type="number" name='ordenCompra' placeholder="Ingrese el número de órden de compra" required></input>
+            <input disabled class="inputCO" type="number" name='ordenCompra' placeholder=" Número de órden de compra" required value="<?php echo htmlspecialchars($_SESSION['folio'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Fecha de Órden de Compra:">
             <input class="inputCO" type="date" name ='fechaOrden' required></input>
             </p>
             <p class="pCO" type="Artículo:">
-            <input class="datal "  name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['articuloDT'] ?? '', ENT_QUOTES); ?>">
+            <input class="datal "  name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['descripcion'] ?? '', ENT_QUOTES); ?>">
             <?php
             tabla_articulos();
             ?> 
@@ -264,7 +274,7 @@
             <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required value="<?php echo htmlspecialchars($_POST['cantidad'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Precio:" >
-            <input class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
+            <input disabled class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
                 <button name ="calcularP"class="buttonBigCO btn" formnovalidate >Recalcular Precio </button>
@@ -341,7 +351,7 @@
 
     <?php
 
-function agregar_tablaM(){
+function folioValue(){
     if(isset($_POST['buscar'])){
         $folio=$_SESSION['folio']=$_POST['folio'];
         $conexion=conecta_servidor();
@@ -356,8 +366,14 @@ function agregar_tablaM(){
             $_SESSION['idCliente'] = $reg->idCliente;
             $_SESSION['dirEnt']= $reg->dirEnt;
             
+            
         }
     }
+}
+
+function agregar_tablaM(){
+    
+   
     if( isset($_POST['agregarArt']) && isset($_SESSION['folio']) ){
 
         $idOrden                                    ="0001";
@@ -369,7 +385,7 @@ function agregar_tablaM(){
         $nombreCliente                              =$_SESSION['nombreCliente'];
         $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
         $idArticulo                                 =$_SESSION['idArticulo'];
-        $ordenCompra                                = $_POST['ordenCompra'];
+        $ordenCompra                                = $_SESSION['folio'];
         $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
         $precio                                     = $_SESSION['precio'];
         $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
@@ -386,12 +402,12 @@ function agregar_tablaM(){
         $estatus=0;
 
         if(!isset($_SESSION['queries'])){
-            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$total','$costo','$moneda','$Observaciones','$estatus')|";
+            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
         
         }
             
         else{
-            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$total','$costo','$moneda','$Observaciones','$estatus')|";
+            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
         }
         echo "Se ha agregado el articulo a la orden"; 
     }
@@ -491,6 +507,7 @@ function update_tableM(){
 
     /* SQL table*/
     if(isset($_SESSION['folio'])){
+       
 
     
         $folio=$_SESSION['folio'];
@@ -558,40 +575,17 @@ function error($msg){
     return $msg;
 }
 
-//guardar e insertar a la DB
-if(isset($_POST["guardar"])){
-
-    $conn = conecta_servidor();
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } 
-    
-    if(isset($_SESSION['queries'])){
-        $queries=explode("|",$_SESSION['queries'],-1);
-
-        for($i=0;$i<count($queries);$i++){
-            $query=$queries[$i];
-            mysqli_query($conn, $query);
-        }
-    
-    }
-    unset($_SESSION['queries']);
-    unset($_SESSION['folio']);
-}
 
 //cancelar una orden
 function cancelar(){
     if(isset($_POST["cancelar"]) ){
-        if(isset($_SESSION['queries'])) {
-            unset($_SESSION['queries']);
-        }
+        unsetAll();
     
         if(isset($_SESSION['folio'])) {
-            unset($_SESSION['folio']);
+            unsetAll();
         }   
         
-}
+    }
     
 }
 
@@ -620,6 +614,33 @@ function tabla_articulos(){
     
            
 }
+//guardar e insertar a la DB
+function guardar(){
+    if(isset($_POST["guardar"])){
+
+        $conn = conecta_servidor();
+    
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+        
+        if(isset($_SESSION['queries'])){
+            $queries=explode("|",$_SESSION['queries'],-1);
+    
+            for($i=0;$i<count($queries);$i++){
+                $query=$queries[$i];
+                mysqli_query($conn, $query);
+            }
+            unsetAll();
+        
+        }else{
+            echo "no hay nada que guardar";
+        }
+        
+    }
+}
+
+
 // PRECIO
 function calcularPrecio(){
     if(isset($_POST['calcularP']) && isset($_POST['cantidad'])  || (isset($_POST['agregarArt']) && isset($_POST['cantidad'])) ){
@@ -690,6 +711,41 @@ function clientValues(){
             $_SESSION['nombreCliente']=$reg->nombreCliente;
         }
     }
+    
+}
+
+function unsetAll(){
+    unset($_SESSION['queries']);
+    unset($_SESSION['direntC']);
+    unset($_SESSION['nomEC']);
+    unset($_SESSION['direccionC']);
+    unset($_SESSION['municipioC']);
+    unset($_SESSION['estadoC']);
+    unset($_SESSION['telefonoC']);
+    unset($_SESSION['obsC']);
+    unset($_SESSION['CRC']);
+    unset( $_SESSION['paisC']); 
+    unset($_SESSION['RFCC']);
+    unset($_SESSION['inputID']);
+    unset($_SESSION['idCompania']);
+    unset($_SESSION['IDorden']);
+    unset($_SESSION['CPC']);
+    unset($_SESSION['ordenCompra']);
+    unset($_SESSION['idCliente']);
+    unset($_SESSION['descripcion']);
+    unset($_SESSION['folio']);
+    unset($_SESSION['numOrdenes']);
+    unset($_SESSION['IDorden']);
+    unset($_SESSION['nombreClienteDT']);
+    unset($_SESSION['dirCompleta']);
+    unset($_SESSION['precio']);
+    unset($_POST['nombreClienteDT']);
+    unset($_POST['descripcion']);
+    unset($_POST['cantidad']);
+    unset($_SESSION['dirEnt']);
+    
+    
+
     
 }
 
