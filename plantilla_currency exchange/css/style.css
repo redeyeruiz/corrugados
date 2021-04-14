@@ -2578,6 +2578,10 @@ ul.bottom_menu li {
     box-sizing:border-box;
     font-family:'Montserrat',sans-serif;
     position:relative;
+	margin-top: 1em;
+	margin-bottom: 2em;
+
+	
 }
 
 .h2CO{

@@ -11,6 +11,8 @@
         die();
     }*/
     include('php/utilerias2.php');
+    
+    
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -152,6 +154,7 @@
                 cancelar();
                 eliminar();
                 agregar_tablaM();
+                update_dir()
                 ?>
         </form>  
 
@@ -171,7 +174,7 @@
 
         <form class="formCO" method="POST" action="modif_ord.php">
         <div class="row g-3">
-                <div class="col-sm">
+        <div class="col-sm">
                     <p class="pCO" type="Número de Dirección de Entrega:">
                     <input disabled class="inputCO" type="text" name='dirEnt' placeholder="i.e. 123" value="<?php echo htmlspecialchars($_SESSION['direntC'] ?? '', ENT_QUOTES); ?>" >
                     </p>
@@ -252,8 +255,8 @@
             <p class="pCO" type="Artículo:">
             <input class="datal " name="nombreClienteDT" name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['articuloDT'] ?? '', ENT_QUOTES); ?>">
             <?php
-            //lista_articulo();
-            ?>
+            tabla_articulos();
+            ?> 
             </p>
             <p class="pCO" type="Cantidad:">
             <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
@@ -347,6 +350,7 @@ function agregar_tablaM(){
             return("error");
         }else{
             $_SESSION['idCliente'] = $reg->idCliente;
+            $_SESSION['dirEnt']= $reg->dirEnt;
             
         }
     }
@@ -357,9 +361,9 @@ function agregar_tablaM(){
         $folio                                      =$_SESSION['folio'];
         $numFact                                    =1234;
         $ordenBaan                                  =1234;
-        $idCliente                                  =1234;
+        $idCliente                                  =$_SESSION['idCliente'];
         $_SESSION['cliente'] = $nombreCliente       =$_POST['nombreCliente'];
-        $_SESSION['dirEnt']  =$dirEnt               =$_POST['dirEnt'];
+        $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
         $idArticulo                                 ="idtest";
         $ordenCompra                                = $_POST['ordenCompra'];
         $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
@@ -386,8 +390,44 @@ function agregar_tablaM(){
         echo "Se ha agregado el articulo a la orden"; 
     }
     
-    update_tableM();
+    //update_tableM();
     
+}
+
+function update_dir(){
+
+    if(isset($_SESSION['dirEnt'])){
+        $dirEnt=$_SESSION['dirEnt'];
+        $conexion=conecta_servidor();
+        $query="SELECT * FROM dirent WHERE dirEnt='$dirEnt'";
+        $sql=mysqli_query($conexion,$query);
+        $reg=mysqli_fetch_object($sql);
+
+        if ($reg==mysqli_fetch_array($sql)){
+            echo "Folio inexistente en base de datos"; //----Agregar CSS bonito
+            return("error");
+        }else{
+            $_SESSION['direccion'] = "$reg->dirEnt, $reg->nombreEntrega, $reg->direccion, $reg->municipio, $reg->estado, $reg->telefono, $reg->observaciones, $reg->codPost, $reg->codRuta, $reg->pais, $reg->rfc";
+            $dire=explode(",",$_SESSION['direccion']);
+
+
+            $_SESSION['direntC'] =$dire[0];
+            $_SESSION['nomEC'] =$dire[1];
+            $_SESSION['direccionC'] =$dire[2];
+            $_SESSION['municipioC'] =$dire[3];
+            $_SESSION['estadoC'] =$dire[4];
+            $_SESSION['telefonoC'] =$dire[5];
+            $_SESSION['obsC'] =$dire[6];
+            $_SESSION['CPC'] =$dire[7];
+            $_SESSION['CRC'] =$dire[8];
+            $_SESSION['paisC'] =$dire[9]; 
+            $_SESSION['RFCC'] =$dire[10];
+            
+            
+        }
+    }
+    
+
 }
 
 function eliminar(){
@@ -550,6 +590,60 @@ function cancelar(){
     
 }
 
+//TABLA ARTICULOS
+function tabla_articulos(){
+    if(isset($_SESSION['idCliente'])){
+        
+        $idCliente=$_SESSION['idCliente'];
+        $conexion=conecta_servidor();
+        $query="SELECT ArticuloExistente.descripcion FROM ArticuloExistente INNER JOIN ArticuloVendido WHERE  ArticuloExistente.idArticulo= ArticuloVendido.idArticulo AND idCliente = '$idCliente'" ;
+        $sql=mysqli_query($conexion,$query);
+        if (mysqli_affected_rows($conexion)==0){
+            echo "Error, id cliente o el idlista es inexistente en base de datos";
+        }
+        echo "<datalist id='articulos'>";
+        while ($reg=mysqli_fetch_object($sql)){
+            echo "<option>$reg->descripcion";
+
+        }
+        echo "</datalist>";
+
+        
+    }
+    
+    
+    
+           
+}
+// PRECIO
+function calcularPrecio(){
+    if(isset($_POST['calcularP']) && isset($_POST['cantidad'])  || (isset($_POST['agregarArt']) && isset($_POST['cantidad'])) ){
+        
+        $precio_articulo=obtenerPrecio();
+        
+        $_SESSION['precio']=strval( intval($_POST['cantidad']) * $precio_articulo);
+    }
+}
+
+function obtenerPrecio(){
+    if(isset($_SESSION['idCliente'])){
+
+        $idArticulo=obtenerIdArticulo();
+        $idLista=$_SESSION['idLista'];  
+        $conn=conecta_servidor();
+        $query="SELECT descuento,precio FROM listaPrecio WHERE idLista ='$idLista' AND idArticulo ='$idArticulo' ";
+        $sql=mysqli_query($conn,$query);
+        $reg=mysqli_fetch_object($sql);
+        if ($reg==mysqli_fetch_array($sql)){
+            echo "Error, no existe artiuclo con tal idLista o idArticulo";
+            return(NULL);
+        }else{
+            
+            return (floatval($reg->precio)  - (floatval($reg->descuento) * floatval($reg->precio) ));
+        }
+    }
+    
+}
 
 ?>
 
