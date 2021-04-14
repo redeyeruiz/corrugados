@@ -150,11 +150,13 @@
                 <button type="submit" name="buscar" class="buttonBigCO btn">Buscar</button>
                 </div>
                 <?php
-                
+                clientValues();
                 cancelar();
                 eliminar();
                 agregar_tablaM();
-                update_dir()
+                update_dir();
+                update_tableM();
+                calcularPrecio()
                 ?>
         </form>  
 
@@ -253,19 +255,19 @@
             <input class="inputCO" type="date" name ='fechaOrden' required></input>
             </p>
             <p class="pCO" type="Artículo:">
-            <input class="datal " name="nombreClienteDT" name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['articuloDT'] ?? '', ENT_QUOTES); ?>">
+            <input class="datal "  name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['articuloDT'] ?? '', ENT_QUOTES); ?>">
             <?php
             tabla_articulos();
             ?> 
             </p>
             <p class="pCO" type="Cantidad:">
-            <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
+            <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required value="<?php echo htmlspecialchars($_POST['cantidad'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Precio:" >
-            <input class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required></input>
+            <input class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
-                <button name ="calcularP"class="buttonBigCO btn">Recalcular Precio </button>
+                <button name ="calcularP"class="buttonBigCO btn" formnovalidate >Recalcular Precio </button>
                 </div>
             <p class="pCO" type="Fecha Solicitada:">
             <input class="inputCO" type="date" name ='fechaSolicitud' required></input>
@@ -277,7 +279,9 @@
             <p class="pCO center">
             </p>
 
-        
+            <button type="submit" name="agregarArt" class="buttonBigCO btn" >agregar articulo</button>
+
+        </form>
 
         <form class="formCO" method="POST" action="modif_ord.php" id="forma">
                 <h2>Confirmar Órden</h2>
@@ -362,12 +366,12 @@ function agregar_tablaM(){
         $numFact                                    =1234;
         $ordenBaan                                  =1234;
         $idCliente                                  =$_SESSION['idCliente'];
-        $_SESSION['cliente'] = $nombreCliente       =$_POST['nombreCliente'];
+        $nombreCliente                              =$_SESSION['nombreCliente'];
         $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
-        $idArticulo                                 ="idtest";
+        $idArticulo                                 =$_SESSION['idArticulo'];
         $ordenCompra                                = $_POST['ordenCompra'];
         $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
-        $_SESSION['precio']=$precio                 =34;
+        $precio                                     = $_SESSION['precio'];
         $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
         $_SESSION['fechaOrden'] =$fechaOrden        =$_POST['fechaOrden'];
         $_SESSION['fechaSolicitud'] =$fechaSolicitud=$_POST['fechaSolicitud'];
@@ -375,22 +379,23 @@ function agregar_tablaM(){
         $entregado                                  =0;
         $acumulado                                  =0;
         $total                                      =0;
-        $costo                                      =$_POST['costo'];
+        $costo                                      =$_SESSION['precio'];
         $moneda                                     ="MXP";
         $Observaciones                              =$_POST['Observaciones'];
+        $producido=0;
+        $estatus=0;
 
         if(!isset($_SESSION['queries'])){
-            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$total','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
+            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$total','$costo','$moneda','$Observaciones','$estatus')|";
         
         }
             
         else{
-            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$total','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
+            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$total','$costo','$moneda','$Observaciones','$estatus')|";
         }
         echo "Se ha agregado el articulo a la orden"; 
     }
     
-    //update_tableM();
     
 }
 
@@ -618,17 +623,18 @@ function tabla_articulos(){
 // PRECIO
 function calcularPrecio(){
     if(isset($_POST['calcularP']) && isset($_POST['cantidad'])  || (isset($_POST['agregarArt']) && isset($_POST['cantidad'])) ){
-        
-        $precio_articulo=obtenerPrecio();
-        
+        $precio_articulo=obtenerPrecio(); 
         $_SESSION['precio']=strval( intval($_POST['cantidad']) * $precio_articulo);
     }
 }
 
 function obtenerPrecio(){
-    if(isset($_SESSION['idCliente'])){
-
-        $idArticulo=obtenerIdArticulo();
+    
+    if(isset($_SESSION['idCliente'])  && isset($_SESSION['idLista']) ){
+        
+        $_SESSION['idArticulo']=$idArticulo=obtenerIdArticulo();
+        
+        
         $idLista=$_SESSION['idLista'];  
         $conn=conecta_servidor();
         $query="SELECT descuento,precio FROM listaPrecio WHERE idLista ='$idLista' AND idArticulo ='$idArticulo' ";
@@ -640,6 +646,48 @@ function obtenerPrecio(){
         }else{
             
             return (floatval($reg->precio)  - (floatval($reg->descuento) * floatval($reg->precio) ));
+        }
+    }
+    
+}
+
+function obtenerIdArticulo(){
+    
+    $conn=conecta_servidor();
+    $descripcion=$_POST['descripcion'];
+    $query="SELECT idArticulo FROM ArticuloExistente WHERE descripcion ='$descripcion'";
+    $sql=mysqli_query($conn,$query);
+    $reg=mysqli_fetch_object($sql);
+    if ($reg==mysqli_fetch_array($sql)){
+        return "Error, no hay articulo con tal descripcion";
+    }else{
+        return $reg->idArticulo;
+    }
+
+
+}
+
+function clientValues(){
+    
+    
+    
+    if(isset($_SESSION['idCliente'])){
+        
+        
+        $idCliente=$_SESSION['idCliente'];         
+        $conn=conecta_servidor();
+        $query="SELECT nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE idCliente = '$idCliente'";
+        $sql=mysqli_query($conn,$query);
+        $reg=mysqli_fetch_object($sql);
+        if ($reg==mysqli_fetch_array($sql)){
+            echo "error no existe tal cliente";
+        }else{
+            $_SESSION['estatus']=$reg->estatus;
+            $_SESSION['idLista']=$reg->idLista;
+            $_SESSION['saldoOrden']=$reg->saldoOrden;
+            $_SESSION['bloqueo']=$reg->bloqueo;
+            $_SESSION['idCompania']=$reg->idCompania;
+            $_SESSION['nombreCliente']=$reg->nombreCliente;
         }
     }
     

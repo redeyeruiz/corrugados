@@ -425,7 +425,7 @@
             $idCliente                                  =$_SESSION['idCliente'];
             $nombreCliente =                            $_SESSION['nombreCliente']; 
             $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['direntC'];
-            $idArticulo                                 ="idtest";
+            $idArticulo                                 =$_SESSION['idArticulo'];
             $ordenCompra                                =$_SESSION['ordenCompra'];       
             $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
             $precio                                      =$_SESSION['precio'];
@@ -750,7 +750,7 @@
     function obtenerPrecio(){
         if(isset($_SESSION['idCliente'])){
 
-            $idArticulo=obtenerIdArticulo();
+            $_SESSION['idArticulo']=$idArticulo=obtenerIdArticulo();
             $idLista=$_SESSION['idLista'];  
             $conn=conecta_servidor();
             $query="SELECT descuento,precio FROM listaPrecio WHERE idLista ='$idLista' AND idArticulo ='$idArticulo' ";
@@ -777,6 +777,7 @@
             return "Error, no hay articulo con tal descripcion";
         }else{
             return $reg->idArticulo;
+
         }
 
 
