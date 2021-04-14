@@ -133,82 +133,8 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('companias') ?>><div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#"/>
-                       <h4>Compañías</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('agentes') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Agentes</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('clientes') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Clientes</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('artExistentes') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s4.png" alt="#" />
-                        <h4>Artículos Existentes</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('artVendidos') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Artículos Vendidos</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('listasprecio') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Listas de Precios</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('dir_ent') ?>><div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" />
-                       <h4>Direcciones de Entrega</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('cantEntre') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Cantidades Entregadas</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('facturas') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Facturas</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('inventarios') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Inventarios</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('almacenes') ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Almacenes</h4>
-                    </div></a>
-                </div>
+                <?php submenu_cat() ?>
             </div>
-            <!-- <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <a class="main_bt" href="#">See More ></a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     <!-- end section -->

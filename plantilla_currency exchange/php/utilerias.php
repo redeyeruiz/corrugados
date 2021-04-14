@@ -1,4 +1,12 @@
 <?php
+
+$dbServername = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "PapelesCorrugados";
+
+$conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
 	function redirect($pagina){
 		switch($pagina){
 			case 'admin':         return 'http://localhost/corrugados/plantilla_currency%20exchange/admin.php';
@@ -71,17 +79,170 @@
         } 
     }
 
-    
+    function submenu_adm(){
+        global $conection;
+        $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
+        $result = mysqli_query($conection, $query);
+        if ($result-> num_rows > 0){
+            while ($row = $result-> fetch_assoc()){
+                switch($row["permiso"]){
+                    case 'Usuarios': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('usuario_frame'); ?>><div class='full services_blog'>
+                                <img class='img-responsive' src='images/s1.png' alt='#' />
+                                <h4>Usuarios</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Roles': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('rol_frame'); ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s1.png" alt="#" />
+                                <h4>Roles</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Asignacion de Roles': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('asig_roles'); ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s3.png" alt="#" />
+                                <h4>Asignación de Roles</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Asignacion de permisos': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('asig_permisos'); ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s4.png" alt="#" />
+                                <h4>Asignación de Permisos</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Parametros Active Directory': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('parametrosAD'); ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Parámetros Active Directory</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Parametros FTP': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('parametrosFTP'); ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s3.png" alt="#" />
+                                <h4>Parámetros FTP</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                }
+            }
+        }
+        else{
+            echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
+        }
+    }
 
-	$dbServername = "localhost:3308";
-	$dbUsername = "root";
-	$dbPassword = "";
-	$dbName = "PapelesCorrugados";
-    
-	$conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
-    /*
-    $query="SELECT * FROM Permiso WHERE idUsuario='$_SESSION[usuario]' AND estatus=true";
-    $result = mysqli_query($conection, $query);
-    $permisos = $result-> fetch_assoc();
-    $permisos['pAdmin'];*/
+    function submenu_cat(){
+        global $conection;
+        $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
+        $result = mysqli_query($conection, $query);
+        if ($result-> num_rows > 0){
+            while ($row = $result-> fetch_assoc()){
+                switch($row["permiso"]){
+                    case 'Companias': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('companias') ?>><div class="full services_blog">
+                            <img class="img-responsive" src="images/s1.png" alt="#"/>
+                            <h4>Compañías</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Agentes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('agentes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Agentes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Clientes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('clientes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s3.png" alt="#" />
+                                <h4>Clientes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Articulos Existentes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('artExistentes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s4.png" alt="#" />
+                                <h4>Artículos Existentes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Articulos Vendidos': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('artVendidos') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Artículos Vendidos</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Listas de Precios': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('listasprecio') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s3.png" alt="#" />
+                                <h4>Listas de Precios</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Direcciones de entrega': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('dir_ent') ?>><div class="full services_blog">
+                            <img class="img-responsive" src="images/s1.png" alt="#" />
+                            <h4>Direcciones de Entrega</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Cantidades entregadas': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('cantEntre') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Cantidades Entregadas</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Facturas': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('facturas') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Facturas</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Inventarios': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('inventarios') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Inventarios</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Almacenes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('almacenes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Almacenes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                }
+            }
+        }
+        else{
+            echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
+        }
+    }
+
 ?>

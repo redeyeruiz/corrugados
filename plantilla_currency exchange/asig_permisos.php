@@ -159,7 +159,7 @@ include("php/permisos.php");
                             <p><span style="color:#C84810" class="error"><?= $per_error ?></span></p> -->
                             <ul class="treeview">
                                 <li>
-                                    <input type="checkbox" name="check_list[]" id="check1" value="Administración">
+                                    <input type="checkbox" name="check_list[]" id="check1" value="Administracion">
                                     <label for="tall" class="custom-unchecked"><b><i>Administración</i></b></label>
                                     <ul>
                                         <li>
@@ -171,29 +171,29 @@ include("php/permisos.php");
                                             <label for="tall-2" class="custom-unchecked">Roles</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check4" value="Asignación de roles">
+                                            <input type="checkbox" name="check_list[]" id="check4" value="Asignacion de Roles">
                                             <label for="tall-3" class="custom-unchecked">Asignación de roles</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check5" value="Asignación de permisos">
+                                            <input type="checkbox" name="check_list[]" id="check5" value="Asignacion de permisos">
                                             <label for="tall-1" class="custom-unchecked">Asignación de permisos</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check6" value="Parámetros Active Directory">
+                                            <input type="checkbox" name="check_list[]" id="check6" value="Parametros Active Directory">
                                             <label for="tall-2" class="custom-unchecked">Parámetros Active Directory</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check7" value="Parámetros FTP">
+                                            <input type="checkbox" name="check_list[]" id="check7" value="Parametros FTP">
                                             <label for="tall-3" class="custom-unchecked">Parámetros FTP</label>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="last">
-                                    <input type="checkbox" name="check_list[]" id="check8" value="Catálogos">
+                                    <input type="checkbox" name="check_list[]" id="check8" value="Catalogos">
                                     <label for="short" class="custom-unchecked"><b><i>Catálogos</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check9" value="Compañías">
+                                            <input type="checkbox" name="check_list[]" id="check9" value="Companias">
                                             <label for="short-1" class="custom-unchecked">Compañías</label>
                                         </li>
                                         <li>
@@ -205,11 +205,11 @@ include("php/permisos.php");
                                             <label for="short-3" class="custom-unchecked">Clientes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check12" value="Artículos Existentes">
+                                            <input type="checkbox" name="check_list[]" id="check12" value="Articulos Existentes">
                                             <label for="short-1" class="custom-unchecked">Artículos Existentes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check13" value="Artículos Vendidos">
+                                            <input type="checkbox" name="check_list[]" id="check13" value="Articulos Vendidos">
                                             <label for="short-2" class="custom-unchecked">Artículos Vendidos</label>
                                         </li>
                                         <li class="last">
@@ -243,11 +243,11 @@ include("php/permisos.php");
                                     <label for="tall" class="custom-unchecked"><b><i>Operaciones</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check21" value="Búsqueda de Órdenes">
+                                            <input type="checkbox" name="check_list[]" id="check21" value="Busqueda de Ordenes">
                                             <label for="tall-1" class="custom-unchecked">Búsqueda de Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check22" value="Captuar Órden">
+                                            <input type="checkbox" name="check_list[]" id="check22" value="Captuar Orden">
                                             <label for="tall-2" class="custom-unchecked">Capturar Órden</label>
                                         </li>
                                         <li class="last">
@@ -255,37 +255,37 @@ include("php/permisos.php");
                                             <label for="tall-3" class="custom-unchecked">Autorizaciones</label>
                                             <ul>
                                                 <li>
-                                                    <input type="checkbox" name="check_list[]" id="check24" value="Autorización Facturación">
+                                                    <input type="checkbox" name="check_list[]" id="check24" value="Autorizacion Facturacion">
                                                     <label for="tall-2-1" class="custom-unchecked">Autorización Facturación</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check25" value="Autorización Cuentas por Cobrar">
+                                                    <input type="checkbox" name="check_list[]" id="check25" value="Autorizacion Cuentas por Cobrar">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Cuentas por Cobrar</label>
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" name="check_list[]" id="check26" value="Autorización Costos">
+                                                    <input type="checkbox" name="check_list[]" id="check26" value="Autorizacion Costos">
                                                     <label for="tall-2-1" class="custom-unchecked">Autorización Costos</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check27" value="Autorización Ingeniería">
+                                                    <input type="checkbox" name="check_list[]" id="check27" value="Autorizacion Ingenieria">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Ingeniería</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check28" value="Autorización Planeación">
+                                                    <input type="checkbox" name="check_list[]" id="check28" value="Autorizacion Planeacion">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Planeación</label>
                                                 </li>
                                                 <li class="last">
-                                                    <input type="checkbox" name="check_list[]" id="check29" value="Autorización Fechas">
+                                                    <input type="checkbox" name="check_list[]" id="check29" value="Autorizacion Fechas">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Fechas</label>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check30" value="Consultar Órdenes">
+                                            <input type="checkbox" name="check_list[]" id="check30" value="Consultar Ordenes">
                                             <label for="tall-1" class="custom-unchecked">Consultar Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check31" value="Modificar Órdenes">
+                                            <input type="checkbox" name="check_list[]" id="check31" value="Modificar Ordenes">
                                             <label for="tall-2" class="custom-unchecked">Modificar Órdenes</label>
                                         </li>
                                         <li class="last">
@@ -293,7 +293,7 @@ include("php/permisos.php");
                                             <label for="tall-3" class="custom-unchecked">Consultar Estatus</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check33" value="Buscar Artículos">
+                                            <input type="checkbox" name="check_list[]" id="check33" value="Buscar Articulos">
                                             <label for="tall-3" class="custom-unchecked">Buscar Artículos</label>
                                         </li>
                                     </ul>
@@ -303,7 +303,7 @@ include("php/permisos.php");
                                     <label for="tall" class="custom-unchecked"><b><i>Reportes</i></b></label>
                                     <ul>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check35" value="Reporte de Todas las Órdenes">
+                                            <input type="checkbox" name="check_list[]" id="check35" value="Reporte de Todas las Ordenes">
                                             <label for="tall-1" class="custom-unchecked">Reporte de Todas las Órdenes</label>
                                         </li>
                                         <li>
@@ -311,11 +311,11 @@ include("php/permisos.php");
                                             <label for="tall-2" class="custom-unchecked">Reporte de Promedio de Tiempo</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check37" value="Reporte de Órdenes Procesadas">
+                                            <input type="checkbox" name="check_list[]" id="check37" value="Reporte de Ordenes Procesadas">
                                             <label for="tall-3" class="custom-unchecked">Reporte de Órdenes Procesadas</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check38" value="Reporte de Órdenes en Proceso">
+                                            <input type="checkbox" name="check_list[]" id="check38" value="Reporte de Ordenes en Proceso">
                                             <label for="tall-1" class="custom-unchecked">Reporte de Órdenes en Proceso</label>
                                         </li>
                                     </ul>
@@ -380,6 +380,18 @@ include("php/permisos.php");
                             <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
+                    <?php
+                        if ($btnsn != ""){
+                            echo '<tr>
+                                    <td colspan="2">
+                                        <div class="center">
+                                            <button name="confirmoc" type="submit" style="width:200px" class="btn btn-outline-success">Confirmar</button>
+                                            <button name="canceloc" type="submit" style="width:200px" class="btn btn-outline-danger">Cancelar</button>
+                                        </div>
+                                    </td>
+                                </tr>';
+                        }
+                    ?>
                 </form>
             </table>    
         <?php

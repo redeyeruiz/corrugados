@@ -2,7 +2,7 @@
 <?php
 session_start();
 include('utilerias.php');
-$DATABASE_HOST = 'localhost:3308';
+$DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASSWORD = '';
 $DATABASE_NAME = 'PapelesCorrugados';
@@ -44,5 +44,6 @@ if($statement = $conexion->prepare('SELECT nombre, contrasena, rol FROM usuario 
         die();
     }
 }
+
 
 ?>

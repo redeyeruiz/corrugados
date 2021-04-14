@@ -46,7 +46,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $exist = mysqli_query($conection, $query);
             if (!$exist){
                 $success = "Error en el alta del usuario.";
-                $idalm = $idcomp = $desc = "";
+                $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
             }
             else{
                 $row = $exist-> fetch_assoc();
@@ -55,14 +55,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                     $btnsn = "Mostrar";
                 }
                 else{
-                    $success = "Error en el alta del almacen.";
-                    $id_user = $id_comp = $nom = $contrasena = $rol = "";
+                    $success = "Error en el alta del usuario.";
+                    $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
                 }
             }
         }
         else{
             $success = "Alta realizada con éxito.";
-            $id_user = $id_comp = $nom = $contrasena = $rol = "";
+            $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
         }
         //$id_user = $id_comp = $nom = $contrasena = $rol = "";
     }
@@ -182,7 +182,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del usuario.";
+            $success = "Error en la actualización de datos del usuario.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -191,13 +191,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $query="UPDATE Usuario SET nombre='$nom', idCompania='$id_comp', estatus=true, contrasena='$laContrasena' WHERE idUsuario='$id_user'";
                 $sql=mysqli_query($conection,$query);
                 if(!$sql){
-                    $succes = "Error  en la actualización de datos del usuario.";
+                    $success = "Error en la actualización de datos del usuario.";
                 }else{
                     $success = "Alta y actualización realizada con éxito.";
                 }
             }
             else{
-                $success = "Error en el actualización de datos del almacen.";
+                $success = "Error en la actualización de datos del almacen.";
             }
         }
         $id_user = $id_comp = $nom = $contrasena = $rol = "";

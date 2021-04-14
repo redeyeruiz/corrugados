@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('php/utilerias.php');
+//include('php/submenu.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
@@ -136,52 +137,8 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('usuario_frame'); ?>><div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" />
-                       <h4>Usuarios</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('rol_frame'); ?>><div class="full services_blog">
-                       <img class="img-responsive" src="images/s1.png" alt="#" />
-                       <h4>Roles</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('asig_roles'); ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Asignación de Roles</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('asig_permisos'); ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s4.png" alt="#" />
-                        <h4>Asignación de Permisos</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('parametrosAD'); ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s2.png" alt="#" />
-                        <h4>Parámetros Active Directory</h4>
-                    </div></a>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-8">
-                    <a href=<?php echo redirect('parametrosFTP'); ?>><div class="full services_blog">
-                        <img class="img-responsive" src="images/s3.png" alt="#" />
-                        <h4>Parámetros FTP</h4>
-                    </div></a>
-                </div>
+                <?php submenu_adm() ?>
             </div>
-            <!-- <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <a class="main_bt" href="#">See More ></a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
     <!-- end section -->
