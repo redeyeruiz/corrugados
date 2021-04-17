@@ -42,11 +42,6 @@ include("funciones/companiasfuncP.php");
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
@@ -174,34 +169,7 @@ include("funciones/companiasfuncP.php");
                                 </div>
                             </div>
                             <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <!--
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="filebutton">Select File</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file" id="file" class="input-large">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="singlebutton">Import data</label>
-                                    <div class="col-md-4">
-                                        <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
-                                    </div>
-                                </div> -->
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
-                            <!--<div id="response"
-                                class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
-                                <?php if(!empty($message)) { echo $message; } ?>
-                            </div>
-                            <div class="center">
-                            <p id="feedback"></p>
-                            </div>-->
+
                         </td>
                     </tr>
                     <tr>
@@ -227,6 +195,7 @@ include("funciones/companiasfuncP.php");
                         }
                     ?>
                 </form>
+                
             </table>
             <?php
                 if ($option != ""){
@@ -252,6 +221,78 @@ include("funciones/companiasfuncP.php");
                 }
             ?>
         </div>
+        <br>
+        &nbsp;
+            <div class="center">
+                
+                <?php
+
+                $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+                if(isset($_POST["import"])){
+                    foreach($_FILES as $file){
+                        //echo $file["tmp_name"];
+                    }
+                    $fileName = $_FILES["file-1"]["tmp_name"];
+
+                    if($_FILES["file-1"]["size"] > 0 ){
+                        $file = fopen($fileName, "r");
+
+                        while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                            $idcomp = $column[0];
+                            $nom = $column[1];
+                            $esta = $column[2];
+                            
+                            $sqlInsert = "INSERT into compania values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
+
+                            $result = mysqli_query($conn, $sqlInsert);
+
+                        }
+                        
+                    }
+                    if(!empty($result)){
+                        echo "CSV Data Importado";
+                    }else{
+                        echo "No importado";
+                    }
+                }
+                if(isset($_POST["descarga"])){
+
+                        $query="SELECT * FROM compania";
+                        $sql=mysqli_query($conn,$query);
+                        // 2) Abrir el archivo de tipo texto
+                        $arch=fopen("archivos/compania.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                        while ($reg=mysqli_fetch_object($sql)){
+                            $linea=$reg->idCompania.",".$reg->nombre.",".$reg->estatus;
+                            //echo $linea."<br>"; // Imprime pa prueba
+                            fwrite($arch,$linea.PHP_EOL);
+                        }
+                        fclose($arch);
+
+                        
+                }
+
+                ?>
+
+
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                <div>
+                <label>Importa CSV</label>
+                <input type="file" name="file-1" accept=".csv , .txt"/>
+                <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+                <div class="center">
+                    <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+                </div>
+                    <div class="center">
+                        <a href="descarga.php?path=archivos/compania.txt">Descargar Archivo de Texto</a>
+                    </div>
+                </div>
+                </form>
+                
+                &nbsp;
+            </div>
     </div>
 
     <div class="footer_bottom">
