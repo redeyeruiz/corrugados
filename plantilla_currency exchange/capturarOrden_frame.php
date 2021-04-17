@@ -91,10 +91,11 @@
                     </div>
                     <div class="site_information">
                         <ul>
-                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Usuario</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                            </li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -394,10 +395,11 @@
                 $sql=mysqli_query($conn,$query);
                 $reg=mysqli_fetch_object($sql);
                 if ($reg==mysqli_fetch_array($sql)){
-                    $_SESSION['ordenCompra']='1';
+                    
                     echo"no FUNCIONA el max";
                     echo "error no existe tal cliente ('numOrdenes')";
                 }else{
+                    
                     $_SESSION['ordenCompra']=strval( intval($reg->ordenCompra) +1);
                     
                 }
@@ -845,8 +847,7 @@
         unset($_SESSION['CPC']);
         unset($_SESSION['ordenCompra']);
         unset($_SESSION['idCliente']);
-        unset($_SESSION['folio']);
-        
+        unset($_SESSION['folio']);        
         unset($_SESSION['numOrdenes']);
         unset($_SESSION['IDorden']);
         unset($_SESSION['nombreClienteDT']);
@@ -854,10 +855,7 @@
         unset($_SESSION['precio']);
         unset($_POST['nombreClienteDT']);
         unset($_POST['descripcion']);
-        unset($_POST['cantidad']);
-        
-   
-        
+        unset($_POST['cantidad']);       
     }
     
 

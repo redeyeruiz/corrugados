@@ -129,7 +129,7 @@
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Reporte de tiempo por departamento</h2>    
+                           <h2><span class="theme_color"></span>Reporte de todas las ordenes</h2>    
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
     
     <div class= "login-space">
         <p>
-        Fecha de orden Desde: <span><input class="user" type="text" id="f_desde"></span> 
-        Hasta: <span><input class="user" type="text" id="f_hasta"></span>
+        Fecha de orden Desde: <span><input class="user" type="date" id="f_desde"></span> 
+        Hasta: <span><input class="user" type="date" id="f_hasta"></span>
         </p>
 
         <p>

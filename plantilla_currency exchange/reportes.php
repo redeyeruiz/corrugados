@@ -142,7 +142,7 @@ if(!isset($_SESSION['conectado'])){
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/reporte-reTodasOrdenes.png" alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
+                       <div class="overlay"><a class="main_bt transparent" href="reportes_ordenes.php">acceder</a></div>
                        <div class="blog_details">
                          <h3>Reporte Todas las Ordenes</h3>
                        </div>

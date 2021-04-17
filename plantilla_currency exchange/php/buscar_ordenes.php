@@ -345,17 +345,66 @@ include('utilerias2.php');
 			$a_desde=$_GET['a_desde'];
 			$a_hasta=$_GET['a_hasta'];
 			$conn=conecta_servidor();
-			$query="SELECT * FROM Orden WHERE fechaOrden BETWEEN '$f_desde' AND '$f_hasta' ";
+			$query="SELECT * FROM reporteorden WHERE fechaOrden BETWEEN '$f_desde' AND '$f_hasta' AND ordenBaan BETWEEN '$b_desde' AND '$b_hasta' AND idCliente BETWEEN '$c_desde' AND '$c_hasta' AND idArticulo BETWEEN '$a_desde' AND '$a_hasta'";
 			echo $query;
 			$sql=mysqli_query($conn,$query);
-			$reg=mysqli_fetch_object($sql);
-			if ($reg==mysqli_fetch_array($sql)){
+			//$reg=mysqli_fetch_object($sql);		
+			if (mysqli_affected_rows($conn)==0){
+                msg("Folio Inexistente", "rojo");
+            }
+			echo
+            "<br><br><br>
+            <h1 class='h1-orden'>Busqueda de orden</h1>
+            <div class='tbl-header-orden'>
+                <table class='table-orden' cellpadding='0' cellspacing='0'>
+                <thead>
+                    <tr>
+                        <th class='th-orden' scope='col'>Fecha de Orden</th>
+                        <th class='th-orden' scope='col'>Orden Baan</th>
+                        <th class='th-orden' scope='col'>ID cliente</th>
+                        <th class='th-orden' scope='col'>ID articulo</th>
+                        
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class='tbl-content-orden'>
+                    <table class='table-orden' cellpadding='0' cellspacing='0'>
+                    <tbody>";
+
+
+			while ($reg=mysqli_fetch_object($sql)){
+
+				/*if ($reg==mysqli_fetch_array($sql)){
+					msg("Folio Inexistente", "rojo");
+				}*/
+				$fechaOrden=$reg->fechaOrden;
+				$ordenBaan=$reg->ordenBaan;
+				$idCliente=$reg->idCliente;
+				$nombreCliente=$reg->nombreCliente;
+				echo
+			
+				"       <tr>
+					<td class='td-orden'>$fechaOrden</td>
+					<td class='td-orden'>$ordenBaan</td>
+					<td class='td-orden'>$idCliente</td>
+					<td class='td-orden'>$nombreCliente</td>
+
+					</tr>
+			";
+
+			}
+			/*if ($reg==mysqli_fetch_array($sql)){
 				msg("Folio Inexistente", "rojo");
 			}
 			else{
-				reporteorden($reg->idOrden, $reg->ordenBaan, $reg->idCliente, $reg->nombreCliente, $reg->fechaOrden, $reg->fechaSolicitud, $reg->fechaEntrega, $reg->tFac, $reg->tCXC, $reg->tPRE, $reg->tCST, $reg->tING, $reg->tPLN, $reg->tFEC, $reg->idArticulo, $reg->cantidad);
+
+				formulario($fol, $reg->ordenBaan, $reg->idCliente, $reg->nombreCliente);
 				msg("Consulta realizada", "verde");
 			}
+			*/
+			
+			
 		}
     ?>
 </body>
