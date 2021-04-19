@@ -56,7 +56,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                     $btnsn = "Mostrar";
                 }
                 else{
-                    $success = "Error en el alta del usuario.";
+                    $success = "Error en el alta del usuario. quack";
                     $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
                 }
             }
@@ -65,7 +65,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $query = "SELECT * FROM rol WHERE estatus = 1";
             $sql = mysqli_query($conection, $query);
             $roles = array();
-            while($row = $sql->fetchassoc()){
+            while($row = $sql->fetch_assoc()){
                 array_push($roles, $row['rol']);
             }
             foreach($roles as $mirol){

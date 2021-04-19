@@ -49,44 +49,32 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 	}
 
 	function menu(){
-        switch($_SESSION['rol']){
-        case 'ADM':?>
-            <li><a class="nav-link" href=<?php echo redirect('inicio'); ?>>Inicio</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('admin'); ?>>Administración</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('catalogos'); ?>>Catálogos</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('operaciones'); ?>>Operaciones</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('reportes'); ?>>Reportes</a></li>
-            <li><a class="nav-link" href="#">Contacto</a></li>
-            <?php break; 
-        case 'ADMA':?>
-            <li><a class="nav-link" href=<?php echo redirect('inicio'); ?>>Inicio</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('admin'); ?>>Administración</a></li>
-            <li><a class="nav-link" href=<?php echo redirect('catalogos'); ?>>Catálogos</a></li>
-            <li><a class="nav-link" href="#">Operaciones</a></li>
-            <li><a class="nav-link" href="#">Reportes</a></li>
-            <li><a class="nav-link" href="#">Contacto</a></li>
-            <?php break; 
-        case 'AGE':?>
-            <li><a class="nav-link" href=<?php echo redirect('inicio'); ?>>Inicio</a></li>
-            <li><a class="nav-link" href="#">Operaciones</a></li>
-            <li><a class="nav-link" href="#">Contacto</a></li>
-            <?php break;
-        case 'CST':
-        case 'CXC':
-        case 'DIR':
-        case 'EMB':
-        case 'IMG':
-        case 'PLN':
-        case 'REA':
-        case 'FAC':
-        case 'VTA':
-        case 'PRE':?>
-            <li><a class="nav-link" href=<?php echo redirect('inicio'); ?>>Inicio</a></li>
-            <li><a class="nav-link" href="#">Operaciones</a></li>
-            <li><a class="nav-link" href="#">Reportes</a></li>
-            <li><a class="nav-link" href="#">Contacto</a></li>
-            <?php break; 
-        } 
+        global $conection;
+        $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
+        $result = mysqli_query($conection, $query); ?>
+        <li><a class="nav-link" href=<?php echo redirect('inicio'); ?>>Inicio</a></li>
+    <?php 
+    if ($result-> num_rows > 0){ 
+        while ($row = $result-> fetch_assoc()){
+            switch($row["permiso"]){
+                case 'Administracion': ?>
+                    <li><a class="nav-link" href=<?php echo redirect('admin'); ?>>Administración</a></li>
+                    <?php break; 
+                case 'Catalogos':?>
+                    <li><a class="nav-link" href=<?php echo redirect('catalogos'); ?>>Catálogos</a></li>
+                    <?php break; 
+                case 'Operaciones':?>
+                    <li><a class="nav-link" href=<?php echo redirect('operaciones'); ?>>Operaciones</a></li>
+                    <?php break;
+                case 'Reportes': ?>
+                    <li><a class="nav-link" href=<?php echo redirect('reportes'); ?>>Reportes</a></li>
+                    <?php break; 
+                }
+            }
+
+        } ?>
+        <li><a class="nav-link" href="#">Contacto</a></li>
+        <?php
     }
 
     function submenu_adm(){
@@ -513,6 +501,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                 mysqli_query($conection, $query);
                 break;
             case 'ADC':
+                echo "entré.";
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
                                                     ('$id_user','Roles',1),
                                                     ('$id_user','Asignacion de Roles',1),
@@ -520,6 +509,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Operaciones',1),
                                                     ('$id_user','Busqueda de Ordenes',1)";
                 mysqli_query($conection, $query);
+                echo mysqli_error($conection);
                 break;
             case 'AGE':
                 $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),

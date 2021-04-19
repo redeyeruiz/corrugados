@@ -43,7 +43,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
         }
         else{
-            $success = "Alta y actualización realizada con éxito.";
+            $success = "Alta realizada con éxito.";
             $rol = $rol_desc = $estatus = "";
         }
     }
