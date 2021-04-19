@@ -247,12 +247,12 @@ include("php/permisos.php");
                                             <label for="tall-1" class="custom-unchecked">Búsqueda de Órdenes</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox" name="check_list[]" id="check22" value="Captuar Orden">
-                                            <label for="tall-2" class="custom-unchecked">Capturar Órden</label>
+                                            <input type="checkbox" name="check_list[]" id="check22" value="Capturar Orden">
+                                            <label for="tall-2" class="custom-unchecked">Capturar Orden</label>
                                         </li>
                                         <li class="last">
-                                            <input type="checkbox" name="check_list[]" id="check23" value="Autorizaciones">
-                                            <label for="tall-3" class="custom-unchecked">Autorizaciones</label>
+                                            <input type="checkbox" name="check_list[]" id="check23" value="Autorizar Orden">
+                                            <label for="tall-3" class="custom-unchecked">Autorizar Orden</label>
                                             <ul>
                                                 <li>
                                                     <input type="checkbox" name="check_list[]" id="check24" value="Autorizacion Facturacion">
