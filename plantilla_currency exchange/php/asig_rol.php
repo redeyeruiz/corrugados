@@ -20,13 +20,31 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     }
     
     if ($id_user_error == "" and $rol_error == ""){
-        $query="UPDATE Usuario SET rol='$rol', estatus='1' WHERE idUsuario='$id_user'";
+        $query="UPDATE Usuario SET rol='$rol' WHERE idUsuario='$id_user' AND estatus=1";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en el alta de rol al Usuario.";
         }
         else{
-            $success = "Alta realizada con éxito.";
+            $query = "SELECT * FROM rol WHERE estatus = 1";
+            $sql = mysqli_query($conection, $query);
+            $roles = array();
+            while($row = $sql->fetchassoc()){
+                array_push($roles, $row['rol']);
+            }
+            foreach($roles as $mirol){
+                if($mirol == $rol){
+                    $success = "Alta realizada con éxito.";
+                }
+            }
+            if($success == "Alta realizada con éxito."){
+                $query = "DELETE FROM Permiso WHERE idUsuario = '$id_user'";
+                mysqli_query($conection, $query);
+                crea_permiso($id_user, $rol);
+            }else{
+                $success = "Error en la alta de usuario, rol no encontrado.";
+            }
+
         }
         $id_user = $rol = "";
     }

@@ -3,7 +3,7 @@
 include_once "utilerias.php";
 $id_user_error = $id_comp_error = $nom_error = $contrasena_error = $rol_error = ""; 
 $id_user = $id_comp = $nom = $contrasena = $rol = $success = $option = $btnsn = $exist = "";
-$roles = array('ADM','ADC','AGE','CST','CXC','DIR','EMB','FAC','FEC','ING','PLN','REA','VTA');
+
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_user"])){
@@ -62,6 +62,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
         }
         else{
+            $query = "SELECT * FROM rol WHERE estatus = 1";
+            $sql = mysqli_query($conection, $query);
+            $roles = array();
+            while($row = $sql->fetchassoc()){
+                array_push($roles, $row['rol']);
+            }
             foreach($roles as $mirol){
                 if($mirol == $rol){
                     $success = "Alta realizada con éxito.";

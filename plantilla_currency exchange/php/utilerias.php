@@ -530,7 +530,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Consultar Estatus',1),
                                                     ('$id_user','Reportes',1),
                                                     ('$id_user','Reporte de Todas las Ordenes',1)";
-                mysqli_quey($conection, $query);
+                mysqli_query($conection, $query);
             case 'CST':
             case 'CXC':
             case 'DIR':
