@@ -7,7 +7,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
-include("php/rol.php");
+include("php/asig_rol.php");
 
 ?>
 

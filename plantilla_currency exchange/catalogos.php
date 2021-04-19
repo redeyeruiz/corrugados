@@ -122,12 +122,12 @@ if(!isset($_SESSION['conectado'])){
     
     <!-- section -->
     <div class="section layout_padding">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Elija el catálogo deseado</h2>    
+                           <h2><span class="theme_color"></span>Elija la opción deseada</h2>    
                         </div>
                     </div>
                 </div>

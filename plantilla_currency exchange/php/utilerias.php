@@ -160,91 +160,124 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Companias': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('companias') ?>><div class="full services_blog">
-                            <img class="img-responsive" src="images/s1.png" alt="#"/>
-                            <h4>Compañías</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-A-companias.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('companias') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Compañías</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Agentes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('agentes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Agentes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-B-agentes.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('agentes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Agentes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Clientes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('clientes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s3.png" alt="#" />
-                                <h4>Clientes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-C-cliente.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('clientes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Clientes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Articulos Existentes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('artExistentes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s4.png" alt="#" />
-                                <h4>Artículos Existentes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-D-articuloexistie.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('artExistentes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Artículos Existentes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Articulos Vendidos': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('artVendidos') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Artículos Vendidos</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-E-listventas.jpg" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('artVendidos') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Artículos Vendidos</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Listas de Precios': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('listasprecio') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s3.png" alt="#" />
-                                <h4>Listas de Precios</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalagos-F-listprecios.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('listasprecio') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Listas de Precios</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Direcciones de entrega': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('dir_ent') ?>><div class="full services_blog">
-                            <img class="img-responsive" src="images/s1.png" alt="#" />
-                            <h4>Direcciones de Entrega</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-G-dirEntregas.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('dir_ent') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Direcciones de Entrega</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Cantidades entregadas': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('cantEntre') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Cantidades Entregadas</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalagos-H-cantEntregadas.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('cantEntre') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Cantidades Entregadas</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Facturas': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('facturas') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Facturas</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalagos-I-factura.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('facturas') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Facturas</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Inventarios': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('inventarios') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Inventarios</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-J-inventario.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('inventarios') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Inventarios</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Almacenes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('almacenes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Almacenes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/catalogos-K-almacen.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('almacenes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Almacenes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                 }
@@ -367,35 +400,47 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Reporte de Todas las Ordenes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('reporte todas ordenes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Reporte de Todas las Órdenes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/reporte-reTodasOrdenes.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte todas ordenes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Reporte de Todas las Órdenes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Reporte de Promedio de Tiempo': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Reporte de Promedio de Tiempo</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/reporte-reTiempo.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte promedio tiempo') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Reporte de Promedio de Tiempo</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Reporte de Ordenes Procesadas': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Reporte de Órdenes Procesadas</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/reporte-procesos.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte promedio tiempo') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Reporte de Órdenes Procesadas</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Reporte de Ordenes en Proceso': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Reporte de Órdenes en Proceso</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/reporte-reProcesos.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte promedio tiempo') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Reporte de Órdenes en Proceso</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     }

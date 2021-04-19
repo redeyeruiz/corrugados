@@ -181,10 +181,15 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             if ($row["estatus"] == "0"){
                 $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep', estatus=true WHERE idRepresentante='$idrep'";
                 $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                if(!$sql){
+                    //$success = "Error en la actualización de datos del usuario.";
+                    $success = mysqli_error($conection);
+                }else{
+                    $success = "Alta y actualización realizada con éxito.";
+                }
             }
             else{
-                $success = "Error en el actualización de datos del agente.";
+                $success = "Error en la actualización de datos del agente.";
             }
         }
         $idrep = $idcomp = $nomrep = "";
