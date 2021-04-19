@@ -873,14 +873,14 @@ a.navbar-brand {
 .inner_page_banner h3 {
     font-size: 42px;
     color: #fff;
-    padding: 40px 15px;
+    padding: 30px 10px;
 }
 
 .inner_page_banner {
     float: left;
     width: 100%;
-    padding-top: 60px;
-    min-height: 240px;
+    padding-top: 40px;
+    min-height: 150px;
     background: #111;
 }
 

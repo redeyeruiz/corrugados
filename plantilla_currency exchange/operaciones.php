@@ -141,7 +141,7 @@ unsetAll()
             </div>
             <div class="row">
                 <!-- Agregar submenu con permisos para operaciones *** -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/busqueda.png"alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="buscarOrdenes_frame.php">acceder</a></div>
@@ -150,7 +150,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/carrito.png" alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="capturarOrden_frame.php">acceder</a></div>
@@ -159,7 +159,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                         <img class="img-responsive" src="images/consulta.png" alt="#" />
                         <div class="overlay"><a class="main_bt transparent" href="autorizarOrden.php">acceder</a></div>
@@ -168,7 +168,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                         <img class="img-responsive" src="images/modificar.png" alt="#" />
                         <div class="overlay"><a class="main_bt transparent" href="capturarOrden_frame.php">acceder</a></div>
@@ -177,7 +177,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/estatus.png"alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="modif_ord.php">acceder</a></div>
@@ -186,7 +186,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/search_store.png"  alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="statusOrden.php">acceder</a></div>
@@ -195,7 +195,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/factura.jpg" alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="busqueda_articulos_frame.php">acceder</a></div>
@@ -204,7 +204,7 @@ unsetAll()
                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/bajaCliente" alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="bloqueo_Clientes.php">acceder</a></div>
