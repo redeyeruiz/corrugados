@@ -25,7 +25,7 @@ unsetAll()
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Exchange Currency - Responsive HTML5 Template</title>
+    <title>Portal Papeles Corrugados</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -70,7 +70,7 @@ unsetAll()
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
-                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="300" height="100" alt="image"></a>
+                        <a class="navbar-brand" href="index.html"><img src="images/papeles_corrugados.png" width="200" height="70" alt="image"></a>
                     </div>
                     <div class="site_information">
                         <ul>
@@ -134,7 +134,7 @@ unsetAll()
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                           <h2><span class="theme_color"></span>Operaciones</h2>    
+                           <h2><span class="theme_color"></span>Elija la opción deseada</h2>    
                         </div>
                     </div>
                 </div>
