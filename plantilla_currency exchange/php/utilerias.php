@@ -254,7 +254,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         }
     }
 
-    /*function submenu_op(){
+    function submenu_op(){
         global $conection;
         $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
         $result = mysqli_query($conection, $query);
@@ -348,7 +348,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                             </div></a>
                         </div>
                         <?php break;
-                    case 'Reporte de Ordenes Procesadas': ?> // falta
+                    case 'Reporte de Ordenes Procesadas': ?>
                         <div class="col-md-2 col-sm-4 col-xs-8">
                             <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
                                 <img class="img-responsive" src="images/s2.png" alt="#" />
@@ -356,7 +356,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                             </div></a>
                         </div>
                         <?php break;
-                    case 'Reporte de Ordenes en Proceso': ?> // falta
+                    case 'Reporte de Ordenes en Proceso': ?>
                         <div class="col-md-2 col-sm-4 col-xs-8">
                             <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
                                 <img class="img-responsive" src="images/s2.png" alt="#" />
@@ -370,5 +370,5 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         else{
             echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
         }
-    }*/
+    }
 ?>

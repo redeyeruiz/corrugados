@@ -64,7 +64,7 @@ if(!isset($_SESSION['conectado'])){
     <!-- END LOADER -->
 
     <!-- Start header -->
-<header class="top-header">
+    <header class="top-header">
         <div class="header_top">
             
             <div class="container">
@@ -139,8 +139,8 @@ if(!isset($_SESSION['conectado'])){
                 </div>
             </div>
             <div class="row">
-            <!-- Agregar submenu con permisos para reportes *** -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <?php submenu_rep() ?>
+                <!--<div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/reporte-reTodasOrdenes.png" alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="reportes_ordenes.php">acceder</a></div>
@@ -175,7 +175,7 @@ if(!isset($_SESSION['conectado'])){
                          <h3>Reporte de ordenes en proceso</h3>
                        </div>
                     </div>
-                </div>
+                </div>-->
              </div>
         </div>
     </div>

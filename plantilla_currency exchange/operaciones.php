@@ -140,8 +140,8 @@ unsetAll()
                 </div>
             </div>
             <div class="row">
-                <!-- Agregar submenu con permisos para operaciones *** -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <?php submenu_op() ?>
+                <!--<div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="full news_blog">
                        <img class="img-responsive" src="images/busqueda.png"alt="#" />
                        <div class="overlay"><a class="main_bt transparent" href="buscarOrdenes_frame.php">acceder</a></div>
@@ -203,11 +203,7 @@ unsetAll()
                          <h3>Buscar Articulos</h3>
                        </div>
                     </div>
-                </div>
-                
-
-
-
+                </div>-->
              </div>
         </div>
     </div>
