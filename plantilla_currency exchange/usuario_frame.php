@@ -269,6 +269,7 @@ include("php/usuario.php");
                                     <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Estatus</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
