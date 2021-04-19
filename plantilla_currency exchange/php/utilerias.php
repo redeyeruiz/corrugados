@@ -468,4 +468,79 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
         }
     }
+
+    function crea_permiso($id_user, $rol){
+        global $conection;
+        switch($rol){
+            case 'ADM':
+                $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
+                                                     ('$id_user','Usuarios',1),
+                                                     ('$id_user','Roles',1),
+                                                     ('$id_user','Asignacion de Roles',1),
+                                                     ('$id_user','Asignacion de permisos',1),
+                                                     ('$id_user','Parametros Active Directory',1),
+                                                     ('$id_user','Parametros FTP',1),
+                                                     ('$id_user','Catalogos',1),
+                                                     ('$id_user','Companias',1),
+                                                     ('$id_user','Agentes',1),
+                                                     ('$id_user','Clientes',1),
+                                                     ('$id_user','Articulos Existentes',1),
+                                                     ('$id_user','Articulos Vendidos',1),
+                                                     ('$id_user','Listas de Precios',1),
+                                                     ('$id_user','Direcciones de entrega',1),
+                                                     ('$id_user','Cantidades entregadas',1),
+                                                     ('$id_user','Facturas',1),
+                                                     ('$id_user','Inventarios',1),
+                                                     ('$id_user','Almacenes',1),
+                                                     ('$id_user','Operaciones',1),
+                                                     ('$id_user','Busqueda de Ordenes',1),
+                                                     ('$id_user','Capturar Orden',1),
+                                                     ('$id_user','Autorizar Orden',1),
+                                                     ('$id_user','Autorizacion Facturacion',1),
+                                                     ('$id_user','Autorizacion Costos',1),
+                                                     ('$id_user','Autorizacion Ingenieria',1),
+                                                     ('$id_user','Autorizacion Planeacion',1),
+                                                     ('$id_user','Autorizacion Fechas',1),
+                                                     ('$id_user','Consultar Ordenes',1),
+                                                     ('$id_user','Modificar Ordenes',1),
+                                                     ('$id_user','Consultar Estatus',1),
+                                                     ('$id_user','Buscar Articulos',1),
+                                                     ('$id_user','Reportes',1),
+                                                     ('$id_user','Reporte de Todas las Ordenes',1),
+                                                     ('$id_user','Reporte de Promedio de Tiempo',1),
+                                                     ('$id_user','Reporte de Ordenes Procesadas',1),
+                                                     ('$id_user','Reporte de Ordenes en Proceso',1)";
+                mysqli_query($conection, $query);
+                break;
+            case 'ADC':
+                $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
+                                                    ('$id_user','Roles',1),
+                                                    ('$id_user','Asignacion de Roles',1),
+                                                    ('$id_user','Asignacion de permisos',1),
+                                                    ('$id_user','Operaciones',1),
+                                                    ('$id_user','Busqueda de Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
+            case 'AGE':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Capturar Orden',1),
+                                                    ('$id_user','Modificar Ordenes',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_quey($conection, $query);
+            case 'CST':
+            case 'CXC':
+            case 'DIR':
+            case 'EMB':
+            case 'FAC':
+            case 'FEC':
+            case 'ING':
+            case 'PLN':
+            case 'REA':
+            case 'VTA':
+        }
+    }
 ?>
