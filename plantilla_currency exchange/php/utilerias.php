@@ -32,7 +32,16 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 			case 'roles':         return 'http://localhost/corrugados/plantilla_currency%20exchange/roles.php';
 			case 'usuario_frame': return 'http://localhost/corrugados/plantilla_currency%20exchange/usuario_frame.php';
             case 'operaciones': return 'http://localhost/corrugados/plantilla_currency%20exchange/operaciones.php';
+            case 'busqueda ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/buscarOrdenes_frame.php';
+            case 'capturar orden': return 'http://localhost/corrugados/plantilla_currency%20exchange/capturarOrden_frame.php';
+            case 'autorizar orden': return 'http://localhost/corrugados/plantilla_currency%20exchange/autorizarOrden_frame.php';
+            case 'consultar ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/buscarOrdenes_frame.php';
+            case 'modificar ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/modif_ord.php';
+            case 'consultar estatus': return 'http://localhost/corrugados/plantilla_currency%20exchange/statusOrden.php';
+            case 'buscar articulos': return 'http://localhost/corrugados/plantilla_currency%20exchange/busqueda_articulos_frame.php';
             case 'reportes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes.php';
+            case 'reporte todas ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_ordenes.php';
+            case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.php';
 			
 			
 		}
@@ -245,4 +254,121 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         }
     }
 
+    /*function submenu_op(){
+        global $conection;
+        $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
+        $result = mysqli_query($conection, $query);
+        if ($result-> num_rows > 0){
+            while ($row = $result-> fetch_assoc()){
+                switch($row["permiso"]){
+                    case 'Busqueda de Ordenes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('busqueda ordenes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Búsqueda de Órdenes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Capturar Orden': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('capturar orden') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Capturar Orden</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Autorizar Orden': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('autorizar orden') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Autorizar Orden</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Consultar Ordenes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('consultar ordenes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Consultar Órdenes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Modificar Ordenes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('modificar ordenes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Modificar Órdenes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Consultar Estatus': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('consultar estatus') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Consultar Estatus de Órden</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Buscar Articulos': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('buscar articulos') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Búsqueda de Artículos</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    }
+            }
+        }
+        else{
+            echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
+        }
+    }
+
+    function submenu_rep(){
+        global $conection;
+        $query="SELECT * FROM permiso WHERE idUsuario='{$_SESSION['usuario']}' and estatus='1'";
+        $result = mysqli_query($conection, $query);
+        if ($result-> num_rows > 0){
+            while ($row = $result-> fetch_assoc()){
+                switch($row["permiso"]){
+                    case 'Reporte de Todas las Ordenes': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('reporte todas ordenes') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Reporte de Todas las Órdenes</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Reporte de Promedio de Tiempo': ?>
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog">
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Reporte de Promedio de Tiempo</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Reporte de Ordenes Procesadas': ?> // falta
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Reporte de Órdenes Procesadas</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    case 'Reporte de Ordenes en Proceso': ?> // falta
+                        <div class="col-md-2 col-sm-4 col-xs-8">
+                            <a href=<?php echo redirect('reporte promedio tiempo') ?>><div class="full services_blog"> 
+                                <img class="img-responsive" src="images/s2.png" alt="#" />
+                                <h4>Reporte de Órdenes en Proceso</h4>
+                            </div></a>
+                        </div>
+                        <?php break;
+                    }
+            }
+        }
+        else{
+            echo "Ningún permiso habilitado para ", $_SESSION['usuario'], ".";
+        }
+    }*/
 ?>
