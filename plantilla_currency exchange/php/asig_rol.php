@@ -20,7 +20,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     }
     
     if ($id_user_error == "" and $rol_error == ""){
-        $query="UPDATE Usuario SET rol='$rol', estatus='1' WHERE idUsuario='$id_user'";
+        $query="UPDATE Usuario SET rol='$rol' WHERE idUsuario='$id_user'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $success = "Error en el alta de rol al Usuario.";
@@ -41,10 +41,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     }
     
     if ($id_user_error == ""){
-        $query="UPDATE Usuario SET estatus='0' WHERE idUsuario='$id_user'";
+        $query="UPDATE Usuario SET rol='' WHERE idUsuario='$id_user'";
         $sql=mysqli_query($conection,$query);
         if (!$sql){
-            $success = "Error en la baja del Rol.";
+            $success = "Error en la baja de usuario a rol";
         }
         else{
             $success = "Baja realizada con éxito.";
