@@ -62,7 +62,6 @@ if(!isset($_SESSION['conectado'])){
     <!-- Start header -->
     <header class="top-header">
         <div class="header_top">
-            
             <div class="container">
                 <div class="row">
                     <div class="logo_section">
@@ -131,7 +130,7 @@ if(!isset($_SESSION['conectado'])){
                                         <p style="color: white; font-size: 48px;">¡Bienvenido <?php echo $_SESSION['nombre'] ?>!<br><br></p>
                                         <p style="color: white; font-weight: bold; font-size: 60px;"><strong>Portal Papeles Corrugados</strong></p>
                                         <br>
-                                        <a class="start_exchange_bt" href="exchange.html">Ver Órdenes ></a>
+                                        <a class="start_exchange_bt" href="operaciones.php">Ver Órdenes ></a>
                                     <!--</div>-->
                                 </div>
                             </div>
@@ -155,7 +154,7 @@ if(!isset($_SESSION['conectado'])){
                                         <p style="color: white; font-size: 48px;">¡Bienvenido <?php echo $_SESSION['nombre'] ?>!<br><br></p>
                                         <p style="color: white; font-weight: bold; font-size: 60px;"><strong>Portal Papeles Corrugados</strong></p>
                                         <br>
-                                        <a class="start_exchange_bt" href="exchange.html">Ver Órdenes ></a>
+                                        <a class="start_exchange_bt" href="operaciones.html">Ver Órdenes ></a>
                                 </div>
                             </div>
                         </div>
