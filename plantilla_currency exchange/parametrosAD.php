@@ -1,12 +1,14 @@
 <?php
+
 session_start();
-include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: ".redirect('login'));
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
     die();
 }
 
+include("php/parametrosAD   .php");
+//include("php/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +97,7 @@ if(!isset($_SESSION['conectado'])){
                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                     <ul class="navbar-nav">
-                                        <?php menu()?>
+                                       <?php menu()?>
                                     </ul>
                                 </div>
                             </div>
@@ -130,47 +132,70 @@ if(!isset($_SESSION['conectado'])){
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Parámetros Active Directory</h2>
+                            <h2><span class="theme_color"></span>Parametros AD</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <table border="0" width="50%" align="center">
-                <form name="f_asig_usuario_rol">
+                <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" name="datos">
                     <tr>
                         <td>
                             <p align="center"><b>Directorio de entrada para autenticación</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="dir" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="dir" type="text" size="50" maxlength="200" class="campo" value="<?= $dir ?>">
+                            <p><span style="color:#C84810" class="error"><?= $dir_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>IP Servidor</b></p>
+                            <p align="center"><b>IP servidor</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_server" type="text" size="50" maxlength="50" class="campo">
+                            <input style="border:3px solid #ff880e" name="ip" type="text" size="50" maxlength="200" class="campo" value="<?= $ip ?>">
+                            <p><span style="color:#C84810" class="error"><?= $ip_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="row margin-top_30">
+                                <div class="col-sm-12">
+                                    <div class="full">
+                                        <div class="center">
+                                            <button name="b_cambios" type="submit" style="width:200px" class="btn btn-outline-success">Cambios</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="center">
+                                &nbsp;
+                                &nbsp;
+                            </div>
+                            <!--<div id="response"
+                                class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
+                                <?php if(!empty($message)) { echo $message; } ?>
+                            </div>
+                            <div class="center">
+                            <p id="feedback"></p>
+                            </div>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center" style="color:#475747; font-size:20px;" class="success"><?= $success; ?></div>
                         </td>
                     </tr>
                 </form>
             </table>
-            <div class="row margin-top_30">
-                <div class="col-sm-12">
-                    <div class="full">
-                        <div class="center">
-                            <button name="b_altas" type="button" value="Altas_com" style="width:200px" class="btn btn-outline-success">Cambiar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <br>
-        <br>
     </div>
-    <!-- end section -->
-    <hr>
-    <hr>
+
     <div class="footer_bottom">
         <div class="container">
             <div class="row">
@@ -180,13 +205,13 @@ if(!isset($_SESSION['conectado'])){
             </div>
         </div>
     </div>
-
     <!-- <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a> -->
 
     <!-- ALL JS FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/cargar.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script>
