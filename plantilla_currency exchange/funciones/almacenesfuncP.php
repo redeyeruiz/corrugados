@@ -106,7 +106,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM Almacen WHERE idAlmacen='$idalm' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del almacen.";
+            $success = "Error en la actualización de datos del almacen.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -116,7 +116,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del almacen.";
+                $success = "Error en la actualización de datos del almacen.";
             }
         }
         $idalm = $idcomp = $desc = "";
@@ -124,16 +124,16 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
 }
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
-    if (empty($_POST["idcomp"])){
-        $idcomp_error = "Se requiere el ID de la compañía.";
+    if (empty($_POST["idalm"])){
+        $idalm_error = "Se requiere el ID del Almacen.";
     }
     else{
-        $idcomp = test_input($_POST["idcomp"]);
+        $idalm = test_input($_POST["idalm"]);
     }
 
     if ($idcomp_error == ""){
-        $option = "Consultas por ID de Compañía";
-        $query="SELECT * FROM Almacen WHERE idCompania='$idcomp' AND estatus=true";
+        $option = "Consultas por ID de Almacen";
+        $query="SELECT * FROM Almacen WHERE idAlmacen='$idalm' AND estatus=true";
         $result = mysqli_query($conection, $query);
         $idalm = $idcomp = $desc = "";
     }
@@ -172,7 +172,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Almacen WHERE idAlmacen='$idalm' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del almacen.";
+            $success = "Error en la actualización de datos del almacen.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -182,7 +182,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del almacen.";
+                $success = "Error en la actualización de datos del almacen.";
             }
         }
         $idalm = $idcomp = $desc = "";

@@ -240,7 +240,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM Cliente WHERE idCliente='$idcliente' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del cliente.";
+            $success = "Error en la actualización de datos del cliente.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -250,7 +250,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del cliente.";
+                $success = "Error en la actualización de datos del cliente.";
             }
         }
         $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac ="";
@@ -371,7 +371,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Cliente WHERE idCliente='$idcliente' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del cliente.";
+            $success = "Error en la actualización de datos del cliente.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -381,7 +381,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del cliente.";
+                $success = "Error en la actualización de datos del cliente.";
             }
         }
         $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac ="";

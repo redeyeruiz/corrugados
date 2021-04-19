@@ -233,7 +233,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM DirEnt WHERE idCompania='$idcomp' and idCliente='$idcli' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos de la dirección de entrega.";
+            $success = "Error en la actualización de datos de la dirección de entrega.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -243,7 +243,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos de la dirección de entrega.";
+                $success = "Error en la actualización de datos de la dirección de entrega.";
             }
         }
         $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
@@ -359,7 +359,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM DirEnt WHERE idCompania='$idcomp' and idCliente='$idcli' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos de la dirección de entrega.";
+            $success = "Error en la actualización de datos de la dirección de entrega.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -369,7 +369,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos de la dirección de entrega.";
+                $success = "Error en la actualización de datos de la dirección de entrega.";
             }
         }
         $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";

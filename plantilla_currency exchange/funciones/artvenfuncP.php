@@ -178,7 +178,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM ArticuloVendido WHERE folio='$folio' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del artículo.";
+            $success = "Error en la actualización de datos del artículo.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -188,7 +188,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del artículo.";
+                $success = "Error en la actualización de datos del artículo.";
             }
         }
         $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
@@ -280,7 +280,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM ArticuloVendido WHERE folio='$folio' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del artículo.";
+            $success = "Error en la actualización de datos del artículo.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -290,7 +290,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del artículo.";
+                $success = "Error en la actualización de datos del artículo.";
             }
         }
         $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
