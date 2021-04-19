@@ -296,6 +296,10 @@ include("php/permisos.php");
                                             <input type="checkbox" name="check_list[]" id="check33" value="Buscar Articulos">
                                             <label for="tall-3" class="custom-unchecked">Buscar Artículos</label>
                                         </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="check_list[]" id="check33_3" value="Bloqueo de Clientes">
+                                            <label for="tall-3" class="custom-unchecked">Bloqueo de Clientes</label>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>

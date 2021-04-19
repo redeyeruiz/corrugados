@@ -39,11 +39,12 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             case 'modificar ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/modif_ord.php';
             case 'consultar estatus': return 'http://localhost/corrugados/plantilla_currency%20exchange/statusOrden.php';
             case 'buscar articulos': return 'http://localhost/corrugados/plantilla_currency%20exchange/busqueda_articulos_frame.php';
+            case 'bloqueo clientes': return 'http://localhost/corrugados/plantilla_currency%20exchange/bloqueo_Clientes.php';
             case 'reportes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes.php';
             case 'reporte todas ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_ordenes.php';
             case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.php';
-			
-			
+            
+        
 		}
 	}
 
@@ -273,54 +274,84 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Capturar Orden': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('capturar orden') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Capturar Orden</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/carrito.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('capturar orden') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Capturar Orden</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Autorizar Orden': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('autorizar orden') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Autorizar Orden</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/consulta.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('autorizar orden') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Autorizar Orden</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
+                        
                     case 'Consultar Ordenes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('consultar ordenes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Consultar Órdenes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/consulta.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar ordenes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Consultar Órdenes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Modificar Ordenes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('modificar ordenes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Modificar Órdenes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/modificar.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('modificar ordenes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Modificar Órdenes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Consultar Estatus': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('consultar estatus') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Consultar Estatus de Órden</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/estatus.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar estatus') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Consultar Estatus</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Buscar Articulos': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('buscar articulos') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Búsqueda de Artículos</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/estatus.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('buscar articulos') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Búsqueda de Artículos</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
-                    }
+                    case 'Bloqueo de Clientes': ?>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/busqueda.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('bloqueo clientes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Bloqueo de Clientes</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <?php break;
+                }
             }
         }
         else{
