@@ -57,22 +57,22 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         $rol = test_input($_POST["rol"]);
     }
 
-    if (empty($_POST["rol_desc"])){
-        $rol_desc_error = "Se requiere la descripción.";
-    }
-    else{
-        $rol_desc = test_input($_POST["rol_desc"]);
-    }
-    
     if ($rol_error == "" and $rol_desc_error == ""){
-        $query="UPDATE Rol SET estatus='0' WHERE rol='$rol'";
-
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
+        $query="SELECT * FROM Rol WHERE rol='$rol' and estatus=true";
+        $exist = mysqli_query($conection, $query);
+        if (!$exist){
             $success = "Error en la baja del Rol.";
         }
         else{
-            $success = "Baja realizada con éxito.";
+            $row = $exist-> fetch_assoc();
+            if ($row["estatus"] == "1"){
+                $query="UPDATE Rol SET estatus=false WHERE rol='$rol' AND estatus=true";
+                $sql=mysqli_query($conection,$query);
+                $success = "Baja realizada con éxito.";
+            }
+            else{
+                $success = "Error en la baja del Rol.";
+            }
         }
         $rol = $rol_desc = $estatus = "";
     }

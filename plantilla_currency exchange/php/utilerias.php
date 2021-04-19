@@ -18,7 +18,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 			case 'asig_roles':    return 'http://localhost/corrugados/plantilla_currency%20exchange/asig_roles.php';
 			case 'cantEntre':     return 'http://localhost/corrugados/plantilla_currency%20exchange/cantEntre.php';
 			case 'catalogos':     return 'http://localhost/corrugados/plantilla_currency%20exchange/catalogos.php';
-			case 'cliente':       return 'http://localhost/corrugados/plantilla_currency%20exchange/cliente.php';
+			case 'cliente':       return 'http://localhost/corrugados/plantilla_currency%20exchange/clientes.php';
 			case 'companias':     return 'http://localhost/corrugados/plantilla_currency%20exchange/companias.php';
 			case 'dir_ent':       return 'http://localhost/corrugados/plantilla_currency%20exchange/dir_ent.php';
 			case 'facturas':      return 'http://localhost/corrugados/plantilla_currency%20exchange/facturas.php';
@@ -203,7 +203,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/catalogos-C-cliente.png" alt="#" />
-                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('clientes') ?>>acceder</a></div>
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('cliente') ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Clientes</h3>
                                 </div>
