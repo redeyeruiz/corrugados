@@ -97,51 +97,69 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Usuarios': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('usuario_frame'); ?>><div class='full services_blog'>
-                                <img class='img-responsive' src='images/s1.png' alt='#' />
-                                <h4>Usuarios</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/usuario.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('usuario_frame'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Usuarios</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Roles': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('rol_frame'); ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s1.png" alt="#" />
-                                <h4>Roles</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/rol.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('rol_frame'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Roles</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Asignacion de Roles': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('asig_roles'); ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s3.png" alt="#" />
-                                <h4>Asignación de Roles</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/asig_rol.jpg" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('asig_roles'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Asignación de Roles</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Asignacion de permisos': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('asig_permisos'); ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s4.png" alt="#" />
-                                <h4>Asignación de Permisos</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/asig_perm.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('asig_permisos'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Asignación de Permisos</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Parametros Active Directory': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('parametrosAD'); ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Parámetros Active Directory</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/ad.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('parametrosAD'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Parámetros del Active Directory</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Parametros FTP': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('parametrosFTP'); ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s3.png" alt="#" />
-                                <h4>Parámetros FTP</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/ftp.png" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('parametrosFTP'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Parámetros del FTP</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                 }
