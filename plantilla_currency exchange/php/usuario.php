@@ -3,6 +3,7 @@
 include_once "utilerias.php";
 $id_user_error = $id_comp_error = $nom_error = $contrasena_error = $rol_error = ""; 
 $id_user = $id_comp = $nom = $contrasena = $rol = $success = $option = $btnsn = $exist = "";
+$roles = array('ADM','ADC','AGE','CST','CXC','DIR','EMB','FAC','FEC','ING','PLN','REA','VTA');
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["id_user"])){
@@ -61,8 +62,17 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
         }
         else{
-            $success = "Alta realizada con éxito.";
-            $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
+            foreach($roles as $mirol){
+                if($mirol == $rol){
+                    $success = "Alta realizada con éxito.";
+                }
+            }
+            if ($success == "Alta realizada con éxito."){
+                crea_permiso($id_user, $rol);
+                $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
+            }else{
+                $success = "Error en la alta de usuario, rol no encontrado.";
+            }
         }
         //$id_user = $id_comp = $nom = $contrasena = $rol = "";
     }
