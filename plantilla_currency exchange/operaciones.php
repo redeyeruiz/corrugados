@@ -10,8 +10,8 @@ if(!isset($_SESSION['conectado'])){
     header("Location: ".redirect('inicio'));
     die();
 }*/
-
-
+include('php/utilerias2.php');
+unsetAll()
 ?>
 <!DOCTYPE html>
 <html lang="en">

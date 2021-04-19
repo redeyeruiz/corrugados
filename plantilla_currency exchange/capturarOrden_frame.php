@@ -189,7 +189,7 @@
             
             
             <div id= "content">
-            <input class="datal" name="dirCompleta" type="search" list="direcciones" size="25" class="datal" value="<?php echo htmlspecialchars($_SESSION['dirCompleta'] ?? '', ENT_QUOTES); ?>" >
+            
 			
             <?php 
 				tabla_dir();
@@ -283,7 +283,6 @@
             <input class="inputCO" type="date" name ='fechaOrden' required value="<?php echo htmlspecialchars($_POST['fechaOrden'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Artículo:">
-            <input class="datal " name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_POST['descripcion'] ?? '', ENT_QUOTES); ?>">
             <?php
             tabla_articulos();
             ?>
@@ -625,15 +624,15 @@
             $query="SELECT * FROM dirent WHERE idCliente = '$idCliente'";
             $sql=mysqli_query($conexion,$query);
             if (mysqli_affected_rows($conexion)==0){
-                echo "Error, id cliente inexistente en base de datos";
+                echo "Error, id cliente inexistente en base de datos o no tiene direcciones asociadas";
             }
-            echo "<datalist id='direcciones'>";
+            echo "<select id='direcciones' class='datal' name='dirCompleta'>";
             while ($reg=mysqli_fetch_object($sql)){
                 
                 echo "<option>$reg->dirEnt, $reg->nombreEntrega, $reg->direccion, $reg->municipio, $reg->estado, $reg->telefono, $reg->observaciones, $reg->codPost, $reg->codRuta, $reg->pais, $reg->rfc";
 
             }
-            echo "</datalist>";
+            echo "</select>";
             
 
 
@@ -726,12 +725,12 @@
             if (mysqli_affected_rows($conexion)==0){
                 echo "Error, id cliente o el idlista es inexistente en base de datos";
             }
-            echo "<datalist id='articulos'>";
+            echo "<select id='articulos' class='datal' name ='descripcion' list='articulos'>";
             while ($reg=mysqli_fetch_object($sql)){
                 echo "<option>$reg->descripcion";
     
             }
-            echo "</datalist>";
+            echo "</select>";
 
             
         }
@@ -829,34 +828,7 @@
         return substr(bin2hex($bytes), 0, $lenght);
     }
 
-    function unsetAll(){
-        unset($_SESSION['queries']);
-        unset($_SESSION['direntC']);
-        unset($_SESSION['nomEC']);
-        unset($_SESSION['direccionC']);
-        unset($_SESSION['municipioC']);
-        unset($_SESSION['estadoC']);
-        unset($_SESSION['telefonoC']);
-        unset($_SESSION['obsC']);
-        unset($_SESSION['CRC']);
-        unset( $_SESSION['paisC']); 
-        unset($_SESSION['RFCC']);
-        unset($_SESSION['inputID']);
-        unset($_SESSION['idCompania']);
-        unset($_SESSION['IDorden']);
-        unset($_SESSION['CPC']);
-        unset($_SESSION['ordenCompra']);
-        unset($_SESSION['idCliente']);
-        unset($_SESSION['folio']);        
-        unset($_SESSION['numOrdenes']);
-        unset($_SESSION['IDorden']);
-        unset($_SESSION['nombreClienteDT']);
-        unset($_SESSION['dirCompleta']);
-        unset($_SESSION['precio']);
-        unset($_POST['nombreClienteDT']);
-        unset($_POST['descripcion']);
-        unset($_POST['cantidad']);       
-    }
+    
     
 
 
