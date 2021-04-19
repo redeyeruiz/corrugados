@@ -179,7 +179,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM Factura WHERE numFact='$numfact' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos de la factura.";
+            $success = "Error en la actualización de datos de la factura.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -189,7 +189,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos de la factura.";
+                $success = "Error en la actualización de datos de la factura.";
             }
         }
         $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
@@ -281,7 +281,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Factura WHERE numFact='$numfact' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos de la factura.";
+            $success = "Error en la actualización de datos de la factura.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -291,7 +291,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos de la factura.";
+                $success = "Error en la actualización de datos de la factura.";
             }
         }
         $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
