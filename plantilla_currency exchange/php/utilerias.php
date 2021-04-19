@@ -262,11 +262,14 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Busqueda de Ordenes': ?>
-                        <div class="col-md-2 col-sm-4 col-xs-8">
-                            <a href=<?php echo redirect('busqueda ordenes') ?>><div class="full services_blog">
-                                <img class="img-responsive" src="images/s2.png" alt="#" />
-                                <h4>Búsqueda de Órdenes</h4>
-                            </div></a>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/busqueda.png"alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('busqueda ordenes') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Búsqueda de Órdenes</h3>
+                                </div>
+                            </div>
                         </div>
                         <?php break;
                     case 'Capturar Orden': ?>
