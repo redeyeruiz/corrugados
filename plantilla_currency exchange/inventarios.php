@@ -254,9 +254,13 @@ include("funciones/inventariosfuncP.php");
                         
                     }
                     if(!empty($result)){
-                        echo "CSV Data Importado";
+                        echo '<script language="javascript">';
+                        echo 'alert("Archivo importado Correctamente")';
+                        echo '</script>';
                     }else{
-                        echo "No importado";
+                        echo '<script language="javascript">';
+                        echo 'alert("Error en la carga del Archivo")';
+                        echo '</script>';
                     }
                 }
                 if(isset($_POST["descarga"])){
@@ -271,6 +275,10 @@ include("funciones/inventariosfuncP.php");
                             fwrite($arch,$linea.PHP_EOL);
                         }
                         fclose($arch);
+
+                        echo '<script language="javascript">';
+                        echo 'alert("Archivo Guardado")';
+                        echo '</script>';
 
                         
                 }
