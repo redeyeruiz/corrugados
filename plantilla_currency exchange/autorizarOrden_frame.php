@@ -246,7 +246,7 @@ $rolFAC=true;
     <!-- Iframe -->
     <section class="bodyCO">
 
-    <form class="formCO100" method="POST" action="autorizarOrden.php" >
+    <form class="formCO100" method="POST" action="autorizarOrden_frame.php" >
 
         <h2 class="h2CO">Autorizar Orden</h2>
         

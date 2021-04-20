@@ -56,12 +56,16 @@
         }).resize();
             
         }
+
+        
     </script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    
 
 </head>
 
@@ -159,8 +163,8 @@
                 clientValues();
                 
                 
-                
                 eliminar();
+                eliminarOrden();
                 calcularPrecio();
                 agregar_tablaM();
                 
@@ -170,14 +174,16 @@
                 
                 ?>
         </form>  
-
+        
         <form class="formCO" method="POST" action="modif_ord.php">
             <h2 class="h2CO">Eliminar Artículos</h2>
             <p class="pCO" type="Eliminar Articulo" >
             <input class="inputCO" type="text" name ='eArticulo' placeholder="Indique el nombre del artículo" required></input>
             </p>
+            
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
-                <button type="submit" name="eliminarB" class="buttonBigCO btn">Eliminar Artículo</button>
+                <button type="submit" name="eliminarB" onClick="go()" class="buttonBigCO btn">Eliminar Artículo</button>
                 </div>
                 <?php
                 require_once('php/utilerias.php');
@@ -281,7 +287,7 @@
                 <button name ="calcularP"class="buttonBigCO btn" formnovalidate >Recalcular Precio </button>
                 </div>
             <p class="pCO" type="Fecha Solicitada:">
-            <input  disabled class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_SESSION['fechaSolicitud'] ?? '', ENT_QUOTES); ?>"></input>
+            <input   class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_SESSION['fechaSolicitud'] ?? '', ENT_QUOTES); ?>"  min="<?php echo date("Y-m-d"); ?>"></input>
             </p>
             <p class="pCO" type="Observaciones de la Orden:">
             <textarea class="textareaCO" name="Observaciones" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
@@ -299,6 +305,7 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
                 <button type="submit" name="guardar" class="buttonBigCO btn" >Guardar</button>
                 <button type ="submit" name= "cancelar" class="buttonBigCO btn">Cancelar</button>
+                <button type ="submit" name= "eliminarO" class="buttonBigCO btn">Eliminar Orden</button>
                 </div>
         </form>
 
@@ -718,6 +725,37 @@ function clientValues(){
         }
     }
     
+}
+//Eliminar orden
+function eliminarOrden(){
+    if(isset($_POST['eliminarO']) && isset($_SESSION['folio'])){
+        $folio=$_SESSION['folio'];
+        
+        
+        $conn = conecta_servidor();
+        $query="DELETE FROM reporteorden WHERE folio='$folio' ";
+        $sql=mysqli_query($conn,$query);
+        
+        if (mysqli_affected_rows($conn)==0){
+           $eliminado = 1;
+        }
+        else{
+            unset($_SESSION['queries']);
+            
+        }
+
+        $query="DELETE FROM orden WHERE folio='$folio' ";
+        $sql=mysqli_query($conn,$query);
+        
+        if (mysqli_affected_rows($conn)==0){
+           echo "Error, no existe tal orden";
+        }
+        else{
+            unset($_SESSION['queries']);
+            echo "la orden ha sido eliminada";
+        }
+
+    }
 }
 
 

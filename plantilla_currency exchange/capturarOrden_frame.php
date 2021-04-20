@@ -60,6 +60,15 @@
 	    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
 	    $('.tbl-header').css({'padding-right':scrollWidth});
         }).resize();
+
+        window.onload = function() {
+        var selItem = sessionStorage.getItem("SelItem");  
+        $('#articulos_l').val(selItem);
+        }
+        $('#articulos_l').change(function() { 
+            var selVal = $(this).val();
+            sessionStorage.setItem("SelItem", selVal);
+        });
     </script>
 
     <!--[if lt IE 9]>
@@ -280,9 +289,10 @@
             <input disabled class="inputCO" type="number" name='ordenCompra' placeholder=" número de órden de compra"  value="<?php echo htmlspecialchars($_SESSION['ordenCompra'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Fecha de Órden de Compra:">
-            <input class="inputCO" type="date" name ='fechaOrden' required value="<?php echo htmlspecialchars($_POST['fechaOrden'] ?? '', ENT_QUOTES); ?>"></input>
+            <input class="inputCO" type="date" name ='fechaOrden' required value="<?php echo htmlspecialchars($_POST['fechaOrden'] ?? '', ENT_QUOTES); ?>" min="<?php echo date("Y-m-d"); ?>"></input>
             </p>
             <p class="pCO" type="Artículo:">
+            <select id='articulos_l' class='datal' name ='descripcion' list='articulos' required value="<?php echo htmlspecialchars($_POST['descripcion'] ?? '', ENT_QUOTES); ?>">
             <?php
             tabla_articulos();
             ?>
@@ -297,7 +307,7 @@
                 <button name ="calcularP"class="buttonBigCO btn" formnovalidate>Recalcular Precio </button>
                 </div>
             <p class="pCO" type="Fecha Solicitada:">
-            <input class="inputCO" type="date" name ='fechaSolicitud' required></input>
+            <input class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_POST['fechaSolicitud'] ?? '', ENT_QUOTES); ?>" min="<?php echo date("Y-m-d"); ?>"></input>
             </p>
             <p class="pCO" type="Observaciones de la Orden:">
             <textarea class="textareaCO" name="Observaciones" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
@@ -433,7 +443,7 @@
             $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
             $_SESSION['fechaOrden'] =$fechaOrden        =$_POST['fechaOrden'];
             $_SESSION['fechaSolicitud'] =$fechaSolicitud=$_POST['fechaSolicitud'];
-            $fechaEntrega                               ="un dia";
+            $fechaEntrega                               ="NULL";
             $entregado                                  =0;
             $acumulado                                  =0;
             $total                                      =0;
@@ -510,12 +520,12 @@
             $idCompania=$_SESSION['idCompania'];
             $idCliente=$_SESSION['idCliente'];
             $ordenCompra=$_SESSION['ordenCompra'];
-            $fechaOrden=$_SESSION['fechaSolicitud'];
+            $fechaOrden=$_SESSION['fechaOrden'];
             $estatus=1;
 
             $total=120;
             $conn= conecta_servidor();
-            $query="INSERT INTO orden VALUES('$idOrden','$idCompania','$idCliente','$ordenCompra','GETDATE()','$dirent','$fechaOrden','null','null','null','null','null','null','null','$total','0','0','0','0','0','0','0','$estatus')";
+            $query="INSERT INTO orden VALUES('$idOrden','$idCompania','$idCliente','$ordenCompra','$fechaOrden','$dirent','0','null','null','null','null','null','null','null','$total','0','0','0','0','0','0','0','$estatus')";
             mysqli_query($conn, $query);
             $queries=explode("|",$_SESSION['queries'],-1);
 
@@ -615,6 +625,15 @@
     //Tabla direccion
 
     function tabla_dir(){    
+
+        if(isset($_SESSION['saldoOrden'])){
+            $saldoOrden= floatval($_SESSION['saldoOrden']);
+        
+            if($saldoOrden<15000){
+                echo " Cliente no tiene suficiente saldo";
+                
+            }
+        }
         
         if(isset($_SESSION['idCliente'])){
     
@@ -632,6 +651,8 @@
                 echo "<option>$reg->dirEnt, $reg->nombreEntrega, $reg->direccion, $reg->municipio, $reg->estado, $reg->telefono, $reg->observaciones, $reg->codPost, $reg->codRuta, $reg->pais, $reg->rfc";
 
             }
+            
+            
             echo "</select>";
             
 
@@ -680,7 +701,7 @@
             $datosCliente=explode(",",$_SESSION['nombreClienteDT']);
             $nombreCliente=$datosCliente[0];         
             $conn=conecta_servidor();
-            $query="SELECT divisa,nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE nombreCliente = '$nombreCliente'";
+            $query="SELECT saldoOrden,divisa,nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE nombreCliente = '$nombreCliente'";
             $sql=mysqli_query($conn,$query);
             $reg=mysqli_fetch_object($sql);
             if ($reg==mysqli_fetch_array($sql)){
@@ -694,6 +715,7 @@
                 $_SESSION['idCompania']=$reg->idCompania;
                 $_SESSION['nombreCliente']=$reg->nombreCliente;
                 $_SESSION['moneda']=$reg->divisa;
+                $_SESSION['saldoOrden']=$reg->saldoOrden;
             }
         }
 
@@ -725,7 +747,8 @@
             if (mysqli_affected_rows($conexion)==0){
                 echo "Error, id cliente o el idlista es inexistente en base de datos";
             }
-            echo "<select id='articulos' class='datal' name ='descripcion' list='articulos'>";
+
+            //echo "<select id='articulos_l' class='datal' name ='descripcion' list='articulos' >";
             while ($reg=mysqli_fetch_object($sql)){
                 echo "<option>$reg->descripcion";
     
@@ -826,6 +849,12 @@
             throw new Exception("no cryptographically secure random function available");
         }
         return substr(bin2hex($bytes), 0, $lenght);
+    }
+
+    function alert($msg) {
+        echo "<script type='text/javascript'>alert('$msg');</script>";
+
+        return $value;
     }
 
     

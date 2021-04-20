@@ -153,7 +153,7 @@
             <!--Ord Baan: <span><input class="user" type="text" id="baan"></span>
             Cliente: <span><input class="user" type="text" id="client"></span> !-->
             <form class="form-button-only" method="POST" action="buscarOrdenes_frame.php">
-            Folio: <span><input name="folio" class="user" type="text" id="fol"></span> 
+            Orden Compra: <span><input name="folio" class="user" type="text" id="fol"></span> 
             <span><button class="form-button-only" name="buscar" >Buscar</button></span>
             </form>
             </p>
@@ -273,7 +273,7 @@
         $sql=mysqli_query($conn,$query);
         
         if (mysqli_affected_rows($conn)==0){
-            msg("Folio Inexistente", "rojo");
+            echo "Folio Inexistente";
         }
         echo
         "<br><br><br>

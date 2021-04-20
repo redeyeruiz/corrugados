@@ -263,7 +263,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Busqueda de Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-8 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/busqueda.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('busqueda ordenes') ?>>acceder</a></div>
@@ -274,7 +274,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Capturar Orden': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/carrito.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('capturar orden') ?>>acceder</a></div>
@@ -285,7 +285,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Autorizar Orden': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/consulta.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('autorizar orden') ?>>acceder</a></div>
@@ -297,7 +297,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         <?php break;
                         
                     case 'Consultar Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/consulta.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar ordenes') ?>>acceder</a></div>
@@ -308,7 +308,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Modificar Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/modificar.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('modificar ordenes') ?>>acceder</a></div>
@@ -319,7 +319,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Consultar Estatus': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/estatus.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar estatus') ?>>acceder</a></div>
@@ -330,7 +330,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Buscar Articulos': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/estatus.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('buscar articulos') ?>>acceder</a></div>
@@ -341,9 +341,9 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Bloqueo de Clientes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
-                                <img class="img-responsive" src="images/busqueda.png"alt="#" />
+                                <img class="img-responsive" src="images/bajaCliente.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('bloqueo clientes') ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Bloqueo de Clientes</h3>

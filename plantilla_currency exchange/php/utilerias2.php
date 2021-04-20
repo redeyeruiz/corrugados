@@ -41,6 +41,7 @@ function unsetAll(){
 
     unset($_SESSION['dirEnt']);
 
-    unset($_SESSION['idOrden']);         
+    unset($_SESSION['idOrden']);
+    unset($_SESSION['saldoOrden']);         
 }
 ?>
