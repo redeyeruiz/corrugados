@@ -261,9 +261,13 @@ include("funciones/agentesfuncP.php");
                     
                 }
                 if(!empty($result)){
-                    echo "CSV Data Importado";
+                    echo '<script language="javascript">';
+                    echo 'alert("Archivo importado Correctamente")';
+                    echo '</script>';
                 }else{
-                    echo "No importado";
+                    echo '<script language="javascript">';
+                    echo 'alert("Error en la carga del Archivo")';
+                    echo '</script>';
                 }
             }
             if(isset($_POST["descarga"])){
@@ -279,6 +283,9 @@ include("funciones/agentesfuncP.php");
                     }
                     fclose($arch);
 
+                    echo '<script language="javascript">';
+                    echo 'alert("Archivo Guardado")';
+                    echo '</script>';
                     
             }
 

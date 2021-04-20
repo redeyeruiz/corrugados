@@ -108,7 +108,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM Agente WHERE idRepresentante='$idrep' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del agente.";
+            $success = "Error en la actualización de datos del agente.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -118,7 +118,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del agente.";
+                $success = "Error en la actualización de datos del agente.";
             }
         }
         $idrep = $idcomp = $nomrep = "";
@@ -174,17 +174,22 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Agente WHERE idRepresentante='$idrep' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del agente.";
+            $success = "Error en la actualización de datos del agente.";
         }
         else{
             $row = $exist-> fetch_assoc();
             if ($row["estatus"] == "0"){
                 $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep', estatus=true WHERE idRepresentante='$idrep'";
                 $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                if(!$sql){
+                    //$success = "Error en la actualización de datos del usuario.";
+                    $success = mysqli_error($conection);
+                }else{
+                    $success = "Alta y actualización realizada con éxito.";
+                }
             }
             else{
-                $success = "Error en el actualización de datos del agente.";
+                $success = "Error en la actualización de datos del agente.";
             }
         }
         $idrep = $idcomp = $nomrep = "";

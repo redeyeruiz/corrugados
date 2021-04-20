@@ -131,7 +131,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         $query="SELECT * FROM Inventario WHERE idCompania='$idcomp' and idAlmacen='$idalm' and idArticulo='$idart' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del inventario.";
+            $success = "Error en la actualización de datos del inventario.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -141,7 +141,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del inventario.";
+                $success = "Error en la actualización de datos del inventario.";
             }
         }
         $idcomp = $idalm = $idart = $stock = "";
@@ -203,7 +203,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         $query="SELECT * FROM Inventario WHERE idCompania='$idcomp' and idAlmacen='$idalm' and idArticulo='$idart' and estatus=false";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
-            $success = "Error en el actualización de datos del inventario.";
+            $success = "Error en la actualización de datos del inventario.";
         }
         else{
             $row = $exist-> fetch_assoc();
@@ -213,7 +213,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $success = "Actualización realizada con éxito.";
             }
             else{
-                $success = "Error en el actualización de datos del inventario.";
+                $success = "Error en la actualización de datos del inventario.";
             }
         }
         $idcomp = $idalm = $idart = $stock = "";
