@@ -492,7 +492,8 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                      ('$id_user','Consultar Ordenes',1),
                                                      ('$id_user','Modificar Ordenes',1),
                                                      ('$id_user','Consultar Estatus',1),
-                                                     ('$id_user','Buscar Articulos',1),
+                                                     ('$id_user','Buscar Articulos',1)
+                                                     ('$id_user','Bloqueo de Clientes',1),
                                                      ('$id_user','Reportes',1),
                                                      ('$id_user','Reporte de Todas las Ordenes',1),
                                                      ('$id_user','Reporte de Promedio de Tiempo',1),
@@ -501,7 +502,6 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                 mysqli_query($conection, $query);
                 break;
             case 'ADC':
-                echo "entré.";
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
                                                     ('$id_user','Roles',1),
                                                     ('$id_user','Asignacion de Roles',1),
@@ -509,7 +509,6 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Operaciones',1),
                                                     ('$id_user','Busqueda de Ordenes',1)";
                 mysqli_query($conection, $query);
-                echo mysqli_error($conection);
                 break;
             case 'AGE':
                 $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
@@ -521,16 +520,83 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Reportes',1),
                                                     ('$id_user','Reporte de Todas las Ordenes',1)";
                 mysqli_query($conection, $query);
+                break;
             case 'CST':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Autorizacion Costos',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'CXC':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Bloqueo de Clientes',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Estatus',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'DIR':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1),
+                                                    ('$id_user','Reporte de Promedio de Tiempo',1),
+                                                    ('$id_user','Reporte de Ordenes Procesadas',1),
+                                                    ('$id_user','Reporte de Ordenes en Proceso',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'EMB':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'FAC':
+                //NA Actualmente
+                break;
             case 'FEC':
+                //NA Actualmente
+                break;
             case 'ING':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Autorizacion Ingenieria',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Buscar Articulos',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'PLN':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizacion Fechas',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Promedio de Tiempo',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'REA':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'VTA':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
         }
     }
 ?>
