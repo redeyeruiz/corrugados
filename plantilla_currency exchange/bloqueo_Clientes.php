@@ -5,11 +5,11 @@ if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
     die();
-}/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+}elseif(!verificacion_permiso($_SESSION['usuario'], 'Bloqueo de Clientes')){
     $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
     header("Location: ".redirect('inicio'));
     die();
-}*/
+}
 include('php/utilerias2.php');
     /*switch($_SESSION['rol']){
         case 'FAC':$rolFAC=true;

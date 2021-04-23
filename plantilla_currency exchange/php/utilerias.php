@@ -599,4 +599,20 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                 break;
         }
     }
+
+    function verificacion_permiso($id_user, $permiso){
+        global $conection;
+        $miPermiso = false;
+        $query = "SELECT * FROM Permiso WHERE idUsuario = '$id_user'";
+        $result = mysqli_query($conection, $query);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                if($row['permiso']==$permiso){
+                    $miPermiso = true;
+                    break;
+                }
+            }
+        }
+        return $miPermiso;
+    }
 ?>

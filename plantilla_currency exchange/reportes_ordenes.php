@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+include("php/utilerias.php");
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    die();
+}elseif(!verificacion_permiso($_SESSION['usuario'], 'Reporte de Todas las Ordenes')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -10,7 +25,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Exchange Currency - Responsive HTML5 Template</title>
+    <title>Portal Papeles Corrugados</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

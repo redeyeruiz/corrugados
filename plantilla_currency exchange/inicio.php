@@ -5,8 +5,12 @@ if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
     die();
+}if(isset($_SESSION['mens_error'])){
+	echo "<script type='text/javascript'>";
+	echo "alert('".$_SESSION['mens_error']."')";
+	echo "</script>";
+	unset($_SESSION['mens_error']);
 }
-
 ?>
 
 <!DOCTYPE html>
