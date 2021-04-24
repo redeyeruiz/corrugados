@@ -32,6 +32,9 @@ function unsetAll(){
     unset($_POST['nombreClienteDT']);
     unset($_POST['descripcion']);
     unset($_POST['cantidad']);
+    unset($_SESSION['precioT']);
+    unset($_SESSION['ordenT']);
+    
     //modificar orden unsetAll
 
 
@@ -43,5 +46,18 @@ function unsetAll(){
 
     unset($_SESSION['idOrden']);
     unset($_SESSION['saldoOrden']);         
+}
+
+function executeQuery($conn,$query){
+
+
+    $sql=mysqli_query($conn,$query);
+        
+    if (mysqli_affected_rows($conn)==0){
+        return FALSE;
+    }
+    else{
+        return TRUE;
+    }
 }
 ?>

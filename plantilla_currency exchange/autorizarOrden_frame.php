@@ -683,7 +683,8 @@ $rolFAC=true;
             $cond="idOrden='$id1' AND idCompania='$id2' AND idCliente='$id3' AND idArticulo='$id4' AND folio='$folio';";
             
             if ($reg->vFac == 1 && $reg->vCXC == 1 && $reg->vPRE == 1 && $reg->vCST == 1 && $reg->vING == 1 && $reg->vPLN == 1 && $reg->vFEC == 1){
-                $query="UPDATE reporteOrden SET estatus='1' WHERE ".$cond; 
+                $query="UPDATE reporteOrden SET estatus='1' WHERE ".$cond;
+                 
             }  else{
                 $query="UPDATE reporteOrden SET estatus='0' WHERE ".$cond; 
             }   

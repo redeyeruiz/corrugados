@@ -1,0 +1,6 @@
+ENV|idOrden|WWWapps|WWW|ORDER||
+HDR|idOrden|idCliente|PDA-consecutivo-idCliente|ordenCompra|fechaA|||MOD|moneda|pais||0
+HAD|idOrden|DEL|||nombreCliente||direccionA||ciudad||COP|paisA|pais||
+INV|idOrden|DEL|||nombreCliente||direccionA||ciudad||COP|paisA|pais||
+HTX|idOrden|(Fecha de Entrega: fechaSlash)| notas
+LIN|idOrden|1|idArticulo|ZZ|cantidad|udVta|fechaEntrega|0|precio||           idArticulo

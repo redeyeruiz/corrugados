@@ -11,7 +11,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }*/
 include('php/utilerias2.php');
-unsetAll()
+unsetAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,0 +1,671 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 24, 2021 at 03:47 PM
+-- Server version: 8.0.21
+-- PHP Version: 7.3.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `papelescorrugados`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agente`
+--
+
+DROP TABLE IF EXISTS `agente`;
+CREATE TABLE IF NOT EXISTS `agente` (
+  `idCompania` varchar(4) NOT NULL,
+  `idRepresentante` varchar(10) NOT NULL,
+  `nomRepresentante` varchar(30) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  `idUsuario` varchar(20) NOT NULL,
+  PRIMARY KEY (`idCompania`,`idRepresentante`),
+  KEY `indx_idrep` (`idRepresentante`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `agente`
+--
+
+INSERT INTO `agente` (`idCompania`, `idRepresentante`, `nomRepresentante`, `estatus`, `idUsuario`) VALUES
+('1', '1', 'nombre Rep 1', 1, 'ruben');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `almacen`
+--
+
+DROP TABLE IF EXISTS `almacen`;
+CREATE TABLE IF NOT EXISTS `almacen` (
+  `idAlmacen` varchar(10) NOT NULL,
+  `idCompania` varchar(4) NOT NULL,
+  `descripcion` varchar(30) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idAlmacen`),
+  KEY `idCompania` (`idCompania`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `almacen`
+--
+
+INSERT INTO `almacen` (`idAlmacen`, `idCompania`, `descripcion`, `estatus`) VALUES
+('idal', '1', 'almacen 1 ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `articuloexistente`
+--
+
+DROP TABLE IF EXISTS `articuloexistente`;
+CREATE TABLE IF NOT EXISTS `articuloexistente` (
+  `idCompania` varchar(4) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `descripcion` varchar(70) NOT NULL,
+  `costoEstandar` double(15,4) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  `stock` double(15,2) NOT NULL,
+  PRIMARY KEY (`idArticulo`),
+  KEY `idCompania` (`idCompania`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `articuloexistente`
+--
+
+INSERT INTO `articuloexistente` (`idCompania`, `idArticulo`, `descripcion`, `costoEstandar`, `estatus`, `stock`) VALUES
+('1', '3', 'Pasta de antonio', 15.0000, 1, 999.00),
+('1', '4', 'pasta larga', 11.0000, 1, 999.00),
+('1', '1', 'sopa de letras', 27.0000, 1, 995.00),
+('1', '2', 'galletas de chocolate', 10.0000, 1, 998.00),
+('1', '6', 'pasta de codo', 20.0000, 1, 992.00),
+('1', '7', 'pasta fina', 34.0000, 1, 990.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `articulovendido`
+--
+
+DROP TABLE IF EXISTS `articulovendido`;
+CREATE TABLE IF NOT EXISTS `articulovendido` (
+  `folio` int NOT NULL,
+  `idCompania` varchar(4) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `idAlmacen` varchar(4) NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `newRep` varchar(12) NOT NULL,
+  `udVta` varchar(4) NOT NULL,
+  `stock` double(15,2) NOT NULL,
+  `codAviso` varchar(3) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`folio`),
+  KEY `idArticulo` (`idArticulo`),
+  KEY `idCliente` (`idCliente`),
+  KEY `idCompania` (`idCompania`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `articulovendido`
+--
+
+INSERT INTO `articulovendido` (`folio`, `idCompania`, `idArticulo`, `idAlmacen`, `idCliente`, `newRep`, `udVta`, `stock`, `codAviso`, `estatus`) VALUES
+(1, '1', '1', 'idal', '1', 'repetición', 'MIL', 4.00, '1', 1),
+(2, '1', '6', 'idal', '1', 'repetición', 'MIL', 7.00, '1', 1),
+(3, '1', '7', 'idal', '1', 'repetición', 'MIL', 9.00, '1', 1),
+(4, '1', '2', 'idal', '1', 'repeticion', 'MIL', 1.00, 'adc', 1),
+(5, '1', '3', 'idal', '2', 'repetición', 'kg', 0.00, '999', 1),
+(6, '1', '4', 'idal', '2', 'repetición', 'kg', 0.00, '999', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cantentregada`
+--
+
+DROP TABLE IF EXISTS `cantentregada`;
+CREATE TABLE IF NOT EXISTS `cantentregada` (
+  `idCompania` varchar(4) NOT NULL,
+  `idOrden` varchar(33) NOT NULL,
+  `folio` int NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `fechaMov` varchar(10) NOT NULL,
+  `hora` bigint NOT NULL,
+  `cantidad` double(15,2) NOT NULL,
+  `secuencia` int NOT NULL,
+  `posicion` int NOT NULL,
+  `tipoReg` int NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idCompania` (`idCompania`),
+  KEY `idArticulo` (`idArticulo`),
+  KEY `idOrden` (`idOrden`),
+  KEY `folio` (`folio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `idCompania` varchar(4) NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `idRepresentante` varchar(10) NOT NULL,
+  `idLista` varchar(10) NOT NULL,
+  `idAlmacen` varchar(10) NOT NULL,
+  `nombreCliente` varchar(100) NOT NULL,
+  `estatusCliente` int NOT NULL,
+  `analista` varchar(10) NOT NULL,
+  `divisa` varchar(3) NOT NULL,
+  `limCredito` bigint NOT NULL,
+  `saldoOrden` double(15,2) NOT NULL,
+  `saldoFactura` double(15,2) NOT NULL,
+  `bloqueo` tinyint(1) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idCliente`),
+  KEY `idCompania` (`idCompania`),
+  KEY `idRepresentante` (`idRepresentante`),
+  KEY `idAlmacen` (`idAlmacen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `cliente`
+--
+
+INSERT INTO `cliente` (`idCompania`, `idCliente`, `idRepresentante`, `idLista`, `idAlmacen`, `nombreCliente`, `estatusCliente`, `analista`, `divisa`, `limCredito`, `saldoOrden`, `saldoFactura`, `bloqueo`, `estatus`) VALUES
+('1', '1', '1', '1', 'idal', 'nombre1', 1, 'analista1', 'MXN', 15000, 15000.00, 15000.00, 0, 1),
+('1', '2', '1', '1', 'idal', 'nombre2', 1, 'analista1', 'MXN', 15000, 10000.00, 15000.00, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compania`
+--
+
+DROP TABLE IF EXISTS `compania`;
+CREATE TABLE IF NOT EXISTS `compania` (
+  `idCompania` varchar(4) NOT NULL,
+  `nombre` varchar(70) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idCompania`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `compania`
+--
+
+INSERT INTO `compania` (`idCompania`, `nombre`, `estatus`) VALUES
+('1', 'compañia uno', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dirent`
+--
+
+DROP TABLE IF EXISTS `dirent`;
+CREATE TABLE IF NOT EXISTS `dirent` (
+  `idCompania` varchar(4) NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `nombreEntrega` varchar(50) NOT NULL,
+  `dirEnt` varchar(10) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
+  `codPost` varchar(5) NOT NULL,
+  `municipio` varchar(30) NOT NULL,
+  `estado` varchar(30) NOT NULL,
+  `pais` varchar(3) NOT NULL,
+  `codRuta` varchar(5) NOT NULL,
+  `rfc` varchar(20) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `observaciones` varchar(100) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idCompania` (`idCompania`),
+  KEY `idCliente` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `dirent`
+--
+
+INSERT INTO `dirent` (`idCompania`, `idCliente`, `nombreEntrega`, `dirEnt`, `direccion`, `codPost`, `municipio`, `estado`, `pais`, `codRuta`, `rfc`, `telefono`, `observaciones`, `estatus`) VALUES
+('1', '1', 'nombre1', 'IDdir1', 'metepec', '3452', 'metepec', 'EDOMEX', 'MEX', 'cr1', 'rfc1', '1234', 'casa azul casa 1', 1),
+('1', '1', 'nombre2', 'IDdir3', 'flor de maria 106 a', '3452', 'toluca', 'EDOMEX', 'MEX', 'cr2', 'rfc2', '1234', 'casa naranja casa 12', 1),
+('1', '2', 'nombre2', 'IDdir2', 'Colonia las rosas', '3456', 'San Mateo Atenco', 'EDOMEX', 'MX', 'cr3', 'rucr0934983', '7226549087', 'Porton amarillo', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `factura`
+--
+
+DROP TABLE IF EXISTS `factura`;
+CREATE TABLE IF NOT EXISTS `factura` (
+  `numFact` bigint NOT NULL,
+  `idCompania` varchar(4) NOT NULL,
+  `idOrden` varchar(33) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `folio` int NOT NULL,
+  `fechaFac` varchar(10) NOT NULL,
+  `entrega` int NOT NULL,
+  `tipoTrans` varchar(4) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`numFact`),
+  KEY `idCompania` (`idCompania`),
+  KEY `idOrden` (`idOrden`),
+  KEY `idArticulo` (`idArticulo`),
+  KEY `folio` (`folio`),
+  KEY `idCliente` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventario`
+--
+
+DROP TABLE IF EXISTS `inventario`;
+CREATE TABLE IF NOT EXISTS `inventario` (
+  `idCompania` varchar(4) NOT NULL,
+  `idAlmacen` varchar(4) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `stock` double(15,2) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idCompania` (`idCompania`),
+  KEY `idAlmacen` (`idAlmacen`),
+  KEY `idArticulo` (`idArticulo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `listaprecio`
+--
+
+DROP TABLE IF EXISTS `listaprecio`;
+CREATE TABLE IF NOT EXISTS `listaprecio` (
+  `idCompania` varchar(4) NOT NULL,
+  `idLista` varchar(10) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `nivelDscto` int NOT NULL,
+  `cantOlmp` bigint NOT NULL,
+  `precio` double(15,2) NOT NULL,
+  `descuento` float(15,2) NOT NULL,
+  `impDesc` double(15,2) NOT NULL,
+  `fechaCaducidad` date NOT NULL,
+  `fechaInicio` date NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idCompania` (`idCompania`),
+  KEY `idArticulo` (`idArticulo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `listaprecio`
+--
+
+INSERT INTO `listaprecio` (`idCompania`, `idLista`, `idArticulo`, `nivelDscto`, `cantOlmp`, `precio`, `descuento`, `impDesc`, `fechaCaducidad`, `fechaInicio`, `estatus`) VALUES
+('1', '1', '1', 45, 453, 34.00, 0.15, 32.00, '0000-00-00', '0000-00-00', 1),
+('1', '1', '6', 45, 45, 24.00, 0.10, 23.00, '0000-00-00', '0000-00-00', 1),
+('1', '1', '7', 45, 324, 36.00, 0.14, 45.00, '0000-00-00', '0000-00-00', 1),
+('1', '1', '2', 11, 21, 14.00, 0.10, 0.28, '2021-04-14', '2021-04-14', 1),
+('1', '2', '3', 1, 99999999, 18.00, 0.05, 0.90, '2021-11-18', '2021-04-24', 1),
+('1', '2', '4', 1, 99999999, 14.00, 0.10, 0.14, '2021-10-16', '2021-10-22', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orden`
+--
+
+DROP TABLE IF EXISTS `orden`;
+CREATE TABLE IF NOT EXISTS `orden` (
+  `idOrden` varchar(33) NOT NULL,
+  `idCompania` varchar(4) NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `ordenCompra` varchar(30) NOT NULL,
+  `fechaOrden` date NOT NULL,
+  `dirEnt` varchar(10) NOT NULL,
+  `estatusOrden` int NOT NULL,
+  `tFac` date DEFAULT NULL,
+  `tCXC` date DEFAULT NULL,
+  `tPRE` date DEFAULT NULL,
+  `tCST` date DEFAULT NULL,
+  `tING` date DEFAULT NULL,
+  `tPLN` date DEFAULT NULL,
+  `tFEC` date DEFAULT NULL,
+  `total` float(15,2) DEFAULT NULL,
+  `vFac` tinyint(1) DEFAULT NULL,
+  `vCXC` tinyint(1) DEFAULT NULL,
+  `vPRE` tinyint(1) DEFAULT NULL,
+  `vCST` tinyint(1) DEFAULT NULL,
+  `vING` tinyint(1) DEFAULT NULL,
+  `vPLN` tinyint(1) DEFAULT NULL,
+  `vFEC` tinyint(1) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  `folio` int NOT NULL,
+  PRIMARY KEY (`idOrden`),
+  KEY `idCompania` (`idCompania`),
+  KEY `idCliente` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `orden`
+--
+
+INSERT INTO `orden` (`idOrden`, `idCompania`, `idCliente`, `ordenCompra`, `fechaOrden`, `dirEnt`, `estatusOrden`, `tFac`, `tCXC`, `tPRE`, `tCST`, `tING`, `tPLN`, `tFEC`, `total`, `vFac`, `vCXC`, `vPRE`, `vCST`, `vING`, `vPLN`, `vFEC`, `estatus`, `folio`) VALUES
+('0811e1176be1b1adb8b517f0867fb658', '1', '1', '1', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 28.90, 0, 0, 0, 0, 0, 0, 0, 0, 5),
+('08f0d54f77ed4373f7ea9e3ce7d19ac0', '1', '1', '1c', '2021-04-24', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 29.10, 0, 0, 0, 0, 0, 0, 0, 0, 11),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', '1', '222', '2021-04-21', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 120.00, 0, 0, 0, 0, 0, 0, 0, 0, 2),
+('2fa9830240021f5a872ca6554af47c17', '1', '1', '5c', '2021-04-30', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 28.90, 0, 0, 0, 0, 0, 0, 0, 0, 14),
+('3e40def19d2930533f056bcbaf775944', '1', '1', '111', '2021-04-22', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 120.00, 0, 0, 0, 0, 0, 0, 0, 0, 1),
+('52ddff8447b1173ac9a8e781563ef654', '1', '1', '5b', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 43.20, 0, 0, 0, 0, 0, 0, 0, 0, 10),
+('581e83f73384a7286e02f5c8b5ec3b61', '1', '1', '221', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 30.96, 0, 0, 0, 0, 0, 0, 0, 0, 4),
+('5c42a4797bd17c7efc6e8747b1566e52', '1', '1', '333', '2021-04-21', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 120.00, 0, 0, 0, 0, 0, 0, 0, 0, 3),
+('5e125bdef590e1499efa14a6ee3fa90d', '1', '1', '6c', '2021-04-24', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 65.16, 0, 0, 0, 0, 0, 0, 0, 0, 15),
+('650d180fc8b015859ab99827ba97898a', '1', '1', '2a', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 56.00, 0, 0, 0, 0, 0, 0, 0, 0, 6),
+('70be656537fb83a3cdb0cd0372e78f26', '1', '1', '2b', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 61.92, 0, 0, 0, 0, 0, 0, 0, 0, 8),
+('7e4f816b6c1028036f54b5cc7149612a', '1', '1', '3b', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 30.96, 0, 0, 0, 0, 0, 0, 0, 0, 9),
+('97a7f43859d96cc52d904507d73743a7', '1', '1', '1b', '2021-04-23', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 129.60, 0, 0, 0, 0, 0, 0, 0, 0, 7),
+('a79009013f22508664ec0f94a6255622', '1', '1', '3c', '2021-04-24', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 21.60, 0, 0, 0, 0, 0, 0, 0, 0, 13),
+('ca6e3c43d13be5e53addc7dbfdfc16fe', '1', '1', '2c', '2021-04-24', 'IDdir1', 0, '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 20.10, 0, 0, 0, 0, 0, 0, 0, 0, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parametrosftp`
+--
+
+DROP TABLE IF EXISTS `parametrosftp`;
+CREATE TABLE IF NOT EXISTS `parametrosftp` (
+  `servidor` varchar(100) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
+  `contrasena` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permiso`
+--
+
+DROP TABLE IF EXISTS `permiso`;
+CREATE TABLE IF NOT EXISTS `permiso` (
+  `idUsuario` varchar(20) NOT NULL,
+  `permiso` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `permiso`
+--
+
+INSERT INTO `permiso` (`idUsuario`, `permiso`, `estatus`) VALUES
+('ruben', 'Asignacion de permis', 1),
+('ruben', 'Asignacion de permisos', 1),
+('ruben', 'Administracion', 1),
+('ruben', 'Usuarios', 1),
+('ruben', 'Roles', 1),
+('ruben', 'Asignacion de Roles', 1),
+('ruben', 'Asignacion de permisos', 1),
+('ruben', 'Parametros Active Directory', 1),
+('ruben', 'Parametros FTP', 1),
+('ruben', 'Catalogos', 1),
+('ruben', 'Companias', 1),
+('ruben', 'Agentes', 1),
+('ruben', 'Clientes', 1),
+('ruben', 'Articulos Existentes', 1),
+('ruben', 'Articulos Vendidos', 1),
+('ruben', 'Listas de Precios', 1),
+('ruben', 'Direcciones de entrega', 1),
+('ruben', 'Cantidades entregadas', 1),
+('ruben', 'Facturas', 1),
+('ruben', 'Inventarios', 1),
+('ruben', 'Almacenes', 1),
+('ruben', 'Operaciones', 0),
+('ruben', 'Busqueda de Ordenes', 0),
+('ruben', 'Captuar Orden', 1),
+('ruben', 'Autorizaciones', 1),
+('ruben', 'Autorizacion Facturacion', 0),
+('ruben', 'Autorizacion Cuentas por Cobra', 1),
+('ruben', 'Autorizacion Costos', 0),
+('ruben', 'Autorizacion Ingenieria', 0),
+('ruben', 'Autorizacion Planeacion', 0),
+('ruben', 'Autorizacion Fechas', 0),
+('ruben', 'Consultar Ordenes', 0),
+('ruben', 'Modificar Ordenes', 0),
+('ruben', 'Consultar Estatus', 0),
+('ruben', 'Buscar Articulos', 0),
+('ruben', 'Reportes', 1),
+('ruben', 'Reporte de Todas las Ordenes', 1),
+('ruben', 'Reporte de Promedio de Tiempo', 1),
+('ruben', 'Reporte de Ordenes Procesadas', 1),
+('ruben', 'Reporte de Ordenes en Proceso', 1),
+('ruben', 'Administracion', 1),
+('ruben', 'Usuarios', 1),
+('ruben', 'Roles', 1),
+('ruben', 'Asignacion de Roles', 1),
+('ruben', 'Asignacion de permisos', 1),
+('ruben', 'Parametros Active Directory', 1),
+('ruben', 'Parametros FTP', 1),
+('ruben', 'Catalogos', 1),
+('ruben', 'Companias', 1),
+('ruben', 'Agentes', 1),
+('ruben', 'Clientes', 1),
+('ruben', 'Articulos Existentes', 1),
+('ruben', 'Articulos Vendidos', 1),
+('ruben', 'Listas de Precios', 1),
+('ruben', 'Direcciones de entrega', 1),
+('ruben', 'Cantidades entregadas', 1),
+('ruben', 'Facturas', 1),
+('ruben', 'Inventarios', 1),
+('ruben', 'Almacenes', 1),
+('ruben', 'Operaciones', 0),
+('ruben', 'Busqueda de Ordenes', 0),
+('ruben', 'Capturar Orden', 0),
+('ruben', 'Autorizar Orden', 0),
+('ruben', 'Autorizacion Facturacion', 0),
+('ruben', 'Autorizacion Cuentas por Cobra', 1),
+('ruben', 'Autorizacion Costos', 0),
+('ruben', 'Autorizacion Ingenieria', 0),
+('ruben', 'Autorizacion Planeacion', 0),
+('ruben', 'Autorizacion Fechas', 0),
+('ruben', 'Consultar Ordenes', 0),
+('ruben', 'Modificar Ordenes', 0),
+('ruben', 'Consultar Estatus', 0),
+('ruben', 'Buscar Articulos', 0),
+('ruben', 'Bloqueo de Clientes', 0),
+('ruben', 'Reportes', 1),
+('ruben', 'Reporte de Todas las Ordenes', 1),
+('ruben', 'Reporte de Promedio de Tiempo', 1),
+('ruben', 'Reporte de Ordenes Procesadas', 1),
+('ruben', 'Reporte de Ordenes en Proceso', 1),
+('ruben', 'Operaciones', 1),
+('ruben', 'Busqueda de Ordenes', 1),
+('ruben', 'Capturar Orden', 1),
+('ruben', 'Autorizar Orden', 1),
+('ruben', 'Autorizacion Facturacion', 1),
+('ruben', 'Autorizacion Cuentas por Cobra', 1),
+('ruben', 'Autorizacion Costos', 1),
+('ruben', 'Autorizacion Ingenieria', 1),
+('ruben', 'Autorizacion Planeacion', 1),
+('ruben', 'Autorizacion Fechas', 1),
+('ruben', 'Consultar Ordenes', 1),
+('ruben', 'Modificar Ordenes', 1),
+('ruben', 'Consultar Estatus', 1),
+('ruben', 'Buscar Articulos', 1),
+('ruben', 'Bloqueo de Clientes', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reporteorden`
+--
+
+DROP TABLE IF EXISTS `reporteorden`;
+CREATE TABLE IF NOT EXISTS `reporteorden` (
+  `idOrden` varchar(33) NOT NULL,
+  `idCompania` varchar(4) NOT NULL,
+  `folio` int NOT NULL,
+  `numFact` bigint NOT NULL,
+  `ordenBaan` bigint NOT NULL,
+  `idCliente` varchar(10) NOT NULL,
+  `nombreCliente` varchar(100) NOT NULL,
+  `dirEnt` varchar(10) NOT NULL,
+  `idArticulo` varchar(20) NOT NULL,
+  `ordenCompra` varchar(30) NOT NULL,
+  `cantidad` double(15,2) NOT NULL,
+  `precio` double(15,2) NOT NULL,
+  `descripcion` varchar(70) NOT NULL,
+  `fechaOrden` date NOT NULL,
+  `fechaSolicitud` date NOT NULL,
+  `fechaEntrega` date NOT NULL,
+  `vFac` tinyint(1) DEFAULT NULL,
+  `vCXC` tinyint(1) DEFAULT NULL,
+  `vPRE` tinyint(1) DEFAULT NULL,
+  `vCST` tinyint(1) DEFAULT NULL,
+  `vING` tinyint(1) DEFAULT NULL,
+  `vPLN` tinyint(1) DEFAULT NULL,
+  `vFEC` tinyint(1) DEFAULT NULL,
+  `producido` int NOT NULL,
+  `entregado` int NOT NULL,
+  `acumulado` int NOT NULL,
+  `total` float(15,2) NOT NULL,
+  `costo` float(15,2) NOT NULL,
+  `moneda` varchar(3) NOT NULL,
+  `nota` varchar(70) NOT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  KEY `idOrden` (`idOrden`),
+  KEY `idCompania` (`idCompania`),
+  KEY `idArticulo` (`idArticulo`),
+  KEY `idCliente` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reporteorden`
+--
+
+INSERT INTO `reporteorden` (`idOrden`, `idCompania`, `folio`, `numFact`, `ordenBaan`, `idCliente`, `nombreCliente`, `dirEnt`, `idArticulo`, `ordenCompra`, `cantidad`, `precio`, `descripcion`, `fechaOrden`, `fechaSolicitud`, `fechaEntrega`, `vFac`, `vCXC`, `vPRE`, `vCST`, `vING`, `vPLN`, `vFEC`, `producido`, `entregado`, `acumulado`, `total`, `costo`, `moneda`, `nota`, `estatus`) VALUES
+('3e40def19d2930533f056bcbaf775944', '1', 1, 1234, 1234, '1', 'nombre1', 'IDdir1', '2', '111', 1.00, 12.60, 'galletas de chocolate', '2021-04-22', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 12.60, 'MXN', 'adf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 1234, 1234, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('27ff94ce2b125ea7986f5fd48f50ac95', '1', 2, 0, 0, '1', 'nombre1', 'IDdir1', '1', '222', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'asdf', 0),
+('5c42a4797bd17c7efc6e8747b1566e52', '1', 3, 0, 0, '1', 'nombre1', 'IDdir1', '2', '333', 3.00, 12.60, 'galletas de chocolate', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37.80, 96.00, 'MXN', 'nota galleta', 0),
+('581e83f73384a7286e02f5c8b5ec3b61', '1', 4, 0, 0, '1', 'nombre1', 'IDdir1', '7', '221', 1.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-27', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.96, 34.00, 'MXN', 'asdf', 0),
+('0811e1176be1b1adb8b517f0867fb658', '1', 5, 0, 0, '1', 'nombre1', 'IDdir1', '6', '1a', 1.00, 21.60, 'pasta de codo', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21.60, 20.00, 'MXN', 'sdf', 0),
+('0811e1176be1b1adb8b517f0867fb658', '1', 5, 0, 0, '1', 'nombre1', 'IDdir1', '1', '1a', 1.00, 28.90, 'sopa de letras', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28.90, 27.00, 'MXN', 'ad', 0),
+('650d180fc8b015859ab99827ba97898a', '1', 6, 0, 0, '1', 'nombre1', 'IDdir1', '1', '2a', 1.00, 28.90, 'sopa de letras', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28.90, 27.00, 'MXN', 'asdf', 0),
+('650d180fc8b015859ab99827ba97898a', '1', 6, 0, 0, '1', 'nombre1', 'IDdir1', '1', '2a', 1.00, 28.90, 'sopa de letras', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28.90, 27.00, 'MXN', 'df', 0),
+('97a7f43859d96cc52d904507d73743a7', '1', 7, 0, 0, '1', 'nombre1', 'IDdir1', '6', '1b', 2.00, 21.60, 'pasta de codo', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43.20, 40.00, 'MXN', 'adf', 0),
+('97a7f43859d96cc52d904507d73743a7', '1', 7, 0, 0, '1', 'nombre1', 'IDdir1', '6', '1b', 2.00, 21.60, 'pasta de codo', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43.20, 40.00, 'MXN', 'adf', 0),
+('70be656537fb83a3cdb0cd0372e78f26', '1', 8, 0, 0, '1', 'nombre1', 'IDdir1', '7', '2b', 2.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-28', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61.92, 68.00, 'MXN', 'asdf', 0),
+('70be656537fb83a3cdb0cd0372e78f26', '1', 8, 0, 0, '1', 'nombre1', 'IDdir1', '7', '2b', 2.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-28', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61.92, 68.00, 'MXN', 'asdf', 0),
+('7e4f816b6c1028036f54b5cc7149612a', '1', 9, 0, 0, '1', 'nombre1', 'IDdir1', '7', '3b', 1.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.96, 34.00, 'MXN', 'afd', 0),
+('7e4f816b6c1028036f54b5cc7149612a', '1', 9, 0, 0, '1', 'nombre1', 'IDdir1', '7', '3b', 1.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.96, 34.00, 'MXN', 'afd', 0),
+('52ddff8447b1173ac9a8e781563ef654', '1', 10, 0, 0, '1', 'nombre1', 'IDdir1', '6', '5b', 2.00, 21.60, 'pasta de codo', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43.20, 40.00, 'MXN', 'dasf', 0),
+('5c42a4797bd17c7efc6e8747b1566e52', '1', 3, 0, 0, '1', 'nombre1', 'IDdir1', '1', '3', 2.00, 57.80, 'sopa de letras', '2021-04-21', '2021-04-22', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 57.80, 'MXN', 'df', 0),
+('581e83f73384a7286e02f5c8b5ec3b61', '1', 4, 0, 0, '1', 'nombre1', 'IDdir1', '7', '4', 2.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-27', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 61.92, 0.00, 'MXN', 'df', 0),
+('581e83f73384a7286e02f5c8b5ec3b61', '1', 4, 0, 0, '1', 'nombre1', 'IDdir1', '7', '4', 4.00, 30.96, 'pasta fina', '2021-04-23', '2021-04-27', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123.84, 136.00, 'MXN', 'wq', 0),
+('97a7f43859d96cc52d904507d73743a7', '1', 7, 0, 0, '1', 'nombre1', 'IDdir1', '6', '7', 2.00, 21.60, 'pasta de codo', '2021-04-23', '2021-04-23', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43.20, 40.00, 'MXN', 'gf', 0),
+('08f0d54f77ed4373f7ea9e3ce7d19ac0', '1', 11, 0, 0, '1', 'nombre1', 'IDdir1', '7', '1c', 1.00, 30.96, 'pasta fina', '2021-04-24', '2021-04-24', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.96, 34.00, 'MXN', 'asdf', 0),
+('ca6e3c43d13be5e53addc7dbfdfc16fe', '1', 12, 0, 0, '1', 'nombre1', 'IDdir1', '6', '2c', 1.00, 21.60, 'pasta de codo', '2021-04-24', '2021-04-24', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21.60, 20.00, 'MXN', 'asd', 0),
+('a79009013f22508664ec0f94a6255622', '1', 13, 0, 0, '1', 'nombre1', 'IDdir1', '6', '3c', 1.00, 21.60, 'pasta de codo', '2021-04-24', '2021-04-30', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21.60, 20.00, 'MXN', 'sdf', 0),
+('2fa9830240021f5a872ca6554af47c17', '1', 14, 0, 0, '1', 'nombre1', 'IDdir1', '1', '5c', 1.00, 28.90, 'sopa de letras', '2021-04-30', '2021-04-29', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28.90, 27.00, 'MXN', 'sdf', 0),
+('5e125bdef590e1499efa14a6ee3fa90d', '1', 15, 0, 0, '1', 'nombre1', 'IDdir1', '2', '6c', 1.00, 12.60, 'galletas de chocolate', '2021-04-24', '2021-04-24', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12.60, 10.00, 'MXN', 'sdf', 0),
+('5e125bdef590e1499efa14a6ee3fa90d', '1', 15, 0, 0, '1', 'nombre1', 'IDdir1', '6', '6c', 1.00, 21.60, 'pasta de codo', '2021-04-24', '2021-04-24', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21.60, 20.00, 'MXN', 'asdf', 0),
+('5e125bdef590e1499efa14a6ee3fa90d', '1', 15, 0, 0, '1', 'nombre1', 'IDdir1', '7', '6c', 1.00, 30.96, 'pasta fina', '2021-04-24', '2021-04-24', '0000-00-00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30.96, 34.00, 'MXN', 'adf', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `representa`
+--
+
+DROP TABLE IF EXISTS `representa`;
+CREATE TABLE IF NOT EXISTS `representa` (
+  `idCompania` varchar(4) NOT NULL,
+  `idRepresentante` varchar(10) NOT NULL,
+  `idUsuario` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rol`
+--
+
+DROP TABLE IF EXISTS `rol`;
+CREATE TABLE IF NOT EXISTS `rol` (
+  `rol` varchar(4) NOT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `rol`
+--
+
+INSERT INTO `rol` (`rol`, `descripcion`, `estatus`) VALUES
+('ADM', 'Para el area de sistemas', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `idCompania` varchar(4) NOT NULL,
+  `idUsuario` varchar(20) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `contrasena` varchar(255) NOT NULL,
+  `rol` varchar(4) DEFAULT NULL,
+  `estatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`),
+  KEY `idCompania` (`idCompania`),
+  KEY `rol` (`rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`idCompania`, `idUsuario`, `nombre`, `contrasena`, `rol`, `estatus`) VALUES
+('1', 'rrc', 'ruben ruiz', '$2y$10$Q37JkD.RRA8RDJ7eA19MfelS3zuNT7BTHy9iUHe6oZ3FQbFYq4et2', 'ADM', 1),
+('1', 'ruben', 'Ruben RC', '$2y$10$kbEZloUVQI376oKA8RFmUecCFiMk//KO9zJB1TFn60ko0U7y/UJS6', 'ADM', 1);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -2,6 +2,8 @@
 include('utilerias2.php');
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -46,14 +48,13 @@ include('utilerias2.php');
 <body>
     <?php
 
-	echo "entra a php";
 	$op=$_GET['op'];
-	echo "algo";
 
 	if ($op=="busqueda") busqueda_orden();
 	if ($op=="articulo") buscar_articulo();
 	if ($op=="tiempo") tiempo_filtro();
 	if ($op=="ordenfiltro") orden_filtro();
+	if ($op=="go") cancelarOrden();
 
 	function msg($mensaje, $color){
 		echo "<table border='3' width='60%'> ";
@@ -241,8 +242,10 @@ include('utilerias2.php');
         function busqueda_orden(){
 			echo "hola :D";
 			$fol=$_GET['fol'];
+			$baan=$_GET['baan'];
+			$client=$_GET['client'];
 			$conn=conecta_servidor();
-			$query="SELECT * FROM reporteorden WHERE folio='$fol'";
+			$query="SELECT * FROM reporteorden WHERE folio='$fol' AND ordenBaan='$baan' AND idCliente='$client'";
 			echo $query;
 			$sql=mysqli_query($conn,$query);
 			
@@ -381,14 +384,14 @@ include('utilerias2.php');
 				$fechaOrden=$reg->fechaOrden;
 				$ordenBaan=$reg->ordenBaan;
 				$idCliente=$reg->idCliente;
-				$nombreCliente=$reg->nombreCliente;
+				$idArticulo=$reg->idArticulo;
 				echo
 			
 				"       <tr>
 					<td class='td-orden'>$fechaOrden</td>
 					<td class='td-orden'>$ordenBaan</td>
 					<td class='td-orden'>$idCliente</td>
-					<td class='td-orden'>$nombreCliente</td>
+					<td class='td-orden'>$idArticulo</td>
 
 					</tr>
 			";
@@ -406,6 +409,26 @@ include('utilerias2.php');
 			
 			
 		}
+
+		echo '<script>
+		function regresar(){
+			var serv=servidor()+"reportesEnProc.php";
+			location.href=serv;
+			}
+		</script>"';
+
+		function cancelarOrden(){
+            $fol=$_GET['fol'];
+            $conn=conecta_servidor();
+			$query="DELETE FROM reporteorden WHERE folio = '$fol'";
+			$sql=mysqli_query($conn,$query);
+            if (mysqli_affected_rows($conn)==0){
+                msg("Folio Inexistente", "rojo");
+            } else {
+				echo "Orden borrada de la BD";
+            }
+        }
     ?>
+
 </body>
 </html>
