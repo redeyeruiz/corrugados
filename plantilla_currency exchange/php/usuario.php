@@ -56,7 +56,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                     $btnsn = "Mostrar";
                 }
                 else{
-                    $success = "Error en el alta del usuario. quack";
+                    $success = "Error en el alta del usuario.";
                     $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
                 }
             }
