@@ -161,11 +161,21 @@ include("php/registro_bajas.php");
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <p align="center"><b>Descrición</b></p>
+                        </td>
+                        <td align="center">
+                            <input style="border:3px solid #ff880e" name="desc" type="text" class="campo" value="<?= $desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <div class="row margin-top_30">
                                 <div class="col-sm-12">
                                     <div class="full">
                                         <div class="center">
+                                            <button name="b_registrar" type="submit" style="width:200px" class="btn btn-outline-success">Registrar</button>
                                             <button name="b_consultar" type="submit" style="width:200px" class="btn btn-outline-success">Consultar</button>
                                         </div>
                                     </div>
@@ -189,21 +199,22 @@ include("php/registro_bajas.php");
                 if ($option != ""){
                     echo "<table style='border:3px solid #ff880e' width='60%' align='center'>
                                 <tr>
-                                    <td style='border:3px solid #ff880e' colspan='2'>
+                                    <td style='border:3px solid #ff880e' colspan='3'>
                                         <p align='center' style='color:#475747; font-size:20px;'>". $option. "</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>ID Usuario</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Fecha</td>
+                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Descripción</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "<tr><td align='center' style='border:3px solid #dba46c' width='15%'>". $row["idUsuario"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["fecha"]."</td></tr>";
+                            echo "<tr><td align='center' style='border:3px solid #dba46c' width='15%'>". $row["idUsuario"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["fecha"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["descripcion"]."</td></tr>";
                         }
                     }
                     else{
-                        echo "<tr><td style='border:3px solid #ff880e' colspan='2'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
+                        echo "<tr><td style='border:3px solid #ff880e' colspan='3'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
                 }
