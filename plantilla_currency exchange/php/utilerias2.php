@@ -60,4 +60,10 @@ function executeQuery($conn,$query){
         return TRUE;
     }
 }
+function warningMssg($message)
+    {
+        echo "<div class= 'alert alert-warning'>" .
+        "<strong>Warning!  </strong>". " $message"   .
+            "</div>";
+    }
 ?>

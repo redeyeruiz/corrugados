@@ -166,6 +166,7 @@
                 $query=$queries[$i];
                 mysqli_query($conn, $query);
             }
+            executeQuery($conn,"UPDATE cliente SET saldoOrden= saldoOrden-'$total'  WHERE idCliente ='$idCliente' AND idCompania = '$idCompania' ");
             queriesStock($conn);
         }
     }
@@ -254,7 +255,7 @@
 
     }
 
-    //Tabla direccion
+    //Tabla direccion Chequeo Saldo 
 
     function tabla_dir(){    
 
@@ -262,7 +263,8 @@
             $saldoOrden= floatval($_SESSION['saldoOrden']);
         
             if($saldoOrden<15000){
-                echo " Cliente no tiene suficiente saldo";
+                warningMssg(" Cliente no tiene suficiente saldo");
+                //echo " Cliente no tiene suficiente saldo";
                 
             }
         }
@@ -440,7 +442,7 @@
         
                
     }
-    // PRECIO , COSTO , CANTIDAD
+    // PRECIO , COSTO , CANTIDAD STOCK, SALDO
     
     function queriesStock($conn){
         $queries=explode("|",$_SESSION['queries'],-1);
@@ -691,7 +693,9 @@
 
         // upload a file
         if (ftp_put($conn_id, $remote_file, $file)) {
-        echo "successfully uploaded $file\n";
+        echo "<div class= 'alert alert-warning'>" .
+        "<strong>Warning!  </strong>". "successfully uploaded $file\n"   .
+            "</div";
         } else {
         echo "There was a problem while uploading $file\n";
         }
@@ -701,7 +705,9 @@
     }
     createFile();
     if (isset($_SESSION['ordenT'])){
-        echo "orden Total :  ".$_SESSION['ordenT'];
+        echo "<div class='alert alert-warning'> orden Total :  ".$_SESSION['ordenT']."</div>";
     }
+
+    
     
 ?>
