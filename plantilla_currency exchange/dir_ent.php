@@ -267,14 +267,6 @@ include("funciones/dir_entfuncP.php");
                                 </div>
                             </div>
                             <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -341,6 +333,93 @@ include("funciones/dir_entfuncP.php");
                 }
             ?>
         </div>
+        <br>
+        &nbsp;
+            <div class="center">
+                
+                <?php
+
+                $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+                if(isset($_POST["import"])){
+                    foreach($_FILES as $file){
+                        //echo $file["tmp_name"];
+                    }
+                    $fileName = $_FILES["file-1"]["tmp_name"];
+
+                    if($_FILES["file-1"]["size"] > 0 ){
+                        $file = fopen($fileName, "r");
+
+                        while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                            $idcomp = $column[0];
+                            $idcliente = $column[1];
+                            $nombre = $column[2];
+                            $dirent = $column[3];
+                            $direc = $column[4];
+                            $codpost = $column[5];
+                            $muni = $column[6];
+                            $esta = $column[7];
+                            $pais = $column[8];
+                            $codruta = $column[9];
+                            $rfc = $column[10];
+                            $telefono = $column[11];
+                            $obser = $column[12];
+                            $estatus = $column[13];
+
+                            $sqlInsert = "INSERT into dirent values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "','" . $column[11] . "','" . $column[12] . "','" . $column[13] . "','" . $column[14] . "');";
+                            //echo $sqlInsert;
+                            $result = mysqli_query($conn, $sqlInsert);
+
+                        }
+                        
+                    }
+                    if(!empty($result)){
+                        echo '<script language="javascript">';
+                        echo 'alert("Archivo importado Correctamente")';
+                        echo '</script>';
+                    }else{
+                        echo '<script language="javascript">';
+                        echo 'alert("Error en la carga del Archivo")';
+                        echo '</script>';
+                    }
+                }
+                if(isset($_POST["descarga"])){
+
+                        $query="SELECT * FROM dirent";
+                        $sql=mysqli_query($conn,$query);
+                        // 2) Abrir el archivo de tipo texto
+                        $arch=fopen("archivos/dirent.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                        while ($reg=mysqli_fetch_object($sql)){
+                            $linea=$reg->idCompania.",".$reg->idCliente.",".$reg->nombreEntrega.",".$reg->dirEnt.",".$reg->direccion.",".$reg->codPost.",".$reg->municipio.",".$reg->estado.",".$reg->pais.",".$reg->codRuta.",".$reg->rfc.",".$reg->telefono.",".$reg->observaciones.",".$reg->estatus;
+                            //echo $linea."<br>"; // Imprime pa prueba
+                            fwrite($arch,$linea.PHP_EOL);
+                        }
+                        fclose($arch);
+
+                        
+                }
+
+                ?>
+
+
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                <div>
+                <label>Importa CSV</label>
+                <input type="file" name="file-1" accept=".csv , .txt"/>
+                <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+                <div class="center">
+                    <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+                </div>
+                    <div class="center">
+                        <a href="descarga.php?path=archivos/dirent.txt">Descargar Archivo de Texto</a>
+                    </div>
+                </div>
+                </form>
+                
+                &nbsp;
+            </div>
     </div>
 
     <div class="footer_bottom">
