@@ -268,14 +268,6 @@ include("funciones/clientesfuncP.php");
                                 </div>
                             </div>
                             <br/>
-                            <div class="center">
-                                &nbsp;
-                                &nbsp;
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>
-                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -336,6 +328,93 @@ include("funciones/clientesfuncP.php");
                     echo "</table>";
                 }
             ?>
+        </div>
+        <br/>
+        <div class="center">
+            &nbsp;
+            &nbsp;
+
+            <?php
+
+            $conn = mysqli_connect("localhost", "root", "", "papelescorrugados");
+
+            if(isset($_POST["import"])){
+                $fileName = $_FILES["file-1"]["tmp_name"];
+                // echo $fileName;
+                if($_FILES["file-1"]["size"] > 0 ){
+                    $file = fopen($fileName, "r");
+
+                    while(($column = fgetcsv($file, 10000, ",")) !== FALSE){
+
+                        $idcliente = $column[0];
+                        $idcomp = $column[1];
+                        $idrepre = $column[2];
+                        $idlist = $column[3];
+                        $idalma = $column[4];
+                        $nombre = $column[5];
+                        $estatuscliente = $column[6];
+                        $analista = $column[7];
+                        $divisa = $column[8];
+                        $limcredito = $column[9];
+                        $saldoorden = $column[10];
+                        $saldofactu = $column[11];
+                        $bloqueo = $column[12];
+                        $estatus = $column[13];
+                        
+                        $sqlInsert = "INSERT into cliente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "','" . $column[4] . "','" . $column[5] . "','" . $column[6] . "','" . $column[7] . "','" . $column[8] . "','" . $column[9] . "','" . $column[10] . "','" . $column[11] . "','" . $column[12] . "','" . $column[13] . "');";
+
+                        //echo $sqlInsert;
+
+                        $result = mysqli_query($conn, $sqlInsert);
+
+                    }
+                    
+                }
+                if(!empty($result)){
+                    echo '<script language="javascript">';
+                    echo 'alert("Archivo importado Correctamente")';
+                    echo '</script>';
+                }else{
+                    echo '<script language="javascript">';
+                    echo 'alert("Error en la carga del Archivo")';
+                    echo '</script>';
+                }
+            }
+            if(isset($_POST["descarga"])){
+
+                    $query="SELECT * FROM cliente";
+                    $sql=mysqli_query($conn,$query);
+                    // 2) Abrir el archivo de tipo texto
+                    $arch=fopen("archivos/cliente.txt","w"); //w=Borra el contenido previo / "a"=append / "r" = Sólo lectura
+                    while ($reg=mysqli_fetch_object($sql)){
+                        $linea=$reg->idCompania.",".$reg->idCliente.",".$reg->idCompania.",".$reg->idRepresentante.",".$reg->idLista.",".$reg->idAlmacen.",".$reg->nombreCliente.",".$reg->estatusCliente.",".$reg->analista.",".$reg->divisa.",".$reg->limCredito.",".$reg->saldoOrden.",".$reg->saldoFactura.",".$reg->bloqueo.",".$reg->estatus;
+                        //echo $linea."<br>"; // Imprime pa prueba
+                        fwrite($arch,$linea.PHP_EOL);
+                    }
+                    fclose($arch);
+
+                    
+            }
+
+            ?>
+
+
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <div>
+            <label>Importa CSV</label>
+            <input type="file" name="file-1" accept=".csv , .txt"/>
+            <button type="submit" name="import" class="btn btn-secondary btn-sm" >Importar</button>
+            <div class="center">
+                <button type="submit" name="descarga" class="btn btn-secondary btn-sm" >Guardar Archivo</button>
+
+            </div>
+                <div class="center">
+                    <a href="descarga.php?path=archivos/cliente.txt">Descargar Archivo de Texto</a>
+                </div>
+            </div>
+            </form>
+            
+            &nbsp;
         </div>
     </div>
 
