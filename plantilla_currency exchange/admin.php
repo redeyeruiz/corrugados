@@ -138,7 +138,7 @@ if(!isset($_SESSION['conectado'])){
             </div>
             <div class="row">
                 <?php submenu_adm() ?>
-                &nbsp
+                &nbsp;
             </div>
         </div>
     </div>

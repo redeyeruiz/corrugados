@@ -5,7 +5,7 @@ if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
     die();
-}elseif(!verificacion_permiso($_SESSION['usuario'], 'Cantidades Entregadas')){
+}elseif(!verificacion_permiso($_SESSION['usuario'], 'Cantidades entregadas')){
     $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
     header("Location: ".redirect('inicio'));
     die();

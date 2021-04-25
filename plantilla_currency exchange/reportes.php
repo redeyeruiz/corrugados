@@ -116,6 +116,7 @@ if(!isset($_SESSION['conectado'])){
     <div class="section inner_page_banner">
         <div class="container">
             <div class="row">
+                &nbsp;
                 <div class="col-md-12">
                     <div class="banner_title">
                         <h3>Reportes</h3>
@@ -140,42 +141,6 @@ if(!isset($_SESSION['conectado'])){
             </div>
             <div class="row">
                 <?php submenu_rep() ?>
-                <!--<div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/reporte-reTodasOrdenes.png" alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="reportes_ordenes.php">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Reporte Todas las Ordenes</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="images/reporte-reTiempo.png" alt="#" />
-                        <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Reporte de Promedio deTiempo</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="images/reporte-reProcesados.jpg" alt="#" />
-                        <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Reporte de ordenes Procesadas</h3>
-                       </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                       <img class="img-responsive" src="images/reporte-reProcesos.png" alt="#" />
-                       <div class="overlay"><a class="main_bt transparent" href="reportes_frame.html">acceder</a></div>
-                       <div class="blog_details">
-                         <h3>Reporte de ordenes en proceso</h3>
-                       </div>
-                    </div>
-                </div>-->
              </div>
         </div>
     </div>
