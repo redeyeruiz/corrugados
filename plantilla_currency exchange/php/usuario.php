@@ -93,7 +93,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     }
     
     if ($id_user_error == ""){
-        $query="SELECT * FROM usuario WHERE idUsuario='$id_user' and estatus=true";
+        $idCompania = $_SESSION['idComp'];
+        $query="SELECT * FROM usuario WHERE idUsuario='$id_user' and estatus=true and idCompania = '$idCompania'";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
             $success = "Error en la baja del usuario.";
@@ -104,6 +105,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
                 $query="UPDATE Usuario SET estatus=false WHERE idUsuario='$id_user' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
                 $success = "Baja realizada con éxito.";
+                registro_baja($query, $_SESSION['usuario']);
             }
             else{
                 $success = "Error en la baja del usuario.";

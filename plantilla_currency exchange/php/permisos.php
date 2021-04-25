@@ -85,6 +85,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         }
         else{
             $success = "Baja realizada con éxito.";
+            registro_baja($query, $_SESSION['usuario']);
         }
         $iduser = $check_list_ar = $permiso_check = $estatus = "";
     }

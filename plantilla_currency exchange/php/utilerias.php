@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("America/Mexico_City");
+
 $dbServername = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
@@ -614,5 +616,13 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             }
         }
         return $miPermiso;
+    }
+
+    function registro_baja($query, $id_user){
+        global $conection;
+        $tiempo = time();
+        $dia = date("Y-m-d",$tiempo);
+        $miQuery = "INSERT INTO Resgitro_bajas Values('$id_user', '$dia','$query')";
+        mysqli_query($conection, $miQuery);
     }
 ?>
