@@ -67,17 +67,18 @@ function warningMssg($message)
     "<strong>Warning!  </strong>". " $message"   .
         "</div>";
 }
-function checarFecha()
+function checarFechaCaducidad()
 {
-    if(isset($_SESSION['idLista']) && $_SESSION['idArticulo'])
+    if(isset($_SESSION['idLista']) && isset($_SESSION['idArticulo']))
     {
+        
         $idLista=$_SESSION['idLista'];
         $idArticulo=$_SESSION['idArticulo'];
         $conexion=conecta_servidor();
         $query="SELECT fechaCaducidad FROM listaprecio WHERE idLista='$idLista' AND idArticulo='$idArticulo'";
         $sql=mysqli_query($conexion,$query);
         $reg=mysqli_fetch_object($sql);
-        unset($_SESSION['ordenT']);
+        
         
         if ($reg==mysqli_fetch_array($sql)){
             warningMssg("ID Lista inexistente o ID Lista no tiene fecha de caducidad");
@@ -86,8 +87,9 @@ function checarFecha()
         }else{
             $fechaCaducidad=$reg->fechaCaducidad;
             $fechaActual = date("Y-m-d"); 
+            
             if ($fechaActual > $fechaCaducidad) {
-                warningMssg("El articulo  en la Lista de Precios : ".$idLista." ha caducado");
+                warningMssg("ha caducado la vigencia de precio para el articulo ".  $_SESSION['idArticulo']." en la Lista de Precios : ".$idLista);
             }else{
                 return FALSE;
             }
@@ -96,6 +98,14 @@ function checarFecha()
     }
     
     
+}
+
+function diasDesde($comienzo)
+{
+    $comienzo = strtotime($comienzo);
+    $final = strtotime(date("Y-m-d"));
+
+    return($diasDesde = ceil(abs($final - $comienzo) / 86400));
 }
 
 ?>

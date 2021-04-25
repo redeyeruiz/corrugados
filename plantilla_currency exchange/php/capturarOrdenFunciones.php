@@ -7,7 +7,7 @@
             if(isset($_SESSION['idCliente'])){
                 $idCliente=$_SESSION['idCliente'];
                 $conn=conecta_servidor();
-                $query="SELECT MAX(folio) AS folio FROM `orden` WHERE '1'";
+                $query="SELECT MAX(folio) AS folio FROM `orden`";
                 $sql=mysqli_query($conn,$query);
                 $reg=mysqli_fetch_object($sql);
                 if ($reg==mysqli_fetch_array($sql)){
@@ -410,6 +410,8 @@
             unset($_SESSION['queries']);
             unset($_SESSION['ordenT']);
             unset($_SESSION['ordenCompra']);
+            unset($_SESSION['idLista']);
+            unset($_SESSION['idArticulo']);
             
         }
 
@@ -445,7 +447,7 @@
     // PRECIO , COSTO , CANTIDAD STOCK, SALDO
     function checarStock(){
         
-        if(isset($_SESSION['idArticulo'])){
+        if(isset($_SESSION['idArticulo']) && isset($_POST['cantidad']) ){
             $idArticulo=$_SESSION['idArticulo'];
             $conn=conecta_servidor();
             $query="SELECT * FROM articuloexistente WHERE  idArticulo ='$idArticulo' ";
@@ -725,6 +727,6 @@
         echo "<div class='alert alert-warning'> orden Total :  ".$_SESSION['ordenT']."</div>";
     }
 
-    
+ 
     
 ?>

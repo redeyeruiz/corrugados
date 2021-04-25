@@ -204,7 +204,7 @@
 			
             <?php 
                 checarStock();
-                checarFecha();
+                checarFechaCaducidad();
 				tabla_dir();      
 			?>
 

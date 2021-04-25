@@ -1,0 +1,18 @@
+ENV|27ff94ce2b125ea7986f5fd48f50ac95|WWWapps|WWW|ORDER||
+HDR|27ff94ce2b125ea7986f5fd48f50ac95|1|PDA-2-1|2|20210425|||MOD|MXP|MXN||0
+HAD|27ff94ce2b125ea7986f5fd48f50ac95|DEL|||nombre1||metepec||metepec||3452|MEXICO|MXN||
+HAD|27ff94ce2b125ea7986f5fd48f50ac95|INV|||nombre1||metepec||metepec||3452|MEXICO|MXN||
+HTX|27ff94ce2b125ea7986f5fd48f50ac95|(Fecha de Entrega: 22/04/2021)| asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf,asdf
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|0|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|1|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|2|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|3|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|4|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|5|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|6|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|7|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|8|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|9|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|10|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|11|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1
+LIN|27ff94ce2b125ea7986f5fd48f50ac95|12|1|ZZ|2.00|MIL|22/0/221|0|57.80||                     1

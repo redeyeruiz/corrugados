@@ -58,3 +58,45 @@ function regresar(){
     var serv=servidor()+"reportesenProc.php";
     location.href=serv;
 }
+
+function pedidoVSurtido(){
+    alert("ahuevo si, js");
+    var serv=servidorsinphp()+"reportesGraf.php?op=PVS";
+    location.href=serv;
+}
+
+function unidadVentas(){
+    alert("ahuevo si, js");
+    var serv=servidorsinphp()+"reportesGraf.php?op=UDV";
+    location.href=serv;
+}
+
+function ventasPorCli(){
+    alert("ahuevo si, js");
+    cliente=document.getElementById("cliente").value;
+    var serv=servidorsinphp()+"reportesGraf.php?op=VPC&cliente="+cliente;
+    location.href=serv;
+}
+
+function ventasPorAr(){
+    alert("ahuevo si, js");
+    articulo=document.getElementById("articulo").value;
+    var serv=servidorsinphp()+"reportesGraf.php?op=VPA&articulo="+articulo;
+    location.href=serv;
+}
+function ventasPorMes(){
+    alert("ahuevo si, js");
+    fecha=document.getElementById("fecha").value;
+    var serv=servidorsinphp()+"reportesGraf.php?op=VPM&fecha="+fecha;
+    location.href=serv;
+}
+function compaVentaFecha(){
+    alert("ahuevo si, js");
+    fecha=document.getElementById("fecha").value;
+    var serv=servidorsinphp()+"reportesGraf.php?op=CVF&fecha="+fecha;
+    location.href=serv;
+}
+
+function servidorsinphp(){
+    return('http://localhost/corrugados/plantilla_currency%20exchange/%22');
+}
