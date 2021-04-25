@@ -1,5 +1,5 @@
 function servidor(){
-	return("http://localhost/corrugados/corrugados-master/corrugados-master/plantilla_currency%20exchange/php/");
+	return("http://localhost/corrugados/plantilla_currency%20exchange/php/");
 }
 
 function cancelar_orden(){

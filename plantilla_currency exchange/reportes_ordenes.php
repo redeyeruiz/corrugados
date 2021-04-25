@@ -1,18 +1,18 @@
-<?php
-
+<?php 
 session_start();
-include("php/utilerias.php");
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
-    header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
+    header("Location: ".redirect('login'));
     die();
-}elseif(!verificacion_permiso($_SESSION['usuario'], 'Reporte de Todas las Ordenes')){
+}elseif(!verificacion_permiso($_SESSION['usuario'], 'Reportes')){
     $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
     header("Location: ".redirect('inicio'));
     die();
 }
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
@@ -25,7 +25,7 @@ if(!isset($_SESSION['conectado'])){
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Portal Papeles Corrugados</title>
+    <title>Exchange Currency - Responsive HTML5 Template</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -45,7 +45,7 @@ if(!isset($_SESSION['conectado'])){
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
     <!-- Javascript-->
-    <script type="text/javascript" src="js/busqueda.js"></script>
+    <script type="text/javascript" src="js/busquedas.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -76,10 +76,11 @@ if(!isset($_SESSION['conectado'])){
                     </div>
                     <div class="site_information">
                         <ul>
-                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Oscar R</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                            </li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -98,13 +99,8 @@ if(!isset($_SESSION['conectado'])){
                     <span></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                    <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                        <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
-                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
-                        
+                <ul class="navbar-nav">
+                    <?php menu() ?>
                     </ul>
                 </div>
                      </div>

@@ -153,8 +153,10 @@
             <!--Ord Baan: <span><input class="user" type="text" id="baan"></span>
             Cliente: <span><input class="user" type="text" id="client"></span> !-->
             <form class="form-button-only" method="POST" action="buscarOrdenes_frame.php">
-            Orden Compra: <span><input name="folio" class="user" type="text" id="fol"></span> 
+            Orden Compra: <span><input name="ordenCompra" class="user" type="text" id="fol"></span> 
             <span><button class="form-button-only" name="buscar" >Buscar</button></span>
+            Folio: <span><input name="folio" class="user" type="text" id="fol"></span> 
+            <span><button class="form-button-only" name="buscarFolio" >Buscar</button></span>
             </form>
             </p>
         </div>
@@ -259,21 +261,35 @@
 
     <?php
     function tabla_orden(){
-        if (isset($_POST['buscar']) && isset($_POST['folio'])){
-           busqueda_orden();
+        if (isset($_POST['buscar']) && isset($_POST['ordenCompra'])){
+           busqueda_orden(0);
             
         }
+        if (isset($_POST['buscarFolio']) && isset($_POST['folio'])){
+            busqueda_orden(1);
+             
+         }
     }
 
-    function busqueda_orden(){
+    function busqueda_orden($op){
+        switch($op){
+            case 0;
+            $ordenCompra=$_POST['ordenCompra'];
+            $conn=conecta_servidor();
+            $query="SELECT * FROM reporteorden WHERE ordenCompra='$ordenCompra'";
+            $sql=mysqli_query($conn,$query);
+            break;
+            case 1;
+            $folio=$_POST['folio'];
+            $conn=conecta_servidor();
+            $query="SELECT * FROM reporteorden WHERE folio='$folio'";
+            $sql=mysqli_query($conn,$query);
+            break;
+        }
         
-        $fol=$_POST['folio'];
-        $conn=conecta_servidor();
-        $query="SELECT * FROM reporteorden WHERE folio='$fol'";
-        $sql=mysqli_query($conn,$query);
         
         if (mysqli_affected_rows($conn)==0){
-            echo "Folio Inexistente";
+            echo "Dato Inexistente";
         }
         echo
         "<br><br><br>
@@ -282,6 +298,7 @@
             <table class='table-orden' cellpadding='0' cellspacing='0'>
             <thead>
                 <tr>
+                    <th class='th-orden' scope='col'>Orden Compra</th>
                     <th class='th-orden' scope='col'>Folio de orden</th>
                     <th class='th-orden' scope='col'>Orden Baan</th>
                     <th class='th-orden' scope='col'>ID cliente</th>
@@ -301,15 +318,17 @@
             /*if ($reg==mysqli_fetch_array($sql)){
                 msg("Folio Inexistente", "rojo");
             }*/
-            $fol=$_POST['folio'];
+            $ordenCompra=$reg->ordenCompra;
             $ordenBaan=$reg->ordenBaan;
             $idCliente=$reg->idCliente;
             $nombreCliente=$reg->nombreCliente;
+            $folio=$reg->folio;
             
             echo
         
             "<tr>
-                <td class='td-orden'>$fol</td>
+                <td class='td-orden'>$ordenCompra</td>
+                <td class='td-orden'>$folio</td>
                 <td class='td-orden'>$ordenBaan</td>
                 <td class='td-orden'>$idCliente</td>
                 <td class='td-orden'>$nombreCliente</td>
