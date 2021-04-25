@@ -69,6 +69,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
                 $query="UPDATE Rol SET estatus=false WHERE rol='$rol' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
                 $success = "Baja realizada con éxito.";
+                registro_baja($query, $_SESSION['usuario']);
             }
             else{
                 $success = "Error en la baja del Rol.";

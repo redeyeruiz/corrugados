@@ -66,6 +66,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         }
         else{
             $success = "Baja realizada con éxito.";
+            registro_baja($query, $_SESSION['usuario']);
         }
         $id_comp = $rol = $rol_af = "";
     }

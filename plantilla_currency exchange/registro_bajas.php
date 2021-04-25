@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+include("php/utilerias.php");
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
@@ -160,22 +161,22 @@ include("php/registro_bajas.php");
                             <p><span style="color:#C84810" class="error"><?= $fecha_error ?></span></p>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>
-                            <p align="center"><b>Descrición</b></p>
+                            <p align="center"><b>Descripción</b></p>
                         </td>
                         <td align="center">
                             <input style="border:3px solid #ff880e" name="desc" type="text" class="campo" value="<?= $desc ?>">
                             <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td colspan="2">
                             <div class="row margin-top_30">
                                 <div class="col-sm-12">
                                     <div class="full">
                                         <div class="center">
-                                            <button name="b_registrar" type="submit" style="width:200px" class="btn btn-outline-success">Registrar</button>
+                                            <!--<button name="b_registrar" type="submit" style="width:200px" class="btn btn-outline-success">Registrar</button>-->
                                             <button name="b_consultar" type="submit" style="width:200px" class="btn btn-outline-success">Consultar</button>
                                         </div>
                                     </div>
