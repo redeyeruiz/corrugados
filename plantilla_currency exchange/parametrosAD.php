@@ -12,7 +12,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
-include("php/parametrosAD   .php");
+include("php/parametrosAD.php");
 //include("php/menu.php");
 ?>
 
@@ -145,6 +145,11 @@ include("php/parametrosAD   .php");
             <table border="0" width="50%" align="center">
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" name="datos">
                     <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <p align="center"><b>Directorio de entrada para autenticación</b></p>
                         </td>
@@ -184,6 +189,16 @@ include("php/parametrosAD   .php");
                             <div class="center">
                             <p id="feedback"></p>
                             </div>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
                         </td>
                     </tr>
                     <tr>

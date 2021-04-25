@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");

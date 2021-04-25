@@ -180,8 +180,6 @@ include("php/asig_rol.php");
                                 </div>
                             </div>
                             <div class="center">
-                                &nbsp;
-                                &nbsp;
                                 <!--
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="filebutton">Select File</label>
@@ -207,6 +205,21 @@ include("php/asig_rol.php");
                             <div class="center">
                             <p id="feedback"></p>
                             </div>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
                         </td>
                     </tr>
                     <tr>

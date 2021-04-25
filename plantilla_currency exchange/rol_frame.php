@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+include('php/utilerias.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: http://localhost/corrugados/plantilla_currency%20exchange/login.php");
@@ -206,6 +207,16 @@ include("php/rol.php");
                             <div class="center">
                             <p id="feedback"></p>
                             </div>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/>
                         </td>
                     </tr>
                     <tr>
