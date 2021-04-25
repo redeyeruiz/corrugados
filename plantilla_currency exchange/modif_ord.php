@@ -5,12 +5,14 @@
         $_SESSION['mens_error'] = "Por favor inicie sesión.";
         header("Location: ".redirect('login'));
         die();
-    }/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
+    }elseif(!verificacion_permiso($_SESSION['usuario'], 'Modificar Ordenes')){
         $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
         header("Location: ".redirect('inicio'));
         die();
-    }*/
-    include('php/utilerias2.php');
+    }
+    //include('php/utilerias2.php');
+    include('php/modOrdenesFunciones.php');
+    
     
     
 ?> 
@@ -56,12 +58,16 @@
         }).resize();
             
         }
+
+        
     </script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    
 
 </head>
 
@@ -152,16 +158,20 @@
                 </div>
                 <?php
                 cancelar();
+                clientValues();
+                calcularPrecio();
                 guardar();
                 folioValue();
                 
                 
-                clientValues();
+                
+                
                 
                 
                 
                 eliminar();
-                calcularPrecio();
+                eliminarOrden();
+                
                 agregar_tablaM();
                 
                 update_dir();
@@ -170,14 +180,16 @@
                 
                 ?>
         </form>  
-
+        
         <form class="formCO" method="POST" action="modif_ord.php">
             <h2 class="h2CO">Eliminar Artículos</h2>
             <p class="pCO" type="Eliminar Articulo" >
             <input class="inputCO" type="text" name ='eArticulo' placeholder="Indique el nombre del artículo" required></input>
             </p>
+            
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
-                <button type="submit" name="eliminarB" class="buttonBigCO btn">Eliminar Artículo</button>
+                <button type="submit" name="eliminarB" onClick="go()" class="buttonBigCO btn">Eliminar Artículo</button>
                 </div>
                 <?php
                 require_once('php/utilerias.php');
@@ -272,16 +284,16 @@
             ?> 
             </p>
             <p class="pCO" type="Cantidad:">
-            <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required value="<?php echo htmlspecialchars($_POST['cantidad'] ?? '', ENT_QUOTES); ?>"></input>
+            <input class="inputCO" type="number" name ='cantidad' placeholder="Indique la cantidad en unidad 1x1000" required  min ="1" value="<?php echo htmlspecialchars($_POST['cantidad'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Precio:" >
-            <input disabled class="inputCO" type="number" name ='costo' placeholder="Indique el precio en pesos" required value="<?php echo htmlspecialchars($_SESSION['precio'] ?? '', ENT_QUOTES); ?>"></input>
+            <input disabled class="inputCO" type="number" name ='costo' placeholder="precio en pesos" required value="<?php echo htmlspecialchars($_SESSION['precioT'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
                 <button name ="calcularP"class="buttonBigCO btn" formnovalidate >Recalcular Precio </button>
                 </div>
             <p class="pCO" type="Fecha Solicitada:">
-            <input  disabled class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_SESSION['fechaSolicitud'] ?? '', ENT_QUOTES); ?>"></input>
+            <input   class="inputCO" type="date" name ='fechaSolicitud' required value="<?php echo htmlspecialchars($_SESSION['fechaSolicitud'] ?? '', ENT_QUOTES); ?>"  min="<?php echo date("Y-m-d"); ?>"></input>
             </p>
             <p class="pCO" type="Observaciones de la Orden:">
             <textarea class="textareaCO" name="Observaciones" rows="3" placeholder="¿Tiene alguna observación sobre el la órden?"required></textarea>
@@ -299,6 +311,7 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">
                 <button type="submit" name="guardar" class="buttonBigCO btn" >Guardar</button>
                 <button type ="submit" name= "cancelar" class="buttonBigCO btn">Cancelar</button>
+                <button type ="submit" name= "eliminarO" class="buttonBigCO btn">Eliminar Orden</button>
                 </div>
         </form>
 
@@ -350,380 +363,7 @@
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
 
-    <?php
-
-function folioValue(){
-    if(isset($_POST['buscar'])){
-        $folio=$_SESSION['folio']=$_POST['folio'];
-        $conexion=conecta_servidor();
-        $query="SELECT * FROM reporteOrden WHERE folio='$folio'";
-        $sql=mysqli_query($conexion,$query);
-        $reg=mysqli_fetch_object($sql);
-        
-        if ($reg==mysqli_fetch_array($sql)){
-            echo "Folio inexistente en base de datos"; //----Agregar CSS bonito
-            return("error");
-        }else{
-            $_SESSION['idCliente'] = $reg->idCliente;
-            $_SESSION['dirEnt']= $reg->dirEnt;
-            $_SESSION['idCompania']= $reg->idCompania;
-            $_SESSION['idOrden']= $reg->idOrden;
-            $_SESSION['fechaSolicitud']= $reg->fechaSolicitud;
-            $_SESSION['fechaOrden']= $reg->fechaOrden;
-            echo "fecha Orden : " . $_SESSION['fechaOrden'];
-            
-            
-        }
-    }
-}
-
-function agregar_tablaM(){
-    
-   
-    if( isset($_POST['agregarArt']) && isset($_SESSION['folio']) ){
-
-        $idOrden                                    =$_SESSION['idOrden'];
-        $idCompania                                 =$_SESSION['idCompania'];
-        $folio                                      =$_SESSION['folio'];
-        $numFact                                    =1234;
-        $ordenBaan                                  =1234;
-        $idCliente                                  =$_SESSION['idCliente'];
-        $nombreCliente                              =$_SESSION['nombreCliente'];
-        $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
-        $idArticulo                                 =$_SESSION['idArticulo'];
-        $ordenCompra                                =$_SESSION['folio'];
-        $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
-        $precio                                     =$_SESSION['precio'];
-        $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
-        $fechaOrden                                 =$_SESSION['fechaOrden'];
-        $fechaSolicitud                             =$_SESSION['fechaSolicitud'];
-        $fechaEntrega                               ="NULL";
-        $entregado                                  =0;
-        $acumulado                                  =0;
-        $total                                      =0;
-        $costo                                      =$_SESSION['precio'];
-        $moneda                                     ="MXP";
-        $Observaciones                              =$_POST['Observaciones'];
-        $producido=0;
-        $estatus=0;
-
-        if(!isset($_SESSION['queries'])){
-            $_SESSION['queries']="INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
-        
-        }
-            
-        else{
-            $_SESSION['queries'] .= "INSERT INTO reporteorden VALUES('$idOrden','$idCompania','$folio','$numFact','$ordenBaan','$idCliente','$nombreCliente','$dirEnt','$idArticulo','$ordenCompra','$cantidad','$precio','$decripcion','$fechaOrden','$fechaSolicitud','$fechaEntrega','0','0','0','0','0','0','0','$producido','$entregado','$acumulado','$total','$costo','$moneda','$Observaciones','$estatus')|";
-        }
-        echo "Se ha agregado el articulo a la orden"; 
-    }
-    
-    
-}
-
-function update_dir(){
-
-    if(isset($_SESSION['dirEnt'])){
-        $dirEnt=$_SESSION['dirEnt'];
-        $conexion=conecta_servidor();
-        $query="SELECT * FROM dirent WHERE dirEnt='$dirEnt'";
-        $sql=mysqli_query($conexion,$query);
-        $reg=mysqli_fetch_object($sql);
-
-        if ($reg==mysqli_fetch_array($sql)){
-            echo "Folio inexistente en base de datos"; //----Agregar CSS bonito
-            return("error");
-        }else{
-            $_SESSION['direccion'] = "$reg->dirEnt, $reg->nombreEntrega, $reg->direccion, $reg->municipio, $reg->estado, $reg->telefono, $reg->observaciones, $reg->codPost, $reg->codRuta, $reg->pais, $reg->rfc";
-            $dire=explode(",",$_SESSION['direccion']);
-
-
-            $_SESSION['direntC'] =$dire[0];
-            $_SESSION['nomEC'] =$dire[1];
-            $_SESSION['direccionC'] =$dire[2];
-            $_SESSION['municipioC'] =$dire[3];
-            $_SESSION['estadoC'] =$dire[4];
-            $_SESSION['telefonoC'] =$dire[5];
-            $_SESSION['obsC'] =$dire[6];
-            $_SESSION['CPC'] =$dire[7];
-            $_SESSION['CRC'] =$dire[8];
-            $_SESSION['paisC'] =$dire[9]; 
-            $_SESSION['RFCC'] =$dire[10];
-            
-            
-        }
-    }
-    
-
-}
-
-function eliminar(){
-    
-    if((!isset($_SESSION['folio'])) && isset($_POST['eliminarB'])){
-        echo "Error, no se ha buscado orden con número de folio";
-    }
-    
-    if(isset($_POST['eArticulo']) && isset($_SESSION['folio']) && isset($_POST['eliminarB'])){
-        
-        $folio=$_SESSION['folio'];
-        $articulo=$_POST['eArticulo'];
-        
-        $conn = conecta_servidor();
-        $query="DELETE FROM reporteorden WHERE folio='$folio' AND descripcion='$articulo'";
-        $sql=mysqli_query($conn,$query);
-        
-        if (mysqli_affected_rows($conn)==0){
-           echo "Error, no existe la relación folio-articulo";
-        }
-        else{
-            unset($_SESSION['queries']);
-            echo "el articulo ha sido eliminado";
-        }
-
-    }
-    
-
-}
-
-function update_tableM(){
-        
-    echo
-    "
-    <h1 class='h1-orden'>Artículos Agregados</h1>
-    <div class='tbl-header-orden'>
-        <table class='table-orden' cellpadding='0' cellspacing='0'>
-        <thead>
-            <tr>
-                <th class='th-orden' scope='col'>Cliente</th>
-                <th class='th-orden' scope='col'>Direccion de Entrega</th>
-                <th class='th-orden' scope='col'>Orden de compra</th>
-                <th class='th-orden' scope='col'>Fecha-Orden</th>
-                <th class='th-orden' scope='col'>Articulo</th>
-                <th class='th-orden' scope='col'>Descripción</th>
-                <th class='th-orden' scope='col'>Cantidad</th>
-                <th class='th-orden' scope='col'>Precio</th>
-                <th class='th-orden' scope='col'>Fecha-Solicitud</th>
-            </tr>
-        </thead>
-        </table>
-    </div>
-    <div class='tbl-content-orden'>
-            <table class='table-orden' cellpadding='0' cellspacing='0'>
-            <tbody>";
-
-    /* SQL table*/
-    if(isset($_SESSION['folio'])){
-       
-
-    
-        $folio=$_SESSION['folio'];
-        $conexion=conecta_servidor();
-        $query="SELECT * FROM reporteorden WHERE folio='$folio'";
-        $sql=mysqli_query($conexion,$query);
-        while ($reg=mysqli_fetch_object($sql)){
-            echo
-            "       <tr>
-                        <td class='td-orden'>$reg->nombreCliente</td>
-                        <td class='td-orden'>$reg->dirEnt</td>
-                        <td class='td-orden'>$reg->ordenCompra</td>
-                        <td class='td-orden'>$reg->fechaOrden</td>
-                        <td class='td-orden'>$reg->idArticulo</td>
-                        <td class='td-orden'>$reg->descripcion</td>
-                        <td class='td-orden'>$reg->cantidad</td>
-                        <td class='td-orden'>$reg->precio</td>
-                        <td class='td-orden'>$reg->fechaSolicitud</td>
-                    </tr>
-            ";
-        }
-    }
-
-    /* session table*/
-    if(isset($_SESSION['queries'])){
-        $queries=explode("|",$_SESSION['queries'],-1);
-
-        for($i=0;$i<count($queries);$i++){
-            $query= explode("'",$queries[$i]);
-
-            $cliente        = $query[13];
-            $dirEnt         = $query [15];
-            $ordenCompra    = $query [19];
-            $fechaOrden     = $query [27];
-            $idArticulo     = $query [17];
-            $descripcion    = $query [25];
-            $cantidad       = $query [21];
-            $precio         = $query [23];
-            $fechaSolicitud = $query [29];
-
-
-            echo
-
-            "       <tr>
-                        <td class='td-orden'>$cliente</td>
-                        <td class='td-orden'>$dirEnt</td>
-                        <td class='td-orden'>$ordenCompra</td>
-                        <td class='td-orden'>$fechaOrden</td>
-                        <td class='td-orden'>$idArticulo</td>
-                        <td class='td-orden'>$descripcion</td>
-                        <td class='td-orden'>$cantidad</td>
-                        <td class='td-orden'>$precio</td>
-                        <td class='td-orden'>$fechaSolicitud</td>
-                    </tr>
-                ";
-        }
-    }
-    echo"
-                </tbody>
-                </table>
-    </div>";
-}
-
-function error($msg){
-    return $msg;
-}
-
-
-//cancelar una orden
-function cancelar(){
-    if(isset($_POST["cancelar"]) ){
-        unsetAll();
-    
-        if(isset($_SESSION['folio'])) {
-            unsetAll();
-        }   
-        
-    }
-    
-}
-
-//TABLA ARTICULOS
-function tabla_articulos(){
-    if(isset($_SESSION['idCliente'])){
-        
-        $idCliente=$_SESSION['idCliente'];
-        $conexion=conecta_servidor();
-        $query="SELECT ArticuloExistente.descripcion FROM ArticuloExistente INNER JOIN ArticuloVendido WHERE  ArticuloExistente.idArticulo= ArticuloVendido.idArticulo AND idCliente = '$idCliente'" ;
-        $sql=mysqli_query($conexion,$query);
-        if (mysqli_affected_rows($conexion)==0){
-            echo "Error, id cliente o el idlista es inexistente en base de datos";
-        }
-        echo "<datalist id='articulos'>";
-        while ($reg=mysqli_fetch_object($sql)){
-            echo "<option>$reg->descripcion";
-
-        }
-        echo "</datalist>";
-
-        
-    }
-    
-    
-    
-           
-}
-//guardar e insertar a la DB
-function guardar(){
-    if(isset($_POST["guardar"])){
-
-        $conn = conecta_servidor();
-    
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
-        
-        if(isset($_SESSION['queries'])){
-            $queries=explode("|",$_SESSION['queries'],-1);
-    
-            for($i=0;$i<count($queries);$i++){
-                $query=$queries[$i];
-                mysqli_query($conn, $query);
-            }
-            unsetAll();
-        
-        }else{
-            echo "no hay nada que guardar";
-        }
-        
-    }
-}
-
-
-// PRECIO
-function calcularPrecio(){
-    if(isset($_POST['calcularP']) && isset($_POST['cantidad'])  || (isset($_POST['agregarArt']) && isset($_POST['cantidad'])) ){
-        $precio_articulo=obtenerPrecio(); 
-        $_SESSION['precio']=strval( intval($_POST['cantidad']) * $precio_articulo);
-    }
-}
-
-function obtenerPrecio(){
-    
-    if(isset($_SESSION['idCliente'])  && isset($_SESSION['idLista']) ){
-        
-        $_SESSION['idArticulo']=$idArticulo=obtenerIdArticulo();
-        
-        
-        $idLista=$_SESSION['idLista'];  
-        $conn=conecta_servidor();
-        $query="SELECT descuento,precio FROM listaPrecio WHERE idLista ='$idLista' AND idArticulo ='$idArticulo' ";
-        $sql=mysqli_query($conn,$query);
-        $reg=mysqli_fetch_object($sql);
-        if ($reg==mysqli_fetch_array($sql)){
-            echo "Error, no existe artiuclo con tal idLista o idArticulo";
-            return(NULL);
-        }else{
-            
-            return (floatval($reg->precio)  - (floatval($reg->descuento) * floatval($reg->precio) ));
-        }
-    }
-    
-}
-
-function obtenerIdArticulo(){
-    
-    $conn=conecta_servidor();
-    $descripcion=$_POST['descripcion'];
-    $query="SELECT idArticulo FROM ArticuloExistente WHERE descripcion ='$descripcion'";
-    $sql=mysqli_query($conn,$query);
-    $reg=mysqli_fetch_object($sql);
-    if ($reg==mysqli_fetch_array($sql)){
-        return "Error, no hay articulo con tal descripcion";
-    }else{
-        return $reg->idArticulo;
-    }
-
-
-}
-
-function clientValues(){
-    
-    
-    
-    if(isset($_SESSION['idCliente'])){
-        
-        
-        $idCliente=$_SESSION['idCliente'];         
-        $conn=conecta_servidor();
-        $query="SELECT nombreCliente,idCliente,estatus,idLista,saldoOrden,bloqueo,idCompania FROM cliente WHERE idCliente = '$idCliente'";
-        $sql=mysqli_query($conn,$query);
-        $reg=mysqli_fetch_object($sql);
-        if ($reg==mysqli_fetch_array($sql)){
-            echo "error no existe tal cliente";
-        }else{
-            $_SESSION['estatus']=$reg->estatus;
-            $_SESSION['idLista']=$reg->idLista;
-            $_SESSION['saldoOrden']=$reg->saldoOrden;
-            $_SESSION['bloqueo']=$reg->bloqueo;
-            $_SESSION['idCompania']=$reg->idCompania;
-            $_SESSION['nombreCliente']=$reg->nombreCliente;
-        }
-    }
-    
-}
-
-
-
-?>
-
+  
 
 </body>
 

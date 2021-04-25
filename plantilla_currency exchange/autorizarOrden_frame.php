@@ -35,11 +35,11 @@ $rolFAC=true;
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
     die();
-    }/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
-    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
-    header("Location: ".redirect('inicio'));
-    die();
-    }*/
+    }elseif(!verificacion_permiso($_SESSION['usuario'], 'Autorizar Orden')){
+        $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+        header("Location: ".redirect('inicio'));
+        die();
+    }
     
 ?> 
 <!DOCTYPE html>
@@ -246,7 +246,7 @@ $rolFAC=true;
     <!-- Iframe -->
     <section class="bodyCO">
 
-    <form class="formCO100" method="POST" action="autorizarOrden.php" >
+    <form class="formCO100" method="POST" action="autorizarOrden_frame.php" >
 
         <h2 class="h2CO">Autorizar Orden</h2>
         
@@ -683,7 +683,8 @@ $rolFAC=true;
             $cond="idOrden='$id1' AND idCompania='$id2' AND idCliente='$id3' AND idArticulo='$id4' AND folio='$folio';";
             
             if ($reg->vFac == 1 && $reg->vCXC == 1 && $reg->vPRE == 1 && $reg->vCST == 1 && $reg->vING == 1 && $reg->vPLN == 1 && $reg->vFEC == 1){
-                $query="UPDATE reporteOrden SET estatus='1' WHERE ".$cond; 
+                $query="UPDATE reporteOrden SET estatus='1' WHERE ".$cond;
+                 
             }  else{
                 $query="UPDATE reporteOrden SET estatus='0' WHERE ".$cond; 
             }   

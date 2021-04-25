@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("America/Mexico_City");
+
 $dbServername = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
@@ -302,7 +304,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             while ($row = $result-> fetch_assoc()){
                 switch($row["permiso"]){
                     case 'Busqueda de Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-8 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/busqueda.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('busqueda ordenes') ?>>acceder</a></div>
@@ -313,7 +315,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Capturar Orden': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/carrito.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('capturar orden') ?>>acceder</a></div>
@@ -324,7 +326,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Autorizar Orden': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/consulta.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('autorizar orden') ?>>acceder</a></div>
@@ -336,7 +338,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         <?php break;
                         
                     case 'Consultar Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/consulta.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar ordenes') ?>>acceder</a></div>
@@ -347,7 +349,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Modificar Ordenes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/modificar.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('modificar ordenes') ?>>acceder</a></div>
@@ -358,7 +360,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Consultar Estatus': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/estatus.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('consultar estatus') ?>>acceder</a></div>
@@ -369,7 +371,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Buscar Articulos': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/estatus.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('buscar articulos') ?>>acceder</a></div>
@@ -380,9 +382,9 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         </div>
                         <?php break;
                     case 'Bloqueo de Clientes': ?>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="col-md-2 col-sm-9 col-xl-2">
                             <div class="full news_blog">
-                                <img class="img-responsive" src="images/busqueda.png"alt="#" />
+                                <img class="img-responsive" src="images/bajaCliente.png"alt="#" />
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('bloqueo clientes') ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Bloqueo de Clientes</h3>
@@ -492,7 +494,8 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                      ('$id_user','Consultar Ordenes',1),
                                                      ('$id_user','Modificar Ordenes',1),
                                                      ('$id_user','Consultar Estatus',1),
-                                                     ('$id_user','Buscar Articulos',1),
+                                                     ('$id_user','Buscar Articulos',1)
+                                                     ('$id_user','Bloqueo de Clientes',1),
                                                      ('$id_user','Reportes',1),
                                                      ('$id_user','Reporte de Todas las Ordenes',1),
                                                      ('$id_user','Reporte de Promedio de Tiempo',1),
@@ -501,7 +504,6 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                 mysqli_query($conection, $query);
                 break;
             case 'ADC':
-                echo "entré.";
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
                                                     ('$id_user','Roles',1),
                                                     ('$id_user','Asignacion de Roles',1),
@@ -509,7 +511,6 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Operaciones',1),
                                                     ('$id_user','Busqueda de Ordenes',1)";
                 mysqli_query($conection, $query);
-                echo mysqli_error($conection);
                 break;
             case 'AGE':
                 $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
@@ -521,16 +522,107 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Reportes',1),
                                                     ('$id_user','Reporte de Todas las Ordenes',1)";
                 mysqli_query($conection, $query);
+                break;
             case 'CST':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Autorizacion Costos',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'CXC':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Bloqueo de Clientes',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Estatus',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'DIR':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1),
+                                                    ('$id_user','Reporte de Promedio de Tiempo',1),
+                                                    ('$id_user','Reporte de Ordenes Procesadas',1),
+                                                    ('$id_user','Reporte de Ordenes en Proceso',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'EMB':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'FAC':
+                //NA Actualmente
+                break;
             case 'FEC':
+                //NA Actualmente
+                break;
             case 'ING':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Autorizacion Ingenieria',1),
+                                                    ('$id_user','Busqueda de Ordenes',1),
+                                                    ('$id_user','Buscar Articulos',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'PLN':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizacion Fechas',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Promedio de Tiempo',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'REA':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','',1)";
+                mysqli_query($conection, $query);
+                break;
             case 'VTA':
+                $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
+                                                    ('$id_user','Autorizar Orden',1),
+                                                    ('$id_user','Consultar Ordenes',1),
+                                                    ('$id_user','Consultar Estatus',1),
+                                                    ('$id_user','Reportes',1),
+                                                    ('$id_user','Reporte de Todas las Ordenes',1)";
+                mysqli_query($conection, $query);
+                break;
         }
+    }
+
+    function verificacion_permiso($id_user, $permiso){
+        global $conection;
+        $miPermiso = false;
+        $query = "SELECT * FROM Permiso WHERE idUsuario = '$id_user'";
+        $result = mysqli_query($conection, $query);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                if($row['permiso']==$permiso){
+                    $miPermiso = true;
+                    break;
+                }
+            }
+        }
+        return $miPermiso;
+    }
+
+    function registro_baja($query, $id_user){
+        global $conection;
+        $tiempo = time();
+        $dia = date("Y-m-d",$tiempo);
+        $miQuery = "INSERT INTO Resgitro_bajas Values('$id_user', '$dia','$query')";
+        mysqli_query($conection, $miQuery);
     }
 ?>

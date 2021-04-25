@@ -7,11 +7,11 @@
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
     die();
-    }/*elseif(!($_SESSION['rol']=='ADM'||$_SESSION['rol']=='ADMA')){
-    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
-    header("Location: ".redirect('inicio'));
-    die();
-    }*/
+    }elseif(!verificacion_permiso($_SESSION['usuario'], 'Consultar Estatus')){
+        $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+        header("Location: ".redirect('inicio'));
+        die();
+    }
     $rolFAC=true;
     $rolCXC=false;
     $rolPRE=false;
@@ -229,14 +229,24 @@
     <form class="formCO100" method="POST" action="statusOrden.php" >
 
         <h2 class="h2CO">Status de Órden</h2>
-        
-        <div class="input-group mb-3">
-            <p class="pCO" type="Número de Órden:">
-            <input class="inputCO" type="text" name='folio' placeholder="Ingrese el folio de la órden" >
-            <button type="submit" name="buscar" class="buttonBigCO btn btn-outline-secondary">Buscar</button>
-            </p>    
+        <div class="row">
+            <div class="input-group col mb-3">
+                <p class="pCO" type="Número de Órden:">
+                <input class="inputCO" type="text" name='folio' placeholder="Ingrese el número de la órden" >
+                <button type="submit" name="buscar" class="buttonBigCO btn btn-outline-secondary">Buscar</button>
+                </p>    
+            </div>
+            <!--
+            <div class="input-group col mb-3">
+                <p class="pCO" type="ID Cliente:">
+                <input class="inputCO" type="text" name='nombre' placeholder="Desde" >
+                <input class="inputCO" type="text" name='nombre' placeholder="Hasta" >
+                <button type="submit" name="buscarN" class="buttonBigCO btn btn-outline-secondary">Buscar</button>
+                </p>    
+            </div>
+            <div class='alert'></div>
+            -->
         </div>
-        <div class='alert'></div>
         <?php
             require_once('php/utilerias.php');
             cancelar();

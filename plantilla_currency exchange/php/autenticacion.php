@@ -17,12 +17,12 @@ if(mysqli_connect_errno()){
     die();
 }
 
-if($statement = $conexion->prepare('SELECT nombre, contrasena, rol FROM usuario WHERE idUsuario = ?')){
+if($statement = $conexion->prepare('SELECT nombre, contrasena, rol, idCompania FROM usuario WHERE idUsuario = ?')){
     $statement->bind_param('s', $_POST['username']);
     $statement->execute();
     $statement->store_result();
     if($statement->num_rows >0){
-        $statement->bind_result($nom, $contra, $rol);
+        $statement->bind_result($nom, $contra, $rol, $idCompania);
         $statement->fetch();
         if(password_verify($_POST['pass'], $contra)){
         //if($contra==$_POST['pass']){
@@ -31,6 +31,7 @@ if($statement = $conexion->prepare('SELECT nombre, contrasena, rol FROM usuario 
             $_SESSION['nombre'] = $nom;
             $_SESSION['usuario'] = $_POST['username'];
             $_SESSION['rol'] = $rol;
+            $_SESSION['idComp'] = $idCompania;
             header('Location: '.redirect('inicio'));
             die();
         }else{
