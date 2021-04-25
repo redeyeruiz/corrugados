@@ -283,6 +283,10 @@ include("php/permisos.php");
                                                     <input type="checkbox" name="check_list[]" id="check29" value="Autorizacion Fechas">
                                                     <label for="tall-2-2" class="custom-unchecked">Autorización Fechas</label>
                                                 </li>
+                                                <li class="last">
+                                                    <input type="checkbox" name="check_list[]" id="check29" value="Autorizacion Precios">
+                                                    <label for="tall-2-2" class="custom-unchecked">Autorización Precios</label>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>

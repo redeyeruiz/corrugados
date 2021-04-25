@@ -62,25 +62,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
         }
         else{
-            $query = "SELECT * FROM rol WHERE estatus = 1";
-            $sql = mysqli_query($conection, $query);
-            $roles = array();
-            while($row = $sql->fetch_assoc()){
-                array_push($roles, $row['rol']);
-            }
-            foreach($roles as $mirol){
-                if($mirol == $rol){
-                    $success = "Alta realizada con éxito.";
-                }
-            }
-            if ($success == "Alta realizada con éxito."){
-                crea_permiso($id_user, $rol);
-                $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
-            }else{
-                $success = "Error en la alta de usuario, rol no encontrado.";
-            }
+            $success = "Alta realizada con éxito.";
+            crea_permiso($id_user, $rol);
+            $id_user = $id_comp = $nom = $contrasena = $rol = $estatus = "";
         }
-        //$id_user = $id_comp = $nom = $contrasena = $rol = "";
     }
 }
 
@@ -104,11 +89,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
             if ($row["estatus"] == "1"){
                 $query="UPDATE Usuario SET estatus=false WHERE idUsuario='$id_user' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
+                $query="DELETE FROM permiso WHERE idUsuario='$id_user'";
                 $success = "Baja realizada con éxito.";
-                registro_baja($query, $_SESSION['usuario']);
+                //echo json_encode($row);
+                registro_baja($row, $_SESSION['usuario']);
             }
             else{
-                $success = "Error en la baja del usuario.";
+                $success = "Error en la baja del usuario22.";
             }
         }
         $id_comp = $id_user = $nom = $contrasena = $rol = "";
@@ -156,9 +143,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         else{
             $row = $exist-> fetch_assoc();
             if ($row["estatus"] == "1"){
-                $query="UPDATE Usuario SET idCompania= '$id_comp', nombre='$nom', idUsuario='$id_user', contrasena='$laContrasena', rol='$rol' WHERE idUsuario='$id_user' and estatus=true";
+                $query="UPDATE Usuario SET idCompania='$id_comp', nombre='$nom', contrasena='$laContrasena', rol='$rol' WHERE idUsuario='$id_user' and estatus=true";
                 $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+                if(!$sql){
+                    $success = "Error en la actualización de datos del usuario.xx";
+                }else{
+                    crea_permiso($id_user, $rol);
+                    $success = "Actualización realizada con éxito.";
+                }
             }
             else{
                 $success = "Error en la actualización de datos del usuario.";
@@ -210,8 +202,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
     else{
         $contrasena = test_input($_POST["contrasena"]);
     }
-
-    $rol = test_input($_POST["rol"]);
+    if (empty($_POST["rol"])){
+        $rol_error = "Se requiere dato actualizado.";
+    }
+    else{
+        $rol = test_input($_POST["rol"]);
+    }
+    //$rol = test_input($_POST["rol"]);
     
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
         $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=false";
@@ -223,11 +220,12 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $row = $exist-> fetch_assoc();
             if ($row["estatus"] == "0"){
                 $laContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
-                $query="UPDATE Usuario SET nombre='$nom', idCompania='$id_comp', estatus=true, contrasena='$laContrasena' WHERE idUsuario='$id_user'";
+                $query="UPDATE Usuario SET nombre='$nom', idCompania='$id_comp', rol='$rol', estatus=true, contrasena='$laContrasena' WHERE idUsuario='$id_user'";
                 $sql=mysqli_query($conection,$query);
                 if(!$sql){
                     $success = "Error en la actualización de datos del usuario.";
                 }else{
+                    crea_permiso($id_user, $rol);
                     $success = "Alta y actualización realizada con éxito.";
                 }
             }

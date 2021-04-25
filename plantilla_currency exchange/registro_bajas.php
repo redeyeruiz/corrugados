@@ -210,8 +210,9 @@ include("php/registro_bajas.php");
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>Descripción</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
+                        //echo "aca";
                         while ($row = $result-> fetch_assoc()){
-                            echo "<tr><td align='center' style='border:3px solid #dba46c' width='15%'>". $row["idUsuario"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["fecha"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["descripcion"]."</td></tr>";
+                            echo "<tr><td align='center' style='border:3px solid #dba46c' width='15%'>". $row["idUsuario"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["fechaBaja"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["descripcionbajas"]."</td></tr>";
                         }
                     }
                     else{

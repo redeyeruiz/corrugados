@@ -460,7 +460,10 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     }
 
     function crea_permiso($id_user, $rol){
+        //echo $rol;
         global $conection;
+        $query = "DELETE FROM permiso WHERE idUsuario='$id_user'";
+        mysqli_query($conection,$query);
         switch($rol){
             case 'ADM':
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
@@ -536,9 +539,9 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                 $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
                                                     ('$id_user','Autorizar Orden',1),
                                                     ('$id_user','Bloqueo de Clientes',1),
-                                                    ('$id_user','Autorizar Orden',1),
                                                     ('$id_user','Consultar Estatus',1)";
                 mysqli_query($conection, $query);
+                echo mysqli_error($conection);
                 break;
             case 'DIR':
                 $query = "INSERT INTO Permiso Values('$id_user','Operaciones',1),
@@ -599,6 +602,8 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                     ('$id_user','Reporte de Todas las Ordenes',1)";
                 mysqli_query($conection, $query);
                 break;
+            default:
+                break;
         }
     }
 
@@ -618,11 +623,13 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         return $miPermiso;
     }
 
-    function registro_baja($query, $id_user){
+    function registro_baja($row, $id_user){
         global $conection;
         $tiempo = time();
         $dia = date("Y-m-d",$tiempo);
-        $miQuery = "INSERT INTO Resgitro_bajas Values('$id_user', '$dia','$query')";
+        $row_f = json_encode($row);
+        $miQuery = "INSERT INTO Registro_bajas Values('$id_user', '$dia','$row_f')";
         mysqli_query($conection, $miQuery);
+        //echo mysqli_error($conection);
     }
 ?>
