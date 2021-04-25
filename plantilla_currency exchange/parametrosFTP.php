@@ -12,7 +12,7 @@ if(!isset($_SESSION['conectado'])){
     die();
 }
 
-include("php/parametrosAD   .php");
+include("php/parametrosFTP.php");
 //include("php/menu.php");
 $user = $_SESSION['nombre'];
 ?>

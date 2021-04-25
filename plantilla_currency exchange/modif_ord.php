@@ -278,7 +278,7 @@
             <input disabled class="inputCO" type="date" name ='fechaOrden' required value="<?php echo htmlspecialchars($_SESSION['fechaOrden'] ?? '', ENT_QUOTES); ?>"></input>
             </p>
             <p class="pCO" type="Artículo:">
-            <input class="datal "  name ='descripcion' type="search" list="articulos" size="25" class="datal" placeholder="Ingrese el nombre de un artículo" required value="<?php echo htmlspecialchars($_SESSION['descripcion'] ?? '', ENT_QUOTES); ?>">
+            <select id='articulos_l' class='datal' name ='descripcion' list='articulos' required value="<?php echo htmlspecialchars($_POST['descripcion'] ?? '', ENT_QUOTES); ?>">
             <?php
             tabla_articulos();
             ?> 

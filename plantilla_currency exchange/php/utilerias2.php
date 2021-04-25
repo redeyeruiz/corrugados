@@ -61,9 +61,41 @@ function executeQuery($conn,$query){
     }
 }
 function warningMssg($message)
+
+{
+    echo "<div class= 'alert alert-warning'>" .
+    "<strong>Warning!  </strong>". " $message"   .
+        "</div>";
+}
+function checarFecha()
+{
+    if(isset($_SESSION['idLista']) && $_SESSION['idArticulo'])
     {
-        echo "<div class= 'alert alert-warning'>" .
-        "<strong>Warning!  </strong>". " $message"   .
-            "</div>";
+        $idLista=$_SESSION['idLista'];
+        $idArticulo=$_SESSION['idArticulo'];
+        $conexion=conecta_servidor();
+        $query="SELECT fechaCaducidad FROM listaprecio WHERE idLista='$idLista' AND idArticulo='$idArticulo'";
+        $sql=mysqli_query($conexion,$query);
+        $reg=mysqli_fetch_object($sql);
+        unset($_SESSION['ordenT']);
+        
+        if ($reg==mysqli_fetch_array($sql)){
+            warningMssg("ID Lista inexistente o ID Lista no tiene fecha de caducidad");
+            //echo "Folio inexistente en base de datos"; //----Agregar CSS bonito
+            return("error");
+        }else{
+            $fechaCaducidad=$reg->fechaCaducidad;
+            $fechaActual = date("Y-m-d"); 
+            if ($fechaActual > $fechaCaducidad) {
+                warningMssg("El articulo  en la Lista de Precios : ".$idLista." ha caducado");
+            }else{
+                return FALSE;
+            }
+            
+        }
     }
+    
+    
+}
+
 ?>

@@ -255,7 +255,7 @@
 
     }
 
-    //Tabla direccion Chequeo Saldo 
+    //Tabla direccion, Chequeo Saldo 
 
     function tabla_dir(){    
 
@@ -443,7 +443,24 @@
                
     }
     // PRECIO , COSTO , CANTIDAD STOCK, SALDO
-    
+    function checarStock(){
+        
+        if(isset($_SESSION['idArticulo'])){
+            $idArticulo=$_SESSION['idArticulo'];
+            $conn=conecta_servidor();
+            $query="SELECT * FROM articuloexistente WHERE  idArticulo ='$idArticulo' ";
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if ($reg==mysqli_fetch_array($sql)){
+                echo "Error, no existe articulo con tal  idArticulo";
+            }else{
+                
+                if($reg->stock < $_POST['cantidad']){
+                    warningMssg("No tiene suficiente stock el articulo : ".$reg->descripcion);
+                }
+            }
+        }
+    }
     function queriesStock($conn){
         $queries=explode("|",$_SESSION['queries'],-1);
         $queriesS=array();
@@ -469,7 +486,7 @@
         $sql=mysqli_query($conn,$query);
         $reg=mysqli_fetch_object($sql);
         if ($reg==mysqli_fetch_array($sql)){
-            echo "Error, no existe artiuclo con tal  idArticulo";
+            echo "Error, no existe articulo con tal  idArticulo";
         }else{
             
             return$reg->costoEstandar;

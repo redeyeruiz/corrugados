@@ -6,6 +6,7 @@
     
     clientValues();
     calcularPrecio();
+    
     update_dir();
     setOrdenCompra();
     guardar();
@@ -202,7 +203,9 @@
             
 			
             <?php 
-				tabla_dir();
+                checarStock();
+                checarFecha();
+				tabla_dir();      
 			?>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" role="group">

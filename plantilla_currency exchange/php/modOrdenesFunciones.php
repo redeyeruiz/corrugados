@@ -303,6 +303,7 @@ function cancelar(){
 
 //TABLA ARTICULOS
 function tabla_articulos(){
+        
     if(isset($_SESSION['idCliente'])){
         
         $idCliente=$_SESSION['idCliente'];
@@ -310,14 +311,15 @@ function tabla_articulos(){
         $query="SELECT ArticuloExistente.descripcion FROM ArticuloExistente INNER JOIN ArticuloVendido WHERE  ArticuloExistente.idArticulo= ArticuloVendido.idArticulo AND idCliente = '$idCliente'" ;
         $sql=mysqli_query($conexion,$query);
         if (mysqli_affected_rows($conexion)==0){
-            echo "Error, id cliente o el idlista es inexistente en base de datos";
+            echo "<option> No hay articulos asignados a este cliente";
         }
-        echo "<datalist id='articulos'>";
+
+        //echo "<select id='articulos_l' class='datal' name ='descripcion' list='articulos' >";
         while ($reg=mysqli_fetch_object($sql)){
             echo "<option>$reg->descripcion";
 
         }
-        echo "</datalist>";
+        echo "</select>";
 
         
     }

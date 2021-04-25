@@ -339,16 +339,66 @@ include('utilerias2.php');
 		}
 
 		function orden_filtro(){
-			$f_desde=$_GET['f_desde'];
-			$f_hasta=$_GET['f_hasta'];
-			$b_desde=$_GET['b_desde'];
-			$b_hasta=$_GET['b_hasta'];
-			$c_desde=$_GET['c_desde'];
-			$c_hasta=$_GET['c_hasta'];
-			$a_desde=$_GET['a_desde'];
-			$a_hasta=$_GET['a_hasta'];
+
+
+            if(($_GET['f_desde'] || $_GET['f_hasta']) == ""){
+                $Query1=""; 
+                $start = false;
+            }
+            else{
+                $f_desde=$_GET['f_desde'];
+                $f_hasta=$_GET['f_hasta'];
+                $Query1="fechaOrden BETWEEN '$f_desde' AND '$f_hasta'";
+            }
+            
+
+            if(($_GET['b_desde'] || $_GET['b_hasta']) == ""){
+                $Query2="";
+            }
+            else{
+                $b_desde=$_GET['b_desde'];
+                $b_hasta=$_GET['b_hasta'];
+                if ($start = false){
+                    $Query2="ordenBaan BETWEEN '$b_desde' AND '$b_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query2=" AND ordenBaan BETWEEN '$b_desde' AND '$b_hasta'";
+                } 
+            }
+
+            if(($_GET['c_desde'] || $_GET['c_hasta']) == ""){
+                $Query3="";
+            }
+            else{
+                $c_desde=$_GET['c_desde'];
+                $c_hasta=$_GET['c_hasta'];
+                if ($start = false){
+                    $Query3="idCliente BETWEEN '$c_desde' AND '$c_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query3=" AND idCliente BETWEEN '$c_desde' AND '$c_hasta'";
+                } 
+            }
+
+            if(($_GET['a_desde'] || $_GET['a_hasta']) == ""){
+                $Query4="";
+            }
+            else{
+                $a_desde=$_GET['a_desde'];
+                $a_hasta=$_GET['a_hasta'];
+                if ($start = false){
+                    $Query4="idArticulo BETWEEN '$a_desde' AND '$a_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query4=" AND idArticulo BETWEEN '$a_desde' AND '$a_hasta'";
+                } 
+            }
 			$conn=conecta_servidor();
-			$query="SELECT * FROM reporteorden WHERE fechaOrden BETWEEN '$f_desde' AND '$f_hasta' AND ordenBaan BETWEEN '$b_desde' AND '$b_hasta' AND idCliente BETWEEN '$c_desde' AND '$c_hasta' AND idArticulo BETWEEN '$a_desde' AND '$a_hasta'";
+			$query="SELECT * FROM reporteorden WHERE $Query1 $Query2 $Query3 $Query4 ";
+            echo "hello";
 			echo $query;
 			$sql=mysqli_query($conn,$query);
 			//$reg=mysqli_fetch_object($sql);		
