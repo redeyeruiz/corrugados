@@ -1,17 +1,10 @@
-1,WALMART,0
+1,LA MODERNA,1
 100,Puertas Corp,1
 101,Unagro,1
 102,Farmacorp,1
 103,Nestle,1
 104,LG,1
-12,Samsung,0
 2,SUPERAMA,0
-3,La Comer,1
-36,Arcor,1
-4,SuperCompras,1
-45,Farmacorp,1
-5,Costco,1
+225,PAPELES CORRUGADOS SA DE CV,1
+286,PELICULAS PLASTICAS SA DE CV,1
 6,Mini Super,0
-64,Concretec,1
-69,Nestle,1
-80,LG,1
