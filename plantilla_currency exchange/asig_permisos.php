@@ -191,6 +191,10 @@ include("php/permisos.php");
                                             <input type="checkbox" name="check_list[]" id="check7" value="Parametros FTP">
                                             <label for="tall-3" class="custom-unchecked">Parámetros FTP</label>
                                         </li>
+                                        <li class="last">
+                                            <input type="checkbox" name="check_list[]" id="check7" value="Registro bajas">
+                                            <label for="tall-3" class="custom-unchecked">Registro de bajas</label>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="last">
@@ -330,6 +334,10 @@ include("php/permisos.php");
                                         <li>
                                             <input type="checkbox" name="check_list[]" id="check38" value="Reporte de Ordenes en Proceso">
                                             <label for="tall-1" class="custom-unchecked">Reporte de Órdenes en Proceso</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" name="check_list[]" id="check38" value="Reportes Graficados">
+                                            <label for="tall-1" class="custom-unchecked">Reportes Graficados</label>
                                         </li>
                                     </ul>
                                 </li>

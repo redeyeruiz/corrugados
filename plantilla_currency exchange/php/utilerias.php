@@ -33,6 +33,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 			case 'rol_frame':     return 'http://localhost/corrugados/plantilla_currency%20exchange/rol_frame.php';
 			case 'roles':         return 'http://localhost/corrugados/plantilla_currency%20exchange/roles.php';
 			case 'usuario_frame': return 'http://localhost/corrugados/plantilla_currency%20exchange/usuario_frame.php';
+            case 'registro_bajas':return 'http://localhost/corrugados/plantilla_currency%20exchange/registro_bajas.php';
             case 'operaciones': return 'http://localhost/corrugados/plantilla_currency%20exchange/operaciones.php';
             case 'busqueda ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/buscarOrdenes_frame.php';
             case 'capturar orden': return 'http://localhost/corrugados/plantilla_currency%20exchange/capturarOrden_frame.php';
@@ -44,7 +45,10 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             case 'bloqueo clientes': return 'http://localhost/corrugados/plantilla_currency%20exchange/bloqueo_Clientes.php';
             case 'reportes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes.php';
             case 'reporte todas ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_ordenes.php';
-            case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.php';
+            case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.html';
+            case 'reporte en proc': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesEnProc.php';
+            case 'reporte proc': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesProcesadas.php';
+            case 'reporte graf': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesGraf.php';
             
         
 		}
@@ -148,6 +152,17 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                 <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('parametrosFTP'); ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Parámetros del FTP</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <?php break;
+                    case 'Registro bajas': ?>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/reg_bajas.jpg" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('registro_bajas'); ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Registro de bajas</h3>
                                 </div>
                             </div>
                         </div>
@@ -433,7 +448,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/reporte-procesos.png" alt="#" />
-                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte promedio tiempo') ?>>acceder</a></div>
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte proc') ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Reporte de Órdenes Procesadas</h3>
                                 </div>
@@ -444,9 +459,20 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <div class="full news_blog">
                                 <img class="img-responsive" src="images/reporte-reProcesos.png" alt="#" />
-                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte promedio tiempo') ?>>acceder</a></div>
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte en proc') ?>>acceder</a></div>
                                 <div class="blog_details">
                                     <h3>Reporte de Órdenes en Proceso</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <?php break;
+                    case 'Reportes Graficados': ?>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <div class="full news_blog">
+                                <img class="img-responsive" src="images/grafica.jpeg" alt="#" />
+                                <div class="overlay"><a class="main_bt transparent" href=<?php echo redirect('reporte graf') ?>>acceder</a></div>
+                                <div class="blog_details">
+                                    <h3>Reportes Graficados</h3>
                                 </div>
                             </div>
                         </div>
