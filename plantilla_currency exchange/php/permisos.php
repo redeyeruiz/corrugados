@@ -34,19 +34,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                 }
                 if (!empty($arr_aux)){
                     $success = "El permiso para este usuario ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo?";
-                    if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
-                        foreach($arr_aux as $permiso_check_aux){
-                            $query="UPDATE permiso SET estatus=true WHERE idUsuario='$id_user' and permiso='$permiso_check_aux' and estatus=false";
-                            $sql=mysqli_query($conection,$query);
-                            if(!$sql){
-                                $success = "Error en la actualización de permisos del usuario.";
-                            }
-                            else{
-                                $success = "Alta y actualización realizada con éxito.";
-                            }
-                        }
-                    }
-                    //$success = json_encode($arr_aux);
                     $btnsn = "Mostrar";
                 }
                 else{
@@ -91,41 +78,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     }
 }
 
-/*if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
-    if (empty($_POST["id_user"])){
-        $id_user_error = "Se requiere el ID del Usuario.";
-    }
-    else{
-        $id_user = test_input($_POST["id_user"]);
-    }
-
-    if (empty($_POST["per"])){
-        $per_error = "Se requiere el Permiso.";
-    }
-    else{
-        $per = test_input($_POST["per"]);
-    }
-
-    if (empty($_POST["per_af"])){
-        $per_af_error = "Se requiere el Permiso a actualizar.";
-    }
-    else{
-        $per_af = test_input($_POST["per_af"]);
-    }
-
-    if ($id_user_error == "" and $per_error == ""){
-        $query="UPDATE permiso SET permiso='$per_af' WHERE idUsuario='$id_user' and permiso='$per'";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $success = "Error en la actualización de datos del Rol.";
-        }
-        else{
-            $success = "Actualización realizada con éxito.";
-        }
-        $id_comp = $rol = $per_af = "";;
-    }
-}*/
-
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
     if (empty($_POST["id_user"])){
         $id_user_error = "Se requiere el ID del Usuario.";
@@ -142,7 +94,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
     }
 }
 
-/*if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
+if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
     if (empty($_POST["id_user"])){
         $id_user_error = "Se requiere el ID del Usuario.";
     }
@@ -152,20 +104,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
 
     $check_list_ar = array();
     $check_list_ar = $_POST['check_list'];
+    $estatus = 1;
 
     if($id_user_error == ""){
-        foreach($check_list_ar as $permiso_check){
-            $query="SELECT * FROM permiso WHERE idUsuario='$id_user' and permiso='$permiso_check' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error. No se encontro.";
-            }
-            else{
-                $arr_aux[] = $permiso_check;
-            }
-        }
-        foreach($arr_aux as $permiso_check_aux){
-            $query="UPDATE permiso SET estatus=true WHERE idUsuario='$id_user' and permiso='$permiso_check_aux' and estatus=false";
+        foreach($check_list_ar as $permiso_check_aux){
+            $query="DELETE FROM permiso WHERE estatus=false AND idUsuario='$id_user' AND permiso='$permiso_check_aux'";
+            $sql=mysqli_query($conection,$query);
+            $query="INSERT INTO permiso VALUES('$id_user','$permiso_check_aux','$estatus')";
             $sql=mysqli_query($conection,$query);
             if(!$sql){
                 $success = "Error en la actualización de permisos del usuario.";
@@ -174,12 +119,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
                 $success = "Alta y actualización realizada con éxito.";
             }
         }
-        /*else{
-            $success = "Error en la actualización de permisos del usuario.";
-        }
     }
-}*/
-
+}
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
