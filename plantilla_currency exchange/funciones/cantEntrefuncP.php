@@ -2,7 +2,9 @@
 
 include_once "util_pcP.php";
 $idcomp_error = $idord_error = $folio_error = $fmov_error = $hora_error = $sec_error = $tiporeg_error = $cant_error = $idart_error = $pos_error = ""; 
-$idcomp = $idord = $folio = $success = $option = $fmov = $hora = $sec = $tiporeg = $cant = $idart = $pos = $exist = $btnsn = "";
+$idcomp = $idord = $folio = $success = $option = $fmov = $hora = $sec = $tiporeg = $cant = $idart = $pos = $exist = $btnsn = $actorden1 = $actorden2 = "";
+$cantidades = $cantidadb = $cantidadc = $secuenciact = $secuenciamax = 0 ;
+$fechamax = $existf = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idcomp"])){
@@ -90,8 +92,47 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
         }
         else{
-            $success = "Alta realizada con éxito.";
+            //$success = "Alta realizada con éxito.";
+            $query="SELECT * FROM CantEntregada WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' and estatus=true";
+            
+            $actorden1 = mysqli_query($conection, $query);
+
+            $cantidades = 0;
+            $secuenciamax = 0;
+            $fechamax = "";
+
+            if ($actorden1 -> num_rows > 0){
+                while ($row = $actorden1-> fetch_assoc()){
+                    $cantidadb = (int)$row["cantidad"];
+                    $cantidades = $cantidades + $cantidadb;
+                    $secuenciact = (int)$row["secuencia"];
+                    if ($secuenciact > $secuenciamax){
+                        $secuenciamax = $secuenciact;
+                        $fechamax = $row["fechaMov"];
+                    }
+                }
+            }
+            $query="SELECT * FROM ReporteOrden WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' and estatus=true";
+
+            $actorden2 = mysqli_query($conection, $query);
+            $row = $actorden2-> fetch_assoc();
+            $cantidadc = (int)$row["cantidad"];
+
+            if ($cantidades == $cantidadc){
+                $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' and estatus=true";
+                $existf = mysqli_query($conection, $query);
+                if (!$existf){
+                    $success = "Alta de cantidad entregada realizada con éxito.\nActualización de datos de Reporte de Orden fallida. ";
+                }
+                else{
+                    $success = "Alta realizada con éxito.";
+                }
+            }
+            
             $idcomp = $idord = $folio = $fmov = $hora = $sec = $tiporeg = $cant = $idart = $pos = "";
+            $cantidades = $cantidadb = $cantidadc = 0;
+            $secuenciamax = $secuenciact = 0;
+            $fechamax = "";
         }
     }
 }
