@@ -121,17 +121,22 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $row = $actorden2-> fetch_assoc();
             $cantidadc = (int)$row["cantidad"];
             
-            if ($cantidades >= $cantidadc){
+            if ($cantidades == $cantidadc){
                 $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax', entregado='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and folio='$folio' ";
                 $existf = mysqli_query($conection, $query);
                 if (!$existf){
                     $success = "Alta de cantidad entregada realizada con éxito.\nActualización de datos de Reporte de Orden fallida. ";
                 }
                 else{
-                    $success = "Alta realizada con éxito.";
+                    $success = "Alta realizada con éxito, se han completado todas las entregas correctamente.";
                 }
             }
-            else{
+            elseif ($cantidades > $cantidadc){
+                $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax', entregado='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and folio='$folio' ";
+                $existf = mysqli_query($conection, $query);
+                $success = "La alta se ha realizado con éxito.\n¡La cantidad de entregas rebasa la cantidad solicitada!";
+            }
+            elseif ($cantidades < $cantidadc){
                 $query = "UPDATE ReporteOrden SET entregado='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and folio='$folio' ";
                 $existf = mysqli_query($conection, $query);
                 $success = "La alta se ha realizado con éxito.";
