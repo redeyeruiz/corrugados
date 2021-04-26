@@ -148,16 +148,16 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>Folio</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="folio" type="text" size="50" maxlength="10" class="campo" value="<?= $folio ?>">
+                            <input style="border:3px solid #ff880e" name="folio" type="text" size="11" maxlength="11" class="campo" value="<?= $folio ?>">
                             <p><span style="color:#C84810" class="error"><?= $folio_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Articulo</b></p>
+                            <p align="center"><b>ID Artículo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="10" class="campo" value="<?= $idart ?>">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="40" maxlength="20" class="campo" value="<?= $idart ?>">
                             <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
@@ -166,16 +166,16 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idalma" type="text" size="50" maxlength="10" class="campo" value="<?= $idalma ?>">
+                            <input style="border:3px solid #ff880e" name="idalma" type="text" size="10" maxlength="4" class="campo" value="<?= $idalma ?>">
                             <p><span style="color:#C84810" class="error"><?= $idalma_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Compañia</b></p>
+                            <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="10" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -184,7 +184,7 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcliente" type="text" size="50" maxlength="50" class="campo" value="<?= $idcliente ?>">
+                            <input style="border:3px solid #ff880e" name="idcliente" type="text" size="20" maxlength="10" class="campo" value="<?= $idcliente ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcliente_error ?></span></p>
                         </td>
                     </tr>
@@ -193,7 +193,7 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>Nuevo Representante</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="newrep" type="text" size="50" maxlength="50" class="campo" value="<?= $newrep ?>">
+                            <input style="border:3px solid #ff880e" name="newrep" type="text" size="20" maxlength="12" class="campo" value="<?= $newrep ?>">
                             <p><span style="color:#C84810" class="error"><?= $newrep_error ?></span></p>
                         </td>
                     </tr>
@@ -202,16 +202,16 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>Stock</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="stock" type="text" size="50" maxlength="50" class="campo" value="<?= $stock ?>">
+                            <input style="border:3px solid #ff880e" name="stock" type="number" min="0" step="0.01" class="campo" value="<?= $stock ?>">
                             <p><span style="color:#C84810" class="error"><?= $stock_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Codigo de Aviso</b></p>
+                            <p align="center"><b>Código de Aviso</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="codavi" type="text" size="50" maxlength="3" class="campo" value="<?= $codavi ?>">
+                            <input style="border:3px solid #ff880e" name="codavi" type="text" size="10" maxlength="3" class="campo" value="<?= $codavi ?>">
                             <p><span style="color:#C84810" class="error"><?= $codavi_error ?></span></p>
                         </td>
                     </tr>
@@ -220,7 +220,7 @@ include("funciones/artvenfuncP.php");
                             <p align="center"><b>Unidad de Venta</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="udvta" type="text" size="50" maxlength="4" class="campo" value="<?= $udvta ?>">
+                            <input style="border:3px solid #ff880e" name="udvta" type="number" min="0" step="0.01" class="campo" value="<?= $udvta ?>">
                             <p><span style="color:#C84810" class="error"><?= $udvta_error ?></span></p>
                         </td>
                     </tr>
