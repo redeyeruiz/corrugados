@@ -104,7 +104,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $val2 = mysqli_query($conection,$query);
             $row = $val2-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $success = "Error en el alta del artículo.";
+                $success = "Error en el alta del cliente.";
                 $id_comp_error = "El ID del representante ingresado no existe en los registros.";
             }
             else{
@@ -112,7 +112,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                 $val3 = mysqli_query($conection,$query);
                 $row = $val3-> fetch_assoc();
                 if ($row["estatus"] == "0"){
-                    $success = "Error en el alta del artículo.";
+                    $success = "Error en el alta del cliente.";
                     $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
                 }
                 else{
@@ -282,7 +282,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                 $val2 = mysqli_query($conection,$query);
                 $row = $val2-> fetch_assoc();
                 if ($row["estatus"] == "0"){
-                    $success = "Error en el alta del artículo.";
+                    $success = "Error en el alta del cliente.";
                     $id_comp_error = "El ID del representante ingresado no existe en los registros.";
                 }
                 else{
@@ -290,7 +290,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
                     $val3 = mysqli_query($conection,$query);
                     $row = $val3-> fetch_assoc();
                     if ($row["estatus"] == "0"){
-                        $success = "Error en el alta del artículo.";
+                        $success = "Error en el alta del cliente.";
                         $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
                     }
                     else{
@@ -440,7 +440,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                 $val2 = mysqli_query($conection,$query);
                 $row = $val2-> fetch_assoc();
                 if ($row["estatus"] == "0"){
-                    $success = "Error en el alta del artículo.";
+                    $success = "Error en el alta del cliente.";
                     $id_comp_error = "El ID del representante ingresado no existe en los registros.";
                 }
                 else{
@@ -448,7 +448,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
                     $val3 = mysqli_query($conection,$query);
                     $row = $val3-> fetch_assoc();
                     if ($row["estatus"] == "0"){
-                        $success = "Error en el alta del artículo.";
+                        $success = "Error en el alta del cliente.";
                         $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
                     }
                     else{

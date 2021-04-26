@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $folio_error = $idart_error = $idalma_error = $idcomp_error = $idcliente_error = $newrep_error = $stock_error = $codavi_error = $udvta_error = ""; 
-$folio = $idart = $idalma = $idcomp = $idcliente = $newrep = $stock = $codavi = $udvta = $coststa = $success = $option = $exist = $btnsn = "";
+$folio = $idart = $idalma = $idcomp = $idcliente = $newrep = $stock = $codavi = $udvta = $coststa = $success = $option = $exist = $btnsn = $val1 = $val2 = $val3 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["folio"])){
@@ -61,38 +61,65 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     }
     
     if ($folio_error == "" and $idart_error == "" and $idalma_error == "" and $idcomp_error == "" and $idcliente_error == "" and $newrep_error == "" and $stock_error == "" and $codavi_error == "" and $udvta_error == ""){
-        $query="INSERT INTO ArticuloVendido (folio, idArticulo, idAlmacen, idCompania, idCliente, newRep, stock, codAviso, udVta, estatus) VALUES ('$folio','$idart','$idalma','$idcomp','$idcliente','$newrep','$stock','$codavi','$udvta', true);";
-        $query2="SELECT stock FROM inventario WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
-        $resultao=mysqli_query($conection,$query2);
-        $row = mysqli_fetch_array($resultao);
-        $quantity = $row['stock'];
-        //echo $quantity;
-        $stock2=($quantity-$stock);
-        $query3="UPDATE inventario SET stock='$stock2' WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
-        $sql2=mysqli_query($conection,$query3);
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM ArticuloVendido WHERE folio='$folio' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta del artículo.";
-                $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
-            }
-            else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "El folio ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
-                }
-                else{
-                    $success = "Error en el alta del artículo.";
-                    $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
-                }
-            }
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+        $val1 = mysqli_query($conection,$query);
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
+            $success = "Error en el alta del artículo vendido.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
         else{
-            $success = "Alta realizada con éxito.";
-            $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
+            $query = "SELECT * FROM Cliente WHERE idCliente='$idcliente'";
+            $val2 = mysqli_query($conection,$query);
+            $row = $val2-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta del artículo vendido.";
+                $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+            }
+            else{
+                $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                $val3 = mysqli_query($conection,$query);
+                $row = $val3-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo vendido.";
+                    $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                }
+                else{
+                    $query="INSERT INTO ArticuloVendido (folio, idArticulo, idAlmacen, idCompania, idCliente, newRep, stock, codAviso, udVta, estatus) VALUES ('$folio','$idart','$idalma','$idcomp','$idcliente','$newrep','$stock','$codavi','$udvta', true);";
+                    $query2="SELECT stock FROM inventario WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
+                    $resultao=mysqli_query($conection,$query2);
+                    $row = mysqli_fetch_array($resultao);
+                    $quantity = $row['stock'];
+                    //echo $quantity;
+                    $stock2=($quantity-$stock);
+                    $query3="UPDATE inventario SET stock='$stock2' WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
+                    $sql2=mysqli_query($conection,$query3);
+                    $sql=mysqli_query($conection,$query);
+                    if (!$sql){
+                        $query="SELECT * FROM ArticuloVendido WHERE folio='$folio' and estatus=false";
+                        $exist = mysqli_query($conection, $query);
+                        if (!$exist){
+                            $success = "Error en el alta del artículo.";
+                            $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
+                        }
+                        else{
+                            $row = $exist-> fetch_assoc();
+                            if ($row["estatus"] == "0"){
+                                $success = "El folio ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                                $btnsn = "Mostrar";
+                            }
+                            else{
+                                $success = "Error en el alta del artículo.";
+                                $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
+                            }
+                        }
+                    }
+                    else{
+                        $success = "Alta realizada con éxito.";
+                        $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
+                    }
+                }
+            }
         }
     }
 }
@@ -189,14 +216,41 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del artículo.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE ArticuloVendido SET idCompania='$idcomp', idAlmacen='$idalma', idArticulo='$idart', idCliente='$cliente', newRep='$newrep', stock='$stock', codAviso='$codavi', udVta='$udvta' WHERE folio='$folio' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta del artículo vendido.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del artículo.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcliente'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo vendido.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta del artículo vendido.";
+                        $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                    }
+                    else{
+                        $row = $exist-> fetch_assoc();
+                        if ($row["estatus"] == "1"){
+                            $query="UPDATE ArticuloVendido SET idCompania='$idcomp', idAlmacen='$idalma', idArticulo='$idart', idCliente='$cliente', newRep='$newrep', stock='$stock', codAviso='$codavi', udVta='$udvta' WHERE folio='$folio' AND estatus=true";
+                            $sql=mysqli_query($conection,$query);
+                            $success = "Actualización realizada con éxito.";
+                        }
+                        else{
+                            $success = "Error en la actualización de datos del artículo.";
+                        }
+                    }
+                }
             }
         }
         $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
@@ -291,14 +345,41 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del artículo.";
         }
         else{
-            $row = $exist-> fetch_assoc();
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $query="UPDATE ArticuloVendido SET idCompania='$idcomp', idAlmacen='$idalma', idArticulo='$idart', idCliente='$cliente', newRep='$newrep', stock='$stock', codAviso='$codavi', udVta='$udvta', estatus=true WHERE folio='$folio'";
-                $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                $success = "Error en el alta del artículo vendido.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del artículo.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcliente'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo vendido.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta del artículo vendido.";
+                        $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                    }
+                    else{
+                        $row = $exist-> fetch_assoc();
+                        if ($row["estatus"] == "0"){
+                            $query="UPDATE ArticuloVendido SET idCompania='$idcomp', idAlmacen='$idalma', idArticulo='$idart', idCliente='$cliente', newRep='$newrep', stock='$stock', codAviso='$codavi', udVta='$udvta', estatus=true WHERE folio='$folio'";
+                            $sql=mysqli_query($conection,$query);
+                            $success = "Alta y actualización realizada con éxito.";
+                        }
+                        else{
+                            $success = "Error en la actualización de datos del artículo.";
+                        }
+                    }
+                }
             }
         }
         $folio = $idart = $idalma = $idcomp = $cliente = $newrep = $stock = $codavi = $udvta = "";
