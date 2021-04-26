@@ -137,7 +137,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -146,7 +146,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="50" maxlength="10" class="campo" value="<?= $idcli ?>">
+                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="20" maxlength="10" class="campo" value="<?= $idcli ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcli_error ?></span></p>
                         </td>
                     </tr>
@@ -155,7 +155,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>Dirección de Entrega</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="dirent" type="text" size="50" maxlength="10" class="campo" value="<?= $dirent ?>">
+                            <input style="border:3px solid #ff880e" name="dirent" type="text" size="20" maxlength="10" class="campo" value="<?= $dirent ?>">
                             <p><span style="color:#C84810" class="error"><?= $dirent_error ?></span></p>
                         </td>
                     </tr>
@@ -200,7 +200,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>Télefono</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="tel" type="text" size="50" maxlength="20" class="campo" value="<?= $tel ?>">
+                            <input style="border:3px solid #ff880e" name="tel" type="text" size="30" maxlength="20" class="campo" value="<?= $tel ?>">
                             <p><span style="color:#C84810" class="error"><?= $tel_error ?></span></p>
                         </td>
                     </tr>
@@ -218,7 +218,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>Código Postal</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="codp" type="text" size="50" maxlength="5" class="campo" value="<?= $codp ?>">
+                            <input style="border:3px solid #ff880e" name="codp" type="text" size="10" maxlength="5" class="campo" value="<?= $codp ?>">
                             <p><span style="color:#C84810" class="error"><?= $codp_error ?></span></p>
                         </td>
                     </tr>
@@ -227,7 +227,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>Código de Ruta</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="codr" type="text" size="50" maxlength="5" class="campo" value="<?= $codr ?>">
+                            <input style="border:3px solid #ff880e" name="codr" type="text" size="10" maxlength="5" class="campo" value="<?= $codr ?>">
                             <p><span style="color:#C84810" class="error"><?= $codr_error ?></span></p>
                         </td>
                     </tr>
@@ -236,7 +236,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>País</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="pais" type="text" size="50" maxlength="3" class="campo" value="<?= $pais ?>">
+                            <input style="border:3px solid #ff880e" name="pais" type="text" size="8" maxlength="3" class="campo" value="<?= $pais ?>">
                             <p><span style="color:#C84810" class="error"><?= $pais_error ?></span></p>
                         </td>
                     </tr>
@@ -245,7 +245,7 @@ include("funciones/dir_entfuncP.php");
                             <p align="center"><b>RFC</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rfc" type="text" size="50" maxlength="20" class="campo" value="<?= $rfc ?>">
+                            <input style="border:3px solid #ff880e" name="rfc" type="text" size="30" maxlength="20" class="campo" value="<?= $rfc ?>">
                             <p><span style="color:#C84810" class="error"><?= $rfc_error ?></span></p>
                         </td>
                     </tr>
