@@ -142,6 +142,7 @@ if(!isset($_SESSION['conectado'])){
             </div>
         </div>
     </div>
+    
     <!-- end section -->
 
    

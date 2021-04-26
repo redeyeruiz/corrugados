@@ -1,10 +1,12 @@
-1,LA MODERNA,1
-100,Puertas Corp,1
-101,Unagro,1
-102,Farmacorp,1
-103,Nestle,1
-104,LG,1
-2,SUPERAMA,0
+10,Santa Cruz,1
+101,Puertas Corp,1
+102,Yplus,1
+103,Cave srl,1
+201,Unagro,1
 225,PAPELES CORRUGADOS SA DE CV,1
 286,PELICULAS PLASTICAS SA DE CV,1
-6,Mini Super,0
+290,LA MODERNA SA DE CV,1
+450,Farmacorp,1
+690,Nestle,1
+754,Loco,1
+800,LG,1

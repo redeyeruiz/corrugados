@@ -486,10 +486,11 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     }
 
     function crea_permiso($id_user, $rol){
-        echo $id_user;
+        //echo $id_user;
         global $conection;
-        $query = "DELETE * FROM permiso WHERE idUsuario='$id_user'";
+        $query = "DELETE FROM permiso WHERE idUsuario='$id_user'";
         mysqli_query($conection,$query);
+        //echo mysqli_error($conection);
         switch($rol){
             case 'ADM':
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
@@ -533,11 +534,13 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                      ('$id_user','Reporte de Ordenes en Proceso',1),
                                                      ('$id_user','Reportes Graficados',1)";
                 mysqli_query($conection, $query);
-                echo mysqli_error($conection);
+                //echo mysqli_error($conection);
                 break;
             case 'ADC':
+                //echo "entra";
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
                                                     ('$id_user','Roles',1),
+                                                    ('$id_user','Usuarios',1),
                                                     ('$id_user','Asignacion de Roles',1),
                                                     ('$id_user','Asignacion de permisos',1),
                                                     ('$id_user','Operaciones',1),
@@ -657,7 +660,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
         $tiempo = time();
         $dia = date("Y-m-d",$tiempo);
         $row_f = json_encode($row);
-        $miQuery = "INSERT INTO Registro_bajas Values('$id_user', '$dia','$row_f')";
+        $miQuery = "INSERT INTO Registro_bajas Values('$id_user','$dia','$row_f')";
         mysqli_query($conection, $miQuery);
         //echo mysqli_error($conection);
     }

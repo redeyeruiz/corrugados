@@ -30,7 +30,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                 $sql=mysqli_query($conection,$query);
             }
             if (!$sql){
-                $arr_aux = array();
+                /*$arr_aux = array();
                 foreach($check_list_ar as $permiso_check){
                     $query="SELECT * FROM Permiso WHERE idUsuario='$id_user' and permiso='$permiso_check' and estatus=false";
                     $exist = mysqli_query($conection, $query);
@@ -44,11 +44,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                         $success = "El permiso para este usuario ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo?";
                         $btnsn = "Mostrar";
                     }
-                    else{
+                    else{*/
                         $success = "Error en el alta del permiso.";
                         $iduser = $check_list_ar = $permiso_check = $estatus = "";
-                    }
-                }
+                    //}
+                //}
             }
             else{
                 $success = "Alta realizada con éxito.";
@@ -73,17 +73,46 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     
     if(array_key_exists('check_list', $_POST) and $id_user_error == ""){
         foreach($check_list_ar as $permiso_check){
-            $query="UPDATE Permiso SET estatus='0' WHERE idUsuario='$id_user' and permiso='$permiso_check'";
-            $sql=mysqli_query($conection,$query);
+            /*$query="UPDATE Permiso SET estatus='0' WHERE idUsuario='$id_user' and permiso='$permiso_check'";
+            $sql=mysqli_query($conection,$query);*/
+            $query="SELECT * FROM Permiso WHERE idUsuario='$id_user' AND permiso='$permiso_check'";
+            $sql = mysqli_query($conection,$query);
+            $row = $sql-> fetch_assoc();
+            if (!$sql){
+                $success = "Error en la baja del Usuario.";
+            }else{
+                $query="DELETE FROM Permiso WHERE idUsuario='$id_user' AND permiso='$permiso_check'";
+                $sql = mysqli_query($conection,$query);
+                if ($sql){
+                    registro_baja($row, $_SESSION['usuario']);
+                    $success = "Baja realizada con éxito.";
+                }else{
+                    $success = "Error en la baja del Usuario.";
+                }
+                
+            }
+        
+            /*$query="DELETE FROM Permiso WHERE idUsuario='$id_user' AND permiso='$permiso_check'";
+            $sql = mysqli_query($conection,$query);
+            //$row = $sql-> fetch_assoc();
+            if (!$sql){
+                $success = "Error en la baja del Usuario.";
+            }
+            else{
+                $success = "Baja realizada con éxito.";
+                registro_baja($query, $_SESSION['usuario']);
+            }
         }
-        if (!$sql){
+        /*if (!$sql){
             $success = "Error en la baja del Usuario.";
         }
         else{
             $success = "Baja realizada con éxito.";
             registro_baja($query, $_SESSION['usuario']);
+        }*/
         }
         $iduser = $check_list_ar = $permiso_check = $estatus = "";
+
     }
 }
 
@@ -103,7 +132,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_consultas"])){
     }
 }
 
-if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
+/*if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
     if (empty($_POST["id_user"])){
         $id_user_error = "Se requiere el ID del Usuario.";
     }
@@ -139,7 +168,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         }
     }
 }
-
+*/
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
     $option = "Reporte";

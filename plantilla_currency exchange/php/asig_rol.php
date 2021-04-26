@@ -94,6 +94,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         }
         else{
             $success = "Actualización realizada con éxito.";
+            crea_permiso($id_user, $rol);
         }
         $id_comp = $rol = "";
     }

@@ -99,13 +99,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     
     if ($id_user_error == ""){
         $idCompania = $_SESSION['idComp'];
-        $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=true and idCompania = '$idCompania'";
+        $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
             $success = "Error en la baja del usuario.";
         }
         else{
             $row = $exist-> fetch_assoc();
+            //echo json_encode($row);
             if ($row["estatus"] == "1"){
                 $query="UPDATE Usuario SET estatus=false WHERE idUsuario='$id_user' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
