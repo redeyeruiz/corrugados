@@ -141,7 +141,7 @@ include("funciones/listaspreciofuncP.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -150,7 +150,7 @@ include("funciones/listaspreciofuncP.php");
                             <p align="center"><b>ID Lista</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idlis" type="text" size="50" maxlength="10" class="campo" value="<?= $idlis ?>">
+                            <input style="border:3px solid #ff880e" name="idlis" type="text" size="20" maxlength="10" class="campo" value="<?= $idlis ?>">
                             <p><span style="color:#C84810" class="error"><?= $idlis_error ?></span></p>
                         </td>
                     </tr>
