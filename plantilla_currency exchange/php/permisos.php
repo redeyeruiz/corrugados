@@ -17,9 +17,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     $estatus = 1;
     
     if(array_key_exists('check_list', $_POST) and $id_user_error == ""){
-        $query = "SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=true";
+        $query = "SELECT * FROM Usuario WHERE idUsuario='$id_user'";
         $val1 = mysqli_query($conection,$query);
-        if (!$val1){
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
             $success = "Error en el alta del permiso.";
             $id_comp_error = "El ID de usuario ingresado no existe en los registros.";
         }
@@ -115,9 +116,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
     $estatus = 1;
 
     if($id_user_error == ""){
-        $query = "SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=true";
+        $query = "SELECT * FROM Usuario WHERE idUsuario='$id_user'";
         $val1 = mysqli_query($conection,$query);
-        if (!$val1){
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
             $success = "Error en la actualización del usuario.";
             $id_comp_error = "El ID de usuario ingresado no existe en los registros.";
         }
