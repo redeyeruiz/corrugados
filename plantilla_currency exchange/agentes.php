@@ -138,20 +138,20 @@ include("funciones/agentesfuncP.php");
                 <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST"  enctype="multipart/form-data" name="datos">
                     <tr>
                         <td>
-                            <p align="center"><b>ID Representante</b></p>
+                            <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="50" maxlength="10" class="campo" value="<?= $idrep ?>">
-                            <p><span style="color:#C84810" class="error"><?= $idrep_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Compañía</b></p>
+                            <p align="center"><b>ID Representante</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
-                            <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="30" maxlength="10" class="campo" value="<?= $idrep ?>">
+                            <p><span style="color:#C84810" class="error"><?= $idrep_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
@@ -252,6 +252,16 @@ include("funciones/agentesfuncP.php");
                         $idrep = $column[1];
                         $nomrep = $column[2];
                         $estatus = $column[3];
+
+                        $queryver="SELECT idRepresentante FROM agente WHERE idRepresentante='idrep' AND estatus=false ;";
+                            $veri=mysqli_query($conn, $queryver);
+                            if (!$veri){
+                                $sqlInsert = "INSERT into agente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
+                            }
+                            else{
+                                $sqlInsert= "UPDATE agente SET estatus=true WHERE idRepresentante='$idrep' AND estatus=false ;";
+                                $result = mysqli_query($conn, $sqlInsert);
+                            }
                         
                         $sqlInsert = "INSERT into agente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
 

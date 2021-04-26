@@ -26,9 +26,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     
     if ($idrep_error == "" and $idcomp_error == "" and $nomrep_error == ""){
         //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
-        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
         $val1 = mysqli_query($conection,$query);
-        if (!$val1){
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
             $success = "Error en el alta del agente.";
             $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
@@ -119,9 +120,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del agente.";
         }
         else{
-            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
             $val1 = mysqli_query($conection,$query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en el alta del agente.";
                 $idcomp_error = "El ID de compañía ingresado no existe en los registros.";
             }
@@ -193,9 +195,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del agente.";
         }
         else{
-            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
             $val1 = mysqli_query($conection,$query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en el alta del agente.";
                 $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }

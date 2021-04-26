@@ -364,23 +364,6 @@ include("php/permisos.php");
                             <div class="center">
                                 &nbsp;
                                 &nbsp;
-                                <!--
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="filebutton">Select File</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file" id="file" class="input-large">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="singlebutton">Import data</label>
-                                    <div class="col-md-4">
-                                        <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
-                                    </div>
-                                </div> 
-                                <input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>-->
                             </div>
                             <!--<div id="response"
                                 class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
@@ -426,18 +409,16 @@ include("php/permisos.php");
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='20%' align='center'>ID Usuario</td>
                                     <td style='border:3px solid #ff880e' width='80%' align='center'>Permiso</td>
-                                    <td style='border:3px solid #ff880e' width='20%' align='center'>Estatus</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["idUsuario"]."</td><td align='center' style='border:3px solid #ff880e' width='80%'>".$row["permiso"]."</td><td align='center' style='border:3px solid #ff880e' width='30%'>". $row["estatus"]."</td></tr>";
+                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["idUsuario"]."</td><td align='center' style='border:3px solid #ff880e' width='80%'>".$row["permiso"]."</td></tr>";
                         }
                     }
                     else{
                         echo "<tr><td style='border:3px solid #ff880e' colspan='6'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
-                    echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";
                 }
             ?>
         </div>

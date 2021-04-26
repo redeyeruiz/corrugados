@@ -149,7 +149,7 @@ include("php/usuario.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_comp" type="text" size="50" maxlength="4" class="campo" value="<?= $id_comp ?>">
+                            <input style="border:3px solid #ff880e" name="id_comp" type="text" size="10" maxlength="4" class="campo" value="<?= $id_comp ?>">
                             <p><span style="color:#C84810" class="error"><?= $id_comp_error ?></span></p>
                         </td>
                     </tr>
@@ -158,7 +158,7 @@ include("php/usuario.php");
                             <p align="center"><b>ID Usuario</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="50" maxlength="20" class="campo" value="<?= $id_user ?>">
+                            <input style="border:3px solid #ff880e" name="id_user" type="text" size="30" maxlength="20" class="campo" value="<?= $id_user ?>">
                             <p><span style="color:#C84810" class="error"><?= $id_user_error ?></span></p>
                         </td>
                     </tr>
@@ -185,7 +185,7 @@ include("php/usuario.php");
                             <p align="center"><b>Rol</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="rol" type="text" size="50" maxlength="4" class="campo" value="<?= $rol ?>">
+                            <input style="border:3px solid #ff880e" name="rol" type="text" size="10" maxlength="4" class="campo" value="<?= $rol ?>">
                             <p><span style="color:#C84810" class="error"><?= $rol_error ?></span></p>
                         </td>
                     </tr>
@@ -209,23 +209,6 @@ include("php/usuario.php");
                             <div class="center">
                                 &nbsp;
                                 &nbsp;
-                                <!--
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="filebutton">Select File</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file" id="file" class="input-large">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="singlebutton">Import data</label>
-                                    <div class="col-md-4">
-                                        <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
-                                    </div>
-                                </div> -->
-                                <!--<input type="file" id="selectedFile" style="display: none;" accept=".csv, .txt"/>
-                                <input type="button" style="width: 100px;" class="btn btn-secondary btn-sm" value="Cargar" name = "archivo" onclick="document.getElementById('selectedFile').click();"/>
-                                &nbsp;
-                                <button type="file" style="width: 100px;" class="btn btn-secondary btn-sm">Descargar</button>-->
                             </div>
                             <!--<div id="response"
                                 class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>">
@@ -271,21 +254,20 @@ include("php/usuario.php");
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>ID Usuario</td>
                                     <td style='border:3px solid #ff880e' width='15%' align='center'>ID Compañía</td>
-                                    <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Estatus</td>
+                                    <td style='border:3px solid #ff880e' width='30%' align='center'>Nombre</td>";
+                                    /*<td style='border:3px solid #ff880e' width='15%' align='center'>Contraseña</td>*/
+                    echo           "<td style='border:3px solid #ff880e' width='15%' align='center'>Rol</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "<tr><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idUsuario"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='30%'>". $row["nombre"] ."</td><td style='border:3px solid #ff880e' width='15%'>". $row["contrasena"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["estatus"]."</td></tr>";
+                            echo "<tr><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idUsuario"] ."</td><td align='center' style='border:3px solid #ff880e' width='15%'>". $row["idCompania"] ."</td><td style='border:3px solid #ff880e' width='30%'>". $row["nombre"] /*."</td><td style='border:3px solid #ff880e' width='15%'>". $row["contrasena"] */."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["rol"]."</td></tr>";
                         }
                     }
                     else{
                         echo "<tr><td style='border:3px solid #ff880e' colspan='6'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
-                    echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";
+                    //echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";
                 }
             ?>
         </div>
