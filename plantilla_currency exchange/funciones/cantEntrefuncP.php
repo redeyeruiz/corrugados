@@ -118,7 +118,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $row = $actorden2-> fetch_assoc();
             $cantidadc = (int)$row["cantidad"];
             
-            if ($cantidades == $cantidadc){
+            if ($cantidades >= $cantidadc){
                 $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax', entrega='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' ";
                 $existf = mysqli_query($conection, $query);
                 if (!$existf){
