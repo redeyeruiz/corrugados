@@ -277,7 +277,7 @@
             $query="SELECT * FROM dirent WHERE idCliente = '$idCliente'";
             $sql=mysqli_query($conexion,$query);
             if (mysqli_affected_rows($conexion)==0){
-                echo "Error, id cliente inexistente en base de datos o no tiene direcciones asociadas";
+                warningMssg("Error, id cliente inexistente en base de datos o no tiene direcciones asociadas");
             }
             echo "<select id='direcciones' class='datal' name='dirCompleta'>";
             while ($reg=mysqli_fetch_object($sql)){
@@ -722,11 +722,6 @@
         // close the connection
         ftp_close($conn_id);
     }
-    createFile();
-    if (isset($_SESSION['ordenT'])){
-        echo "<div class='alert alert-warning'> orden Total :  ".$_SESSION['ordenT']."</div>";
-    }
-
- 
     
+
 ?>

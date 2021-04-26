@@ -426,7 +426,7 @@
                 $reg=mysqli_fetch_object($sql);
                 error_reporting(E_ALL & ~E_NOTICE);
                 if($reg->estatus=='1'){
-                    echo "<div class='alert alert-info' role='alert'> La orden ya fue autorizada </div>";
+                    echo "<div class='alert alert-success' role='alert'> La orden ya fue autorizada </div>";
                 }else{
                     echo "<div class='alert alert-info' role='alert'> La orden está en proceso de autorización </div>";
                 }

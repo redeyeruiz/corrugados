@@ -39,13 +39,13 @@ function agregar_tablaM(){
         $idCompania                                 =$_SESSION['idCompania'];
         $folio                                      =$_SESSION['folio'];
         $numFact                                    ="NULL";
-        $ordenBaan                                  ="NULL";
+        $ordenBaan                                  ="0";
         $idCliente                                  =$_SESSION['idCliente'];
         $nombreCliente                              =$_SESSION['nombreCliente'];
         $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['dirEnt'];
         $idArticulo                                 =$_SESSION['idArticulo'];
         $ordenCompra                                =$_SESSION['ordenCompra'];
-        $_SESSION['cantidad']=$cantidad             =$_POST['cantidad'];
+        $_SESSION['cantidad']=$cantidad             =floatval($_POST['cantidad']);
         $precio                                     =$_SESSION['precio_articulo'];
         $_SESSION['descripcion'] =$decripcion       =$_POST['descripcion'];
         $fechaOrden                                 =$_SESSION['fechaOrden'];
@@ -360,14 +360,20 @@ function guardar(){
 }
 // queries Stock
 function queriesStock($conn){
+
     $queries=explode("|",$_SESSION['queries'],-1);
     $queriesS=array();
+    
     for($i=0;$i<count($queries);$i++){
         $query= explode("'",$queries[$i]);
-        $idArticulo     = $query [17];
-        $cantidad       = $query [21];
-        array_push($queriesS,"UPDATE articulovendido SET stock= stock +'$cantidad'   WHERE idArticulo ='$idArticulo'");
-        array_push($queriesS,"UPDATE articuloexistente SET stock= stock -'$cantidad'   WHERE idArticulo ='$idArticulo'");
+        if($query[0]=="INSERT INTO reporteorden VALUES("){
+            
+            $idArticulo     = $query [17];
+            $cantidad       = $query [21];
+            array_push($queriesS,"UPDATE articulovendido SET stock= stock +'$cantidad'   WHERE idArticulo ='$idArticulo'");
+            array_push($queriesS,"UPDATE articuloexistente SET stock= stock -'$cantidad'   WHERE idArticulo ='$idArticulo'");
+        }
+        
     }
 
     for($i=0;$i<count($queriesS);$i++){
