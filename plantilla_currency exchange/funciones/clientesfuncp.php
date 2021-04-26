@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $idcomp_error = $idcliente_error = $idrep_error = $idlist_error = $idalma_error = $nom_error = $status_error = $analista_error = $divisa_error = $limitcre_error = $salorden_error = $salfac_error =  ""; 
-$idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = $success = $option = $exist = $btnsn = "";
+$idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = $success = $option = $exist = $btnsn = $val1 = $val2 = $val3 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idcomp"])){
@@ -92,32 +92,59 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
 
     if ($idcomp_error == "" and $idcliente_error == "" and $idrep_error == "" and $idlist_error == "" and $idalma_error == "" and $nom_error == "" and $status_error == "" and $analista_error == "" and $divisa_error == "" and $limitcre_error == "" and $salorden_error == "" and $salfac_error == ""){
         //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
-        $query="INSERT INTO Cliente (idCliente, idCompania, idRepresentante, idLista, idAlmacen, nombreCliente, estatusCliente, analista, divisa, limCredito, saldoOrden, saldoFactura, bloqueo, estatus) VALUES ('$idcliente','$idcomp','$idrep','$idlist','$idalma','$nom','$status','$analista','$divisa','$limitcre','$salorden','$salfac', false, true);";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM Cliente WHERE idCliente='$idcliente' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta del cliente.";
-                $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
-            }
-            else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "El ID del cliente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
-                }
-                else{
-                    $success = "Error en el alta del cliente.";
-                    $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
-                }
-            }
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+        $val1 = mysqli_query($conection,$query);
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
+            $success = "Error en el alta del cliente.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
         else{
-            $success = "Alta realizada con éxito.";
-            $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
+            $query = "SELECT * FROM Agente WHERE idRepresentante='$idrep'";
+            $val2 = mysqli_query($conection,$query);
+            $row = $val2-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta del artículo.";
+                $id_comp_error = "El ID del representante ingresado no existe en los registros.";
+            }
+            else{
+                $query = "SELECT * FROM Almacen WHERE idAlmacen='$idalma'";
+                $val3 = mysqli_query($conection,$query);
+                $row = $val3-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo.";
+                    $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
+                }
+                else{
+                    $query="INSERT INTO Cliente (idCliente, idCompania, idRepresentante, idLista, idAlmacen, nombreCliente, estatusCliente, analista, divisa, limCredito, saldoOrden, saldoFactura, bloqueo, estatus) VALUES ('$idcliente','$idcomp','$idrep','$idlist','$idalma','$nom','$status','$analista','$divisa','$limitcre','$salorden','$salfac', false, true);";
+                    $sql=mysqli_query($conection,$query);
+                    if (!$sql){
+                        $query="SELECT * FROM Cliente WHERE idCliente='$idcliente' and estatus=false";
+                        $exist = mysqli_query($conection, $query);
+                        if (!$exist){
+                            $success = "Error en el alta del cliente.";
+                            $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
+                        }
+                        else{
+                            $row = $exist-> fetch_assoc();
+                            if ($row["estatus"] == "0"){
+                                $success = "El ID del cliente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                                $btnsn = "Mostrar";
+                            }
+                            else{
+                                $success = "Error en el alta del cliente.";
+                                $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
+                            }
+                        }
+                    }
+                    else{
+                        $success = "Alta realizada con éxito.";
+                        $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
+                    }
+                    //$idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
+                }
+            }
         }
-        //$idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac = "";
     }
 }
 
@@ -243,14 +270,41 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del cliente.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE Cliente SET idCompania='$idcomp', idRepresentante='$idrep', idLista='$idlist', idAlmacen='$idalma', nombreCliente='$nom', estatusCliente='$status', analista='$analista', divisa='$divisa', limCredito='$limitcre', saldoOrden='$salorden', saldoFactura='$salfac' WHERE idCliente='$idcliente' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta del cliente.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del cliente.";
+                $query = "SELECT * FROM Agente WHERE idRepresentante='$idrep'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo.";
+                    $id_comp_error = "El ID del representante ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Almacen WHERE idAlmacen='$idalma'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta del artículo.";
+                        $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
+                    }
+                    else{
+                        $row = $exist-> fetch_assoc();
+                        if ($row["estatus"] == "1"){
+                            $query="UPDATE Cliente SET idCompania='$idcomp', idRepresentante='$idrep', idLista='$idlist', idAlmacen='$idalma', nombreCliente='$nom', estatusCliente='$status', analista='$analista', divisa='$divisa', limCredito='$limitcre', saldoOrden='$salorden', saldoFactura='$salfac' WHERE idCliente='$idcliente' AND estatus=true";
+                            $sql=mysqli_query($conection,$query);
+                            $success = "Actualización realizada con éxito.";
+                        }
+                        else{
+                            $success = "Error en la actualización de datos del cliente.";
+                        }
+                    }
+                }
             }
         }
         $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac ="";
@@ -374,14 +428,41 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del cliente.";
         }
         else{
-            $row = $exist-> fetch_assoc();
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $query="UPDATE Cliente SET idCompania='$idcomp', idRepresentante='$idrep', idLista='$idlist', idAlmacen='$idalma', nombreCliente='$nom', estatusCliente='$status', analista='$analista', divisa='$divisa', limCredito='$limitcre', saldoOrden='$salorden', saldoFactura='$salfac', estatus=true WHERE idCliente='$idcliente'";
-                $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                $success = "Error en el alta del cliente.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del cliente.";
+                $query = "SELECT * FROM Agente WHERE idRepresentante='$idrep'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta del artículo.";
+                    $id_comp_error = "El ID del representante ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Almacen WHERE idAlmacen='$idalma'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta del artículo.";
+                        $id_comp_error = "El ID del almacen ingresado no existe en los registros.";
+                    }
+                    else{
+                        $row = $exist-> fetch_assoc();
+                        if ($row["estatus"] == "0"){
+                            $query="UPDATE Cliente SET idCompania='$idcomp', idRepresentante='$idrep', idLista='$idlist', idAlmacen='$idalma', nombreCliente='$nom', estatusCliente='$status', analista='$analista', divisa='$divisa', limCredito='$limitcre', saldoOrden='$salorden', saldoFactura='$salfac', estatus=true WHERE idCliente='$idcliente'";
+                            $sql=mysqli_query($conection,$query);
+                            $success = "Alta y actualización realizada con éxito.";
+                        }
+                        else{
+                            $success = "Error en la actualización de datos del cliente.";
+                        }
+                    }
+                }
             }
         }
         $idcomp = $idcliente = $idrep = $idlist = $idalma = $nom = $status = $analista = $divisa = $limitcre = $salorden = $salfac ="";
