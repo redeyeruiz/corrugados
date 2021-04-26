@@ -128,6 +128,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                     $success = "Alta realizada con éxito.";
                 }
             }
+            else{
+                $success = "Alta realizada con éxito.";
+            }
             
             $idcomp = $idord = $folio = $fmov = $hora = $sec = $tiporeg = $cant = $idart = $pos = "";
             $cantidades = $cantidadb = $cantidadc = 0;
@@ -144,12 +147,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     else{
         $idcomp = test_input($_POST["idcomp"]);
     }
+    /*
     if (empty($_POST["idord"])){
         $idord_error = "Se requiere el ID de orden.";
     }
     else{
         $idord = test_input($_POST["idord"]);
     }
+    */
     if (empty($_POST["folio"])){
         $folio_error = "Se requiere el folio.";
     }
@@ -163,24 +168,43 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
         $idart = test_input($_POST["idart"]);
     }
     
-    if ($idcomp_error == "" and $idord_error == "" and $folio_error == "" and $idart_error == ""){
-        $query="SELECT * FROM CantEntregada WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' and estatus=true";
+    if ($idcomp_error == "" and $folio_error == "" and $idart_error == ""){
+        $query="SELECT * FROM CantEntregada WHERE idCompania='$idcomp' and idArticulo='$idart' and folio='$folio' and estatus=true";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
             $success = "Error en la baja.";
         }
         else{
+
+            $cantidades = 0;
+            $cantidadb = 0;
+            $cantidadc = 0;
+
             $row = $exist-> fetch_assoc();
             if ($row["estatus"] == "1"){
-                $query="UPDATE CantEntregada SET estatus=false WHERE idCompania='$idcomp' AND idArticulo='$idart' AND idOrden='$idord' AND folio='$folio' AND estatus=true";
+                //$query="UPDATE CantEntregada SET estatus=false WHERE idCompania='$idcomp' AND idArticulo='$idart' AND idOrden='$idord' AND folio='$folio' AND estatus=true";
+                $query="UPDATE CantEntregada SET estatus=false WHERE idCompania='$idcomp' AND idArticulo='$idart' AND folio='$folio' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
                 $success = "Baja realizada con éxito.";
+                $cantidadb = (int)$row["cantidad"];
+                
+                $query="SELECT * FROM ReporteOrden WHERE idCompania='$idcomp' and idArticulo='$idart' and folio='$folio'";
+                $actorden1 = mysqli_query($conection, $query);
+                $row = $actorden1-> fetch_assoc();
+                $cantidadc = (int)$row["entregado"];
+                $cantidades = $cantidadc - $cantidadb;
+                
+                $query="UPDATE ReporteOrden SET entregado='$cantidades', fechaEntrega='0000-00-00' WHERE idCompania='$idcomp' AND idArticulo='$idart' AND folio='$folio'";
+                $actorden2 = mysqli_query($conection, $query);
             }
             else{
                 $success = "Error en la baja.";
             }
         }
         $idcomp = $idord = $folio = $fmov = $hora = $sec = $tiporeg = $cant = $idart = $pos = "";
+        $cantidades = 0;
+        $cantidadb = 0;
+        $cantidadc = 0;
     }
 }
 
