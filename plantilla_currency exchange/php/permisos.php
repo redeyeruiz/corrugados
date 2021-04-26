@@ -141,7 +141,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
     $option = "Reporte";
-    $query="SELECT * FROM Permiso";
+    $query="SELECT * FROM Permiso WHERE estatus=true";
     $result = mysqli_query($conection, $query);
     $id_comp = $rol = "";
 }

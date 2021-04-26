@@ -254,18 +254,16 @@ include("php/rol.php");
                                 <tr>
                                     <td style='border:3px solid #ff880e' width='20%' align='center'>Rol</td>
                                     <td style='border:3px solid #ff880e' width='20%' align='center'>Descripción</td>
-                                    <td style='border:3px solid #ff880e' width='15%' align='center'>Estado</td>
                                 </tr>";
                     if ($result-> num_rows > 0){
                         while ($row = $result-> fetch_assoc()){
-                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='20%'>".$row["descripcion"]."</td><td align='center' style='border:3px solid #ff880e' width='15%'>".$row["estatus"]."</td></tr>";
+                            echo "</td><td align='center' style='border:3px solid #ff880e' width='20%'>". $row["rol"]."</td><td align='center' style='border:3px solid #ff880e' width='20%'>".$row["descripcion"]."</td></tr>";
                         }
                     }
                     else{
                         echo "<tr><td style='border:3px solid #ff880e' colspan='2'><div align='center' style='color:#475747; font-size:15px;'>No hay resultados.</div>";
                     }
                     echo "</table>";
-                    echo "<p align='center'>*Estado 1 significa Activo y 0 significa Inactivo </p>";
                 }
             ?>
         </div>

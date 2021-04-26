@@ -303,7 +303,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["canceloc"])){
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
     $option = "Reporte";
-    $query="SELECT * FROM Usuario";
+    $query="SELECT * FROM Usuario WHERE estatus=true";
     $result = mysqli_query($conection, $query);
     $id_user = $id_comp = $nom = $contrasena = $rol = "";
 }

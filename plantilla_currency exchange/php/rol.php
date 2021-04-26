@@ -174,7 +174,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["canceloc"])){
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_reporte"])){
 
     $option = "Reporte";
-    $query="SELECT * FROM Rol";
+    $query="SELECT * FROM Rol WHERE estatus=true";
     $result = mysqli_query($conection, $query);
     $rol = $rol_desc = "";
 }
