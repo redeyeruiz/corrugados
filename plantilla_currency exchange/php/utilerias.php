@@ -486,9 +486,9 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
     }
 
     function crea_permiso($id_user, $rol){
-        //echo $rol;
+        echo $id_user;
         global $conection;
-        $query = "DELETE FROM permiso WHERE idUsuario='$id_user'";
+        $query = "DELETE * FROM permiso WHERE idUsuario='$id_user'";
         mysqli_query($conection,$query);
         switch($rol){
             case 'ADM':
@@ -499,6 +499,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                      ('$id_user','Asignacion de permisos',1),
                                                      ('$id_user','Parametros Active Directory',1),
                                                      ('$id_user','Parametros FTP',1),
+                                                     ('$id_user','Registro bajas',1),
                                                      ('$id_user','Catalogos',1),
                                                      ('$id_user','Companias',1),
                                                      ('$id_user','Agentes',1),
@@ -523,14 +524,16 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
                                                      ('$id_user','Consultar Ordenes',1),
                                                      ('$id_user','Modificar Ordenes',1),
                                                      ('$id_user','Consultar Estatus',1),
-                                                     ('$id_user','Buscar Articulos',1)
+                                                     ('$id_user','Buscar Articulos',1),
                                                      ('$id_user','Bloqueo de Clientes',1),
                                                      ('$id_user','Reportes',1),
                                                      ('$id_user','Reporte de Todas las Ordenes',1),
                                                      ('$id_user','Reporte de Promedio de Tiempo',1),
                                                      ('$id_user','Reporte de Ordenes Procesadas',1),
-                                                     ('$id_user','Reporte de Ordenes en Proceso',1)";
+                                                     ('$id_user','Reporte de Ordenes en Proceso',1),
+                                                     ('$id_user','Reportes Graficados',1)";
                 mysqli_query($conection, $query);
+                echo mysqli_error($conection);
                 break;
             case 'ADC':
                 $query = "INSERT INTO Permiso Values('$id_user','Administracion',1),
