@@ -41,16 +41,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if ($id_user_error == "" and $id_comp_error == "" and $nom_error == "" and $contrasena_error == "" and $rol_error == ""){
         $laContrasena = password_hash($contrasena, PASSWORD_DEFAULT);
 
-        $query = "SELECT * FROM Compania WHERE idCompania='$id_comp' and estatus=true";
+        $query = "SELECT * FROM Compania WHERE idCompania='$id_comp'";
         $val1 = mysqli_query($conection,$query);
-        if (!$val1){
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
             $success = "Error en el alta del usuario.";
             $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
         else{
-            $query = "SELECT * FROM Rol WHERE rol='$rol' and estatus=true";
+            $query = "SELECT * FROM Rol WHERE rol='$rol'";
             $val2 = mysqli_query($conection,$query);
-            if (!$val2){
+            $row = $val2-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en el alta del usuario.";
                 $rol_error = "El rol ingresado no existe en los registros.";
             }
@@ -159,16 +161,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del usuario.";
         }
         else{
-            $query="SELECT * FROM Compania WHERE idCompania='$id_comp' and estatus=true";
+            $query="SELECT * FROM Compania WHERE idCompania='$id_comp'";
             $val1 = mysqli_query($conection, $query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en la actualización del usuario.";
                 $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $query="SELECT * FROM Rol WHERE rol='$rol' and estatus=true";
+                $query="SELECT * FROM Rol WHERE rol='$rol'";
                 $val2 = mysqli_query($conection, $query);
-                if (!$val2){
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
                     $success = "Error en la actualización del usuario.";
                     $id_comp_error = "El rol ingresado no existe en los registros.";
                 }
@@ -252,16 +256,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del usuario.";
         }
         else{
-            $query="SELECT * FROM Compania WHERE idCompania='$id_comp' and estatus=true";
+            $query="SELECT * FROM Compania WHERE idCompania='$id_comp'";
             $val1 = mysqli_query($conection, $query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en la actualización del usuario.";
                 $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $query="SELECT * FROM Rol WHERE rol='$rol' and estatus=true";
+                $query="SELECT * FROM Rol WHERE rol='$rol'";
                 $val2 = mysqli_query($conection, $query);
-                if (!$val2){
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
                     $success = "Error en la actualización del usuario.";
                     $id_comp_error = "El rol ingresado no existe en los registros.";
                 }
