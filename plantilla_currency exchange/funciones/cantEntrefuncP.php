@@ -197,6 +197,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
                 $cantidades = $cantidadc - $cantidadb;
                 
                 $query="UPDATE ReporteOrden SET entregado='$cantidades', fechaEntrega='0000-00-00' WHERE idCompania='$idcomp' AND idArticulo='$idart' AND folio='$folio' AND estatus=true";
+                $actorden2 = mysqli_query($conection, $query);
 
             }
             else{
