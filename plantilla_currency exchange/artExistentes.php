@@ -135,7 +135,7 @@ include("funciones/artexfuncP.php");
                 <div class="col-md-12">
                     <div class="full">
                         <div class="heading_main text_align_center">
-                            <h2><span class="theme_color"></span>Articulos Existentes</h2>
+                            <h2><span class="theme_color"></span>Artículos Existentes</h2>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ include("funciones/artexfuncP.php");
                             <p align="center"><b>ID Articulo</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idart" type="text" size="50" maxlength="4" class="campo" value="<?= $idart ?>">
+                            <input style="border:3px solid #ff880e" name="idart" type="text" size="40" maxlength="20" class="campo" value="<?= $idart ?>">
                             <p><span style="color:#C84810" class="error"><?= $idart_error ?></span></p>
                         </td>
                     </tr>
@@ -156,26 +156,26 @@ include("funciones/artexfuncP.php");
                             <p align="center"><b>ID Compañia</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="70" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Descripcion</b></p>
+                            <p align="center"><b>Costo Estándar</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="desc" type="text" size="50" maxlength="70" class="campo" value="<?= $desc ?>">
-                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="coststa" type="number" min="0" step="0.01" class="campo" value="<?= $coststa ?>">
+                            <p><span style="color:#C84810" class="error"><?= $coststa_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>Costo Estandar</b></p>
+                            <p align="center"><b>Descripción</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="coststa" type="text" size="50" maxlength="70" class="campo" value="<?= $coststa ?>">
-                            <p><span style="color:#C84810" class="error"><?= $coststa_error ?></span></p>
+                            <input style="border:3px solid #ff880e" name="desc" type="text" size="50" maxlength="70" class="campo" value="<?= $desc ?>">
+                            <p><span style="color:#C84810" class="error"><?= $desc_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
