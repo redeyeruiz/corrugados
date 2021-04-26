@@ -240,7 +240,6 @@ include("funciones/cantEntrefuncP.php");
                                         </div>
                                         <div class="center">
                                             <button name="b_consultas" type="submit" style="width:200px" class="btn btn-outline-dark">Consultas</button>
-                                            <button name="b_actualizar" type="submit" style="width:200px" class="btn btn-outline-info">Actualización</button>
                                             <button name="b_reporte" type="submit" style="width:200px" class="btn btn-outline-dark">Reportes</button>
                                         </div>
                                     </div>
