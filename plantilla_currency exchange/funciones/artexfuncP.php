@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $idart_error = $idcomp_error = $desc_error = $coststa_error = ""; 
-$idart = $idcomp = $desc = $success = $coststa = $success = $option = $exist = $btnsn = "";
+$idart = $idcomp = $desc = $success = $coststa = $success = $option = $exist = $btnsn = $val1 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idart"])){
@@ -31,30 +31,39 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     }
     
     if ($idart_error == "" and $idcomp_error == "" and $desc_error == "" and $coststa_error == ""){
-        $query="INSERT INTO ArticuloExistente (idArticulo, idCompania, descripcion, costoEstandar, estatus) VALUES ('$idart','$idcomp','$desc','$coststa', true);";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM ArticuloExistente WHERE idArticulo='$idart' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta del artículo.";
-                $idart = $idcomp = $desc = $coststa= "";
-            }
-            else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "El ID del artículo ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
-                }
-                else{
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+        $val1 = mysqli_query($conection,$query);
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
+            $success = "Error en el alta del artículo.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
+        }
+        else{
+            $query="INSERT INTO ArticuloExistente (idArticulo, idCompania, descripcion, costoEstandar, estatus) VALUES ('$idart','$idcomp','$desc','$coststa', true);";
+            $sql=mysqli_query($conection,$query);
+            if (!$sql){
+                $query="SELECT * FROM ArticuloExistente WHERE idArticulo='$idart' and estatus=false";
+                $exist = mysqli_query($conection, $query);
+                if (!$exist){
                     $success = "Error en el alta del artículo.";
                     $idart = $idcomp = $desc = $coststa= "";
                 }
+                else{
+                    $row = $exist-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "El ID del artículo ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                        $btnsn = "Mostrar";
+                    }
+                    else{
+                        $success = "Error en el alta del artículo.";
+                        $idart = $idcomp = $desc = $coststa= "";
+                    }
+                }
             }
-        }
-        else{
-            $success = "Alta realizada con éxito.";
-            $idart = $idcomp = $desc = $coststa= "";
+            else{
+                $success = "Alta realizada con éxito.";
+                $idart = $idcomp = $desc = $coststa= "";
+            }
         }
     }
 }
@@ -121,14 +130,23 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del artículo.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE ArticuloExistente SET idCompania='$idcomp', descripcion='$desc', costoEstandar='$coststa' WHERE idArticulo='$idart' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta del artículo.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del artículo.";
+                $row = $exist-> fetch_assoc();
+                if ($row["estatus"] == "1"){
+                    $query="UPDATE ArticuloExistente SET idCompania='$idcomp', descripcion='$desc', costoEstandar='$coststa' WHERE idArticulo='$idart' AND estatus=true";
+                    $sql=mysqli_query($conection,$query);
+                    $success = "Actualización realizada con éxito.";
+                }
+                else{
+                    $success = "Error en la actualización de datos del artículo.";
+                }
             }
         }
         $idart = $idcomp = $desc = $coststa= "";
@@ -193,14 +211,23 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del artículo.";
         }
         else{
-            $row = $exist-> fetch_assoc();
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $query="UPDATE ArticuloExistente SET idCompania='$idcomp', descripcion='$desc', costoEstandar='$coststa', estatus=true WHERE idArticulo='$idart'";
-                $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                $success = "Error en el alta del artículo.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del artículo.";
+                $row = $exist-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $query="UPDATE ArticuloExistente SET idCompania='$idcomp', descripcion='$desc', costoEstandar='$coststa', estatus=true WHERE idArticulo='$idart'";
+                    $sql=mysqli_query($conection,$query);
+                    $success = "Alta y actualización realizada con éxito.";
+                }
+                else{
+                    $success = "Error en la actualización de datos del artículo.";
+                }
             }
         }
         $idart = $idcomp = $desc = $coststa= "";
