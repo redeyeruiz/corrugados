@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $numfact_error = $idcomp_error = $idord_error = $idart_error = $idcli_error = $fol_error = $ent_error = $trans_error = $fechaf_error = ""; 
-$numfact = $idcomp = $idord = $success = $option = $idart = $idcli = $fol = $ent = $trans = $fechaf = $exist = $btnsn = "";
+$numfact = $idcomp = $idord = $success = $option = $idart = $idcli = $fol = $ent = $trans = $fechaf = $exist = $btnsn = $val1 = $val2 = $val3 = $val4 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["numfact"])){
@@ -62,30 +62,66 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
 
     if ($numfact_error == "" and $idcomp_error == "" and $idord_error == "" and $idart_error == "" and $idcli_error == "" and $fol_error == "" and $ent_error == "" and $trans_error == "" and $fechaf_error == ""){
         //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
-        $query="INSERT INTO Factura (numFact, idCompania, idOrden, idArticulo, idCliente, folio, entrega, tipoTrans, fechaFac, estatus) VALUES ('$numfact','$idcomp','$idord','$idart','$idcli','$fol','$ent','$trans','$fechaf', true);";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM Factura WHERE numFact='$numfact' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta de la factura.";
-                $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
-            }
-            else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "El número de factura ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
-                }
-                else{
-                    $success = "Error en el alta de la factura.";
-                    $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
-                }
-            }
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+        $val1 = mysqli_query($conection,$query);
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
+            $success = "Error en el alta de la factura.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
         else{
-            $success = "Alta realizada con éxito.";
-            $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
+            $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+            $val2 = mysqli_query($conection,$query);
+            $row = $val2-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta de la factura.";
+                $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+            }
+            else{
+                $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                $val3 = mysqli_query($conection,$query);
+                $row = $val3-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta de la factura.";
+                    $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM ArticuloVendido WHERE folio='$fol'";
+                    $val4 = mysqli_query($conection,$query);
+                    $row = $val4-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta de la factura.";
+                        $id_comp_error = "El folio ingresado no existe en los registros.";
+                    }
+                    else{
+                        $query="INSERT INTO Factura (numFact, idCompania, idOrden, idArticulo, idCliente, folio, entrega, tipoTrans, fechaFac, estatus) VALUES ('$numfact','$idcomp','$idord','$idart','$idcli','$fol','$ent','$trans','$fechaf', true);";
+                        $sql=mysqli_query($conection,$query);
+                        if (!$sql){
+                            $query="SELECT * FROM Factura WHERE numFact='$numfact' and estatus=false";
+                            $exist = mysqli_query($conection, $query);
+                            if (!$exist){
+                                $success = "Error en el alta de la factura.";
+                                $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
+                            }
+                            else{
+                                $row = $exist-> fetch_assoc();
+                                if ($row["estatus"] == "0"){
+                                    $success = "El número de factura ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                                    $btnsn = "Mostrar";
+                                }
+                                else{
+                                    $success = "Error en el alta de la factura.";
+                                    $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
+                                }
+                            }
+                        }
+                        else{
+                            $success = "Alta realizada con éxito.";
+                            $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -182,14 +218,50 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos de la factura.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE Factura SET idCompania='$idcomp', idOrden='$idord', idArticulo='$idart', idCliente='$idcli', folio='$fol', entrega='$ent', tipoTrans='$trans', fechaFac='$fechaf' WHERE numFact='$numfact' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta de la factura.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos de la factura.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta de la factura.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta de la factura.";
+                        $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                    }
+                    else{
+                        $query = "SELECT * FROM ArticuloVendido WHERE folio='$fol'";
+                        $val4 = mysqli_query($conection,$query);
+                        $row = $val4-> fetch_assoc();
+                        if ($row["estatus"] == "0"){
+                            $success = "Error en el alta de la factura.";
+                            $id_comp_error = "El folio ingresado no existe en los registros.";
+                        }
+                        else{
+                            $row = $exist-> fetch_assoc();
+                            if ($row["estatus"] == "1"){
+                                $query="UPDATE Factura SET idCompania='$idcomp', idOrden='$idord', idArticulo='$idart', idCliente='$idcli', folio='$fol', entrega='$ent', tipoTrans='$trans', fechaFac='$fechaf' WHERE numFact='$numfact' AND estatus=true";
+                                $sql=mysqli_query($conection,$query);
+                                $success = "Actualización realizada con éxito.";
+                            }
+                            else{
+                                $success = "Error en la actualización de datos de la factura.";
+                            }
+                        }
+                    }
+                }
             }
         }
         $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";
@@ -284,14 +356,50 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos de la factura.";
         }
         else{
-            $row = $exist-> fetch_assoc();
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $query="UPDATE Factura SET idCompania='$idcomp', idOrden='$idord', idArticulo='$idart', idCliente='$idcli', folio='$fol', entrega='$ent', tipoTrans='$trans', fechaFac='$fechaf', estatus=true WHERE numFact='$numfact'";
-                $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                $success = "Error en el alta de la factura.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos de la factura.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta de la factura.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $query = "SELECT * FROM Articulo WHERE idArticulo='$idart'";
+                    $val3 = mysqli_query($conection,$query);
+                    $row = $val3-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "Error en el alta de la factura.";
+                        $id_comp_error = "El ID del artículo ingresado no existe en los registros.";
+                    }
+                    else{
+                        $query = "SELECT * FROM ArticuloVendido WHERE folio='$fol'";
+                        $val4 = mysqli_query($conection,$query);
+                        $row = $val4-> fetch_assoc();
+                        if ($row["estatus"] == "0"){
+                            $success = "Error en el alta de la factura.";
+                            $id_comp_error = "El folio ingresado no existe en los registros.";
+                        }
+                        else{
+                            $row = $exist-> fetch_assoc();
+                            if ($row["estatus"] == "0"){
+                                $query="UPDATE Factura SET idCompania='$idcomp', idOrden='$idord', idArticulo='$idart', idCliente='$idcli', folio='$fol', entrega='$ent', tipoTrans='$trans', fechaFac='$fechaf', estatus=true WHERE numFact='$numfact'";
+                                $sql=mysqli_query($conection,$query);
+                                $success = "Alta y actualización realizada con éxito.";
+                            }
+                            else{
+                                $success = "Error en la actualización de datos de la factura.";
+                            }
+                        }
+                    }
+                }
             }
         }
         $numfact = $idcomp = $idord = $idart = $idcli = $fol = $ent = $trans = $fechaf = "";

@@ -154,9 +154,9 @@
             Cliente: <span><input class="user" type="text" id="client"></span> !-->
             <form class="form-button-only" method="POST" action="buscarOrdenes_frame.php">
             Orden Compra: <span><input name="ordenCompra" class="user" type="text" id="fol"></span> 
-            <span><button class="form-button-only" name="buscar" >Buscar</button></span>
+            <span><button class="capturar-button" name="buscar" >Buscar</button></span>
             Folio: <span><input name="folio" class="user" type="text" id="fol"></span> 
-            <span><button class="form-button-only" name="buscarFolio" >Buscar</button></span>
+            <span><button class="capturar-button" name="buscarFolio" >Buscar</button></span>
             </form>
             </p>
         </div>
@@ -172,58 +172,12 @@
     </section>
     <!-- end cIframe -->
    
-    <!-- Start Footer -->
-    <footer class="footer-box">
+          <!-- Start Footer -->
+  <footer class="footer-box">
         <div class="container">
             <div class="row">
                <div class="col-md-12 white_fonts">
                     <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <img class="img-responsive" src="images/footer_logo.png" alt="#" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <h3>Quick Links</h3>
-                            </div>
-                            <div class="full">
-                                <ul class="menu_footer">
-                                    <li><a href="catalogos.html">> Catálogos</a></li>
-                                    <li><a href="about.html">> About</a></li>
-                                    <li><a href="exchange.html">> Exchange</a></li>
-                                    <li><a href="operaciones.html">> operaciones</a></li>
-                                    <li><a href="reportes.html">> New</a></li>
-                                    <li><a href="contact.html">> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Newsletter</h3>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-                             <div class="newsletter_form">
-                                <form action="catalogos.html">
-                                   <input type="email" placeholder="Your Email" name="#" required="">
-                                   <button>Submit</button>
-                                </form>
-                             </div>
-                         </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Contact us</h3>
-                             <ul class="full">
-                               <li><img src="images/i5.png"><span>London 145<br>United Kingdom</span></li>
-                               <li><img src="images/i6.png"><span>demo@gmail.com</span></li>
-                               <li><img src="images/i7.png"><span>+12586954775</span></li>
-                             </ul>
-                         </div>
-                            </div>
-                        </div>
 					</div>
                 </div>
 			 </div>
@@ -235,11 +189,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
+                    <p class="crp">© Papeles Corrugados: Innovación de Empaques</p>
                 </div>
             </div>
         </div>
     </div>
+</body>
 
     <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
@@ -298,6 +253,7 @@
             <table class='table-orden' cellpadding='0' cellspacing='0'>
             <thead>
                 <tr>
+                    <th class='th-orden' scope='col'>ID orden</th>
                     <th class='th-orden' scope='col'>Orden Compra</th>
                     <th class='th-orden' scope='col'>Folio de orden</th>
                     <th class='th-orden' scope='col'>Orden Baan</th>
@@ -318,6 +274,7 @@
             /*if ($reg==mysqli_fetch_array($sql)){
                 msg("Folio Inexistente", "rojo");
             }*/
+            $idOrden=$reg->idOrden;
             $ordenCompra=$reg->ordenCompra;
             $ordenBaan=$reg->ordenBaan;
             $idCliente=$reg->idCliente;
@@ -327,6 +284,7 @@
             echo
         
             "<tr>
+                <td class='td-orden'>$idOrden</td>
                 <td class='td-orden'>$ordenCompra</td>
                 <td class='td-orden'>$folio</td>
                 <td class='td-orden'>$ordenBaan</td>

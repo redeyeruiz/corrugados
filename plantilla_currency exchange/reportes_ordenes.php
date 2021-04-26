@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include('php/utilerias.php');
+include('php/utilerias2.php');
 if(!isset($_SESSION['conectado'])){
     $_SESSION['mens_error'] = "Por favor inicie sesión.";
     header("Location: ".redirect('login'));
@@ -168,21 +169,75 @@ if(!isset($_SESSION['conectado'])){
     </div>
 
     <!-- contact_form -->
-    <div class="section contact_form">
-        <iframe class="ordenesEP" src="ordenesEP.html" title="ordenesEP"></iframe>
+    <div>
         <?php
+        if(isset($_GET['op'])){
+            $op = $_GET['op'];
+        
+            if($op == "orden_filt") orden_filtro();
+        
+        }
 		function orden_filtro(){
-			$f_desde=$_GET['f_desde'];
-			$f_hasta=$_GET['f_hasta'];
-			$b_desde=$_GET['b_desde'];
-			$b_hasta=$_GET['b_hasta'];
-			$c_desde=$_GET['c_desde'];
-			$c_hasta=$_GET['c_hasta'];
-			$a_desde=$_GET['a_desde'];
-			$a_hasta=$_GET['a_hasta'];
+
+
+            if(($_GET['f_desde'] || $_GET['f_hasta']) == ""){
+                $Query1=""; 
+                $start = false;
+            }
+            else{
+                $f_desde=$_GET['f_desde'];
+                $f_hasta=$_GET['f_hasta'];
+                $Query1="fechaOrden BETWEEN '$f_desde' AND '$f_hasta'";
+                $start = true;
+            }
+            
+
+            if(($_GET['b_desde'] || $_GET['b_hasta']) == ""){
+                $Query2="";
+            }
+            else{
+                $b_desde=$_GET['b_desde'];
+                $b_hasta=$_GET['b_hasta'];
+                if ($start == false){
+                    $Query2="ordenBaan BETWEEN '$b_desde' AND '$b_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query2=" AND ordenBaan BETWEEN '$b_desde' AND '$b_hasta'";
+                } 
+            }
+
+            if(($_GET['c_desde'] || $_GET['c_hasta']) == ""){
+                $Query3="";
+            }
+            else{
+                $c_desde=$_GET['c_desde'];
+                $c_hasta=$_GET['c_hasta'];
+                if ($start == false){
+                    $Query3="idCliente BETWEEN '$c_desde' AND '$c_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query3=" AND idCliente BETWEEN '$c_desde' AND '$c_hasta'";
+                } 
+            }
+
+            if(($_GET['a_desde'] || $_GET['a_hasta']) == ""){
+                $Query4="";
+            }
+            else{
+                $a_desde=$_GET['a_desde'];
+                $a_hasta=$_GET['a_hasta'];
+                if ($start == false){
+                    $Query4="idArticulo BETWEEN '$a_desde' AND '$a_hasta' ";
+                    $start = true;
+                }
+                else{
+                    $Query4=" AND idArticulo BETWEEN '$a_desde' AND '$a_hasta'";
+                } 
+            }
 			$conn=conecta_servidor();
-			$query="SELECT * FROM reporteorden WHERE fechaOrden BETWEEN '$f_desde' AND '$f_hasta' AND ordenBaan BETWEEN '$b_desde' AND '$b_hasta' AND idCliente BETWEEN '$c_desde' AND '$c_hasta' AND idArticulo BETWEEN '$a_desde' AND '$a_hasta'";
-			echo $query;
+			$query="SELECT * FROM reporteorden WHERE $Query1 $Query2 $Query3 $Query4 ";
 			$sql=mysqli_query($conn,$query);
 			//$reg=mysqli_fetch_object($sql);		
 			if (mysqli_affected_rows($conn)==0){
@@ -247,73 +302,9 @@ if(!isset($_SESSION['conectado'])){
     <!-- end contact_form -->
    
     <!-- Start Footer -->
-    <footer class="footer-box">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-12 white_fonts">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <img class="img-responsive" src="images/footer_logo.png" alt="#" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <h3>Quick Links</h3>
-                            </div>
-                            <div class="full">
-                                <ul class="menu_footer">
-                                    <li><a href="catalogos.html">> Catálogos</a></li>
-                                    <li><a href="about.html">> About</a></li>
-                                    <li><a href="exchange.html">> Exchange</a></li>
-                                    <li><a href="operaciones.html">> operaciones</a></li>
-                                    <li><a href="new.html">> New</a></li>
-                                    <li><a href="contact.html">> Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Newsletter</h3>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-                             <div class="newsletter_form">
-                                <form action="catalogos.html">
-                                   <input type="email" placeholder="Your Email" name="#" required="">
-                                   <button>Submit</button>
-                                </form>
-                             </div>
-                         </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="full">
-                                <div class="footer_blog full white_fonts">
-                             <h3>Contact us</h3>
-                             <ul class="full">
-                               <li><img src="images/i5.png"><span>London 145<br>United Kingdom</span></li>
-                               <li><img src="images/i6.png"><span>demo@gmail.com</span></li>
-                               <li><img src="images/i7.png"><span>+12586954775</span></li>
-                             </ul>
-                         </div>
-                            </div>
-                        </div>
-					</div>
-                </div>
-			 </div>
-        </div>
-    </footer>
     <!-- End Footer -->
 
-    <div class="footer_bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <p class="crp">© Copyrights 2019 design by html.design</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
@@ -331,7 +322,9 @@ if(!isset($_SESSION['conectado'])){
     <script src="js/isotope.min.js"></script>
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
-	
+
+
+
 </body>
 
 </html>

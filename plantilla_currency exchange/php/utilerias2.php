@@ -71,6 +71,13 @@ function warningMssg($message)
     "<strong>Warning!  </strong>". " $message"   .
         "</div>";
 }
+function errorMssg($message)
+
+{
+    echo "<div class= 'alert alert-danger'>" .
+    "<strong>Warning!  </strong>". " $message"   .
+        "</div>";
+}
 function checarFechaCaducidad()
 {
     if(isset($_SESSION['idLista']) && isset($_SESSION['idArticulo']))
