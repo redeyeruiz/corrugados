@@ -247,7 +247,7 @@ include("funciones/clientesfuncP.php");
     <script src="js/contact-form-script.js"></script>
     <script src="js/isotope.min.js"></script>
     <script src="js/images-loded.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="js/custom.js"></script> <!-- oscar regreso -->
 	
 </body>
 
