@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $idcomp_error = $idcli_error = $dirent_error = $noment_error = $dir_error = $mun_error = $est_error = $tel_error = $obs_error = $codp_error = $codr_error = $pais_error = $rfc_error = ""; 
-$idcomp = $idcli = $dirent = $success = $option = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = $exist = $btnsn = "";
+$idcomp = $idcli = $dirent = $success = $option = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = $exist = $btnsn = $val1 = $val2 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idcomp"])){
@@ -86,30 +86,48 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
 
     if ($idcomp_error == "" and $idcli_error == "" and $dirent_error == "" and $noment_error == "" and $dir_error == "" and $mun_error == "" and $est_error == "" and $tel_error == "" and $obs_error == "" and $codp_error == "" and $codr_error == "" and $pais_error == "" and $rfc_error == ""){
         //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
-        $query="INSERT INTO DirEnt (idCompania, idCliente, dirEnt, nombreEntrega, direccion, municipio, estado, telefono, observaciones, codPost, codRuta, pais, rfc, estatus) VALUES ('$idcomp','$idcli','$dirent','$noment','$dir','$mun','$est','$tel','$obs','$codp','$codr','$pais','$rfc', true);";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM DirEnt WHERE idCompania='$idcomp' and idCliente='$idcli' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta de la dirección de entrega.";
-                $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+        $val1 = mysqli_query($conection,$query);
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
+            $success = "Error en el alta de de la dirección de entrega.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
+        }
+        else{
+            $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+            $val2 = mysqli_query($conection,$query);
+            $row = $val2-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta de de la dirección de entrega.";
+                $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
             }
             else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "La direccion de entrega con el ID de Compañía e ID de Cliente ingresados ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
+                $query="INSERT INTO DirEnt (idCompania, idCliente, dirEnt, nombreEntrega, direccion, municipio, estado, telefono, observaciones, codPost, codRuta, pais, rfc, estatus) VALUES ('$idcomp','$idcli','$dirent','$noment','$dir','$mun','$est','$tel','$obs','$codp','$codr','$pais','$rfc', true);";
+                $sql=mysqli_query($conection,$query);
+                if (!$sql){
+                    $query="SELECT * FROM DirEnt WHERE idCompania='$idcomp' and idCliente='$idcli' and estatus=false";
+                    $exist = mysqli_query($conection, $query);
+                    if (!$exist){
+                        $success = "Error en el alta de la dirección de entrega.";
+                        $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
+                    }
+                    else{
+                        $row = $exist-> fetch_assoc();
+                        if ($row["estatus"] == "0"){
+                            $success = "La direccion de entrega con el ID de Compañía e ID de Cliente ingresados ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                            $btnsn = "Mostrar";
+                        }
+                        else{
+                            $success = "Error en el alta de la dirección de entrega.";
+                            $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
+                        }
+                    }
                 }
                 else{
-                    $success = "Error en el alta de la dirección de entrega.";
+                    $success = "Alta realizada con éxito.";
                     $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
                 }
             }
-        }
-        else{
-            $success = "Alta realizada con éxito.";
-            $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
         }
     }
 }
@@ -236,14 +254,32 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos de la dirección de entrega.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE DirEnt SET dirEnt='$dirent', nombreEntrega='$noment', direccion='$dir', municipio='$mun', estado='$est', telefono='$tel', observaciones='$obs', codPost='$codp', codRuta='$codr', pais='$pais', rfc='$rfc' WHERE idCompania='$idcomp' AND idCliente='$idcli' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
+                $success = "Error en el alta de de la dirección de entrega.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos de la dirección de entrega.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta de de la dirección de entrega.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $row = $exist-> fetch_assoc();
+                    if ($row["estatus"] == "1"){
+                        $query="UPDATE DirEnt SET dirEnt='$dirent', nombreEntrega='$noment', direccion='$dir', municipio='$mun', estado='$est', telefono='$tel', observaciones='$obs', codPost='$codp', codRuta='$codr', pais='$pais', rfc='$rfc' WHERE idCompania='$idcomp' AND idCliente='$idcli' AND estatus=true";
+                        $sql=mysqli_query($conection,$query);
+                        $success = "Actualización realizada con éxito.";
+                    }
+                    else{
+                        $success = "Error en la actualización de datos de la dirección de entrega.";
+                    }
+                }
             }
         }
         $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";
@@ -362,14 +398,32 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos de la dirección de entrega.";
         }
         else{
-            $row = $exist-> fetch_assoc();
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp'";
+            $val1 = mysqli_query($conection,$query);
+            $row = $val1-> fetch_assoc();
             if ($row["estatus"] == "0"){
-                $query="UPDATE DirEnt SET dirEnt='$dirent', nombreEntrega='$noment', direccion='$dir', municipio='$mun', estado='$est', telefono='$tel', observaciones='$obs', codPost='$codp', codRuta='$codr', pais='$pais', rfc='$rfc', estatus=true WHERE idCompania='$idcomp' AND idCliente='$idcli'";
-                $sql=mysqli_query($conection,$query);
-                $success = "Alta y actualización realizada con éxito.";
+                $success = "Error en el alta de de la dirección de entrega.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos de la dirección de entrega.";
+                $query = "SELECT * FROM Cliente WHERE idCliente='$idcli'";
+                $val2 = mysqli_query($conection,$query);
+                $row = $val2-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $success = "Error en el alta de de la dirección de entrega.";
+                    $id_comp_error = "El ID del cliente ingresado no existe en los registros.";
+                }
+                else{
+                    $row = $exist-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $query="UPDATE DirEnt SET dirEnt='$dirent', nombreEntrega='$noment', direccion='$dir', municipio='$mun', estado='$est', telefono='$tel', observaciones='$obs', codPost='$codp', codRuta='$codr', pais='$pais', rfc='$rfc', estatus=true WHERE idCompania='$idcomp' AND idCliente='$idcli'";
+                        $sql=mysqli_query($conection,$query);
+                        $success = "Alta y actualización realizada con éxito.";
+                    }
+                    else{
+                        $success = "Error en la actualización de datos de la dirección de entrega.";
+                    }
+                }
             }
         }
         $idcomp = $idcli = $dirent = $noment = $dir = $mun = $est = $tel = $obs = $codp = $codr = $pais = $rfc = "";

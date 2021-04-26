@@ -252,6 +252,16 @@ include("funciones/agentesfuncP.php");
                         $idrep = $column[1];
                         $nomrep = $column[2];
                         $estatus = $column[3];
+
+                        $queryver="SELECT idRepresentante FROM agente WHERE idRepresentante='idrep' AND estatus=false ;";
+                            $veri=mysqli_query($conn, $queryver);
+                            if (!$veri){
+                                $sqlInsert = "INSERT into agente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
+                            }
+                            else{
+                                $sqlInsert= "UPDATE agente SET estatus=true WHERE idRepresentante='$idrep' AND estatus=false ;";
+                                $result = mysqli_query($conn, $sqlInsert);
+                            }
                         
                         $sqlInsert = "INSERT into agente values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "','" . $column[3] . "')";
 

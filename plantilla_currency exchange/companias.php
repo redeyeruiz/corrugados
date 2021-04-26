@@ -142,7 +142,7 @@ include("funciones/companiasfuncP.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -248,6 +248,15 @@ include("funciones/companiasfuncP.php");
                             $nom = $column[1];
                             $esta = $column[2];
                             
+                            $queryver="SELECT idCompania FROM compania WHERE idCompania='idcom' AND estatus=false ;";
+                            $veri=mysqli_query($conn, $queryver);
+                            if (!$veri){
+                                $sqlInsert = "INSERT into compania values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
+                            }
+                            else{
+                                $sqlInsert= "UPDATE compania SET estatus=true WHERE idCompania='$idcomp' AND estatus=false ;";
+                                $result = mysqli_query($conn, $sqlInsert);
+                            }
 
                             $sqlInsert = "INSERT into compania values ('" . $column[0] . "','" . $column[1] . "','" . $column[2] . "')";
 

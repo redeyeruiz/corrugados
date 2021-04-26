@@ -22,7 +22,9 @@ function folioValue(){
             $_SESSION['fechaOrden']= $reg->fechaOrden;
             $_SESSION['moneda']= $reg->moneda;
             $_SESSION['ordenCompra']=$reg->ordenCompra;
-            echo "fecha Orden : " . $_SESSION['fechaOrden'];
+            unset($_SESSION['ArticulosA']);
+            unset($_SESSION['flagArticulosA']);
+            
             
             
             
@@ -33,7 +35,7 @@ function folioValue(){
 function agregar_tablaM(){
     
    
-    if( isset($_POST['agregarArt']) && isset($_SESSION['folio']) && $_SESSION['precioT'] != "0"){
+    if( isset($_POST['agregarArt']) && isset($_SESSION['idCompania']) && isset($_SESSION['direntC']) && $_SESSION['precioT'] != "0" && isset($_SESSION['idArticulo'])){
 
         $idOrden                                    =$_SESSION['idOrden'];
         $idCompania                                 =$_SESSION['idCompania'];
@@ -176,7 +178,57 @@ function eliminar(){
     
 
 }
-
+function chequeoRepetidos(){
+    if(isset($_POST['agregarArt']) && isset($_SESSION['ArticulosA'])){
+        
+        $articulos=explode("|",$_SESSION['ArticulosA'],-1);
+        for($i=0;$i<count($articulos);$i++){
+            $idArticulo=$articulos[$i];
+            if($idArticulo==$_SESSION['idArticulo']){
+                warningMssg("ya se agrego ese articulo");
+                unset($_SESSION['idArticulo']);
+                unset($_SESSION['ArticulosA']);
+            }
+        }
+        if(isset($_SESSION['queries'])  && isset($_SESSION['idArticulo'])){
+            articulosRepetidos();
+        }
+        
+    }
+}
+function articulosAgregados($idArticulo){
+    
+    if(!isset($_SESSION['flagArticulosA'])){
+        
+        if(!isset($_SESSION['ArticulosA'])){
+        $_SESSION['ArticulosA']=$idArticulo."|";
+        }else{
+            $_SESSION['ArticulosA'].=$idArticulo."|";
+        }
+        
+    }
+    
+}
+function articulosRepetidos(){
+    if(isset($_SESSION['queries'])  && isset($_POST['agregarArt'])){
+        $queries=explode("|",$_SESSION['queries'],-1);
+        
+        for($i=0;$i<count($queries);$i++){
+            $query= explode("'",$queries[$i]);
+            if($query[0]=="INSERT INTO reporteorden VALUES("){
+                
+                $idArticulo     = $query [17];
+                if($idArticulo==$_SESSION['idArticulo']){
+                    warningMssg("ya se agrego ese articulo");
+                    unset($_SESSION['idArticulo']);
+                    unset($_SESSION['ArticulosA']);
+                }
+                
+            }
+            
+        }
+    }
+}
 function update_tableM(){
         
     echo
@@ -230,12 +282,14 @@ function update_tableM(){
                         <td class='td-orden'>$reg->fechaSolicitud</td>
                     </tr>
             ";
+
             
             
-            
+            articulosAgregados($reg->idArticulo);
             
             
         }
+        $_SESSION['flagArticulosA']="set";
         
     }
 
@@ -281,6 +335,7 @@ function update_tableM(){
                 </tbody>
                 </table>
     </div>";
+    
 }
 
 function error($msg){
@@ -429,7 +484,7 @@ function ordenTotal($strPrecioT){
 function calcularPrecio(){
     if(isset($_POST['calcularP']) && isset($_POST['cantidad'])  || (isset($_POST['agregarArt']) && isset($_POST['cantidad'])) ){
         $precio_articulo=obtenerPrecio();
-        echo $precio_articulo;
+        
         $_SESSION['precio_articulo']=strval($precio_articulo);
         
         $_SESSION['precioT']=strval( intval($_POST['cantidad']) * $precio_articulo);

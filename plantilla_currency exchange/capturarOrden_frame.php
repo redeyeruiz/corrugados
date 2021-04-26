@@ -6,6 +6,7 @@
     
     clientValues();
     calcularPrecio();
+    repeticionArticulo();
     
     update_dir();
     setOrdenCompra();
