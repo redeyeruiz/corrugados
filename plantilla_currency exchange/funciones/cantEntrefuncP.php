@@ -130,7 +130,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             }
             else{
                 $query = "UPDATE ReporteOrden SET entrega='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' ";
-
+                $existf = mysqli_query($conection, $query);
                 $success = "Alta realizada con éxito.";
             }
             
