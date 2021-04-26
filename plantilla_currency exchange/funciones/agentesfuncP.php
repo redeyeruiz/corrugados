@@ -2,7 +2,7 @@
 
 include_once "util_pcP.php";
 $idrep_error = $idcomp_error = $nomrep_error = ""; 
-$idrep = $idcomp = $nomrep = $success = $option = $exist = $btnsn = "";
+$idrep = $idcomp = $nomrep = $success = $option = $exist = $btnsn = $val1 = "";
 
 if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if (empty($_POST["idrep"])){
@@ -26,32 +26,40 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     
     if ($idrep_error == "" and $idcomp_error == "" and $nomrep_error == ""){
         //$conection = mysqli_connect("localhost", "root", "rootroot", "PapelesCorrugados");
-        $query="INSERT INTO Agente (idRepresentante, nomRepresentante, idCompania, estatus) VALUES ('$idrep','$nomrep','$idcomp', true);";
-        $sql=mysqli_query($conection,$query);
-        if (!$sql){
-            $query="SELECT * FROM Agente WHERE idRepresentante='$idrep' and estatus=false";
-            $exist = mysqli_query($conection, $query);
-            if (!$exist){
-                $success = "Error en el alta del agente.";
-                $idrep = $idcomp = $nomrep = "";
-            }
-            else{
-                $row = $exist-> fetch_assoc();
-                if ($row["estatus"] == "0"){
-                    $success = "El ID del agente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
-                    $btnsn = "Mostrar";
-                }
-                else{
+        $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+        $val1 = mysqli_query($conection,$query);
+        if (!$val1){
+            $success = "Error en el alta del agente.";
+            $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
+        }
+        else{
+            $query="INSERT INTO Agente (idRepresentante, nomRepresentante, idCompania, estatus) VALUES ('$idrep','$nomrep','$idcomp', true);";
+            $sql=mysqli_query($conection,$query);
+            if (!$sql){
+                $query="SELECT * FROM Agente WHERE idRepresentante='$idrep' and estatus=false";
+                $exist = mysqli_query($conection, $query);
+                if (!$exist){
                     $success = "Error en el alta del agente.";
                     $idrep = $idcomp = $nomrep = "";
                 }
+                else{
+                    $row = $exist-> fetch_assoc();
+                    if ($row["estatus"] == "0"){
+                        $success = "El ID del agente ya existe en la base de datos pero en modo inactivo.\n¿Quiere cambiar su modo a activo y actualizarlo con los datos que ya ingresó?";
+                        $btnsn = "Mostrar";
+                    }
+                    else{
+                        $success = "Error en el alta del agente.";
+                        $idrep = $idcomp = $nomrep = "";
+                    }
+                }
             }
+            else{
+                $success = "Alta realizada con éxito.";
+                $idrep = $idcomp = $nomrep = "";
+            }
+            //$idrep = $idcomp = $nomrep = "";
         }
-        else{
-            $success = "Alta realizada con éxito.";
-            $idrep = $idcomp = $nomrep = "";
-        }
-        //$idrep = $idcomp = $nomrep = "";
     }
 }
 
@@ -111,14 +119,22 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
             $success = "Error en la actualización de datos del agente.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "1"){
-                $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep' WHERE idRepresentante='$idrep' AND estatus=true";
-                $sql=mysqli_query($conection,$query);
-                $success = "Actualización realizada con éxito.";
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+            $val1 = mysqli_query($conection,$query);
+            if (!$val1){
+                $success = "Error en el alta del agente.";
+                $idcomp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del agente.";
+                $row = $exist-> fetch_assoc();
+                if ($row["estatus"] == "1"){
+                    $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep' WHERE idRepresentante='$idrep' AND estatus=true";
+                    $sql=mysqli_query($conection,$query);
+                    $success = "Actualización realizada con éxito.";
+                }
+                else{
+                    $success = "Error en la actualización de datos del agente.";
+                }
             }
         }
         $idrep = $idcomp = $nomrep = "";
@@ -177,19 +193,27 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
             $success = "Error en la actualización de datos del agente.";
         }
         else{
-            $row = $exist-> fetch_assoc();
-            if ($row["estatus"] == "0"){
-                $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep', estatus=true WHERE idRepresentante='$idrep'";
-                $sql=mysqli_query($conection,$query);
-                if(!$sql){
-                    //$success = "Error en la actualización de datos del usuario.";
-                    $success = mysqli_error($conection);
-                }else{
-                    $success = "Alta y actualización realizada con éxito.";
-                }
+            $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
+            $val1 = mysqli_query($conection,$query);
+            if (!$val1){
+                $success = "Error en el alta del agente.";
+                $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
             else{
-                $success = "Error en la actualización de datos del agente.";
+                $row = $exist-> fetch_assoc();
+                if ($row["estatus"] == "0"){
+                    $query="UPDATE Agente SET idCompania='$idcomp', nomRepresentante='$nomrep', estatus=true WHERE idRepresentante='$idrep'";
+                    $sql=mysqli_query($conection,$query);
+                    if(!$sql){
+                        //$success = "Error en la actualización de datos del usuario.";
+                        $success = mysqli_error($conection);
+                    }else{
+                        $success = "Alta y actualización realizada con éxito.";
+                    }
+                }
+                else{
+                    $success = "Error en la actualización de datos del agente.";
+                }
             }
         }
         $idrep = $idcomp = $nomrep = "";
