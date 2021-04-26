@@ -147,7 +147,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="10" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -156,7 +156,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcliente" type="text" size="50" maxlength="10" class="campo" value="<?= $idcliente ?>">
+                            <input style="border:3px solid #ff880e" name="idcliente" type="text" size="20" maxlength="10" class="campo" value="<?= $idcliente ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcliente_error ?></span></p>
                         </td>
                     </tr>
@@ -165,7 +165,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>ID Representante</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="50" maxlength="10" class="campo" value="<?= $idrep ?>">
+                            <input style="border:3px solid #ff880e" name="idrep" type="text" size="20" maxlength="10" class="campo" value="<?= $idrep ?>">
                             <p><span style="color:#C84810" class="error"><?= $idrep_error ?></span></p>
                         </td>
                     </tr>
@@ -174,16 +174,16 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>ID Lista de Precios</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idlist" type="text" size="50" maxlength="10" class="campo" value="<?= $idlist ?>">
+                            <input style="border:3px solid #ff880e" name="idlist" type="text" size="20" maxlength="10" class="campo" value="<?= $idlist ?>">
                             <p><span style="color:#C84810" class="error"><?= $idlist_error ?></span></p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p align="center"><b>ID Almacén</b></p>
+                            <p align="center"><b>ID Almacen</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idalma" type="text" size="50" maxlength="10" class="campo" value="<?= $idalma ?>">
+                            <input style="border:3px solid #ff880e" name="idalma" type="text" size="20" maxlength="10" class="campo" value="<?= $idalma ?>">
                             <p><span style="color:#C84810" class="error"><?= $idalma_error ?></span></p>
                         </td>
                     </tr>
@@ -192,7 +192,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Nombre del Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="nom" type="text" size="50" maxlength="25" class="campo" value="<?= $nom ?>">
+                            <input style="border:3px solid #ff880e" name="nom" type="text" size="50" maxlength="100" class="campo" value="<?= $nom ?>">
                             <p><span style="color:#C84810" class="error"><?= $nom_error ?></span></p>
                         </td>
                     </tr>
@@ -201,7 +201,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Estatus del Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="status" type="int" size="50" maxlength="1" class="campo" value="<?= $status ?>">
+                            <input style="border:3px solid #ff880e" name="status" type="int" size="5" maxlength="1" class="campo" value="<?= $status ?>">
                             <p><span style="color:#C84810" class="error"><?= $status_error ?></span></p>
                         </td>
                     </tr>
@@ -210,7 +210,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Analista</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="analista" type="text" size="50" maxlength="10" class="campo" value="<?= $analista ?>">
+                            <input style="border:3px solid #ff880e" name="analista" type="text" size="20" maxlength="10" class="campo" value="<?= $analista ?>">
                             <p><span style="color:#C84810" class="error"><?= $analista_error ?></span></p>
                         </td>
                     </tr>
@@ -219,7 +219,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Divisa</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="divisa" type="text" size="50" maxlength="10" class="campo" value="<?= $divisa?>">
+                            <input style="border:3px solid #ff880e" name="divisa" type="text" size="10" maxlength="3" class="campo" value="<?= $divisa?>">
                             <p><span style="color:#C84810" class="error"><?= $divisa_error ?></span></p>
                         </td>
                     </tr>
@@ -228,7 +228,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Límite de Crédito</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="limitcre" type="text" size="50" maxlength="10" class="campo" value="<?= $limitcre ?>">
+                            <input style="border:3px solid #ff880e" name="limitcre" type="number" min="0" step="0.01" class="campo" value="<?= $limitcre ?>">
                             <p><span style="color:#C84810" class="error"><?= $limitcre_error ?></span></p>
                         </td>
                     </tr>
@@ -237,7 +237,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Saldo de Orden</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="salorden" type="text" size="50" maxlength="10" class="campo" value="<?= $salorden ?>">
+                            <input style="border:3px solid #ff880e" name="salorden" type="number" min="0" step="0.01" class="campo" value="<?= $salorden ?>">
                             <p><span style="color:#C84810" class="error"><?= $salorden_error ?></span></p>
                         </td>
                     </tr>
@@ -246,7 +246,7 @@ include("funciones/clientesfuncP.php");
                             <p align="center"><b>Saldo de Factura</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="salfac" type="text" size="50" maxlength="10" class="campo" value="<?= $salfac ?>">
+                            <input style="border:3px solid #ff880e" name="salfac" type="number" min="0" step="0.01" class="campo" value="<?= $salfac ?>">
                             <p><span style="color:#C84810" class="error"><?= $salfac_error ?></span></p>
                         </td>
                     </tr>
