@@ -470,17 +470,11 @@ include('utilerias2.php');
 
 		function cancelarOrden(){
 			$fol=$_GET['fol'];
-			echo "asdfasdfasfd";
-			/*
+			
             $fol=$_GET['fol'];
             $conn=conecta_servidor();
 			$query="DELETE FROM reporteorden WHERE folio = '$fol'";
 			$sql=mysqli_query($conn,$query);
-            if (mysqli_affected_rows($conn)==0){
-                msg("Folio Inexistente", "rojo");
-            } else {
-				echo "Orden borrada de la BD";
-            }*/
 			if (executeQuery(conecta_servidor(),"DELETE FROM reporteorden WHERE folio = '$fol'")){
 				warningMssg("Se elimino la orden");
 			}else{
@@ -489,7 +483,7 @@ include('utilerias2.php');
         }
 
 		function busqueda_prom_time(){
-            echo "hola :D";
+           
             $f_desde=$_GET['f_desde'];
             $f_hasta=$_GET['f_hasta'];
             $conn=conecta_servidor();

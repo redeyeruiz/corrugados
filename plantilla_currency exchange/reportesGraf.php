@@ -212,7 +212,6 @@ function pedidoSurtido(){
     $surtido="";
     $conn=conecta_servidor();
     $query="SELECT * FROM reporteorden where ordenBaan != 0 ";
-    echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
@@ -230,7 +229,7 @@ function pedidoSurtido(){
     $surtido=substr($surtido,1);
     $folio=substr($folios,1);
 
-    echo $pedido;
+
 
     echo "<div class='titulo-graf'> Pedido y Suritdo </div> <canvas>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js'></script>
@@ -552,7 +551,7 @@ function ventasPorMesAno(){
 }
 
 function comparaVentaFecha(){
-    $folios="";
+    $fechas="";
     $kilos="";
     $dineros="";
     $fecha=$_GET['fecha'];
@@ -574,7 +573,7 @@ function comparaVentaFecha(){
 
     $pedido=substr($kilos,1);
     $dineros=substr($dineros,1);
-    $folio=substr($folios,1);
+    $folios=substr($folios,1);
 
     echo $pedido;
 
@@ -585,7 +584,7 @@ function comparaVentaFecha(){
         var pvsChart = new Chart(myChart, {
             type: 'bar',
             data: {
-                labels:[$folio],
+                labels:[$folios],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -608,7 +607,7 @@ function comparaVentaFecha(){
         var pvsChart = new Chart(myChart, {
             type: 'bar',
             data: {
-                labels:[$folio],
+                labels:[$folios],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
@@ -648,6 +647,29 @@ function comparaVentaFecha(){
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
 	
+
+      <!-- Start Footer -->
+  <footer class="footer-box">
+        <div class="container">
+            <div class="row">
+               <div class="col-md-12 white_fonts">
+                    <div class="row">
+					</div>
+                </div>
+			 </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div class="footer_bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="crp">© Papeles Corrugados: Innovación de Empaques</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
