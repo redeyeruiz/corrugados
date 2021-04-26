@@ -62,6 +62,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     
     if ($folio_error == "" and $idart_error == "" and $idalma_error == "" and $idcomp_error == "" and $idcliente_error == "" and $newrep_error == "" and $stock_error == "" and $codavi_error == "" and $udvta_error == ""){
         $query="INSERT INTO ArticuloVendido (folio, idArticulo, idAlmacen, idCompania, idCliente, newRep, stock, codAviso, udVta, estatus) VALUES ('$folio','$idart','$idalma','$idcomp','$idcliente','$newrep','$stock','$codavi','$udvta', true);";
+        $query2="SELECT stock FROM inventario WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
+        $resultao=mysqli_query($conection,$query2);
+        $row = mysqli_fetch_array($resultao);
+        $quantity = $row['stock'];
+        //echo $quantity;
+        $stock2=($quantity-$stock);
+        $query3="UPDATE inventario SET stock='$stock2' WHERE idArticulo = '$idart' AND idAlmacen = '$idalma';";
+        $sql2=mysqli_query($conection,$query3);
         $sql=mysqli_query($conection,$query);
         if (!$sql){
             $query="SELECT * FROM ArticuloVendido WHERE folio='$folio' and estatus=false";
