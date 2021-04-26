@@ -97,7 +97,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
     
     if ($id_user_error == ""){
         $idCompania = $_SESSION['idComp'];
-        $query="SELECT * FROM usuario WHERE idUsuario='$id_user' and estatus=true and idCompania = '$idCompania'";
+        $query="SELECT * FROM Usuario WHERE idUsuario='$id_user' and estatus=true and idCompania = '$idCompania'";
         $exist = mysqli_query($conection, $query);
         if (!$exist){
             $success = "Error en la baja del usuario.";
@@ -107,7 +107,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_bajas"])){
             if ($row["estatus"] == "1"){
                 $query="UPDATE Usuario SET estatus=false WHERE idUsuario='$id_user' AND estatus=true";
                 $sql=mysqli_query($conection,$query);
-                $query="DELETE FROM permiso WHERE idUsuario='$id_user'";
+                $query="DELETE FROM Permiso WHERE idUsuario='$id_user'";
                 $success = "Baja realizada con éxito.";
                 //echo json_encode($row);
                 registro_baja($row, $_SESSION['usuario']);
