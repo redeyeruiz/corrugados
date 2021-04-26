@@ -163,7 +163,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>ID Orden</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idord" type="number" min="0" max="9999999999" class="campo" value="<?= $idord ?>">
+                            <input style="border:3px solid #ff880e" name="idord" type="text" size="50" maxlength="33" class="campo" value="<?= $idord ?>">
                             <p><span style="color:#C84810" class="error"><?= $idord_error ?></span></p>
                         </td>
                     </tr>
