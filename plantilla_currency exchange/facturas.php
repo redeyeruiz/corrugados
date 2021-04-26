@@ -145,7 +145,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>Número de Factura</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="numfact" type="number" min="0" max="9999999999"class="campo" value="<?= $numfact ?>">
+                            <input style="border:3px solid #ff880e" name="numfact" type="number" min="0" max="9999999999" class="campo" value="<?= $numfact ?>">
                             <p><span style="color:#C84810" class="error"><?= $numfact_error ?></span></p>
                         </td>
                     </tr>
@@ -154,7 +154,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>ID Compañía</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="50" maxlength="4" class="campo" value="<?= $idcomp ?>">
+                            <input style="border:3px solid #ff880e" name="idcomp" type="text" size="10" maxlength="4" class="campo" value="<?= $idcomp ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcomp_error ?></span></p>
                         </td>
                     </tr>
@@ -181,7 +181,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>ID Cliente</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="50" maxlength="10" class="campo" value="<?= $idcli ?>">
+                            <input style="border:3px solid #ff880e" name="idcli" type="text" size="30" maxlength="10" class="campo" value="<?= $idcli ?>">
                             <p><span style="color:#C84810" class="error"><?= $idcli_error ?></span></p>
                         </td>
                     </tr>
@@ -208,7 +208,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>Tipo de Transporte</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="trans" type="text" size="50" maxlength="4" class="campo" value="<?= $trans ?>">
+                            <input style="border:3px solid #ff880e" name="trans" type="text" size="10" maxlength="4" class="campo" value="<?= $trans ?>">
                             <p><span style="color:#C84810" class="error"><?= $trans_error ?></span></p>
                         </td>
                     </tr>
@@ -217,7 +217,7 @@ include("funciones/facturasfuncP.php");
                             <p align="center"><b>Fecha de Facturación</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="fechaf" type="text" size="50" maxlength="10" class="campo" value="<?= $fechaf ?>">
+                            <input style="border:3px solid #ff880e" name="fechaf" type="text" size="40" maxlength="10" class="campo" value="<?= $fechaf ?>">
                             <p><span style="color:#C84810" class="error"><?= $fechaf_error ?></span></p>
                         </td>
                     </tr>
