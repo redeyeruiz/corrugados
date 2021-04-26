@@ -45,7 +45,7 @@ $conection = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
             case 'bloqueo clientes': return 'http://localhost/corrugados/plantilla_currency%20exchange/bloqueo_Clientes.php';
             case 'reportes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes.php';
             case 'reporte todas ordenes': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_ordenes.php';
-            case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.html';
+            case 'reporte promedio tiempo': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportes_frame.php';
             case 'reporte en proc': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesEnProc.php';
             case 'reporte proc': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesProcesadas.php';
             case 'reporte graf': return 'http://localhost/corrugados/plantilla_currency%20exchange/reportesGraf.php';
