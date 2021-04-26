@@ -414,24 +414,43 @@
                 return("error");
             }
 
+
             } if (isset($_SESSION['folio'])){
                 $GLOBALS['flagGuardar']=true;
+
+                // Rubs
+                $folio=$_SESSION['folio'];
+                $query="SELECT * FROM orden WHERE estatus='$folio'";
+                $conn = conecta_servidor();
+                $sql=mysqli_query($conn,$query);
+                $reg=mysqli_fetch_object($sql);
+                error_reporting(E_ALL & ~E_NOTICE);
+                if($reg->estatus=='1'){
+                    echo "<div class='alert alert-info' role='alert'> La orden ya fue autorizada </div>";
+                }else{
+                    echo "<div class='alert alert-info' role='alert'> La orden está en proceso de autorización </div>";
+                }
+                error_reporting(E_ALL);
                 echo "<div class='alert alert-info' role='alert'> Folio encontrado en base de datos </div>";
 
-                $folio                                      =$_SESSION['folio'];
-
-                
-
+                // $folio =$_SESSION['folio'];
                     
             }
+
+            
+            
         
         crearTabla();
         
     }
 
 
+
     function crearTabla(){
         //Inicio de encabezados de tabla ---------------------------------------------------------------------------------------------
+        error_reporting(E_ALL & ~E_NOTICE);
+        $folio=$_SESSION['folio'];
+
         echo"
         <h1 class='h1-orden'>Artículos Agregados </h1>
         
@@ -447,22 +466,43 @@
                     <th class='th-orden' scope='col'>Descripción</th>
                     <th class='th-orden' scope='col'>Cantidad</th>
                     <th class='th-orden' scope='col'>Precio</th>
-                    <th class='th-orden' scope='col'>Fecha-Solicitud</th>";
+                    <th class='th-orden' scope='col'>Costo</th>
+                    <th class='th-orden' scope='col'>Fecha-Solicitud</th>
+                    <th class='th-orden' scope='col'>Fecha-Entrega</th>";
         
         //Encabezados por Rol
 
+        
+        
+        
         if($GLOBALS['rolFAC']){
             echo"<th class='th-orden' scope='col'>vFac
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevFac(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevFac(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vFac==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
-
+        
         if($GLOBALS['rolCXC']){
             echo"<th class='th-orden' scope='col'>vCXC
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevCXC(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevCXC(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vCXC==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
@@ -470,7 +510,15 @@
         if($GLOBALS['rolPRE']){
             echo"<th class='th-orden' scope='col'>vPRE
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevPRE(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevPRE(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vPRE==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
@@ -478,7 +526,15 @@
         if($GLOBALS['rolCST']){
             echo"<th class='th-orden' scope='col'>vCST
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevCST(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevCST(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vCST==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
@@ -486,7 +542,15 @@
         if($GLOBALS['rolING']){
             echo"<th class='th-orden' scope='col'>vING
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevING(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevING(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vING==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
@@ -494,7 +558,15 @@
         if($GLOBALS['rolPLN']){
             echo"<th class='th-orden' scope='col'>vPLN
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevPLN(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevPLN(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vPLN==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
@@ -502,11 +574,20 @@
         if($GLOBALS['rolFEC']){
             echo"<th class='th-orden' scope='col'>vFEC
             <div class='form-check'>
-            <input class='form-check-input' type='checkbox' onClick='togglevFEC(this)'>
+            <input class='form-check-input' type='checkbox' onClick='togglevFEC(this)'";
+            $query="SELECT * FROM orden WHERE folio='$folio'";
+            $conn = conecta_servidor();
+            $sql=mysqli_query($conn,$query);
+            $reg=mysqli_fetch_object($sql);
+            if($reg->vFEC==1){
+                echo " hidden";
+            }
+            echo">
             </div>
             </th>";
         }
 
+        error_reporting(E_ALL);
         //Fin de encabezados
         echo"
         
@@ -554,7 +635,9 @@
                             <td class='td-orden'>$reg->descripcion</td>
                             <td class='td-orden'>$reg->cantidad</td>
                             <td class='td-orden'>$reg->precio</td>
+                            <td class='td-orden'>$reg->costo</td>
                             <td class='td-orden'>$reg->fechaSolicitud</td>
+                            <td class='td-orden'>$reg->fechaEntrega</td>
 
             
 
@@ -567,7 +650,7 @@
                     <div class='form-check'>
                     <input type='hidden' name='vFac$count' value='0'> 
                     <input class='vFac form-check-input' type='checkbox' name='vFac$count' value='1' ";
-                    if($reg->vFac ==1)echo"checked";
+                    if($reg->vFac ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -578,7 +661,7 @@
                     <div class='form-check'> 
                     <input type='hidden' name='vCXC$count' value='0'>
                     <input class='vCXC form-check-input' type='checkbox' name='vCXC$count' value='1' ";
-                    if($reg->vCXC ==1)echo"checked";
+                    if($reg->vCXC ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -589,7 +672,7 @@
                     <div class='form-check'>
                     <input type='hidden' name='vPRE$count' value='0'>
                     <input class='vPRE form-check-input' type='checkbox' name='vPRE$count' value='1' ";
-                    if($reg->vPRE ==1)echo"checked";
+                    if($reg->vPRE ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -600,7 +683,7 @@
                     <div class='form-check'> 
                     <input type='hidden' name='vCST$count' value='0'>
                     <input class='vCST form-check-input' type='checkbox' name='vCST$count' value='1' ";
-                    if($reg->vCST ==1)echo"checked";
+                    if($reg->vCST ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -611,7 +694,7 @@
                     <div class='form-check'> 
                     <input type='hidden' name='vING$count' value='0'>
                     <input class='vING form-check-input' type='checkbox' name='vING$count' value='1' ";
-                    if($reg->vING ==1)echo"checked";
+                    if($reg->vING ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -622,7 +705,7 @@
                     <div class='form-check'>
                     <input type='hidden' name='vPLN$count' value='0'> 
                     <input class='vPLN form-check-input' type='checkbox' name='vPLN$count' value='1' ";
-                    if($reg->vPLN ==1)echo"checked";
+                    if($reg->vPLN ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -633,7 +716,7 @@
                     <div class='form-check'>
                     <input type='hidden' name='vFEC$count' value='0'> 
                     <input class='vFEC form-check-input' type='checkbox' name='vFEC$count' value='1' ";
-                    if($reg->vFEC ==1)echo"checked";
+                    if($reg->vFEC ==1)echo"checked hidden";
                     echo">
                     </div>
                     </td>";
@@ -944,7 +1027,15 @@
             // LLmar funcion
 
             //texto();
-            createFile("ordenes/".fileName(),texto(),fileName());
+            $query="SELECT count(vFac) as totalFec FROM reporteorden WHERE fechaEntrega='0000-00-00' AND folio='$folio'";
+            $result=mysqli_query($conn, $query);
+            $data=mysqli_fetch_assoc($result);
+            if($data['totalFec']==0){
+                createFile("ordenes/".fileName(),texto(),fileName());
+            }else{
+                warningMssg("Falta que todos los articulos hayan sido entregados, vuelve a autorizar la orden cuando se hayan entregado");
+            }
+            
 
         }  else{
             $query="UPDATE $table2 SET estatus='0' WHERE ".$cond2; 

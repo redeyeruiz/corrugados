@@ -29,7 +29,7 @@ function busqueda_orden(){
 function tiempo_filtro(){
     f_desde = document.getElementById("f_desde").value;
     f_hasta = document.getElementById("f_hasta").value;
-    var serv=servidor()+"buscar_ordenes.php?op=tiempo&f_desde="+f_desde+"&f_hasta="+f_hasta;
+    var serv=servidor()+"buscar_ordenes.php?op=prom_tiempo&f_desde="+f_desde+"&f_hasta="+f_hasta;
 	location.href=serv;	
 
 }

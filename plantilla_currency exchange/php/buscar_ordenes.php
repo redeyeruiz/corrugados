@@ -36,7 +36,7 @@ include('utilerias2.php');
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css" />
     <!-- Javascript-->
-    <script type="text/javascript" src="js/busqueda.js"></script>
+    <script type="text/javascript" src="js/busquedas.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -55,6 +55,7 @@ include('utilerias2.php');
 	if ($op=="tiempo") tiempo_filtro();
 	if ($op=="ordenfiltro") orden_filtro();
 	if ($op=="go") cancelarOrden();
+	if ($op=="prom_tiempo") busqueda_prom_time();
 
 	function msg($mensaje, $color){
 		echo "<table border='3' width='60%'> ";
@@ -468,6 +469,9 @@ include('utilerias2.php');
 		</script>"';
 
 		function cancelarOrden(){
+			$fol=$_GET['fol'];
+			echo "asdfasdfasfd";
+			/*
             $fol=$_GET['fol'];
             $conn=conecta_servidor();
 			$query="DELETE FROM reporteorden WHERE folio = '$fol'";
@@ -476,7 +480,76 @@ include('utilerias2.php');
                 msg("Folio Inexistente", "rojo");
             } else {
 				echo "Orden borrada de la BD";
+            }*/
+			if (executeQuery(conecta_servidor(),"DELETE FROM reporteorden WHERE folio = '$fol'")){
+				warningMssg("Se elimino la orden");
+			}else{
+				warningMssg("NO Se elimino la orden");
+			}
+        }
+
+		function busqueda_prom_time(){
+            echo "hola :D";
+            $f_desde=$_GET['f_desde'];
+            $f_hasta=$_GET['f_hasta'];
+            $conn=conecta_servidor();
+            $query="SELECT * FROM reporteorden WHERE fechaOrden BETWEEN '$f_desde' AND '$f_hasta';";
+            
+            $sql=mysqli_query($conn,$query);
+            
+            if (mysqli_affected_rows($conn)==0){
+                msg("Folio Inexistente", "rojo");
             }
+            echo
+            "<br><br><br>
+            <h1 class='h1-orden'>Busqueda de orden</h1>
+            <div class='tbl-header-orden'>
+                <table class='table-orden' cellpadding='0' cellspacing='0'>
+                <thead>
+                    <tr>
+                        <th class='th-orden' scope='col'>Folio de orden</th>
+                        <th class='th-orden' scope='col'>Orden Baan</th>
+                        <th class='th-orden' scope='col'>ID cliente</th>
+                        <th class='th-orden' scope='col'>Nombre</th>
+                        
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class='tbl-content-orden'>
+                    <table class='table-orden' cellpadding='0' cellspacing='0'>
+                    <tbody>";
+
+
+            while ($reg=mysqli_fetch_object($sql)){
+
+                /*if ($reg==mysqli_fetch_array($sql)){
+                    msg("Folio Inexistente", "rojo");
+                }*/
+                $ordenBaan=$reg->ordenBaan;
+                $idCliente=$reg->idCliente;
+                $nombreCliente=$reg->nombreCliente;
+                $fol=$reg->folio;
+                echo
+                "<tr>
+                    <td class='td-orden'>$fol</td>
+                    <td class='td-orden'>$ordenBaan</td>
+                    <td class='td-orden'>$idCliente</td>
+                    <td class='td-orden'>$nombreCliente</td>
+
+                    </tr>
+            	";
+
+            }
+            /*if ($reg==mysqli_fetch_array($sql)){
+                msg("Folio Inexistente", "rojo");
+            }
+            else{
+
+                formulario($fol, $reg->ordenBaan, $reg->idCliente, $reg->nombreCliente);
+                msg("Consulta realizada", "verde");
+            }
+            */
         }
     ?>
 

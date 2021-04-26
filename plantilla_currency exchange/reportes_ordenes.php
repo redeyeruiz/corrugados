@@ -99,18 +99,13 @@ if(!isset($_SESSION['conectado'])){
                     <span></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                <ul class="navbar-nav">
-                    <?php menu() ?>
+                    <ul class="navbar-nav">
+                        <?php menu() ?>
                     </ul>
                 </div>
                      </div>
                  </nav>
-                 <div class="search-box">
-                    <input type="text" class="search-txt" placeholder="Search">
-                    <a class="search-btn">
-                        <img src="images/search_icon.png" alt="#" />
-                    </a>
-                </div> 
+                 
                 </div>
             </div>
           </div>

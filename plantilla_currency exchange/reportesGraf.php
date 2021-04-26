@@ -125,12 +125,7 @@ die();
                 </div>
                      </div>
                  </nav>
-                 <div class="search-box">
-                    <input type="text" class="search-txt" placeholder="Search">
-                    <a class="search-btn">
-                        <img src="images/search_icon.png" alt="#" />
-                    </a>
-                </div> 
+                 
                 </div>
             </div>
           </div>
@@ -194,28 +189,37 @@ die();
     
     <?php
 
-$op = $_GET['op'];
+if(isset($_GET['op'])){
+    $op = $_GET['op'];
 
-if($op == "PVS") pedidoSurtido();
-if($op == "UDV") uniDeVentas();
-if($op == "VPC") ventasPorClientes();
-if($op == "VPA") ventasPorArticulos();
-if($op == "VPM") VentasPorMesAno();
-if($op == "CVF") comparaVentaFecha();
+    if($op == "PVS") pedidoSurtido();
+    if($op == "UDV") uniDeVentas();
+    if($op == "VPC") ventasPorClientes();
+    if($op == "VPA") ventasPorArticulos();
+    if($op == "VPM") VentasPorMesAno();
+    if($op == "CVF") comparaVentaFecha();
+
+}else{
+    pedidoSurtido();
+}
+
 
 
 
 function pedidoSurtido(){
+    $folios="";
     $pedido="";
     $surtido="";
     $conn=conecta_servidor();
-    $query="SELECT cantidad, entregado FROM reporteorden where ordenBaan != 0 ";
+    $query="SELECT * FROM reporteorden where ordenBaan != 0 ";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $entregado=$reg->entregado;
         $pedido.=",".$cantidad;
@@ -224,6 +228,7 @@ function pedidoSurtido(){
 
     $pedido=substr($pedido,1);
     $surtido=substr($surtido,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -232,9 +237,9 @@ function pedidoSurtido(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad',
                     data:[$pedido, $surtido],
@@ -252,16 +257,19 @@ function pedidoSurtido(){
 }
 
 function uniDeVentas(){
+    $folios="";
     $kilos="";
     $dineros="";
     $conn=conecta_servidor();
-    $query="SELECT cantidad, precio FROM reporteorden where ordenBaan != 0 ";
+    $query="SELECT * FROM reporteorden where ordenBaan != 0 ";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $precio=$reg->precio;
         $kilos.=",".$cantidad;
@@ -270,6 +278,7 @@ function uniDeVentas(){
 
     $pedido=substr($kilos,1);
     $precio=substr($dineros,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -278,9 +287,9 @@ function uniDeVentas(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -301,9 +310,9 @@ function uniDeVentas(){
     <script>
         var myChart = document.getElementById('myChart2').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
@@ -321,17 +330,20 @@ function uniDeVentas(){
 }
 
 function ventasPorClientes(){
+    $folios="";
     $kilos="";
     $dineros="";
     $cliente=$_GET['cliente'];
     $conn=conecta_servidor();
-    $query="SELECT cantidad, precio FROM reporteorden where idCliente=$cliente";
+    $query="SELECT * FROM reporteorden where idCliente=$cliente";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $precio=$reg->precio;
         $kilos.=",".$cantidad;
@@ -340,6 +352,7 @@ function ventasPorClientes(){
 
     $pedido=substr($kilos,1);
     $dineros=substr($dineros,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -348,9 +361,9 @@ function ventasPorClientes(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -371,9 +384,9 @@ function ventasPorClientes(){
     <script>
         var myChart = document.getElementById('myChart2').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
@@ -391,17 +404,20 @@ function ventasPorClientes(){
 }
 
 function ventasPorArticulos(){
+    $folios="";
     $kilos="";
     $dineros="";
     $articulo=$_GET['articulo'];
     $conn=conecta_servidor();
-    $query="SELECT cantidad, precio FROM reporteorden where idArticulo=$articulo";
+    $query="SELECT * FROM reporteorden where idArticulo=$articulo";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $precio=$reg->precio;
         $kilos.=",".$cantidad;
@@ -410,6 +426,7 @@ function ventasPorArticulos(){
 
     $pedido=substr($kilos,1);
     $dineros=substr($dineros,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -418,9 +435,9 @@ function ventasPorArticulos(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -441,9 +458,9 @@ function ventasPorArticulos(){
     <script>
         var myChart = document.getElementById('myChart2').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
@@ -461,17 +478,20 @@ function ventasPorArticulos(){
 }
 
 function ventasPorMesAno(){
+    $folios="";
     $kilos="";
     $dineros="";
     $fecha=$_GET['fecha'];
     $conn=conecta_servidor();
-    $query="SELECT cantidad, precio FROM reporteorden where fechaOrden ";
+    $query="SELECT * FROM reporteorden where fechaOrden ";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $precio=$reg->precio;
         $kilos.=",".$cantidad;
@@ -480,6 +500,7 @@ function ventasPorMesAno(){
 
     $pedido=substr($kilos,1);
     $dineros=substr($dineros,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -488,9 +509,9 @@ function ventasPorMesAno(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -511,9 +532,9 @@ function ventasPorMesAno(){
     <script>
         var myChart = document.getElementById('myChart2').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
@@ -531,17 +552,20 @@ function ventasPorMesAno(){
 }
 
 function comparaVentaFecha(){
+    $folios="";
     $kilos="";
     $dineros="";
     $fecha=$_GET['fecha'];
     $conn=conecta_servidor();
-    $query="SELECT cantidad, precio FROM reporteorden where fechaOrden ";
+    $query="SELECT * FROM reporteorden where fechaOrden ";
     echo $query;
     $sql=mysqli_query($conn,$query);
     if (mysqli_affected_rows($conn)==0){
         msg("Folio Inexistente", "rojo");
     }
     while ($reg=mysqli_fetch_object($sql)){
+        $folio=$reg->folio;
+        $folios.=",".$folio;
         $cantidad=$reg->cantidad;
         $precio=$reg->precio;
         $kilos.=",".$cantidad;
@@ -550,6 +574,7 @@ function comparaVentaFecha(){
 
     $pedido=substr($kilos,1);
     $dineros=substr($dineros,1);
+    $folio=substr($folios,1);
 
     echo $pedido;
 
@@ -558,9 +583,9 @@ function comparaVentaFecha(){
     <script>
         var myChart = document.getElementById('myChart').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'cantidad/kilos',
                     data:[$kilos],
@@ -581,9 +606,9 @@ function comparaVentaFecha(){
     <script>
         var myChart = document.getElementById('myChart2').getContext('2d');
         var pvsChart = new Chart(myChart, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
-                labels:[],
+                labels:[$folio],
                 datasets:[{
                     label:'precio',
                     data:[$dineros],
