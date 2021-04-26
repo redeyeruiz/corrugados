@@ -45,7 +45,11 @@ function unsetAll(){
     unset($_SESSION['dirEnt']);
 
     unset($_SESSION['idOrden']);
-    unset($_SESSION['saldoOrden']);         
+    unset($_SESSION['saldoOrden']);
+    unset($_SESSION['ArticulosA']);
+    unset($_SESSION['flagArticulosA']);
+    
+             
 }
 
 function executeQuery($conn,$query){
@@ -106,6 +110,22 @@ function diasDesde($comienzo)
     $final = strtotime(date("Y-m-d"));
 
     return($diasDesde = ceil(abs($final - $comienzo) / 86400));
+}
+function repeticionArticulo(){
+
+    if(isset($_SESSION['queries'])  && isset($_POST['agregarArt'])){
+        $queries=explode("|",$_SESSION['queries'],-1);
+    
+        for($i=0;$i<count($queries);$i++){
+            $query= explode("'",$queries[$i]);
+            $idArticulo     = $query [17];
+            if($idArticulo==$_SESSION['idArticulo']){
+                warningMssg("ya se agrego ese articulo");
+                unset($_SESSION['idArticulo']);
+            }
+        }
+    }
+    
 }
 
 ?>

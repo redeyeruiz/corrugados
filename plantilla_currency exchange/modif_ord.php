@@ -160,6 +160,7 @@
                 cancelar();
                 clientValues();
                 calcularPrecio();
+                
                 guardar();
                 folioValue();
                 
@@ -171,7 +172,7 @@
                 
                 eliminar();
                 eliminarOrden();
-                
+                chequeoRepetidos();
                 agregar_tablaM();
                 
                 update_dir();

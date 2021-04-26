@@ -49,7 +49,7 @@
     function agregar_tabla(){
         crearIdOrden();
                 
-        if( isset($_POST['agregarArt']) && isset($_SESSION['idCompania']) && isset($_SESSION['direntC']) && $_SESSION['precioT'] != "0"){
+        if( isset($_POST['agregarArt']) && isset($_SESSION['idCompania']) && isset($_SESSION['direntC']) && $_SESSION['precioT'] != "0" && isset($_SESSION['idArticulo'])){
     
             setOrdenCompra();
             
@@ -58,7 +58,7 @@
             $idCompania                                 =$_SESSION['idCompania'];
             $folio                                      =$_SESSION['folio'];
             $numFact                                    ='NULL';
-            $ordenBaan                                  ='NULL';
+            $ordenBaan                                  ='0';
             $idCliente                                  =$_SESSION['idCliente'];
             $nombreCliente =                            $_SESSION['nombreCliente']; 
             $_SESSION['dirEnt']  =$dirEnt               =$_SESSION['direntC'];
@@ -94,16 +94,18 @@
             
             
 
-            update_table();
+            
 
         }
         else{
             if(isset($_POST['agregarArt'])){
-                echo "falta llenar todos los campode de la forum superior";
+                warningMssg("Algun campo falta");
+                
                 
             }
             
         }
+        update_table();
         
     }
 
@@ -111,7 +113,7 @@
      
     //guardar e insertar a la DB
     function guardar(){
-        if(isset($_POST["guardar"]) && isset($_SESSION["queries"])   ){
+        if(isset($_POST["guardar"]) && isset($_SESSION["queries"])  ){
 
             $conn = conecta_servidor();
 
@@ -444,7 +446,8 @@
         
                
     }
-    // PRECIO , COSTO , CANTIDAD STOCK, SALDO
+    // PRECIO , COSTO , CANTIDAD STOCK, SALDO, Checar Articulo
+    
     function checarStock(){
         
         if(isset($_SESSION['idArticulo']) && isset($_POST['cantidad']) ){
@@ -466,12 +469,18 @@
     function queriesStock($conn){
         $queries=explode("|",$_SESSION['queries'],-1);
         $queriesS=array();
+        
         for($i=0;$i<count($queries);$i++){
             $query= explode("'",$queries[$i]);
+            
+           
+            
             $idArticulo     = $query [17];
             $cantidad       = $query [21];
             array_push($queriesS,"UPDATE articulovendido SET stock= stock +'$cantidad'   WHERE idArticulo ='$idArticulo'");
             array_push($queriesS,"UPDATE articuloexistente SET stock= stock -'$cantidad'   WHERE idArticulo ='$idArticulo'");
+            
+            
         }
 
         for($i=0;$i<count($queriesS);$i++){
@@ -488,7 +497,7 @@
         $sql=mysqli_query($conn,$query);
         $reg=mysqli_fetch_object($sql);
         if ($reg==mysqli_fetch_array($sql)){
-            echo "Error, no existe articulo con tal  idArticulo";
+            warningMssg("Error, no existe articulo con tal  idArticulo");
         }else{
             
             return$reg->costoEstandar;
@@ -522,7 +531,8 @@
             $sql=mysqli_query($conn,$query);
             $reg=mysqli_fetch_object($sql);
             if ($reg==mysqli_fetch_array($sql)){
-                echo "Error, no existe artiuclo con tal idLista o idArticulo";
+                warningMssg("Error, no existe articulo con tal idLista o idArticulo");
+                
                 unset($_SESSION['ordenCompra']);
                 return(NULL);
             }else{
