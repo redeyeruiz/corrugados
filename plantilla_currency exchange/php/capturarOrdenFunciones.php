@@ -32,8 +32,8 @@
                 $_SESSION['ordenCompra']=$_POST['ordenCompra'];             
                 
             }else{
+                errorMssg("error ese numero de órden ya existe");
                 
-                echo "error ese numero de órden ya existe";
                 unsetAll();
                 
             }

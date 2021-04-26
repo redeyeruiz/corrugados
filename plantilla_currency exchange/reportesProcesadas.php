@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Basic -->
-
+<?php 
+session_start();
+include('php/utilerias.php');
+if(!isset($_SESSION['conectado'])){
+    $_SESSION['mens_error'] = "Por favor inicie sesión.";
+    header("Location: ".redirect('login'));
+    die();
+}elseif(!verificacion_permiso($_SESSION['usuario'], 'Operaciones')){
+    $_SESSION['mens_error'] = "No cuenta con el permiso para entrar a esta página.";
+    header("Location: ".redirect('inicio'));
+    die();
+}
+include('php/utilerias2.php');
+unsetAll();
+?>
 <?php
-    function conecta_servidor(){
-
-        return $conenccion=mysqli_connect("localhost","root","","papelescorrugados");
-        
-    } 
+    
     function msg($mensaje, $color){
         echo "<table border='3' width='60%'> ";
         if ($color=="rojo") echo "<tr bgcolor='red' align='center'>";
@@ -79,10 +89,11 @@
                     </div>
                     <div class="site_information">
                         <ul>
-                            <!-- <li><a href="mailto:exchang@gmail.com"><img src="images/mail_icon.png" alt="#" />exchang@gmail.com</a></li> -->
                             <li><a href="#">&nbsp</a></li>
-                            <li><a href="tel:exchang@gmail.com"><img src="images/user_logo.png" width="30" height="30"alt="#" />Oscar R</a></li>
-                            <li><a class="join_bt" href="#">Cerrar sesión</a></li>
+                            <li>
+                                <a href="#"><img src="images/user_logo.png" width="30" height="30" alt="#" /><?php echo $_SESSION['nombre'] ?></a>
+                            </li>
+                            <li><a class="join_bt" href="php/logout.php">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,22 +113,12 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="inicio.html">Inicio</a></li>
-                        <li><a class="nav-link" href="admin.html">Administración</a></li>
-                        <li><a class="nav-link" href="catalogos.html">Catálogos</a></li>
-                        <li><a class="nav-link" href="operaciones.html">Operaciones</a></li>
-                        <li><a class="nav-link" href="reportes.html">Reportes</a></li>
-                        
+                        <?php menu() ?>                        
                     </ul>
                 </div>
                      </div>
                  </nav>
-                 <div class="search-box">
-                    <input type="text" class="search-txt" placeholder="Search">
-                    <a class="search-btn">
-                        <img src="images/search_icon.png" alt="#" />
-                    </a>
-                </div> 
+                 
                 </div>
             </div>
           </div>

@@ -26,7 +26,7 @@
     $rolFEC=false;
     
     //  rolFAC
-    echo $query="SELECT * FROM Permiso WHERE idUsuario='$idUsuario' AND permiso='Autorizacion Facturacion'";
+    $query="SELECT * FROM Permiso WHERE idUsuario='$idUsuario' AND permiso='Autorizacion Facturacion'";
 
     $conn = conecta_servidor();
     $sql=mysqli_query($conn,$query);
@@ -109,9 +109,7 @@
     $rolING=TRUE;
     $rolPLN=TRUE;
     $rolFEC=TRUE;
-    echo $idUsuario;
-    echo "okkkkk".$rolFAC.$rolCXC.$rolPRE.$rolCST.$rolING.$rolPLN.$rolFEC;
-    echo FALSE;
+    
     error_reporting(E_ALL);
     
 ?> 
