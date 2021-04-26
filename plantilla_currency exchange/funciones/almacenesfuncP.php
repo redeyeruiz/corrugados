@@ -27,7 +27,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
     if ($idalm_error == "" and $idcomp_error == "" and $desc_error == ""){
         $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
         $val1 = mysqli_query($conection,$query);
-        if (!$val1){
+        $row = $val1-> fetch_assoc();
+        if ($row["estatus"] == "0"){
             $success = "Error en el alta del almacen.";
             $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
         }
@@ -119,7 +120,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_actualizar"])){
         else{
             $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
             $val1 = mysqli_query($conection,$query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en el alta del almacen.";
                 $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
@@ -193,7 +195,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["confirmoc"])){
         else{
             $query = "SELECT * FROM Compania WHERE idCompania='$idcomp' and estatus=true";
             $val1 = mysqli_query($conection,$query);
-            if (!$val1){
+            $row = $val1-> fetch_assoc();
+            if ($row["estatus"] == "0"){
                 $success = "Error en el alta del almacen.";
                 $id_comp_error = "El ID de compañía ingresado no existe en los registros.";
             }
