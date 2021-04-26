@@ -219,6 +219,7 @@
     <!-- end contact_form -->
    
     <!-- Start Footer -->
+    
    
 
     <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
@@ -238,6 +239,9 @@
     <script src="js/images-loded.min.js"></script>
     <script src="js/custom.js"></script>
 	
+
+    
 </body>
+
 
 </html>

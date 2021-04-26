@@ -18,9 +18,10 @@ die();
     die();
 }
 ?>
+
+
 <script>
 function cancelarOrden(){
-    alert("yes");
     fol=document.getElementById("fol").value;
     var serv=servidor()+"buscar_ordenes.php?op=go&fol="+fol;
     location.href=serv;
@@ -195,6 +196,8 @@ function cancelarOrden(){
                     </tbody>
                     </div>
 
+                    
+
         <?php
             
         show();
@@ -245,11 +248,14 @@ function cancelarOrden(){
 		}
 
         ?>
+        
     </p>
     <!-- contact_form -->
     <!-- end contact_form -->
    
     <!-- Start Footer -->
+
+    
    
 
     <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
