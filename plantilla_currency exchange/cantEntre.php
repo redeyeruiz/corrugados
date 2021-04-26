@@ -171,7 +171,7 @@ include("funciones/cantEntrefuncP.php");
                             <p align="center"><b>Fecha de Movimiento</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="fmov" type="text" size="50" maxlength="10" class="campo" value="<?= $fmov ?>">
+                            <input style="border:3px solid #ff880e" name="fmov" type="date" class="campo" value="<?= $fmov ?>">
                             <p><span style="color:#C84810" class="error"><?= $fmov_error ?></span></p>
                         </td>
                     </tr>
@@ -180,7 +180,7 @@ include("funciones/cantEntrefuncP.php");
                             <p align="center"><b>Hora</b></p>
                         </td>
                         <td align="center">
-                            <input style="border:3px solid #ff880e" name="hora" type="number" min="0" step="9999999999" class="campo" value="<?= $hora ?>">
+                            <input style="border:3px solid #ff880e" name="hora" type="time" class="campo" value="<?= $hora ?>">
                             <p><span style="color:#C84810" class="error"><?= $hora_error ?></span></p>
                         </td>
                     </tr>
