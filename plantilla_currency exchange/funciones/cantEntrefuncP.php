@@ -117,9 +117,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
             $actorden2 = mysqli_query($conection, $query);
             $row = $actorden2-> fetch_assoc();
             $cantidadc = (int)$row["cantidad"];
-
+            
             if ($cantidades == $cantidadc){
-                $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' ";
+                $query = "UPDATE ReporteOrden SET fechaEntrega='$fechamax', entrega='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' ";
                 $existf = mysqli_query($conection, $query);
                 if (!$existf){
                     $success = "Alta de cantidad entregada realizada con éxito.\nActualización de datos de Reporte de Orden fallida. ";
@@ -129,6 +129,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && isset($_POST["b_altas"])){
                 }
             }
             else{
+                $query = "UPDATE ReporteOrden SET entrega='$cantidades' WHERE idCompania='$idcomp' and idArticulo='$idart' and idOrden='$idord' and folio='$folio' ";
+
                 $success = "Alta realizada con éxito.";
             }
             
