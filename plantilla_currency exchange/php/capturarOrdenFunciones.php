@@ -14,6 +14,7 @@
                     
                     echo"no FUNCIONA el max";
                     echo "error no existe tal cliente ('numOrdenes')";
+                    echo "arreglar esto no funciona"
                 }else{
                     
                     $_SESSION['folio']=strval( intval($reg->folio) +1);

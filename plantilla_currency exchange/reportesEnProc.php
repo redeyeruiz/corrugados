@@ -22,7 +22,7 @@ die();
 
 <script>
 function cancelarOrden(){
-    fol=document.getElementById("fol").value;
+    var fol=document.getElementById("fol").value;
     var serv=servidor()+"buscar_ordenes.php?op=go&fol="+fol;
     location.href=serv;
 }
@@ -172,15 +172,16 @@ function cancelarOrden(){
     <div class= "login-space">
         <p>
         <p>
-        Folio: <span><input class="user" type="text" id="fol"></span> 
+        <!--Folio: <span><input class="user" type="text" id="fol"></span> -->
         </p>
-        <span><button class="capturar-button" onclick="cancelarOrden();">Borrar Orden</button></span>
+        <!--<span><button class="capturar-button" onclick="cancelarOrden();">Borrar Orden</button></span>-->
         <br><br><br>
             <h1 class='h1-orden'>Ordenes en Proceso</h1>
             <div class='tbl-header-orden'>
                 <table class='table-orden' cellpadding='0' cellspacing='0'>
                 <thead>
                     <tr>
+                        <th class='th-orden' scope='col'>Folio</th>
                         <th class='th-orden' scope='col'>Fecha de Orden</th>
                         <th class='th-orden' scope='col'>Orden Baan</th>
                         <th class='th-orden' scope='col'>ID cliente</th>

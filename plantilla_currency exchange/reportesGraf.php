@@ -587,7 +587,7 @@ function comparaVentaFecha(){
                 labels:[$folios],
                 datasets:[{
                     label:'cantidad/kilos',
-                    data:[$kilos],
+                    data:[$folios],
                     backgroundColor: ['#004159','#65A8C4','#AACEE2','#8C65D3','#9A93EC','#CAB9F1','#0052A5','413BF7','81CBF9','#00ADCE','#59DBF1','#9EE7FA','#00C590','#59DBF1','#9EE7FA','#00C590','#73EBAE','#B5F9D3', '#C88691','#AD85BA','#95A1C3','#74A18E','#81SFB5','#B2C891','#B99C6B','#E49969','#C9C27F','#949494','#B2B2B2','#D6D6D6','#91967E','#B2AAA4','#D9D5D2'],
                     borderWidth:1,
                     borderColor:'#777',

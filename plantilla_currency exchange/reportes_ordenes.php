@@ -229,7 +229,7 @@ if(!isset($_SESSION['conectado'])){
                 $a_desde=$_GET['a_desde'];
                 $a_hasta=$_GET['a_hasta'];
                 if ($start == false){
-                    $Query4="idArticulo BETWEEN '$a_desde' AND '$a_hasta' ";
+                    $Query4="idArticulo BETWEEN '$a_desde' AND '$a_hasta' ";    
                     $start = true;
                 }
                 else{

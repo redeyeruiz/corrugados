@@ -469,11 +469,9 @@ include('utilerias2.php');
 		</script>"';
 
 		function cancelarOrden(){
-			$fol=$_GET['fol'];
-			
             $fol=$_GET['fol'];
             $conn=conecta_servidor();
-			$query="DELETE FROM reporteorden WHERE folio = '$fol'";
+			$query="DELETE FROM reporteorden WHERE folio = '$fol";
 			$sql=mysqli_query($conn,$query);
 			if (executeQuery(conecta_servidor(),"DELETE FROM reporteorden WHERE folio = '$fol'")){
 				warningMssg("Se elimino la orden");
